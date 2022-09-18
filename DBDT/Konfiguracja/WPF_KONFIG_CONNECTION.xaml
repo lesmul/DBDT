@@ -1,0 +1,16 @@
+﻿<Window x:Class="DBDT.Konfiguracja.WPF_KONFIG_CONNECTION"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBDT.Konfiguracja"
+        mc:Ignorable="d"
+        Title="Konfiguracja połączenia do bazy danych" Height="215" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png">
+    <Grid>
+        <Button Content="Zakończ" HorizontalAlignment="Left" Height="25" Margin="300,149,0,0" VerticalAlignment="Top" Width="130" Click="zakoncz_click" />
+        <Label Content="Nazwa bazy danych" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="28" Margin="15,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="275"/>
+        <Button Content="Test" HorizontalAlignment="Left" Height="28" Margin="300,36,0,0" VerticalAlignment="Top" Width="130" Click="test_click"/>
+
+    </Grid>
+</Window>
