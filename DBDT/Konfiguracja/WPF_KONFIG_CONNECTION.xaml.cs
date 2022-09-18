@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBDT.USTAWIENIA_PROGRAMU;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,22 @@ namespace DBDT.Konfiguracja
 
         private void zakoncz_click(object sender, RoutedEventArgs e)
         {
-            Close();
-        }
+            if (TXT_NAZWA_SERWERA.Text.Trim() != "" && TXT_NAZWE_BAZY.Text.Trim() != "")
+            { 
+                var dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
+                if (dr== MessageBoxResult.Yes)
+                {
 
+                    _PUBLIC_SqlLite.Existsdb("");
+                
+                    _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA(TXT_NAZWA_SERWERA.Text.Trim(), TXT_NAZWE_BAZY.Text.Trim());
+
+                }
+            }
+
+            Close();
+
+        }
         private void test_click(object sender, RoutedEventArgs e)
         {
 

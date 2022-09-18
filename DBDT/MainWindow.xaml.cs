@@ -1,4 +1,5 @@
 ﻿using DBDT.Konfiguracja;
+using DBDT.USTAWIENIA_PROGRAMU;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -161,5 +162,9 @@ namespace DBDT
 
         #endregion
 
+        private void loadApp(object sender, RoutedEventArgs e)
+        {
+            //_PUBLIC_SQL.connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + ScieszkaProgramu + "Database1.mdf;Integrated Security=True";
+        }
     }
 }
