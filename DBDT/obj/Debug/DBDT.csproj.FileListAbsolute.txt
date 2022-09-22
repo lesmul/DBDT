@@ -30,3 +30,5 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\EntityFramework
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\System.Data.SQLite.xml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT_Content.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\UWPF_ZAPYTANIE_SQL.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\UWPF_ZAPYTANIE_SQL.g.cs

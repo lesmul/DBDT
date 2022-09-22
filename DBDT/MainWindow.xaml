@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mdi="clr-namespace:WPF.MDI;assembly=WPF.MDI" 
-        Title="Aplikacja do generowania plików maszynowych DBDT - OKNOPLAST" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Loaded="loadApp">
+        Title="Aplikacja do generowania plików maszynowych DBDT - OKNOPLAST" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Loaded="loadApp" SizeChanged="SizeChan">
     <DockPanel>
         <DockPanel>
             <mdi:MdiContainer Name="Container">
@@ -10,8 +10,8 @@
                     <Menu DockPanel.Dock="Top">
                         <MenuItem Header="Konfiguracja">
                             <MenuItem Header="Połączenie do bazy danych" Click="KonfiguracjaPolaczenia_Click" />
-                            <MenuItem Header="Fixed Window" Click="AddFixedWindow_Click" />
-                            <MenuItem Header="Scroll Window" Click="AddScrollWindow_Click" />
+                            <!--<MenuItem Header="Fixed Window" Click="AddFixedWindow_Click" />-->
+                            <MenuItem Header="Zapytania SQL" Click="AddScrollWindow_Click" />
                         </MenuItem>
                         <MenuItem Header="Styl okien">
                             <MenuItem Header="Generic" Name="Generic" ToolTip="Generic Visual Studio designer theme" Click="Generic_Click" />

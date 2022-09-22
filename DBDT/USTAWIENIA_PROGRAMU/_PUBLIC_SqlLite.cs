@@ -11,8 +11,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
     internal class _PUBLIC_SqlLite
     {
         public static string sqlite_file;
-        //private readonly SQLiteConnection connection;
-
+       
         public static bool Existsdb(string path)
         {
             string ScieszkaProgramu = "";
@@ -54,8 +53,79 @@ namespace DBDT.USTAWIENIA_PROGRAMU
         {
             SQLiteConnection.CreateFile(sqlite_file);
 
-            string str = "CREATE TABLE IF NOT EXISTS `ParametryPalaczenia` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,`serwer` varchar(255) NOT NULL, " +
-                ", `nazwa_bazy` varchar(255) NOT NULL, data_utworzenia` DATETIME DEFAULT SYSDATE NOT NULL); ";
+            string str_1 = "CREATE TABLE IF NOT EXISTS `ParametryPalaczenia` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,`serwer` varchar(255) NOT NULL, " +
+                ", `nazwa_bazy` varchar(255) NOT NULL, " +
+                " `pole1` varchar(255) NOT NULL, " +
+                " `pole2` varchar(255) NOT NULL, " +
+                " `pole3` varchar(255) NOT NULL, " +
+                " `pole4` varchar(255) NOT NULL, " +
+                " `pole5` varchar(255) NOT NULL, " +
+                " `pole6` varchar(255) NOT NULL, " +
+                " `pole7` varchar(255) NOT NULL, " +
+                " `pole7` varchar(255) NOT NULL, " +
+                " `pole8` varchar(255) NOT NULL, " +
+                " `pole9` varchar(255) NOT NULL, " +
+                " `pole10` text, " +
+                " `poleint1` int DEFAULT 0, " +
+                " `poleint2` int DEFAULT 0, " +
+                " `poleint3` int DEFAULT 0, " +
+                " `poleint4` int DEFAULT 0, " +
+                " `poleint5` int DEFAULT 0, " +
+                " `polesng1` single DEFAULT 0, " +
+                " `polesng1` single DEFAULT 0, " +
+                " `polesng1` single DEFAULT 0, " +
+                " `kto_zmienil` varchar(255) NOT NULL, " +
+                " data_utworzenia` DATETIME DEFAULT SYSDATE NOT NULL); ";
+
+            string str_2 = "CREATE TABLE IF NOT EXISTS `sql_zapytania` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                ", `nazwa_zapytania` varchar(255) NOT NULL, " +
+                " `sql` varchar(5000) NOT NULL, " +
+                " `pole1` varchar(255) NOT NULL, " +
+                " `pole2` varchar(255) NOT NULL, " +
+                " `pole3` varchar(255) NOT NULL, " +
+                " `pole4` varchar(255) NOT NULL, " +
+                " `pole5` varchar(255) NOT NULL, " +
+                " `pole6` varchar(255) NOT NULL, " +
+                " `pole7` varchar(255) NOT NULL, " +
+                " `pole7` varchar(255) NOT NULL, " +
+                " `pole8` varchar(255) NOT NULL, " +
+                " `pole9` varchar(255) NOT NULL, " +
+                " `pole10` text, " +
+                " `poleint1` int DEFAULT 0, " +
+                " `poleint2` int DEFAULT 0, " +
+                " `poleint3` int DEFAULT 0, " +
+                " `poleint4` int DEFAULT 0, " +
+                " `poleint5` int DEFAULT 0, " +
+                " `polesng1` single DEFAULT 0, " +
+                " `polesng1` single DEFAULT 0, " +
+                " `polesng1` single DEFAULT 0, " +
+                " `kto_zmienil` varchar(255) NOT NULL, " +
+                " data_utworzenia` DATETIME DEFAULT SYSDATE NOT NULL); ";
+
+            string str_3 = "CREATE TABLE IF NOT EXISTS `obrobki` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                ", `nazwa_obrobki` varchar(255) NOT NULL, " +
+                " `opis` text NOT NULL, " +
+                " `pole1` varchar(255) NOT NULL, " +
+                " `pole2` varchar(255) NOT NULL, " +
+                " `pole3` varchar(255) NOT NULL, " +
+                " `pole4` varchar(255) NOT NULL, " +
+                " `pole5` varchar(255) NOT NULL, " +
+                " `pole6` varchar(255) NOT NULL, " +
+                " `pole7` varchar(255) NOT NULL, " +
+                " `pole7` varchar(255) NOT NULL, " +
+                " `pole8` varchar(255) NOT NULL, " +
+                " `pole9` varchar(255) NOT NULL, " +
+                " `pole10` text, " +
+                " `poleint1` int DEFAULT 0, " +
+                " `poleint2` int DEFAULT 0, " +
+                " `poleint3` int DEFAULT 0, " +
+                " `poleint4` int DEFAULT 0, " +
+                " `poleint5` int DEFAULT 0, " +
+                " `polesng1` single DEFAULT 0, " +
+                " `polesng1` single DEFAULT 0, " +
+                " `polesng1` single DEFAULT 0, " +
+                " `kto_zmienil` varchar(255) NOT NULL, " +
+                " data_utworzenia` DATETIME DEFAULT SYSDATE NOT NULL); ";
 
             //SQLiteConnection connection = new SQLiteConnection
             SQLiteConnection connection = new SQLiteConnection
@@ -66,7 +136,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             SQLiteCommand command = new SQLiteCommand(connection)
             {
-                CommandText = str
+                CommandText = str_1 + str_2 + str_3
             };
 
             command.ExecuteNonQuery();

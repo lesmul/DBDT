@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBDT.Konfiguracja"
         mc:Ignorable="d"
-        Title="Konfiguracja połączenia do bazy danych" Height="215" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png">
+        Title="Konfiguracja połączenia do bazy danych" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png" WindowStyle="ToolWindow" Width="415" Height="210" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
     <Grid>
-        <Button Content="Zakończ" HorizontalAlignment="Left" Height="25" Margin="300,149,0,0" VerticalAlignment="Top" Width="130" Click="zakoncz_click" />
-        <Label Content="Nazwa serwera" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TXT_NAZWA_SERWERA" HorizontalAlignment="Left" Height="28" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285" ToolTip="Uwagi do pozycji" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+        <Button Content="Zakończ" Height="25" Margin="265,136,0,0" Width="130" Click="zakoncz_click" BorderThickness="1,1,1,1" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <Label Content="Nazwa serwera" HorizontalAlignment="Left" Margin="7,6,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TXT_NAZWA_SERWERA" HorizontalAlignment="Left" Height="28" Margin="7,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" ToolTip="Uwagi do pozycji" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
             <TextBox.Style>
                 <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
                     <Style.Resources>
@@ -33,9 +33,9 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <Button Content="Test" HorizontalAlignment="Left" Height="88" Margin="300,36,0,0" VerticalAlignment="Top" Width="130" Click="test_click"/>
-        <Label Content="Nazwa bazy danych" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TXT_NAZWE_BAZY" HorizontalAlignment="Left" Height="28" Margin="10,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285" ToolTip="Uwagi do pozycji" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+        <Button Content="Test" HorizontalAlignment="Left" Height="88" Margin="265,32,0,0" VerticalAlignment="Top" Width="130" Click="test_click"/>
+        <Label Content="Nazwa bazy danych" HorizontalAlignment="Left" Margin="7,65,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TXT_NAZWE_BAZY" HorizontalAlignment="Left" Height="28" Margin="7,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" ToolTip="Uwagi do pozycji" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
             <TextBox.Style>
                 <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
                     <Style.Resources>
