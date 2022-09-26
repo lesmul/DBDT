@@ -1,4 +1,5 @@
-﻿using DBDT.Konfiguracja;
+﻿using DBDT.DXF;
+using DBDT.Konfiguracja;
 using DBDT.SQL;
 using DBDT.USTAWIENIA_PROGRAMU;
 using Microsoft.SqlServer.Server;
@@ -120,9 +121,19 @@ namespace DBDT
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void AddFixedWindow_Click(object sender, RoutedEventArgs e)
+        private void AddDXFWindow_Click(object sender, RoutedEventArgs e)
         {
-            Container.Children.Add(new MdiChild { Content = new Label { Content = "Fixed width window" }, Title = "Window " + ooo++, Resizable = false });
+            //Container.Children.Add(new MdiChild { Content = new Label { Content = "Fixed width window" }, Title = "Window " + ooo++, Resizable = false });
+            UC_RYS_DXF sp = new UC_RYS_DXF();
+
+            ScrollViewer sv = new ScrollViewer
+            {
+                Content = sp,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+            //Container.Children.Add(new MdiChild { Content = sv, Title = "Zapytanie SQL " + ooo++, WindowState=WindowState.Maximized, Width= SHT_W, Height= SHT_H });
+            Container.Children.Add(new MdiChild { Content = sp, Title = "DXF " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
         }
 
         /// <summary>
