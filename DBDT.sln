@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBDT", "DBDT\DBDT.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.MDI", "..\MDI\WPF.MDI\WPF.MDI.csproj", "{BE1ED569-5E0B-4DF0-8964-33AD2AAE4C4A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "netDxf", "..\..\..\..\Desktop\PRZYKLADY\DXF\netDxf-master\netDxf\netDxf.csproj", "{77C55526-790B-413E-AFD1-407DC338730B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BE1ED569-5E0B-4DF0-8964-33AD2AAE4C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE1ED569-5E0B-4DF0-8964-33AD2AAE4C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE1ED569-5E0B-4DF0-8964-33AD2AAE4C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C55526-790B-413E-AFD1-407DC338730B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77C55526-790B-413E-AFD1-407DC338730B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77C55526-790B-413E-AFD1-407DC338730B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77C55526-790B-413E-AFD1-407DC338730B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

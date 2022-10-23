@@ -49,6 +49,10 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="netDxf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=618c63290969e781, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Desktop\PRZYKLADY\DXF\netDxf-master\netDxf\bin\Debug\net45\netDxf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -87,7 +91,13 @@
     <Compile Include="Adorners\SizeAdorner.cs" />
     <Compile Include="Adorners\SizeChrome.cs" />
     <Compile Include="DesignerItemDecorator.cs" />
+    <Compile Include="DXF\CDxfOBJ.cs" />
+    <Compile Include="DXF\CoverterSVG.cs" />
     <Compile Include="DXF\DXF.cs" />
+    <Compile Include="DXF\LOAD_SAVE_DXF.cs" />
+    <Compile Include="DXF\W_EDIT_DATA_DXF.xaml.cs">
+      <DependentUpon>W_EDIT_DATA_DXF.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MoveThumb.cs" />
     <Compile Include="ResizeThumb.cs" />
     <Compile Include="RotateThumb.cs" />
@@ -100,6 +110,10 @@
     <Compile Include="USTAWIENIA_PROGRAMU\LadujIni.cs" />
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SQL.cs" />
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SqlLite.cs" />
+    <Page Include="DXF\W_EDIT_DATA_DXF.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\DDesignerItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
