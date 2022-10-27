@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBDT.DXF"
         mc:Ignorable="d"
-        Title="Edytuj dane" Height="450" Width="855" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True" WindowStyle="ToolWindow" Loaded="Loaded_win" SizeToContent="Height" BorderThickness="0,0,0,0">
+        Title="Edytuj dane" Height="450" Width="930" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True" WindowStyle="ToolWindow" Loaded="Loaded_win" SizeToContent="Height" BorderThickness="0,0,0,0">
     <Grid Margin="0,0,0,0">
-        <DataGrid x:Name="DG_DXF_OBJ" HorizontalAlignment="Left" Height="401" Margin="5,5,5,5" VerticalAlignment="Top" Width="730" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-        <Button x:Name="B_OK" Content="Zmień" HorizontalAlignment="Left" Height="26" Margin="745,4,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.211,0.862" Click="Click_OK"/>
+        <DataGrid x:Name="DG_DXF_OBJ" HorizontalAlignment="Left" Height="349" Margin="5,5,0,0" VerticalAlignment="Top" Width="805" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Button x:Name="B_OK" Content="Zmień" HorizontalAlignment="Left" Height="26" Margin="824,4,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.211,0.862" Click="Click_OK"/>
+        <TextBox x:Name="Canvas_TXT" HorizontalAlignment="Left" Height="43" Margin="5,380,0,11" TextWrapping="Wrap" Text="Canvas_TXT" Width="905" UndoLimit="1" ToolTip="Wygenerowane objekty" IsReadOnly="True" BorderThickness="1,1,1,1" SelectionOpacity="1"/>
+        <Label Content="Canvas - objekty:" HorizontalAlignment="Left" Margin="5,354,0,0" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.478,0.618" Height="26"/>
 
     </Grid>
 </Window>

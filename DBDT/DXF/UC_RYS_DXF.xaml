@@ -13,6 +13,20 @@
     </UserControl.Resources>
 
     <Grid>
+        <Canvas x:Name="DesignerCanvas"
+            ClipToBounds="True"
+            SnapsToDevicePixels="True" 
+            PreviewMouseLeftButtonUp="canvas_MouseSelect">
+            <Rectangle
+            Width="1000"
+            Height="500"
+            Fill="Blue"
+            Tag="-999"
+            Stroke="Black" StrokeThickness="4"
+            RadiusX="1" RadiusY="1"
+            Canvas.Left="0"
+            Canvas.Top="0"/>
+        </Canvas>
 
         <CheckBox x:Name="chOdbChek" Click="OnClick"
               Content=" Odblokój rozmiar"
@@ -42,12 +56,6 @@
               HorizontalAlignment="Left"
               VerticalAlignment="Top">
             Otwórz DXF</Button>
-
-        <Canvas x:Name="DesignerCanvas"
-            ClipToBounds="True"
-            SnapsToDevicePixels="True" 
-            PreviewMouseLeftButtonUp="canvas_MouseSelect">
-        </Canvas>
 
     </Grid>
 

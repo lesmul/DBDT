@@ -25,6 +25,7 @@ using System.Collections;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
+using System.Windows;
 
 namespace DBDT.DXF
 {
@@ -39,13 +40,24 @@ namespace DBDT.DXF
             Angular2LineDimension d = null;
             //DxfDocument doc = DxfDocument.Load(@"C:\Users\Leszek Mularski\Desktop\PRZYKLADY\DXF\netDxf-master\TestDxfDocument\sample.dxf");
             //DxfDocument doc = DxfDocument.Load(@"C:\Users\Leszek Mularski\Documents\SOLID_WORKS\WYDRUKI_3D\Część1.DXF");
-            DxfDocument doc = DxfDocument.Load(FilenName);
+            DxfDocument doc = new DxfDocument();
+            try
+            {
+                doc = DxfDocument.Load(FilenName);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message,"Błąd");
+                return null;
+            }
 
+           // var limit_Rys = doc.Blocks["*Model_Space"];
+      
             List<CDxfOBJ> myObjDxfAll = new List<CDxfOBJ>();//default constructor
 
             int id_object = id_object_c;
 
-            //if(myObjDxfAll.Count > 0)
+              //if(myObjDxfAll.Count > 0)
             //{
             //    var maxid = myObjDxfAll.Max(row => row.Id_object);
             //    id_object = maxid + 1;
@@ -72,9 +84,28 @@ namespace DBDT.DXF
                     myObjDxf.Y1 = Math.Round(xppol2d.Vertexes[j - 1].Position.Y, 3);
                     myObjDxf.X2 = Math.Round(xppol2d.Vertexes[j].Position.X, 3);
                     myObjDxf.Y2 = Math.Round(xppol2d.Vertexes[j].Position.Y, 3);
-                    myObjDxf.MaxX = Math.Round(xppol2d.Vertexes[j].Position.X, 3);
-                    myObjDxf.MaxY = Math.Round(xppol2d.Vertexes[j].Position.Y, 3);
-                    
+
+                    if (myObjDxf.X2 > myObjDxf.X1)
+                    {
+                        myObjDxf.MaxX = myObjDxf.X2 - myObjDxf.X1;
+                    }
+                    else
+                    {
+                        myObjDxf.MaxX = myObjDxf.X1 - myObjDxf.X2;
+                    }
+
+                    if (myObjDxf.Y2 > myObjDxf.Y1)
+                    {
+                        myObjDxf.MaxY = myObjDxf.Y2 - myObjDxf.Y1;
+                    }
+                    else
+                    {
+                        myObjDxf.MaxY = myObjDxf.Y1 - myObjDxf.Y2;
+                    }
+
+                    myObjDxf.Handle = xppol2d.Handle;
+                    myObjDxf.IntHandle = int.Parse(myObjDxf.Handle, System.Globalization.NumberStyles.HexNumber);
+
                     myObjDxf.Id = myObjDxfAll.Count;
                     myObjDxfAll.Add(myObjDxf);
                 }
@@ -91,8 +122,16 @@ namespace DBDT.DXF
                 myObjDxf.EndA = Math.Round(xpEllipses.EndAngle, 3);
                 myObjDxf.MajorA = Math.Round(xpEllipses.MajorAxis, 3);
                 myObjDxf.MinorA = Math.Round(xpEllipses.MinorAxis, 3);
-                myObjDxf.MaxX = Math.Round(xpEllipses.MajorAxis, 3);
-                myObjDxf.MaxY = Math.Round(xpEllipses.MinorAxis, 3);
+                myObjDxf.X1 = myObjDxf.CenterX - myObjDxf.MajorA / 2;
+                myObjDxf.Y1 = myObjDxf.CenterY - myObjDxf.MinorA / 2;
+                myObjDxf.X2 = myObjDxf.CenterX + myObjDxf.MajorA / 2;
+                myObjDxf.Y2 = myObjDxf.CenterY + myObjDxf.MinorA / 2;
+
+                myObjDxf.MaxX = myObjDxf.CenterX + myObjDxf.MajorA / 2;
+                myObjDxf.MaxY = myObjDxf.CenterX + myObjDxf.MinorA / 2;
+
+                myObjDxf.Handle = xpEllipses.Handle;
+                myObjDxf.IntHandle = int.Parse(myObjDxf.Handle, System.Globalization.NumberStyles.HexNumber);
 
                 myObjDxf.Id = myObjDxfAll.Count;
                 myObjDxfAll.Add(myObjDxf);
@@ -109,8 +148,27 @@ namespace DBDT.DXF
                 myObjDxf.Y1 = Math.Round(pLines.StartPoint.Y, 3);
                 myObjDxf.X2 = Math.Round(pLines.EndPoint.X, 3);
                 myObjDxf.Y2 = Math.Round(pLines.EndPoint.Y, 3);
-                myObjDxf.MaxX = Math.Round(pLines.StartPoint.X, 3);
-                myObjDxf.MaxY = Math.Round(pLines.EndPoint.Y, 3);
+
+                if (myObjDxf.X2 > myObjDxf.X1)
+                {
+                    myObjDxf.MaxX = myObjDxf.X2 - myObjDxf.X1;
+                }
+                else
+                {
+                    myObjDxf.MaxX = myObjDxf.X1 - myObjDxf.X2;
+                }
+
+                if (myObjDxf.Y2 > myObjDxf.Y1)
+                {
+                    myObjDxf.MaxY = myObjDxf.Y2 - myObjDxf.Y1;
+                }
+                else
+                {
+                    myObjDxf.MaxY = myObjDxf.Y1 - myObjDxf.Y2;
+                }
+
+                myObjDxf.Handle = pLines.Handle;
+                myObjDxf.IntHandle = int.Parse(myObjDxf.Handle, System.Globalization.NumberStyles.HexNumber);
 
                 myObjDxf.Id = myObjDxfAll.Count;
                 myObjDxfAll.Add(myObjDxf);
@@ -125,8 +183,14 @@ namespace DBDT.DXF
                 myObjDxf.CenterX = Math.Round(pCircle.Center.X,3);
                 myObjDxf.CenterY = Math.Round(pCircle.Center.Y,3);
                 myObjDxf.Radius = Math.Round(pCircle.Radius,3);
-                myObjDxf.MaxX = Math.Round(pCircle.Radius,3);
-                myObjDxf.MaxY = Math.Round(pCircle.Radius,3);
+
+                myObjDxf.MaxX = myObjDxf.Radius * 2;
+                myObjDxf.MaxY = myObjDxf.Radius * 2;
+
+                myObjDxf.Handle = pCircle.Handle;
+                myObjDxf.IntHandle = int.Parse(myObjDxf.Handle, System.Globalization.NumberStyles.HexNumber);
+
+                myObjDxf.KierZegara = true;
 
                 myObjDxf.Id = myObjDxfAll.Count;
                 myObjDxfAll.Add(myObjDxf);
@@ -140,15 +204,31 @@ namespace DBDT.DXF
                 myObjDxf.Typ = "A";
                 myObjDxf.CenterX = Math.Round(pArc.Center.X,3);
                 myObjDxf.CenterY = Math.Round(pArc.Center.Y,3);
-                myObjDxf.StartA = Math.Round(pArc.EndAngle, 3); 
-                myObjDxf.EndA = Math.Round(pArc.StartAngle, 3);
+                //myObjDxf.StartA = Math.Round(pArc.EndAngle, 3); 
+                //myObjDxf.EndA = Math.Round(pArc.StartAngle, 3);
+                myObjDxf.StartA = Math.Round(pArc.StartAngle, 3);
+                myObjDxf.EndA = Math.Round(pArc.EndAngle, 3);
                 myObjDxf.Radius = Math.Round(pArc.Radius,3);
 
-                myObjDxf.Y1 = myObjDxf.CenterX + Math.Round(pArc.Radius * Math.Cos(Math.PI * pArc.StartAngle / 180.0),3);
-                myObjDxf.X1 = myObjDxf.CenterY + Math.Round(pArc.Radius * Math.Sin(Math.PI * pArc.StartAngle / 180.0), 3);
+                //myObjDxf.Y1 = myObjDxf.CenterX + Math.Round(pArc.Radius * Math.Cos(Math.PI * pArc.StartAngle / 180.0), 3);
+                //myObjDxf.X1 = myObjDxf.CenterY + Math.Round(pArc.Radius * Math.Sin(Math.PI * pArc.StartAngle / 180.0), 3);
 
-                myObjDxf.Y2 = myObjDxf.CenterX + Math.Round(pArc.Radius * Math.Cos(Math.PI * pArc.EndAngle / 180.0), 3);
-                myObjDxf.X2 = myObjDxf.CenterY + Math.Round(pArc.Radius * Math.Sin(Math.PI * pArc.EndAngle / 180.0), 3);
+                //myObjDxf.Y2 = myObjDxf.CenterX + Math.Round(pArc.Radius * Math.Cos(Math.PI * pArc.EndAngle / 180.0), 3);
+                //myObjDxf.X2 = myObjDxf.CenterY + Math.Round(pArc.Radius * Math.Sin(Math.PI * pArc.EndAngle / 180.0), 3);
+
+                myObjDxf.X1 = myObjDxf.CenterX + Math.Round(pArc.Radius * Math.Cos(Math.PI * pArc.StartAngle / 180.0), 3);
+                myObjDxf.Y1 = myObjDxf.CenterY + Math.Round(pArc.Radius * Math.Sin(Math.PI * pArc.StartAngle / 180.0), 3);
+
+                myObjDxf.X2 = myObjDxf.CenterX + Math.Round(pArc.Radius * Math.Cos(Math.PI * pArc.EndAngle / 180.0), 3);
+                myObjDxf.Y2 = myObjDxf.CenterY + Math.Round(pArc.Radius * Math.Sin(Math.PI * pArc.EndAngle / 180.0), 3);
+
+                myObjDxf.MaxX = myObjDxf.Radius * 2;
+                myObjDxf.MaxY = myObjDxf.Radius * 2;
+
+                myObjDxf.Handle= pArc.Handle;
+                myObjDxf.IntHandle = int.Parse(myObjDxf.Handle, System.Globalization.NumberStyles.HexNumber);
+
+                myObjDxf.KierZegara = true;
 
                 myObjDxf.Id = myObjDxfAll.Count;
                 myObjDxfAll.Add(myObjDxf);
@@ -161,9 +241,10 @@ namespace DBDT.DXF
                 ArrayList myALMinY = new ArrayList();
                 myALMinX.Add(myObjDxfAll.Min(row => row.X1));
                 myALMinX.Add(myObjDxfAll.Min(row => row.X2));
+                myALMinX.Add(myObjDxfAll.Min(row => row.CenterX));
+
                 myALMinY.Add(myObjDxfAll.Min(row => row.Y1));
                 myALMinY.Add(myObjDxfAll.Min(row => row.Y2));
-                myALMinX.Add(myObjDxfAll.Min(row => row.CenterX));
                 myALMinY.Add(myObjDxfAll.Min(row => row.CenterY));
 
                 myALMinX.Sort();
@@ -179,6 +260,7 @@ namespace DBDT.DXF
                         myObjDxfAll[i].CenterX = myObjDxfAll[i].CenterX + moveX;
                         myObjDxfAll[i].MaxX = myObjDxfAll[i].MaxX + moveX;
 
+
                     }
                 }
 
@@ -190,7 +272,7 @@ namespace DBDT.DXF
                         myObjDxfAll[i].Y1 = myObjDxfAll[i].Y1 + moveY;
                         myObjDxfAll[i].Y2 = myObjDxfAll[i].Y2 + moveY;
                         myObjDxfAll[i].CenterY = myObjDxfAll[i].CenterY + moveY;
-                        myObjDxfAll[i].MaxY = myObjDxfAll[i].MaxX + moveY;
+                        myObjDxfAll[i].MaxY = myObjDxfAll[i].MaxY + moveY;
 
                     }
                 }

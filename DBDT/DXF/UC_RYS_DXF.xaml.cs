@@ -98,9 +98,16 @@ namespace DBDT.DXF
 
             List<CDxfOBJ> myObjDxfAll = new List<CDxfOBJ>();
 
+            int id_wezel = 1;
+
             if (edycja == false)
             {
                 myObjDxfAll = load_save_dxf.LOAD(filename, DesignerCanvas.Children.Count);
+
+                if (myObjDxfAll== null)
+                {
+                    return ;
+                }
 
                 ALL_DXF_OBJ.Add(myObjDxfAll);
 
@@ -162,6 +169,8 @@ namespace DBDT.DXF
             while (query.Count() != 0) // condition
             {
 
+                myObjDxfAll[i].IntWezel = id_wezel;
+
                 switch (myObjDxfAll[i].Typ)
                 {
                     case "L":
@@ -188,11 +197,12 @@ namespace DBDT.DXF
                        //M100,100 a25,25 0 0 1 25,-25
                         geoDXF.AppendLine(" M" + Convert.ToString(myObjDxfAll[i].X1).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].Y1).Replace(",", "."));
 
-
+       
                         //" 0 0 0" - zgodnie z ruchem wsk. zeg.
                         //" 0 0 1" - przeciwnie z ruchem wsk. zeg.
                         double sX = xStart + xEnd;
                         double sY = yStart + yEnd;
+
                         if (sY > 0)
                         {
                             sY = -sY;
@@ -202,8 +212,10 @@ namespace DBDT.DXF
                             sY = Math.Abs(sY);
                         }
 
-                        geoDXF.AppendLine(" a" + Convert.ToString(myObjDxfAll[i].Radius).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].Radius).Replace(",", ".") + " 0 0 0 "
-                        + Convert.ToString(sX).Replace(",", ".") + "," + Convert.ToString(sY).Replace(",", "."));
+                        geoDXF.AppendLine(" A" + Convert.ToString(myObjDxfAll[i].Radius).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].Radius).Replace(",", ".") + " 0 0 " + Convert.ToString(Convert.ToInt16(myObjDxfAll[i].KierZegara)).Replace(",", ".") + " "
+                        + Convert.ToString(myObjDxfAll[i].X2).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].Y2).Replace(",", "."));
+                        //geoDXF.AppendLine(" a" + Convert.ToString(myObjDxfAll[i].Radius).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].Radius).Replace(",", ".") + " 0 0 0 "
+                        //+ Convert.ToString(sX).Replace(",", ".") + "," + Convert.ToString(sY).Replace(",", "."));
 
                         X = myObjDxfAll[i].X2;
                         Y = myObjDxfAll[i].Y2;
@@ -211,9 +223,11 @@ namespace DBDT.DXF
                         break;
                     case "E":
 
-                        geoDXF.AppendLine(" M" + Convert.ToString(myObjDxfAll[i].CenterX).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].CenterY).Replace(",", "."));
+                        //geoDXF.AppendLine(" M" + Convert.ToString(myObjDxfAll[i].X1).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].Y1).Replace(",", "."));
+                        //geoDXF.AppendLine(" a" + Convert.ToString(myObjDxfAll[i].MajorA).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].MinorA).Replace(",", ".") + " 0 1 0 0.00001,0");
 
-                        geoDXF.AppendLine(" a" + Convert.ToString(myObjDxfAll[i].MinorA).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].MajorA).Replace(",", ".") + " 0 1 0 0.00001,0");
+                        geoDXF.AppendLine(" M" + Convert.ToString(myObjDxfAll[i].CenterX).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].CenterY).Replace(",", "."));
+                        geoDXF.AppendLine(" a" + Convert.ToString(myObjDxfAll[i].MajorA / 2).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].MinorA / 2).Replace(",", ".") + " 0 1 0 0.00001,0");
 
                         X = myObjDxfAll[i].X2;
                         Y = myObjDxfAll[i].Y2;
@@ -230,6 +244,7 @@ namespace DBDT.DXF
                         break;
                     default:
                         myObjDxfAll[i].Juz_dodany = true;
+                        myObjDxfAll[i].IntWezel = -99;
                         break;
                 }
 
@@ -255,6 +270,7 @@ namespace DBDT.DXF
                 if (find_i.Count() > 0)
                 {
                     i = (int)find_i.Min();
+                    id_wezel = i;
                 }
                 else
                 {
@@ -265,10 +281,12 @@ namespace DBDT.DXF
                     if (find_i_min.Count() > 0)
                     {
                         i = (int)find_i_min.Min();
+                        myObjDxfAll[i].IntWezel = 0;
                     }
                     else
                     {
-                        i++;
+                        myObjDxfAll[i].IntWezel = -1;
+                        i++;   
                     }
                 }
 
@@ -363,7 +381,10 @@ namespace DBDT.DXF
 
         private void canvas_MouseSelect(object sender, MouseEventArgs e)
         {
+
           is_select = Convert.ToInt32(((System.Windows.FrameworkElement)e.Source).Tag);
+
+            if (is_select < 0) return;
 
             foreach (Control child in DesignerCanvas.Children)
             {
@@ -397,7 +418,27 @@ namespace DBDT.DXF
             myObjDxfAll = (List<CDxfOBJ>)ALL_DXF_OBJ[is_select];
 
             FRM.DG_DXF_OBJ.ItemsSource = myObjDxfAll;
-           if (FRM.ShowDialog() == true)
+
+           // FRM.Canvas_TXT.Text = DesignerCanvas.Children[is_select].ToString();
+
+
+            foreach (UIElement element in DesignerCanvas.Children)
+            {
+                var contentControl = new ContentControl();
+                contentControl = ((System.Windows.Controls.ContentControl)element);
+                var content = contentControl.Content;
+
+                if (Convert.ToString(((System.Windows.FrameworkElement)content).Tag) == Convert.ToString(is_select))
+                   {
+                    var chil = ((System.Windows.Controls.Decorator)content).Child;
+                    var dat = ((System.Windows.Shapes.Path)chil).Data;
+                    FRM.Canvas_TXT.Text = dat.ToString().Replace(",",".").Replace(";", " ");
+                }
+
+
+            }
+
+            if (FRM.ShowDialog() == true)
             {
 
                 chOdbChek.IsChecked = false;
@@ -421,9 +462,17 @@ namespace DBDT.DXF
 
         private void BClickDellData(object sender, RoutedEventArgs e)
         {
+            if (is_select == -1) return;
+
                 DesignerCanvas.Children.RemoveAt(is_select);
                 ALL_DXF_OBJ.RemoveAt(is_select);
                 is_select = -1;
+            int i = 0;
+            foreach (Control child in DesignerCanvas.Children)
+            {
+                child.Tag = i;
+                i++;
+            }
         }
 
         private void BClick_LoadDXF(object sender, RoutedEventArgs e)
@@ -553,6 +602,12 @@ namespace DBDT.DXF
                                     generuj_linieDXF = true;
                                     ostatniakomenda = "A";
                                     break;
+                                case 97:
+                                    //a
+                                    str += "a";
+                                    generuj_linieDXF = true;
+                                    ostatniakomenda = "a";
+                                    break;
                                 case 59:
                                     //;
                                     str += ";";
@@ -631,7 +686,7 @@ namespace DBDT.DXF
                                 if (str.Length > 1)
                                 {
                                     string stmp = str.Substring(str.Length - 1, 1);
-                                    if (stmp == "A" || stmp == "L" || stmp == "M" || generuj_linie_konic_liniDXF == true)
+                                    if (stmp == "A" || stmp == "a" || stmp == "L" || stmp == "M" || generuj_linie_konic_liniDXF == true)
                                     {
                                         string ostznak = stmp;
                                         if (generuj_linie_konic_liniDXF == true)

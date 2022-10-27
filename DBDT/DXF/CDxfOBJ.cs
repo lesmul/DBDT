@@ -24,6 +24,20 @@ namespace DBDT.DXF
             set { id_object = value; }
         }
 
+        private int inthandle;
+        public int IntHandle
+        {
+            get { return inthandle; }
+            set { inthandle = value; }
+        }
+
+        private int intwezel;
+        public int IntWezel
+        {
+            get { return intwezel; }
+            set { intwezel = value; }
+        }
+
         private string typ;
 
         public string Typ
@@ -121,6 +135,20 @@ namespace DBDT.DXF
         {
             get { return maxY; }
             set { maxY = value; }
+        }
+
+        private bool kierZegara = false;
+        public bool KierZegara
+        {
+            get { return kierZegara; }
+            set { kierZegara = value; }
+        }
+
+        private string handle;
+        public string Handle
+        {
+            get { return handle; }
+            set { handle = value; }
         }
 
         private bool juz_dodany=false;
