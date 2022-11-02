@@ -92,7 +92,6 @@
     <Compile Include="Adorners\SizeChrome.cs" />
     <Compile Include="DesignerItemDecorator.cs" />
     <Compile Include="DXF\CDxfOBJ.cs" />
-    <Compile Include="DXF\CoverterSVG.cs" />
     <Compile Include="DXF\DXF.cs" />
     <Compile Include="DXF\LOAD_SAVE_DXF.cs" />
     <Compile Include="DXF\W_EDIT_DATA_DXF.xaml.cs">

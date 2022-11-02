@@ -22,14 +22,14 @@
                      Visibility="Collapsed"/>
             <s:MoveThumb Template="{StaticResource MoveThumbTemplate}"
                          Cursor="SizeAll"/>
-            <Control x:Name="ResizeDecorator"
+            <!--<Control x:Name="ResizeDecorator"
                      Template="{StaticResource ResizeDecoratorTemplate}"
-                     Visibility="Collapsed"/>
+                     Visibility="Collapsed"/>-->
             <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
           </Grid>
           <ControlTemplate.Triggers>
             <Trigger Property="Selector.IsSelected" Value="True">
-              <Setter TargetName="ResizeDecorator" Property="Visibility" Value="Visible"/>
+              <!--<Setter TargetName="ResizeDecorator" Property="Visibility" Value="Visible"/>-->
               <Setter TargetName="RotateDecorator" Property="Visibility" Value="Visible"/>
             </Trigger>
           </ControlTemplate.Triggers>

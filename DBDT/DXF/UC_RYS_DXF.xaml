@@ -1,8 +1,7 @@
 ﻿<UserControl x:Class="DBDT.DXF.UC_RYS_DXF"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Background="#303030" Loaded="laduj_uc"
-        >
+        Background="#303030" Loaded="laduj_uc">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -13,10 +12,9 @@
     </UserControl.Resources>
 
     <Grid>
-        <Canvas x:Name="DesignerCanvas"
-            ClipToBounds="True"
-            SnapsToDevicePixels="True" 
-            PreviewMouseLeftButtonUp="canvas_MouseSelect">
+
+        <Canvas x:Name="DesignerCanvasCNC" ClipToBounds="True"
+            SnapsToDevicePixels="True" PreviewMouseRightButtonUp="canvas_Right_MouseSelect" >
             <Rectangle
             Width="1000"
             Height="500"
@@ -26,8 +24,36 @@
             RadiusX="1" RadiusY="1"
             Canvas.Left="0"
             Canvas.Top="0"/>
+            <Canvas.ContextMenu>
+                 <ContextMenu Name="cm">
+                      <MenuItem Header="Zapisz układ DXF" Click="BClick_SaveDXFALL"/>
+                    <Separator />
+                    <MenuItem Header="Otwóż plik DXF" Click="BClick_LoadDXF"/>
+                </ContextMenu>
+            </Canvas.ContextMenu>
         </Canvas>
 
+        <Canvas x:Name="DesignerCanvas"
+            ClipToBounds="True"
+            SnapsToDevicePixels="True" 
+            PreviewMouseLeftButtonUp="canvas_MouseSelect" PreviewMouseRightButtonUp="canvas_Right_MouseSelect">
+            <Canvas.ContextMenu>
+                <ContextMenu Name="ParentContextMenu">
+                    <MenuItem Header="Edytuj dane DXF" Click="BClickEditData" >
+                        <!--<MenuItem.Icon>
+                            <Image Source="C_VALUE.png" />
+                        </MenuItem.Icon>-->
+                    </MenuItem>
+                    <MenuItem Header="Zapisz DXF" Click="BClick_SaveDXF"/>
+                    <MenuItem Header="Usuń" Click="BClickDellData"/>
+                    <Separator/>
+                    <MenuItem Header="Kopiuj" Click="BClickCopyData"/>
+                    <!--<Separator />
+                    <MenuItem Header="Otwóż plik DXF" Click="BClick_LoadDXF"/>-->
+                </ContextMenu>
+            </Canvas.ContextMenu>
+        </Canvas>
+        <!--<Label>Kliknij prawym klawiszem myszy</Label>-->
         <CheckBox x:Name="chOdbChek" Click="OnClick"
               Content=" Odblokój rozmiar"
               Margin="20,10,0,0"
@@ -35,8 +61,8 @@
               FontFamily="UISegoe"
               FontSize="15"
               HorizontalAlignment="Left"
-              VerticalAlignment="Top"/>
-        <Button Click="BClickDellData"
+              VerticalAlignment="Top" Visibility="Hidden" />
+        <!--<Button Click="BClickDellData"
               Margin="20,30,0,0"
               HorizontalAlignment="Left"
               VerticalAlignment="Top">
@@ -55,7 +81,7 @@
               Margin="20,90,0,0"
               HorizontalAlignment="Left"
               VerticalAlignment="Top">
-            Otwórz DXF</Button>
+            Otwórz DXF</Button>-->
 
     </Grid>
 

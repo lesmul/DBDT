@@ -61,7 +61,6 @@ namespace DBDT.DXF
             //}
  
         }
-
         private void OnClick(object sender, RoutedEventArgs args)
         {
             if (DesignerCanvas.Children.Count > 0)
@@ -88,8 +87,9 @@ namespace DBDT.DXF
 
         }
 
-        private void PathGeometryFDXF(string filename, bool edycja)
+        private void PathGeometryFDXF(string filename, byte edycja, double lokX = 50, double lokY = 50)
         {
+
             Style s = this.FindResource("DesignerItemStyle") as Style;
        
             var contentControl2 = new ContentControl();
@@ -100,7 +100,7 @@ namespace DBDT.DXF
 
             int id_wezel = 1;
 
-            if (edycja == false)
+            if (edycja == 0)
             {
                 myObjDxfAll = load_save_dxf.LOAD(filename, DesignerCanvas.Children.Count);
 
@@ -112,9 +112,8 @@ namespace DBDT.DXF
                 ALL_DXF_OBJ.Add(myObjDxfAll);
 
             }
-            else
+            else if (edycja == 1)
             {
-
                 DesignerCanvas.Children.RemoveAt(is_select);
 
                 myObjDxfAll = (List<CDxfOBJ>)ALL_DXF_OBJ[is_select];
@@ -129,7 +128,17 @@ namespace DBDT.DXF
                 ALL_DXF_OBJ.Add(myObjDxfAll);
 
             }
-           
+            else if (edycja == 2)
+            {
+                myObjDxfAll = (List<CDxfOBJ>)ALL_DXF_OBJ[is_select];
+
+               // ALL_DXF_OBJ.Add(myObjDxfAll);
+
+            }
+
+            if (myObjDxfAll == null) return;
+
+            if (myObjDxfAll.Count == 0) return;
             //double wys_canvas = DesignerCanvas.Height;
 
             //add Ellipse
@@ -138,14 +147,14 @@ namespace DBDT.DXF
             var maxX = myObjDxfAll.Max(row => row.MaxX);
             var maxY = myObjDxfAll.Max(row => row.MaxY);
 
-            contentControl.Width = maxX;
-            contentControl.Height = maxY;
+            contentControl.Width = Math.Abs(maxX);
+            contentControl.Height = Math.Abs(maxY);
             contentControl.MinHeight = 5;
             contentControl.MinWidth = 5;
             contentControl.Padding = new Thickness(1.0);
 
-            Canvas.SetTop(contentControl, 50);
-            Canvas.SetLeft(contentControl, 50);
+            Canvas.SetTop(contentControl, lokX);
+            Canvas.SetLeft(contentControl, lokY);
 
             contentControl.Style = s;
 
@@ -196,7 +205,6 @@ namespace DBDT.DXF
 
                        //M100,100 a25,25 0 0 1 25,-25
                         geoDXF.AppendLine(" M" + Convert.ToString(myObjDxfAll[i].X1).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].Y1).Replace(",", "."));
-
        
                         //" 0 0 0" - zgodnie z ruchem wsk. zeg.
                         //" 0 0 1" - przeciwnie z ruchem wsk. zeg.
@@ -299,7 +307,6 @@ namespace DBDT.DXF
 
         EndWhile:
 
-
             var path = new Path
             {
                 Stroke = Brushes.White,
@@ -309,10 +316,18 @@ namespace DBDT.DXF
                 Data = Geometry.Parse(geoDXF.ToString()),
                 Stretch = Stretch.Fill
             };
-            path.Tag = DesignerCanvas.Children.Count;
 
-            contentControl.Tag = DesignerCanvas.Children.Count;
-       
+            if (edycja != 2)
+            {
+                path.Tag = DesignerCanvas.Children.Count;
+                contentControl.Tag = DesignerCanvas.Children.Count;
+            }
+            else
+            {
+                path.Tag = DesignerCanvas.Children.Count;
+                contentControl.Tag = DesignerCanvas.Children.Count;
+            }
+
             var border = new Border { Background = Brushes.Transparent, VerticalAlignment = VerticalAlignment.Stretch, HorizontalAlignment = HorizontalAlignment.Stretch };
             border.IsHitTestVisible = false;
             border.Child = path;
@@ -322,7 +337,6 @@ namespace DBDT.DXF
   
 
         }
-
 
         private Path GetPath(string aColor)
         {
@@ -378,11 +392,27 @@ namespace DBDT.DXF
             }
         }
 
+        private void canvas_Right_MouseSelect(object sender, MouseButtonEventArgs e)
+        {
+
+            if (is_select < 0) return;
+
+            var menuItem = sender as MenuItem;
+            var contextMenu = menuItem?.Parent as ContextMenu;
+            var ellipse = contextMenu?.PlacementTarget as Ellipse;
+            DesignerCanvas.Children.Remove(ellipse);
+
+            foreach (Control child in DesignerCanvas.Children)
+            {
+                Selector.SetIsSelected(DesignerCanvas.Children[is_select], true);
+            }
+
+        }
 
         private void canvas_MouseSelect(object sender, MouseEventArgs e)
         {
 
-          is_select = Convert.ToInt32(((System.Windows.FrameworkElement)e.Source).Tag);
+            is_select = Convert.ToInt32(((System.Windows.FrameworkElement)e.Source).Tag);
 
             if (is_select < 0) return;
 
@@ -406,10 +436,12 @@ namespace DBDT.DXF
                 Selector.SetIsSelected(child, false);
             }
 
-             if (DesignerCanvas.Children.Count == 0)
+            if (DesignerCanvas.Children.Count == 0)
             {
                 return;
             }
+
+             if (is_select < 0) return;
 
             W_EDIT_DATA_DXF FRM = new W_EDIT_DATA_DXF();
 
@@ -428,13 +460,27 @@ namespace DBDT.DXF
                 contentControl = ((System.Windows.Controls.ContentControl)element);
                 var content = contentControl.Content;
 
+                var aktAngle =  contentControl.RenderTransform;
+
                 if (Convert.ToString(((System.Windows.FrameworkElement)content).Tag) == Convert.ToString(is_select))
                    {
                     var chil = ((System.Windows.Controls.Decorator)content).Child;
                     var dat = ((System.Windows.Shapes.Path)chil).Data;
                     FRM.Canvas_TXT.Text = dat.ToString().Replace(",",".").Replace(";", " ");
-                }
+       
+                    var tt = new ToolTip();
 
+                    if (aktAngle.IsSealed == false)
+                    {
+                        tt.Content = "Kąt obrotu: " + ((System.Windows.Media.RotateTransform)aktAngle).Angle;
+                    }
+                    else
+                    {
+                        tt.Content = "Kąt obrotu: 0";
+                    }
+
+                    FRM.Canvas_TXT.ToolTip = tt;
+                  }
 
             }
 
@@ -443,7 +489,7 @@ namespace DBDT.DXF
 
                 chOdbChek.IsChecked = false;
 
-                PathGeometryFDXF("", true);
+                PathGeometryFDXF("", 1);
 
                 if (DesignerCanvas.Children.Count > 0)
                 {
@@ -467,12 +513,61 @@ namespace DBDT.DXF
                 DesignerCanvas.Children.RemoveAt(is_select);
                 ALL_DXF_OBJ.RemoveAt(is_select);
                 is_select = -1;
+
             int i = 0;
+
             foreach (Control child in DesignerCanvas.Children)
             {
                 child.Tag = i;
                 i++;
             }
+        }
+        private void BClickCopyData(object sender, RoutedEventArgs e)
+        {
+            if (is_select == -1) return;
+
+            List<CDxfOBJ> myObjDxfAll = new List<CDxfOBJ>();
+            myObjDxfAll = (List<CDxfOBJ>)ALL_DXF_OBJ[is_select];
+
+            List<CDxfOBJ> myObjDxfAllC = new List<CDxfOBJ>();
+
+            if (ALL_DXF_OBJ == null) return;
+
+            int id_s = ALL_DXF_OBJ.Count;
+
+            for (int j = 0; j < myObjDxfAll.Count; j++)
+            {
+                CDxfOBJ myObjDxf = new CDxfOBJ();
+                myObjDxf.Id_object = id_s;
+                myObjDxf.Juz_dodany = false;
+                myObjDxf.X1 = myObjDxfAll[j].X1;
+                myObjDxf.Y1 = myObjDxfAll[j].Y1;
+                myObjDxf.X2 = myObjDxfAll[j].X2;
+                myObjDxf.Y2 = myObjDxfAll[j].Y2;
+                myObjDxf.Typ = myObjDxfAll[j].Typ;
+                myObjDxf.Radius = myObjDxfAll[j].Radius;
+                myObjDxf.CenterX = myObjDxfAll[j].CenterX;
+                myObjDxf.CenterY = myObjDxfAll[j].CenterY;
+                myObjDxf.EndA = myObjDxfAll[j].EndA;
+                myObjDxf.StartA = myObjDxfAll[j].StartA;
+                myObjDxf.MajorA = myObjDxfAll[j].MajorA;
+                myObjDxf.MinorA = myObjDxfAll[j].MinorA;
+                myObjDxf.Id = myObjDxfAll[j].Id;
+                myObjDxf.IntHandle = myObjDxfAll[j].IntHandle;
+                myObjDxf.IntWezel = myObjDxfAll[j].IntWezel;
+                myObjDxf.KierZegara = myObjDxfAll[j].KierZegara;
+                myObjDxf.MaxX = myObjDxfAll[j].MaxX;
+                myObjDxf.MaxY = myObjDxfAll[j].MaxY;
+
+                myObjDxfAllC.Add(myObjDxf);
+            }
+
+            ALL_DXF_OBJ.Add(myObjDxfAllC);
+
+            is_select = id_s;
+
+            PathGeometryFDXF("", 2, 99 + is_select, 88 + is_select);
+
         }
 
         private void BClick_LoadDXF(object sender, RoutedEventArgs e)
@@ -490,8 +585,8 @@ namespace DBDT.DXF
             {
 
                 //  PathGeometryFromDXF(OpenFileDialog_DXF.FileName);
-                PathGeometryFDXF(OpenFileDialog_DXF.FileName,false);
-                
+                PathGeometryFDXF(OpenFileDialog_DXF.FileName, 0);
+
                 chOdbChek.IsChecked = false;
 
                 if (DesignerCanvas.Children.Count > 0)
@@ -512,6 +607,7 @@ namespace DBDT.DXF
         }
         private void BClick_SaveDXF(object sender, RoutedEventArgs e)
         {
+            if (is_select == -1) return;
 
             // return;
 
@@ -530,222 +626,64 @@ namespace DBDT.DXF
 
                 //****************************************************************************************************************************************
                 //****************************************************************************************************************************************
-                //DxfDocument dxf = new DxfDocument();
-                //Angular2LineDimension d = null;
-                //DxfDocument doc = DxfDocument.Load("C:\\Users\\Leszek Mularski\\Documents\\SOLID_WORKS\\WYDRUKI_3D\\Część1.DXF\");
-                //foreach (Dimension dim in doc.Entities.Dimensions)
-                //{
-                //    dim.Block = DimensionBlock.Build(dim);
-                //    if (dim.DimensionType == DimensionType.Angular)
-                //        d = (Angular2LineDimension)dim;
-                //}
 
-                //****************************************************************************************************************************************
-                //****************************************************************************************************************************************
-
-
-
-                //   System.IO.FileStream FsA = new System.IO.FileStream(fiA.FullName, System.IO.FileMode.CreateNew, System.IO.FileAccess.Write, System.IO.FileShare.None);
-                //   System.IO.StreamWriter SwFromFileStreamDefaultEncA = new System.IO.StreamWriter(FsA, System.Text.Encoding.Default);
-
-                //    SwFromFileStreamDefaultEncA.WriteLine(DXF.DxfInit());
-                //     SwFromFileStreamDefaultEncA.WriteLine(DXF.DxfText(0, 0, 12, 0, 4, "Wygenerowano z programu OKNOPLAST - LM : " + DateTime.Now.ToLongDateString() + " " + DateTime.Now.Hour + ":" + DateTime.Now.Minute));
-                // SwFromFileStreamDefaultEncA.WriteLine(DXF.DxfLine(C_OB_SZYBA.Item(i).X, C_OB_SZYBA.Item(i).Y, C_OB_SZYBA.Item(i + 1).X, C_OB_SZYBA.Item(i + 1).y, 1, ""));
-
-                //M = przenieś do
-                //L = linia do
-                //H = linia pozioma do
-                //V = linia pionowa do
-                //C = krzywa do
-                //S = gładka krzywa do
-                //Q = kwadratowa krzywa Béziera
-                //T = gładka kwadratowa krzywa Bézierato
-                //A = łuk eliptyczny
-                //Z = ścieżka zamnknij
-
-                ArrayList linieDXF = new ArrayList();
+                int katObr = 0;
 
                 foreach (UIElement element in DesignerCanvas.Children)
                 {
                     var contentControl = new ContentControl();
                     contentControl = ((System.Windows.Controls.ContentControl)element);
                     var content = contentControl.Content;
-                    var chil = ((System.Windows.Controls.Decorator)content).Child;
-                    var dat = ((System.Windows.Shapes.Path)chil).Data;
 
-                    string[] splitLine;
-                    splitLine = (Convert.ToString(dat).Split(new char[] { ' ', '\t' }));
+                    var aktAngle = contentControl.RenderTransform;
 
-                    string ostatniakomenda = "!";
-
-                    for (int i = 0; i < splitLine.Length; i++)
+                    if (Convert.ToString(((System.Windows.FrameworkElement)content).Tag) == Convert.ToString(is_select))
                     {
-                        string splitLn;
-                        splitLn = ostatniakomenda + splitLine[i].Trim();
-                        var bytes = Encoding.UTF8.GetBytes(Convert.ToString(splitLn));
-
-                        bool generuj_linieDXF = true;
-                        bool generuj_linie_konic_liniDXF = false;
-                        string str = "";
-
-                        int j = 0;
-
-                        foreach (byte pojz in bytes)
+       
+                        if (aktAngle.IsSealed == false)
                         {
-                            j++;
-
-                            switch (pojz)
-                            {
-                                case 65:
-                                    //A
-                                    str += "A";
-                                    generuj_linieDXF = true;
-                                    ostatniakomenda = "A";
-                                    break;
-                                case 97:
-                                    //a
-                                    str += "a";
-                                    generuj_linieDXF = true;
-                                    ostatniakomenda = "a";
-                                    break;
-                                case 59:
-                                    //;
-                                    str += ";";
-                                    break;
-                                case 76:
-                                    //L
-                                    str += "L";
-                                    generuj_linieDXF = true;
-                                    ostatniakomenda = "L";
-                                    break;
-                                case 77:
-                                    //M
-                                    str += "M";
-                                    generuj_linieDXF = true;
-                                    ostatniakomenda = "M";
-                                    break;
-                                case 48:
-                                    //0
-                                    str += "0";
-                                    break;
-                                case 49:
-                                    //1
-                                    str += "1";
-                                    break;
-                                case 50:
-                                    //2
-                                    str += "2";
-                                    break;
-                                case 51:
-                                    //3
-                                    str += "3";
-                                    break;
-                                case 52:
-                                    //4
-                                    str += "4";
-                                    break;
-                                case 53:
-                                    //5
-                                    str += "5";
-                                    break;
-                                case 54:
-                                    //6
-                                    str += "6";
-                                    break;
-                                case 55:
-                                    //7
-                                    str += "7";
-                                    break;
-                                case 56:
-                                    //8
-                                    str += "8";
-                                    break;
-                                case 57:
-                                    //9
-                                    str += "9";
-                                    break;
-                                case 46:
-                                    //.
-                                    str += ".";
-                                    break;
-                                case 44:
-                                    //,
-                                    str += ",";
-                                    break;
-                                case 33:
-                                    //,
-                                    str += "|";
-                                    break;
-                                default:
-                                    str += "?";
-                                    break;
-                            }
-
-                            if (generuj_linieDXF == true || generuj_linie_konic_liniDXF == true)
-                            {
-                                if (str.Length > 1)
-                                {
-                                    string stmp = str.Substring(str.Length - 1, 1);
-                                    if (stmp == "A" || stmp == "a" || stmp == "L" || stmp == "M" || generuj_linie_konic_liniDXF == true)
-                                    {
-                                        string ostznak = stmp;
-                                        if (generuj_linie_konic_liniDXF == true)
-                                        {
-                                            linieDXF.Add(str);
-                                        }
-                                        else
-                                        {
-                                            linieDXF.Add(str.Substring(0, str.Length - 1));
-                                        }
-
-                                        str = ostznak;
-                                        generuj_linieDXF = false;
-                                        generuj_linie_konic_liniDXF = false;
-                                    }
-
-                                    //string ostznak = str.Substring(str.Length - 1, 1);
-                                    //sb.AppendLine(str.Substring(0, str.Length - 1));
-                                    //str = ostznak;
-                                    //generuj_linieDXF = false;
-                                }
-                                else if (linieDXF.Count == 0)
-                                {
-                                    generuj_linieDXF = false;
-                                }
-                                //
-                            }
-
-                            if (j == bytes.Length - 1)
-                            {
-                                generuj_linie_konic_liniDXF = true;
-                            }
-
+                            katObr = (int)((RotateTransform)aktAngle).Angle;
                         }
-
-                        //  SwFromFileStreamDefaultEncA.WriteLine("----------------????????" + sb.ToString());
-
-                        //linia DXF
-                        //  var svg = Encoding.UTF8.GetString(bytes);
+                        else
+                        {
+                            katObr = 0;
+                        }
                     }
-
-                    //{M0;0A100;100;0;0;1;100;100L100;200 0;200 0;0}
-                    //{M0;0A50;50;0;0;1;100;100  L100;200 0;200 0;0}
-                    //{M0;0
-                    //->A100;100;0;0;1;100;100
-                    //->L100;200
-                    //->0;200
-                    //->0;0}
 
                 }
 
-                CoverterSVG coverterSVG = new CoverterSVG();
-                linieDXF = coverterSVG.ConvertSVGDXF(linieDXF);
+                LOAD_SAVE_DXF load_save_dxf = new LOAD_SAVE_DXF();
+                load_save_dxf.SAVE(SaveFileDialog_DXF.FileName, ALL_DXF_OBJ, is_select, katObr);
 
-                //   SwFromFileStreamDefaultEncA.WriteLine(DXF.DxfEnd());
-                //  SwFromFileStreamDefaultEncA.Flush();
-                //  SwFromFileStreamDefaultEncA.Close();
+                //****************************************************************************************************************************************
+                //****************************************************************************************************************************************
 
-                linieDXF.Clear();
+            }
+        }
+
+        private void BClick_SaveDXFALL(object sender, RoutedEventArgs e)
+        {
+            if (is_select == -1) return;
+
+            //string savedCanvasString = System.Windows.Markup.XamlWriter.Save(((System.Windows.Shapes.Path)abcd).Data);
+
+            SaveFileDialog SaveFileDialog_DXF = new SaveFileDialog();
+            SaveFileDialog_DXF.Filter = "plik DXF (*.dxf)|*.dxf";
+            SaveFileDialog_DXF.FileName = "dbdt_file_all";
+
+            if (SaveFileDialog_DXF.ShowDialog() == true)
+            {
+                System.IO.FileInfo fiA = new System.IO.FileInfo(SaveFileDialog_DXF.FileName);
+
+                if (fiA.Exists == true)
+                    fiA.Delete();
+
+                LOAD_SAVE_DXF load_save_dxf = new LOAD_SAVE_DXF();
+
+                load_save_dxf.SAVE_ALL(SaveFileDialog_DXF.FileName, ALL_DXF_OBJ, DesignerCanvas);
+
+                //****************************************************************************************************************************************
+                //****************************************************************************************************************************************
 
             }
         }
