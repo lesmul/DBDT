@@ -1,0 +1,254 @@
+﻿<UserControl   x:Class="DBDT.SQL.SQL_SELECT.MainWindowSQL"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:cc="clr-namespace:DBDT.SQL.SQL_SELECT"
+          Loaded="Window_Loaded" FocusManager.FocusedElement="{Binding ElementName=txtCode}" IsVisibleChanged="close_sql">
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="Open" Executed="Open_Executed"/>
+        <CommandBinding Command="Save" Executed="Save_Executed"/>
+        <CommandBinding Command="cc:SqlHandler.ParseOpis" Executed="Save_ExecutedSQL"/>
+        <CommandBinding Command="cc:SqlHandler.ParseCommand" Executed="Parse_Executed" CanExecute="IsConnected_Executed"/>
+        <CommandBinding Command="cc:SqlHandler.ExecuteCommand" Executed="Execute_Executed" CanExecute="IsConnected_Executed"/>
+        <CommandBinding Command="cc:SqlHandler.ExecuteCommand_ds" Executed="Execute_ExecutedDS" CanExecute="IsConnected_Executed"/>
+        <CommandBinding Command="cc:SqlHandler.ConnectCommand" Executed="Connect_Executed"/>
+        <CommandBinding Command="cc:SqlHandler.DisconnectCommand" Executed="Disconnect_Executed"/>
+        <CommandBinding Command="cc:SqlHandler.ParseTable" Executed="ClickAuto" CanExecute="IsConnected_Executed"/>
+    </UserControl.CommandBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--<Menu>
+            <MenuItem Header="File">
+                <MenuItem Command="Open"/>
+                <MenuItem Command="Save"/>
+                <Separator />
+                <MenuItem Command="Cut"/>
+                <MenuItem Command="Copy"/>
+                <MenuItem Command="Paste"/>
+               </MenuItem>
+            <MenuItem Header="Database">
+                <MenuItem Command="cc:SqlHandler.ConnectCommand"/>
+                <MenuItem Command="cc:SqlHandler.DisconnectCommand"/>
+                <Separator />
+                <MenuItem Command="cc:SqlHandler.ExecuteCommand"/>
+                <MenuItem Command="cc:SqlHandler.ParseCommand"/>
+            </MenuItem>
+        </Menu>-->
+        <ToolBar Grid.Row="1">
+            <ToolBar.Resources>
+                <Style TargetType="{x:Type Button}" x:Key="buttonStyle">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" />
+                </Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type ButtonBase}, AncestorLevel=1}, Path=IsEnabled}" Value="False">
+                            <Setter Property="Opacity" Value="0.30" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ToolBar.Resources>
+            <Button x:Name="b_wykonaj_ds" Command="cc:SqlHandler.ExecuteCommand_ds" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Wykonaj zapytanie - obiekt może zwrócić wiele tabel">
+                <Image Source="Images/lightning_ds.png" IsEnabled="False"/>
+            </Button>
+            <Separator/>
+            <Button Command="Open" Style="{StaticResource ResourceKey=buttonStyle}">
+                <Image Source="Images/folder_page.png"/>
+            </Button>
+            <Button Command="Save" Style="{StaticResource ResourceKey=buttonStyle}">
+                <Image Source="Images/disk.png"/>
+            </Button>
+            <Button x:Name="B_ZAPISZ_DO_BAZY" Command="cc:SqlHandler.ParseOpis" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Zapisz do bazy danych">
+                <Image Source="Images/database.png"/>
+            </Button>
+            <Separator />
+            <Button Command="Cut" Style="{StaticResource ResourceKey=buttonStyle}">
+                <Image Source="Images/cut.png"/>
+            </Button>
+            <Button Command="Copy" Style="{StaticResource ResourceKey=buttonStyle}">
+                <Image Source="Images/page_white_copy.png"/>
+            </Button>
+            <Button Command="Paste" Style="{StaticResource ResourceKey=buttonStyle}">
+                <Image Source="Images/page_white_paste.png"/>
+            </Button>
+            <Separator />
+            <Button Command="cc:SqlHandler.ConnectCommand" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Połącz">
+                <Image Source="Images/database_connect.png"/>
+            </Button>
+            <Button Command="cc:SqlHandler.DisconnectCommand" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Rozłącz">
+                <Image Source="Images/disconnect.png"/>
+            </Button>
+
+            <Separator />
+            <Button x:Name="b_wykonaj" Command="cc:SqlHandler.ExecuteCommand" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Wykonaj">
+                <Image Source="Images/lightning.png" IsEnabled="False"/>
+            </Button>
+            <Button Command="cc:SqlHandler.ParseCommand" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Analizuj">
+                <Image Source="Images/bug.png"/>
+            </Button>
+            <Separator />
+            <Separator Width="80" Visibility="Hidden"/>
+            <Button Command="cc:SqlHandler.ParseTable" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Włącz auto uzupełnianie">
+                <Image x:Name="auto_on" Source="/SQL/SQL_SELECT/Images/auto.png"/>
+            </Button>
+            <Separator />
+            <Button Name="B_EXIT" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Zamknij" Click="frm_exit">
+                <Image Source="Images/exit.ico"/>
+            </Button>
+            <Separator />
+            <Label>z:</Label>
+            <TextBox x:Name="TXT_OLD" Width="150" Height="27">
+                <TextBox.Style>
+                    <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="Tekst który chcesz zmienić" Foreground="LightGray" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Label>na:</Label>
+            <TextBox x:Name="TXT_NEW" Width="140" Height="27">
+                <TextBox.Style>
+                    <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="Nowy tekst" Foreground="LightGray" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Button Name="B_REPLECE" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Zamień tekst" Click="replace_text_click" >
+                <Image Source="Images/replace.ico"/>
+            </Button>
+            <Button Name="B_PASTE_MOVE" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Wklej ze schowka do pola na: pole na: przenieś na z:" Click="paste_and_move_click" >
+                <Image Source="Images/paste.png"/>
+            </Button>
+        </ToolBar>
+        <TextBox Name="txtCode"
+                 AcceptsReturn="True"
+                 AcceptsTab="True"
+                 HorizontalScrollBarVisibility="Auto"
+                 VerticalScrollBarVisibility="Auto"
+                 Padding="5"
+                 FontFamily="Courier New"
+                 Grid.Row="2" TextChanged="textChengen" FontSize="14" SelectionChanged="SelectionChanged" >
+            <TextBox.ContextMenu>
+                <ContextMenu  Name="cxm" Opened="CxmOpened">
+                    <MenuItem Header="Wytnij" Name="cxmItemCut" Click="ClickCut" />
+                    <MenuItem Header="Kopiuj" Name="cxmItemCopy" Click="ClickCopy" />
+                    <MenuItem Header="Wklej" Name="cxmItemPaste" Click="ClickPaste" />
+                    <Separator/>
+                    <MenuItem Header="Zaznacz wszystko" Name="cxmItemSelectAll" Click="ClickSelectAll" />
+                    <MenuItem Header="Wybierz bieżącą linię" Name="cxmItemSelectLine" Click="ClickSelectLine" />
+                    <Separator/>
+                    <MenuItem Header="Cofnij ostatnią akcję" Name="cxmItemUndo" Click="ClickUndo" />
+                    <MenuItem Header="Powtórz ostatnią akcję" Name="cxmItemRedo" Click="ClickRedo" />
+                    <Separator/>
+                    <MenuItem Header="Wyczyść cały tekst"  Name="cxmItemClear" Click="ClickClear" />
+                    <Separator/>
+                    <MenuItem Header="W zaznaczonym fragmencie">
+                        <MenuItem Header="zamień na LIKE" Name="cxmItemLike" Click="ClickLike" />
+                        <MenuItem Header="zamień na LIKE%...%" Name="cxmItemLikeProc" Click="ClickLikeProc" />
+                        <MenuItem Header="zamień na =" Name="cxmItemLikeRow" Click="ClickRowna" />
+                        <MenuItem Header="zamień na AND" Name="cxmItemLikeAnd" Click="ClickAnd" />
+                        <MenuItem Header="zamień na OR" Name="cxmItemLikeOr" Click="ClickOr" />
+                        <Separator/>
+                        <MenuItem Header="Zmień na DUŻE LITERY" Name="cxmItemUpperText" Click="ClickUpperText" />
+                        <MenuItem Header="Zmień na małe litery" Name="cxmItemLowerText" Click="ClickLowerText" />
+                        <MenuItem Header="Kopiuj kolumny w tabeli" Name="cxmItemColumsTable" Click="ClickColumnTable" />
+                        <Separator/>
+                        <MenuItem Name="praca_procedura"  Header="Ustaw tryb pracy - procedura" Click="click_procedura" />
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Pokaż wszystkie tabele"  Name="cxmSelecAllTable" Click="ClickSelecAllTable" />
+                    <Separator/>
+                    <MenuItem Header="Zmień zaznaczone linie na komentarz" Tag="comments" Click="click_coments" />
+                    <MenuItem Header="Usuń komentarz z zaznaczonych linii" Tag="uncomments" Click="click_coments" />
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+        <Expander Grid.Row="3" Name="errorsExpander" Header="Błędy">
+            <DataGrid Name="errorsGrid" Height="120" AutoGenerateColumns="False">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Foreground" Value="Red"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Number}" Header="Numer"/>
+                    <DataGridTextColumn Binding="{Binding Path=Class}" Header="Poziom"/>
+                    <DataGridTextColumn Binding="{Binding Path=State}" Header="Status"/>
+                    <DataGridTextColumn Binding="{Binding Path=LineNumber}" Header="Linia"/>
+                    <DataGridTextColumn Binding="{Binding Path=Message}" Width="*" Header="Wiadomość"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Expander>
+        <StatusBar Name="statusBar" Grid.Row="4" HorizontalAlignment="Stretch">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+
+            <StatusBarItem Grid.Column="0">
+                <Image Name="connStatusIcon" />
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="1">
+                <TextBlock Name="txtStatus"/>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="2">
+                <TextBlock Name="txtConnection"/>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="3" HorizontalAlignment="Right">
+                <TextBlock Name="txtLineKlik"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</UserControl>

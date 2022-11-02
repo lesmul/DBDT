@@ -5,60 +5,569 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBDT.Konfiguracja"
         mc:Ignorable="d"
-        Title="Konfiguracja połączenia do bazy danych" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png" WindowStyle="ToolWindow" Width="415" Height="210" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-    <Grid>
-        <Button Content="Zakończ" Height="25" Margin="265,136,0,0" Width="130" Click="zakoncz_click" BorderThickness="1,1,1,1" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-        <Label Content="Nazwa serwera" HorizontalAlignment="Left" Margin="7,6,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TXT_NAZWA_SERWERA" HorizontalAlignment="Left" Height="28" Margin="7,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" ToolTip="Uwagi do pozycji" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
-            <TextBox.Style>
-                <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
-                    <Style.Resources>
-                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                            <VisualBrush.Visual>
-                                <Label Content="Podaj nazwę serwera" Foreground="LightGray" />
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Style.Resources>
-                    <Style.Triggers>
-                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                        </Trigger>
-                        <Trigger Property="Text" Value="{x:Null}">
-                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter Property="Background" Value="White" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Style>
-        </TextBox>
-        <Button Content="Test" HorizontalAlignment="Left" Height="88" Margin="265,32,0,0" VerticalAlignment="Top" Width="130" Click="test_click"/>
-        <Label Content="Nazwa bazy danych" HorizontalAlignment="Left" Margin="7,65,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TXT_NAZWE_BAZY" HorizontalAlignment="Left" Height="28" Margin="7,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" ToolTip="Uwagi do pozycji" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
-            <TextBox.Style>
-                <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
-                    <Style.Resources>
-                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                            <VisualBrush.Visual>
-                                <Label Content="Podaj nazwę bazy danych" Foreground="LightGray" />
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Style.Resources>
-                    <Style.Triggers>
-                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                        </Trigger>
-                        <Trigger Property="Text" Value="{x:Null}">
-                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter Property="Background" Value="White" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Style>
-        </TextBox>
+        Title="Konfiguracja programu połączenia/katalogi/synchronizacja" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png" WindowStyle="ToolWindow" Width="637" Height="395" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5,5,5,5" Margin="-1,0,0,0">
+    <Grid Margin="-5,-5,-5,4">
+
+        <TabControl HorizontalAlignment="Center" Height="356" VerticalAlignment="Top" Width="627" Margin="0,14,0,0">
+            <TabItem Header="Połączenia do bazy danych">
+                <Grid Background="#FFF6F5F5">
+                    <Button Content="Zakończ i zapisz" Height="43" Margin="0,186,0,0" Width="601" Click="zakoncz_click" BorderThickness="1,1,1,1" VerticalAlignment="Top" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                    <Label Content="Nazwa serwera" HorizontalAlignment="Left" Margin="7,62,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_NAZWA_SERWERA" HorizontalAlignment="Left" Height="28" Margin="7,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="388" ToolTip="Podaj adre IP lub nazwę serwera" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj nazwę serwera" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button Content="Test" HorizontalAlignment="Left" Height="30" Margin="400,31,0,0" VerticalAlignment="Top" Width="211" Click="test_click"/>
+                    <Label Content="Nazwa bazy danych" HorizontalAlignment="Left" Margin="7,114,0,0" VerticalAlignment="Top" Loaded="zapisane_polaczenia"/>
+                    <TextBox x:Name="TXT_NAZWA_BAZY" HorizontalAlignment="Left" Height="28" Margin="10,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="385" ToolTip="Podaj nazwę bazy danych" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj nazwę bazy danych" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <ComboBox x:Name="CB_HIST_POL" DisplayMemberPath="SerwerIBaza" SelectedValuePath="SerwerIBaza" HorizontalAlignment="Left" Height="30" Margin="10,31,0,0" VerticalAlignment="Top" Width="385" SelectionChanged="CB_HIST_POL_SelectionChanged"/>
+                    <Label Content="Historia zapisanych połączeń:" HorizontalAlignment="Left" Margin="7,5,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Konfiguracja lokalizacji katalogów" Cursor="Hand">
+                <Grid Background="#FFFAFAFA">
+                    <ScrollBar x:Name="SC_POZIOM" SmallChange="1" Maximum="2" Minimum="0" Value="0" Cursor="Hand" Orientation="Horizontal" Margin="497,10,0,301" HorizontalAlignment="Left" Width="35" ToolTip="Przewiń aby dodać pozostałe wartości do katalogów" ValueChanged="SC_POZIOM_ValueChanged" BorderThickness="1,1,1,1" Background="#FF0C0C0C" BorderBrush="#FF121212" Panel.ZIndex="1"/>
+                    <Label Name="LBL_LK_1" Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,10,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_1" HorizontalAlignment="Left" Height="28" Margin="7,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj lokalizację plików do bazy wiedzy" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_OPIS_1" HorizontalAlignment="Left" Height="28" Margin="392,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" ToolTip="Podaj opis widoczny w menu" MaxLines="1" MaxLength="25" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj opis w drzewie" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button Name="ZAPISZ_LOK_KATALAGU_1" Tag="T1" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,37,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
+
+                    <Label Name="LBL_LK_2" Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,70,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_2" HorizontalAlignment="Left" Height="28" Margin="7,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj lokalizację plików do bazy wiedzy" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_OPIS_2" HorizontalAlignment="Left" Height="28" Margin="392,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" ToolTip="Podaj opis widoczny w menu" MaxLines="1" MaxLength="25" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj opis w drzewie" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button Name="ZAPISZ_LOK_KATALAGU_2"  Tag="T2" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,95,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
+
+                    <Label Name="LBL_LK_3" Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,130,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_3" HorizontalAlignment="Left" Height="28" Margin="7,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj lokalizację plików do bazy wiedzy" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_OPIS_3" HorizontalAlignment="Left" Height="28" Margin="392,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" ToolTip="Podaj opis widoczny w menu" MaxLines="1" MaxLength="25" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj opis w drzewie" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button Name="ZAPISZ_LOK_KATALAGU_3"  Tag="T3" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,155,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
+
+                    <Label Name="LBL_LK_4" Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,190,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_4" HorizontalAlignment="Left" Height="28" Margin="7,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj lokalizację plików do bazy wiedzy" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_OPIS_4" HorizontalAlignment="Left" Height="28" Margin="392,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" ToolTip="Podaj opis widoczny w menu" MaxLines="1" MaxLength="25" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj opis w drzewie" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button Name="ZAPISZ_LOK_KATALAGU_4"  Tag="T4" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,215,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
+
+                    <Label Name="LBL_LK_5" Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,250,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_5" HorizontalAlignment="Left" Height="28" Margin="7,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj lokalizację plików do bazy wiedzy" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_OPIS_5" HorizontalAlignment="Left" Height="28" Margin="392,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" ToolTip="Podaj opis widoczny w menu" MaxLines="1" MaxLength="25" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj opis w drzewie" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button Name="ZAPISZ_LOK_KATALAGU_5" Tag="T5" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,275,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Konfiguracja indesków">
+                <Grid>
+                    <Label Content="Podaj informację o przedrostku indeksu dummy:" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_INDESK_DUMMY" HorizontalAlignment="Left" Height="28" Margin="10,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="467" ToolTip="Konfiguracja niektórych indeksów" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj format indesków dammy np: Dummy_" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Label Content="Podaj informację o przedrostku indeksu doplata:" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_INDESK_DOPLAT" HorizontalAlignment="Left" Height="28" Margin="10,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="467" ToolTip="Konfiguracja niektórych indeksów" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj format indesków dopłat np: Doplata_" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Label Content="Podaj informację o przedrostku indeksu info:" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_INDESK_INNY" HorizontalAlignment="Left" Height="28" Margin="10,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="467" ToolTip="Konfiguracja niektórych indeksów" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj format indesków typ info np: Info_" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Label Content="Podaj informację o przedrostku indeksu druk:" HorizontalAlignment="Left" Margin="10,169,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_INDESK_DRUK" HorizontalAlignment="Left" Height="28" Margin="10,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="467" ToolTip="Konfiguracja niektórych indeksów" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj format indesków typ info np: Druk_" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Label Content="Podaj informację o przedrostku indeksu - dowolny użytkownika:" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_INDESK_UZYTKOWNIKA" HorizontalAlignment="Left" Height="28" Margin="10,249,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="467" ToolTip="Konfiguracja niektórych indeksów" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj format indesków typ swój np: Uzyt_" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button x:Name="B_ZAPISZ_KONF_INDEKS" Content="Zapisz konfiguracje" Height="28" Margin="391,260,5,0" Click="B_ZAPISZ_KONF_INDEKS_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Synchronizacja programu">
+                <Grid>
+                    <Label Content="Lokalizacja - pliku bazy źródło:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKU_MATKI" HorizontalAlignment="Left" Height="28" Margin="10,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="467" ToolTip="Wklej ścieszkę w pole pliki" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj lokalizację plików bazy do synchronizacji" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button Name="ZAPISZ_LOK_PLIKU_MATKI" Tag="T5" Content="Zapisz lokalizację" HorizontalAlignment="Left" Height="28" Margin="512,37,0,0" VerticalAlignment="Top" Width="99" Click="ZAPISZ_LOK_MATKA_Click" />
+                    <Button Name="button_synchronizuj" Content="Synchronizuj" HorizontalAlignment="Center" Height="28" Margin="0,80,0,0" VerticalAlignment="Top" Width="601" Click="button_synchronizuj_Click"/>
+                    <Button HorizontalAlignment="Left"  FontFamily="Verdana" Height="28" Margin="482,37,0,0" VerticalAlignment="Top" 
+                            Click="Open_file_click" Width="28" ToolTip="Otwórz">
+                        <Button.Content>
+                            <Image  Source="/DrzewoProcesu/Images/folder-open.png" Stretch="Fill" />
+                        </Button.Content>
+                        <Button.Background>
+                            <SolidColorBrush Color="White" />
+                        </Button.Background>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" >
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <EventTrigger RoutedEvent="Button.MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF484A4D" Duration="0:0:0.1" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="Button.MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ParallelTimeline  >
+                                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="White" Duration="0:0:0.1" />
+                                                </ParallelTimeline>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button HorizontalAlignment="Left"  FontFamily="Verdana" Height="28" Margin="580,280,0,0" VerticalAlignment="Top" 
+                            Click="Save_file_all_click" Width="28" ToolTip="Zapisz jako domyślne ustawienia dla pozostałych baz do synchronizacji">
+                        <Button.Content>
+                            <Image  Source="/IKONY/save_all.ico" Stretch="Fill" />
+                        </Button.Content>
+                        <Button.Background>
+                            <SolidColorBrush Color="White" />
+                        </Button.Background>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" >
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <EventTrigger RoutedEvent="Button.MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Yellow"  Duration="0:0:0.1" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="Button.MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ParallelTimeline  >
+                                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="White" Duration="0:0:0.1" />
+                                                </ParallelTimeline>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>

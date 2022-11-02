@@ -1,0 +1,54 @@
+<?xml version="1.0" standalone="yes"?>
+<DataSetXML xmlns="http://tempuri.org/DataSetXML.xsd">
+  <_x0024_SYSTEM_x0024_>
+    <ID>1</ID>
+    <Objekt>test kolor</Objekt>
+    <NumerProjektu>0000/000</NumerProjektu>
+    <Nazwa_Kom_Excel_NrProj />
+    <Nazwa_Arkusz_NrProj />
+    <SQL_Tlumaczenia>Brak</SQL_Tlumaczenia>
+    <Nazwa_Kom_Excel />
+    <Nazwa_Arkusz />
+    <KomurkaStart />
+    <LokalizPlikExcel />
+    <WlaczTlumaczenie>false</WlaczTlumaczenie>
+  </_x0024_SYSTEM_x0024_>
+  <_x0024_SYSTEM_x0024_>
+    <ID>2</ID>
+    <Objekt>opcje</Objekt>
+    <NumerProjektu>0000/000</NumerProjektu>
+    <Nazwa_Kom_Excel_NrProj />
+    <Nazwa_Arkusz_NrProj />
+    <SQL_Tlumaczenia>Brak</SQL_Tlumaczenia>
+    <Nazwa_Kom_Excel />
+    <Nazwa_Arkusz />
+    <KomurkaStart />
+    <LokalizPlikExcel />
+    <WlaczTlumaczenie>false</WlaczTlumaczenie>
+  </_x0024_SYSTEM_x0024_>
+  <_x0024_SYSTEM_CONFIG_x0024_>
+    <ID>1</ID>
+    <LP>0</LP>
+    <TypParametru>@</TypParametru>
+    <PoleSQL>sssss¶</PoleSQL>
+    <NazwaZakladki>test kolor</NazwaZakladki>
+  </_x0024_SYSTEM_CONFIG_x0024_>
+  <test_x0020_kolor>
+    <ID>1</ID>
+    <Ilość_Znaków>4</Ilość_Znaków>
+    <Objekt>test kolor</Objekt>
+    <Nazwa>aaa</Nazwa>
+    <Wartość>aaaa</Wartość>
+    <Tekst>aaaa</Tekst>
+  </test_x0020_kolor>
+  <opcje>
+    <ID>1</ID>
+    <Ilość_Znaków>0</Ilość_Znaków>
+    <Objekt>opcje</Objekt>
+  </opcje>
+  <opcje>
+    <ID>2</ID>
+    <Ilość_Znaków>0</Ilość_Znaków>
+    <Objekt>opcje</Objekt>
+  </opcje>
+</DataSetXML>

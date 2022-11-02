@@ -235,7 +235,10 @@ namespace DBDT.DXF
                         //geoDXF.AppendLine(" a" + Convert.ToString(myObjDxfAll[i].MajorA).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].MinorA).Replace(",", ".") + " 0 1 0 0.00001,0");
 
                         geoDXF.AppendLine(" M" + Convert.ToString(myObjDxfAll[i].CenterX).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].CenterY).Replace(",", "."));
-                        geoDXF.AppendLine(" a" + Convert.ToString(myObjDxfAll[i].MajorA / 2).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].MinorA / 2).Replace(",", ".") + " 0 1 0 0.00001,0");
+                        //geoDXF.AppendLine(" a" + Convert.ToString(myObjDxfAll[i].MajorA / 2).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].MinorA / 2).Replace(",", ".") + " 0 1 0 0.00001,0");
+                        geoDXF.AppendLine(" A" + Convert.ToString(myObjDxfAll[i].MajorA / 2).Replace(",", ".") + "," + Convert.ToString(myObjDxfAll[i].MinorA / 2).Replace(",", ".") 
+                            + " 0 1 0 " + Convert.ToString(myObjDxfAll[i].CenterX).Replace(",", ".").Replace(".", "") + ".00001," + Convert.ToString(myObjDxfAll[i].CenterY).Replace(",", "."));
+                         //A100 75 0 1 0 102.00001 102
 
                         X = myObjDxfAll[i].X2;
                         Y = myObjDxfAll[i].Y2;

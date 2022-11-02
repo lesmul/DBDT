@@ -1,0 +1,50 @@
+﻿<Window x:Class="DBDT.SQL.Indeksy.IndeksTable"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBDT.Indeksy"
+        mc:Ignorable="d"
+        Title="Indesky do zapamiętania" Height="460" Width="605" Topmost="True" ResizeMode="NoResize" InputScope="Default" WindowStyle="ToolWindow" Loaded="loaded" Closed="wind_Closed" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <ListBox Name="itContr" SelectionMode="Multiple" Margin="0,19,0,40">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="IsSelected" Value="{Binding Path=IsChecked, Mode=TwoWay}" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Content="{Binding .}" IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button Content="Zapamiętaj" HorizontalAlignment="Center" Height="30" Margin="0,384,0,0" VerticalAlignment="Top" Width="585" Click="Click_Close"/>
+        <TextBox x:Name="TXT_FILTR" HorizontalAlignment="Center" Height="19" TextWrapping="Wrap" VerticalAlignment="Top" Width="585" TextChanged="text_changed" UndoLimit="10" MaxLines="1" MaxLength="50">
+            <TextBox.Style>
+                <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Filtruj dane" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+    </Grid>
+</Window>

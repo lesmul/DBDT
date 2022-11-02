@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetXML" targetNamespace="http://tempuri.org/DataSetXML.xsd" xmlns:mstns="http://tempuri.org/DataSetXML.xsd" xmlns="http://tempuri.org/DataSetXML.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetXML" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DataSetXML" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetXML">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="_x0024_SYSTEM_x0024_" msprop:Generator_RowEvHandlerName="__SYSTEM_RowChangeEventHandler" msprop:Generator_RowDeletedName="__SYSTEM_RowDeleted" msprop:Generator_RowDeletingName="__SYSTEM_RowDeleting" msprop:Generator_RowEvArgName="__SYSTEM_RowChangeEvent" msprop:Generator_TablePropName="__SYSTEM_" msprop:Generator_RowChangedName="__SYSTEM_RowChanged" msprop:Generator_UserTableName="$SYSTEM$" msprop:Generator_RowChangingName="__SYSTEM_RowChanging" msprop:Generator_RowClassName="__SYSTEM_Row" msprop:Generator_TableClassName="__SYSTEM_DataTable" msprop:Generator_TableVarName="_table_SYSTEM_">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnVarNameInTable="columnID" type="xs:int" />
+              <xs:element name="Objekt" msprop:Generator_ColumnPropNameInTable="ObjektColumn" msprop:Generator_ColumnPropNameInRow="Objekt" msprop:Generator_UserColumnName="Objekt" msprop:Generator_ColumnVarNameInTable="columnObjekt" type="xs:string" minOccurs="0" />
+              <xs:element name="NumerProjektu" msprop:Generator_ColumnPropNameInTable="NumerProjektuColumn" msprop:Generator_ColumnPropNameInRow="NumerProjektu" msprop:Generator_UserColumnName="NumerProjektu" msprop:Generator_ColumnVarNameInTable="columnNumerProjektu" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa_Kom_Excel_NrProj" msprop:Generator_ColumnPropNameInTable="Nazwa_Kom_Excel_NrProjColumn" msprop:Generator_ColumnPropNameInRow="Nazwa_Kom_Excel_NrProj" msprop:Generator_UserColumnName="Nazwa_Kom_Excel_NrProj" msprop:Generator_ColumnVarNameInTable="columnNazwa_Kom_Excel_NrProj" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa_Arkusz_NrProj" msprop:Generator_ColumnPropNameInTable="Nazwa_Arkusz_NrProjColumn" msprop:Generator_ColumnPropNameInRow="Nazwa_Arkusz_NrProj" msprop:Generator_UserColumnName="Nazwa_Arkusz_NrProj" msprop:Generator_ColumnVarNameInTable="columnNazwa_Arkusz_NrProj" type="xs:string" minOccurs="0" />
+              <xs:element name="SQL_Tlumaczenia" msprop:Generator_ColumnPropNameInTable="SQL_TlumaczeniaColumn" msprop:Generator_ColumnPropNameInRow="SQL_Tlumaczenia" msprop:Generator_UserColumnName="SQL_Tlumaczenia" msprop:Generator_ColumnVarNameInTable="columnSQL_Tlumaczenia" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa_Kom_Excel" msprop:Generator_ColumnPropNameInTable="Nazwa_Kom_ExcelColumn" msprop:Generator_ColumnPropNameInRow="Nazwa_Kom_Excel" msprop:Generator_UserColumnName="Nazwa_Kom_Excel" msprop:Generator_ColumnVarNameInTable="columnNazwa_Kom_Excel" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa_Arkusz" msprop:Generator_ColumnPropNameInTable="Nazwa_ArkuszColumn" msprop:Generator_ColumnPropNameInRow="Nazwa_Arkusz" msprop:Generator_UserColumnName="Nazwa_Arkusz" msprop:Generator_ColumnVarNameInTable="columnNazwa_Arkusz" type="xs:string" minOccurs="0" />
+              <xs:element name="KomurkaStart" msprop:Generator_ColumnPropNameInTable="KomurkaStartColumn" msprop:Generator_ColumnPropNameInRow="KomurkaStart" msprop:Generator_UserColumnName="KomurkaStart" msprop:Generator_ColumnVarNameInTable="columnKomurkaStart" type="xs:string" minOccurs="0" />
+              <xs:element name="LokalizPlikExcel" msprop:Generator_ColumnPropNameInTable="LokalizPlikExcelColumn" msprop:Generator_ColumnPropNameInRow="LokalizPlikExcel" msprop:Generator_UserColumnName="LokalizPlikExcel" msprop:Generator_ColumnVarNameInTable="columnLokalizPlikExcel" type="xs:string" minOccurs="0" />
+              <xs:element name="WlaczTlumaczenie" msprop:Generator_ColumnPropNameInTable="WlaczTlumaczenieColumn" msprop:Generator_ColumnPropNameInRow="WlaczTlumaczenie" msprop:Generator_UserColumnName="WlaczTlumaczenie" msprop:Generator_ColumnVarNameInTable="columnWlaczTlumaczenie" type="xs:boolean" default="true" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="_x0024_SYSTEM_CONFIG_x0024_" msprop:Generator_RowEvHandlerName="__SYSTEM_CONFIG_RowChangeEventHandler" msprop:Generator_RowDeletedName="__SYSTEM_CONFIG_RowDeleted" msprop:Generator_RowDeletingName="__SYSTEM_CONFIG_RowDeleting" msprop:Generator_RowEvArgName="__SYSTEM_CONFIG_RowChangeEvent" msprop:Generator_TablePropName="__SYSTEM_CONFIG_" msprop:Generator_RowChangedName="__SYSTEM_CONFIG_RowChanged" msprop:Generator_UserTableName="$SYSTEM_CONFIG$" msprop:Generator_RowChangingName="__SYSTEM_CONFIG_RowChanging" msprop:Generator_RowClassName="__SYSTEM_CONFIG_Row" msprop:Generator_TableClassName="__SYSTEM_CONFIG_DataTable" msprop:Generator_TableVarName="_table_SYSTEM_CONFIG_">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnVarNameInTable="columnID" type="xs:int" />
+              <xs:element name="LP" msprop:Generator_ColumnPropNameInTable="LPColumn" msprop:Generator_ColumnPropNameInRow="LP" msprop:Generator_UserColumnName="LP" msprop:Generator_ColumnVarNameInTable="columnLP" type="xs:short" minOccurs="0" />
+              <xs:element name="TypParametru" msprop:Generator_ColumnPropNameInTable="TypParametruColumn" msprop:Generator_ColumnPropNameInRow="TypParametru" msprop:Generator_UserColumnName="TypParametru" msprop:Generator_ColumnVarNameInTable="columnTypParametru" type="xs:string" minOccurs="0" />
+              <xs:element name="TypDanych" msprop:Generator_ColumnPropNameInTable="TypDanychColumn" msprop:Generator_ColumnPropNameInRow="TypDanych" msprop:Generator_UserColumnName="TypDanych" msprop:Generator_ColumnVarNameInTable="columnTypDanych" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa_Arkusz_NrProj" msprop:Generator_ColumnPropNameInTable="Nazwa_Arkusz_NrProjColumn" msprop:Generator_ColumnPropNameInRow="Nazwa_Arkusz_NrProj" msprop:Generator_UserColumnName="Nazwa_Arkusz_NrProj" msprop:Generator_ColumnVarNameInTable="columnNazwa_Arkusz_NrProj" type="xs:string" minOccurs="0" />
+              <xs:element name="NazwaParametru" msprop:Generator_ColumnPropNameInTable="NazwaParametruColumn" msprop:Generator_ColumnPropNameInRow="NazwaParametru" msprop:Generator_UserColumnName="NazwaParametru" msprop:Generator_ColumnVarNameInTable="columnNazwaParametru" type="xs:string" minOccurs="0" />
+              <xs:element name="PolePowiazane" msprop:Generator_ColumnPropNameInTable="PolePowiazaneColumn" msprop:Generator_ColumnPropNameInRow="PolePowiazane" msprop:Generator_UserColumnName="PolePowiazane" msprop:Generator_ColumnVarNameInTable="columnPolePowiazane" type="xs:string" minOccurs="0" />
+              <xs:element name="DodatkowOpcje" msprop:Generator_ColumnPropNameInTable="DodatkowOpcjeColumn" msprop:Generator_ColumnPropNameInRow="DodatkowOpcje" msprop:Generator_UserColumnName="DodatkowOpcje" msprop:Generator_ColumnVarNameInTable="columnDodatkowOpcje" type="xs:string" minOccurs="0" />
+              <xs:element name="PoleSQL" msprop:Generator_ColumnPropNameInTable="PoleSQLColumn" msprop:Generator_ColumnPropNameInRow="PoleSQL" msprop:Generator_UserColumnName="PoleSQL" msprop:Generator_ColumnVarNameInTable="columnPoleSQL" type="xs:string" minOccurs="0" />
+              <xs:element name="NazwaZakladki" msprop:Generator_ColumnPropNameInTable="NazwaZakladkiColumn" msprop:Generator_ColumnPropNameInRow="NazwaZakladki" msprop:Generator_UserColumnName="NazwaZakladki" msprop:Generator_ColumnVarNameInTable="columnNazwaZakladki" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="_x0024_Konfigurator_x0020_zakładak_x0024_" msprop:Generator_RowEvHandlerName="__Konfigurator_zakładak_RowChangeEventHandler" msprop:Generator_RowDeletedName="__Konfigurator_zakładak_RowDeleted" msprop:Generator_RowDeletingName="__Konfigurator_zakładak_RowDeleting" msprop:Generator_RowEvArgName="__Konfigurator_zakładak_RowChangeEvent" msprop:Generator_TablePropName="__Konfigurator_zakładak_" msprop:Generator_RowChangedName="__Konfigurator_zakładak_RowChanged" msprop:Generator_UserTableName="$Konfigurator zakładak$" msprop:Generator_RowChangingName="__Konfigurator_zakładak_RowChanging" msprop:Generator_RowClassName="__Konfigurator_zakładak_Row" msprop:Generator_TableClassName="__Konfigurator_zakładak_DataTable" msprop:Generator_TableVarName="_table_Konfigurator_zakładak_">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_UserColumnName="ID" msprop:Generator_ColumnVarNameInTable="columnID" type="xs:int" minOccurs="0" />
+              <xs:element name="Ilość_Znaków" msprop:Generator_ColumnPropNameInTable="Ilość_ZnakówColumn" msprop:Generator_ColumnPropNameInRow="Ilość_Znaków" msprop:Generator_UserColumnName="Ilość_Znaków" msprop:Generator_ColumnVarNameInTable="columnIlość_Znaków" type="xs:short" default="0" minOccurs="0" />
+              <xs:element name="Objekt" msprop:Generator_ColumnPropNameInTable="ObjektColumn" msprop:Generator_ColumnPropNameInRow="Objekt" msprop:Generator_UserColumnName="Objekt" msprop:Generator_ColumnVarNameInTable="columnObjekt" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa" msprop:Generator_ColumnPropNameInTable="NazwaColumn" msprop:Generator_ColumnPropNameInRow="Nazwa" msprop:Generator_UserColumnName="Nazwa" msprop:Generator_ColumnVarNameInTable="columnNazwa" type="xs:string" minOccurs="0" />
+              <xs:element name="Wartość" msprop:Generator_ColumnPropNameInTable="WartośćColumn" msprop:Generator_ColumnPropNameInRow="Wartość" msprop:Generator_UserColumnName="Wartość" msprop:Generator_ColumnVarNameInTable="columnWartość" type="xs:string" minOccurs="0" />
+              <xs:element name="Tekst" msprop:Generator_ColumnPropNameInTable="TekstColumn" msprop:Generator_ColumnPropNameInRow="Tekst" msprop:Generator_UserColumnName="Tekst" msprop:Generator_ColumnVarNameInTable="columnTekst" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:_x0024_SYSTEM_x0024_" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="_x0024_SYSTEM_CONFIG_x0024__Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:_x0024_SYSTEM_CONFIG_x0024_" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="Konfigurator_x0020_zakładakKey1">
+      <xs:selector xpath=".//mstns:_x0024_Konfigurator_x0020_zakładak_x0024_" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBDT.SQL.SQL_SELECT;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -27,7 +28,11 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             {
                 if (myConnection.State == ConnectionState.Closed)
 
+                if (connectionString == null)
+                {
+                    connectionString = conn_string();
                     myConnection.ConnectionString = connectionString;
+                }
 
                 {
                     if (myConnection.State == ConnectionState.Closed)
@@ -54,6 +59,20 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 return null;
 
             }
+        }
+
+        public static string conn_string()
+        {
+            DataTable dt = new DataTable();
+
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, serwer, nazwa_bazy FROM ParametryPalaczenia WHERE nazwa_bazy <> '' order by id desc");
+
+            if (dt.Rows.Count == 0)
+            {
+                return "" ;
+            }
+
+            return "Server=" + dt.Rows[0][1].ToString() + ";Database=" + dt.Rows[0][2].ToString() + ";Trusted_Connection=True";
         }
 
         /// <summary>

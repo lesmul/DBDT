@@ -1,0 +1,63 @@
+<?xml version="1.0" standalone="yes"?>
+<DataSetXML xmlns="http://tempuri.org/DataSetXML.xsd">
+  <_x0024_SYSTEM_x0024_>
+    <ID>1</ID>
+    <Objekt>opcje wartosc</Objekt>
+    <NumerProjektu>2023/123</NumerProjektu>
+    <Nazwa_Kom_Excel_NrProj />
+    <Nazwa_Arkusz_NrProj />
+    <SQL_Tlumaczenia>Brak</SQL_Tlumaczenia>
+    <Nazwa_Kom_Excel />
+    <Nazwa_Arkusz />
+    <KomurkaStart />
+    <LokalizPlikExcel />
+    <WlaczTlumaczenie>false</WlaczTlumaczenie>
+  </_x0024_SYSTEM_x0024_>
+  <_x0024_SYSTEM_CONFIG_x0024_>
+    <ID>1</ID>
+    <LP>0</LP>
+    <TypParametru>adParamInput</TypParametru>
+    <TypDanych>adVarChar</TypDanych>
+    <NazwaParametru>test</NazwaParametru>
+    <PolePowiazane>bool</PolePowiazane>
+    <PoleSQL>¶</PoleSQL>
+    <NazwaZakladki>opcje</NazwaZakladki>
+  </_x0024_SYSTEM_CONFIG_x0024_>
+  <opcje>
+    <ID xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">0</ID>
+    <Ilość_Znaków xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">3</Ilość_Znaków>
+    <Objekt xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">opcje</Objekt>
+    <Nazwa xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">rr000000</Nazwa>
+    <Wartość xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;TEST|TEST1|TEST2">TEST2</Wartość>
+    <Tekst xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">rrr0</Tekst>
+    <bool xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">true</bool>
+    <int xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">0</int>
+  </opcje>
+  <opcje>
+    <ID xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">1</ID>
+    <Ilość_Znaków xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">0</Ilość_Znaków>
+    <Objekt xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">opcje</Objekt>
+    <Nazwa xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">ttt</Nazwa>
+    <Wartość xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;TEST|TEST1|TEST2">TEST1</Wartość>
+    <Tekst xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">ttt5555</Tekst>
+    <bool xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">false</bool>
+    <int xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">0</int>
+  </opcje>
+  <opcje>
+    <ID xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">2</ID>
+    <Objekt xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">opcje</Objekt>
+    <Nazwa xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False" />
+    <Wartość xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;TEST|TEST1|TEST2" />
+    <Tekst xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">555</Tekst>
+    <bool xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">false</bool>
+    <int xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">0</int>
+  </opcje>
+  <opcje_x0020_wartosc>
+    <ID xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">0</ID>
+    <Objekt xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">opcje</Objekt>
+    <Nazwa xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;{opcje|Nazwa}">PVC_bggg</Nazwa>
+    <Wartość xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">555</Wartość>
+    <Tekst xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">5555</Tekst>
+    <Nazwa_x003F_ xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">5555 </Nazwa_x003F_>
+  </opcje_x0020_wartosc>
+</DataSetXML>

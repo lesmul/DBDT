@@ -1,0 +1,36 @@
+﻿<Window x:Class="DBDT.Excel.WPF_ZAPIS_SQL"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBDT.Excel"
+        mc:Ignorable="d"
+        Title="Konfigurator zapisu danych SQL" Height="480" Width="1200" WindowStartupLocation="CenterScreen" StateChanged="state_changed" MinWidth="795" MinHeight="470" Loaded="load_data">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="1" Name="exectGrid" AutoGenerateColumns="False" ColumnWidth="Auto" CanUserDeleteRows="True" CanUserResizeColumns="False" SelectionUnit="Cell" Margin="0,1,0,1" CanUserAddRows="False" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="LP" Binding="{Binding Path=id}" />
+                <DataGridTextColumn Header="Nazwa" Binding="{Binding Path=Nazwa}"/>
+                <DataGridTextColumn Header="Wartość" Binding="{Binding Path=Wartość}"/>
+                <DataGridTextColumn Header="Funkcja" Binding="{Binding Path=Funkcja}"/>
+                <DataGridTextColumn Header="Procedura" Binding="{Binding Path=Procedura}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Expander Grid.Row="2" Name="precura_sql" Header="Informacja">
+            <StackPanel Grid.Row="2" Margin="5,5,5,5">
+                <TextBox Grid.Row="0" x:Name="TXT_INFO" Height="120" TextWrapping="Wrap" UndoLimit="25" MaxLength="5500"/>
+                <CheckBox x:Name="CB_PROCEDURE" Content="CommandType.StoredProcedure" Visibility="Collapsed" HorizontalAlignment="Right" Height="15" Grid.Row="2" Width="220"/>
+            </StackPanel>
+        </Expander>
+        <StackPanel Grid.Row="2" Margin="1,1,6,1">
+            <Grid>
+                <Button Content="Zapisz funkcje"  HorizontalContentAlignment="Center" Width="132" Height="25" HorizontalAlignment="Left" Click="Button_Click" VerticalAlignment="Bottom" Margin="1061,0,0,0"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

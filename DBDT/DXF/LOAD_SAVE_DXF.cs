@@ -106,6 +106,9 @@ namespace DBDT.DXF
                     myObjDxf.CenterX = 0;
                     myObjDxf.CenterY = 0;
 
+                    myObjDxf.MaxX = 0;
+                    myObjDxf.MaxY = 0;
+
                     myObjDxf.Handle = xppol2d.Handle;
                     myObjDxf.IntHandle = int.Parse(myObjDxf.Handle, System.Globalization.NumberStyles.HexNumber);
 
@@ -125,10 +128,10 @@ namespace DBDT.DXF
                 myObjDxf.EndA = Math.Round(xpEllipses.EndAngle, 3);
                 myObjDxf.MajorA = Math.Round(xpEllipses.MajorAxis, 3);
                 myObjDxf.MinorA = Math.Round(xpEllipses.MinorAxis, 3);
-                myObjDxf.X1 = Math.Round(myObjDxf.CenterX - myObjDxf.MajorA / 2, 3);
-                myObjDxf.Y1 = Math.Round(myObjDxf.CenterY - myObjDxf.MinorA / 2, 3);
-                myObjDxf.X2 = Math.Round(myObjDxf.CenterX + myObjDxf.MajorA / 2, 3);
-                myObjDxf.Y2 = Math.Round(myObjDxf.CenterY + myObjDxf.MinorA / 2, 3);
+                myObjDxf.X1 = Math.Round(myObjDxf.CenterX - myObjDxf.MajorA / 2, 3) * Math.Cos(Math.PI * xpEllipses.StartAngle / 180.0);
+                myObjDxf.Y1 = Math.Round(myObjDxf.CenterY - myObjDxf.MinorA / 2, 3) * Math.Cos(Math.PI * xpEllipses.StartAngle / 180.0);
+                myObjDxf.X2 = Math.Round(myObjDxf.CenterX + myObjDxf.MajorA / 2, 3) * Math.Cos(Math.PI * xpEllipses.EndAngle / 180.0);
+                myObjDxf.Y2 = Math.Round(myObjDxf.CenterY + myObjDxf.MinorA / 2, 3) * Math.Cos(Math.PI * xpEllipses.EndAngle / 180.0);
                 myObjDxf.StartA = xpEllipses.StartAngle;
                 myObjDxf.StartA = xpEllipses.EndAngle;
 
@@ -136,8 +139,8 @@ namespace DBDT.DXF
                 double sinus = Math.Sin(radian);
                 double cosinus = Math.Cos(radian);
 
-                myObjDxf.MaxX = Math.Round((myObjDxf.MajorA / 2) * Math.Cos(Math.PI * xpEllipses.StartAngle / 180.0), 3) * 2;
-                myObjDxf.MaxY = Math.Round((myObjDxf.MinorA / 2) * Math.Cos(Math.PI * xpEllipses.StartAngle / 180.0), 3) * 2;
+                myObjDxf.MaxX = Math.Round(xpEllipses.Center.X, 3) + Math.Round((myObjDxf.MajorA / 2) * Math.Cos(Math.PI * xpEllipses.StartAngle / 180.0), 3);
+                myObjDxf.MaxY = Math.Round(xpEllipses.Center.Y, 3) + Math.Round((myObjDxf.MinorA / 2) * Math.Cos(Math.PI * xpEllipses.StartAngle / 180.0), 3);
 
                 myObjDxf.Handle = xpEllipses.Handle;
                 myObjDxf.IntHandle = int.Parse(myObjDxf.Handle, System.Globalization.NumberStyles.HexNumber);
@@ -160,6 +163,9 @@ namespace DBDT.DXF
 
                 myObjDxf.CenterX = 0;
                 myObjDxf.CenterY = 0;
+
+                myObjDxf.MaxX = 0;
+                myObjDxf.MaxY = 0;
 
                 myObjDxf.Handle = pLines.Handle;
                 myObjDxf.IntHandle = int.Parse(myObjDxf.Handle, System.Globalization.NumberStyles.HexNumber);
@@ -216,13 +222,14 @@ namespace DBDT.DXF
                 myObjDxf.X2 = myObjDxf.CenterX + Math.Round(pArc.Radius * Math.Cos(Math.PI * pArc.EndAngle / 180.0), 3);
                 myObjDxf.Y2 = myObjDxf.CenterY + Math.Round(pArc.Radius * Math.Sin(Math.PI * pArc.EndAngle / 180.0), 3);
 
-                //myObjDxf.MaxX = myObjDxf.CenterX + myObjDxf.CenterX - myObjDxf.X1;
-                //myObjDxf.MaxY = myObjDxf.CenterX + myObjDxf.CenterY - myObjDxf.Y1;
-                //myObjDxf.MaxX = Math.Round(myObjDxf.CenterX + (myObjDxf.Radius * 2 * Math.Pow(2, 2) / 2), 3);
-                //myObjDxf.MaxY = Math.Round(myObjDxf.CenterY + (myObjDxf.Radius * 2 * Math.Pow(2, 2) / 2), 3);
-                //myObjDxf.MaxX = myObjDxf.CenterX + Math.Round((myObjDxf.Radius * 2 * Math.Pow(2, 2) / 2), 3);
-                //myObjDxf.MaxY = myObjDxf.CenterY + Math.Round((myObjDxf.Radius * 2 * Math.Pow(2, 2) / 2), 3);
+                //double katx = (pArc.EndAngle - pArc.StartAngle) / 2;
 
+                double hypotenuse = (Math.Sqrt(Math.Pow(pArc.Radius * 2, 2) + Math.Pow(pArc.Radius * 2, 2))) / 2;
+
+                myObjDxf.MaxX = hypotenuse * Math.Cos(Math.PI * 0 / 180.0); 
+
+                myObjDxf.MaxY = hypotenuse * Math.Abs(Math.Round(Math.Sin(Math.PI * 90 / 180.0), 3));
+             
                 myObjDxf.Handle = pArc.Handle;
                 myObjDxf.IntHandle = int.Parse(myObjDxf.Handle, System.Globalization.NumberStyles.HexNumber);
 
@@ -237,6 +244,9 @@ namespace DBDT.DXF
 
                 ArrayList myALMinX = new ArrayList();
                 ArrayList myALMinY = new ArrayList();
+                ArrayList myALMaxX = new ArrayList();
+                ArrayList myALMaxY = new ArrayList();
+
                 myALMinX.Add(myObjDxfAll.Min(row => row.X1));
                 myALMinX.Add(myObjDxfAll.Min(row => row.X2));
                 myALMinX.Add(myObjDxfAll.Min(row => row.CenterX));
@@ -248,6 +258,7 @@ namespace DBDT.DXF
                 myALMinX.Sort();
                 myALMinY.Sort();
 
+   
                 if (Convert.ToDouble(myALMinX[0]) < 0.0)
                 {
                     double moveX = Math.Round(Math.Abs(Convert.ToDouble(myALMinX[0])), 3);
@@ -256,7 +267,7 @@ namespace DBDT.DXF
                         myObjDxfAll[i].X1 = Math.Round(myObjDxfAll[i].X1 + moveX, 3);
                         myObjDxfAll[i].X2 = Math.Round(myObjDxfAll[i].X2 + moveX, 3);
                         myObjDxfAll[i].CenterX = Math.Round(myObjDxfAll[i].CenterX + moveX, 3);
-                        myObjDxfAll[i].MaxX = Math.Round(myObjDxfAll[i].MaxX + moveX, 3);
+                       // myObjDxfAll[i].MaxX = Math.Round(myObjDxfAll[i].MaxX + moveX, 3);
                     }
                 }
 
@@ -268,19 +279,78 @@ namespace DBDT.DXF
                         myObjDxfAll[i].Y1 = Math.Round(myObjDxfAll[i].Y1 + moveY, 3);
                         myObjDxfAll[i].Y2 = Math.Round(myObjDxfAll[i].Y2 + moveY, 3);
                         myObjDxfAll[i].CenterY = Math.Round(myObjDxfAll[i].CenterY + moveY, 3);
-                        myObjDxfAll[i].MaxY = Math.Round(myObjDxfAll[i].MaxY + moveY, 3);
+                        //myObjDxfAll[i].MaxY = Math.Round(myObjDxfAll[i].MaxY + moveY, 3);
 
                     }
                 }
 
+                myALMinX.Clear();
+                myALMinY.Clear();
+
+                myALMinX.Add(myObjDxfAll.Min(row => row.X1));
+                myALMinX.Add(myObjDxfAll.Min(row => row.X2));
+
+                myALMinY.Add(myObjDxfAll.Min(row => row.Y1));
+                myALMinY.Add(myObjDxfAll.Min(row => row.Y2));
+         
+                myALMinX.Sort();
+                myALMinY.Sort();
+
                 for (int i = 0; i < myObjDxfAll.Count; i++)
                 {
-                    if (myObjDxfAll[i].MaxX == 0)
-                    {
-                        myObjDxfAll[i].MaxX = Math.Round(Convert.ToDouble(myObjDxfAll.Max(row => row.X1)) - Convert.ToDouble(myObjDxfAll.Min(row => row.X2)), 3);
-                        myObjDxfAll[i].MaxY = Math.Round(Convert.ToDouble(myObjDxfAll.Max(row => row.Y1)) - Convert.ToDouble(myObjDxfAll.Min(row => row.Y2)), 3);
-                        break;
+                   // if (myObjDxfAll[i].MaxX == 0)
+                   // {
+                        if (myObjDxfAll[i].Typ == "A")
+                        {
+                            if (myObjDxfAll[i].StartA > 0 && myObjDxfAll[i].StartA < 90 || myObjDxfAll[i].EndA > 0 && myObjDxfAll[i].EndA < 90)
+                            {
+                                double tx = Math.Round(Convert.ToDouble(myObjDxfAll.Max(row => row.X1)) - Convert.ToDouble(myObjDxfAll.Min(row => row.X2)), 3);
+                                double ty = Math.Round(Convert.ToDouble(myObjDxfAll.Max(row => row.Y1)) - Convert.ToDouble(myObjDxfAll.Min(row => row.Y2)), 3);
+                                myObjDxfAll[i].MaxX = myObjDxfAll[i].MaxX - myObjDxfAll[i].Radius + tx;
+                                myObjDxfAll[i].MaxY = myObjDxfAll[i].MaxY - myObjDxfAll[i].Radius + ty;
+                            }
+                        }
+                        else
+                        {
+
+                            if (myObjDxfAll[i].Typ != "E")
+                            {
+
+                            myALMinX.Clear();
+                            myALMinY.Clear();
+
+                            myALMaxX.Clear();
+                            myALMaxY.Clear();
+
+                            myALMinX.Add(myObjDxfAll.Min(row => row.X1));
+                            myALMinX.Add(myObjDxfAll.Min(row => row.X2));
+
+                            myALMinY.Add(myObjDxfAll.Min(row => row.Y1));
+                            myALMinY.Add(myObjDxfAll.Min(row => row.Y2));
+
+                            myALMaxX.Add(myObjDxfAll.Max(row => row.X1));
+                            myALMaxX.Add(myObjDxfAll.Max(row => row.X2));
+
+                            myALMaxY.Add(myObjDxfAll.Max(row => row.Y1));
+                            myALMaxY.Add(myObjDxfAll.Max(row => row.Y2));
+
+                            myALMinX.Sort();
+                            myALMinY.Sort();
+
+                            myALMaxX.Sort();
+                            myALMaxY.Sort();
+
+
+                            myObjDxfAll[i].MaxX = Math.Round(Convert.ToDouble(myALMaxX[myALMaxX.Count - 1]) - Convert.ToDouble(myALMinX[0]), 3);
+                            myObjDxfAll[i].MaxY = Math.Round(Convert.ToDouble(myALMaxY[myALMaxY.Count - 1]) - Convert.ToDouble(myALMinY[0]), 3);
+                            //myObjDxfAll[i].MaxX = Math.Round(Convert.ToDouble(myObjDxfAll.Max(row => row.X1)) - Convert.ToDouble(myObjDxfAll.Min(row => row.X2)), 3);
+                            //myObjDxfAll[i].MaxY = Math.Round(Convert.ToDouble(myObjDxfAll.Max(row => row.Y1)) - Convert.ToDouble(myObjDxfAll.Min(row => row.Y2)), 3);
+                        }
+
                     }
+                     
+                        //break;
+                   // }
 
                 }
 

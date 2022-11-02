@@ -2,16 +2,57 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mdi="clr-namespace:WPF.MDI;assembly=WPF.MDI" 
-        Title="Aplikacja do generowania plików maszynowych DBDT - OKNOPLAST" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Loaded="loadApp" SizeChanged="SizeChan">
+        Title="Aplikacja DBDT - OKNOPLAST" Height="768" Width="1224" WindowStartupLocation="CenterScreen" Loaded="loadApp" SizeChanged="SizeChan" Closed="close_sql" Closing="closeng_sql">
     <DockPanel>
         <DockPanel>
             <mdi:MdiContainer Name="Container">
                 <mdi:MdiContainer.Menu>
                     <Menu DockPanel.Dock="Top">
                         <MenuItem Header="Konfiguracja">
-                            <MenuItem Header="Połączenie do bazy danych" Click="KonfiguracjaPolaczenia_Click" />
-                            <MenuItem Header="DXF" Click="AddDXFWindow_Click" />
-                            <MenuItem Header="Zapytania SQL" Click="AddScrollWindow_Click" />
+                            <MenuItem Header="Parametry programu" Click="KonfiguracjaPolaczenia_Click" />
+                            <Separator/>
+                            <MenuItem Header="Konfiguruj automatyzację zapisu" Tag="" Click="AddAutomatEXCEL_Click" />
+                            <Separator/>
+                            <MenuItem Header="Konfiguruj indesky/komendy" Click="Config_Indeks_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="Narzędzia SQL">
+                            <MenuItem Header="Lista zapytań SQL" Click="FindSQLWindow_Click" />
+                            <MenuItem Header="Dodaj nowe zapytanie SQL" Tag="" Click="AddNewSQLWindow_Click" />
+                            <MenuItem Header="Dodaj nowe zapytanie SQL w nowym oknie" Tag="NEW" Click="AddNewSQLWindow_Click" />
+                            <Separator/>
+                            <MenuItem Header="Pliki EXCEL" Click="AddNewEXCEL_Click" />
+                            <Separator/>
+                            <MenuItem Header="Struktura poleceń SQL" Click="Window_TreeSQL_Click" />
+                        </MenuItem>
+                        <MenuItem Header="Narzędzia specjalne">
+                            <MenuItem Header="Drzewo projektów">
+                                <MenuItem Tag="_1" Name="Drzewo_1" Header="Drzewo #1" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_2" Name="Drzewo_2" Header="Drzewo #2" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_3" Name="Drzewo_3" Header="Drzewo #3" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_4" Name="Drzewo_4" Header="Drzewo #4" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_5" Name="Drzewo_5" Header="Drzewo #5" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_6" Name="Drzewo_6" Header="Drzewo #6" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_7" Name="Drzewo_7" Header="Drzewo #7" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_8" Name="Drzewo_8" Header="Drzewo #8" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_9" Name="Drzewo_9" Header="Drzewo #9" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_10" Name="Drzewo_10" Header="Drzewo #10" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_11" Name="Drzewo_11" Header="Drzewo #11" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_12" Name="Drzewo_12" Header="Drzewo #12" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_13" Name="Drzewo_13" Header="Drzewo #13" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_14" Name="Drzewo_14" Header="Drzewo #14" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_15" Name="Drzewo_15" Header="Drzewo #15" Click="Window_Tree_Click" />
+                                <MenuItem Tag="WT_ALL" Name="Drzewo_ALL" Header="Mój komputer" Click="Window_Tree_Click" />
+                            </MenuItem>
+                            <Separator/>
+                            <MenuItem Header="Generuj dane automatyzacji zapisu" Click="ExecAutomatEXCEL_Click" />
+                            <Separator/>
+                            <MenuItem Header="Kopiuj dane z EXCEL do tabeli w bazie danych" Click="EXCEL_COPY_DATA_Click" />
+                        </MenuItem>
+                        <MenuItem Header="DXF">
+                            <MenuItem Header="Podgląd DXF" Click="AddDXFWindow_Click" />
+                        </MenuItem>
+                        <MenuItem Header="Narzędzia Python">
+                            <MenuItem Header="Uruchom program" Click="Python_CMD_Click" />
                         </MenuItem>
                         <MenuItem Header="Styl okien">
                             <MenuItem Header="Generic" Name="Generic" ToolTip="Generic Visual Studio designer theme" Click="Generic_Click" />

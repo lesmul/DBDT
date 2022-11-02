@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\SQLite.3.13.0\build\net45\SQLite.props" Condition="Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -10,7 +11,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DBDT</RootNamespace>
     <AssemblyName>DBDT</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -18,6 +19,22 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publikuj\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -42,6 +59,13 @@
     <StartupObject>
     </StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>iokno.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -49,22 +73,68 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="netDxf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=618c63290969e781, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EPPlus, Version=7.0.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.7.0.0-preview1\lib\net462\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.Interfaces, Version=6.1.1.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.Interfaces.6.1.1\lib\net462\EPPlus.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.System.Drawing, Version=6.1.1.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.System.Drawing.6.1.1\lib\net462\EPPlus.System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython">
+      <HintPath>..\packages\IronPython.Interpreter.2.7.4\tools\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic, Version=1.3.3.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.3\lib\net452\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=2.3.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.2.3.2\lib\net462\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.3.3.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.3\lib\net452\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.3.3.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicLanguageRuntime.1.3.3\lib\net452\Microsoft.Scripting.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="netDxf">
       <HintPath>..\..\..\..\..\Desktop\PRZYKLADY\DXF\netDxf-master\netDxf\bin\Debug\net45\netDxf.dll</HintPath>
     </Reference>
+    <Reference Include="PropertyChanged, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.4.1.0\lib\net40\PropertyChanged.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.116.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SQLite.EF6, Version=1.0.116.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.116.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.118.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.116.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.116.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.118.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.118.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -91,25 +161,163 @@
     <Compile Include="Adorners\SizeAdorner.cs" />
     <Compile Include="Adorners\SizeChrome.cs" />
     <Compile Include="DesignerItemDecorator.cs" />
+    <Compile Include="DrzewoProcesu\FRM_ZMIEN_NAZ_PLIKU.xaml.cs">
+      <DependentUpon>FRM_ZMIEN_NAZ_PLIKU.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DrzewoSQL\C_Tree_Return_ID.cs" />
+    <Compile Include="DrzewoSQL\Directory\Data\DirectoryItemSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\Data\DirectoryItemTypeSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\DirectoryStructureSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\ViewModels\Base\BaseViewModelSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\ViewModels\Base\RelayCommandSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\ViewModels\DirectoryItemViewModelSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\ViewModels\DirectoryStructureViewModelSQL.cs" />
+    <Compile Include="DrzewoSQL\HeaderToImageConverter.cs" />
+    <Compile Include="DrzewoSQL\UC_SQL_TREE.xaml.cs">
+      <DependentUpon>UC_SQL_TREE.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DrzewoProcesu\Directory\Data\DirectoryItem.cs" />
+    <Compile Include="DrzewoProcesu\Directory\Data\DirectoryItemType.cs" />
+    <Compile Include="DrzewoProcesu\Directory\DirectoryStructure.cs" />
+    <Compile Include="DrzewoProcesu\Directory\ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="DrzewoProcesu\Directory\ViewModels\Base\RelayCommand.cs" />
+    <Compile Include="DrzewoProcesu\Directory\ViewModels\DirectoryItemViewModel.cs" />
+    <Compile Include="DrzewoProcesu\Directory\ViewModels\DirectoryStructureViewModel.cs" />
+    <Compile Include="DrzewoProcesu\HeaderToImageConverter.cs" />
+    <Compile Include="DrzewoProcesu\UC_PROCES_TREE.xaml.cs">
+      <DependentUpon>UC_PROCES_TREE.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DXF\CDxfOBJ.cs" />
     <Compile Include="DXF\DXF.cs" />
     <Compile Include="DXF\LOAD_SAVE_DXF.cs" />
     <Compile Include="DXF\W_EDIT_DATA_DXF.xaml.cs">
       <DependentUpon>W_EDIT_DATA_DXF.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Excel\add_boom.cs" />
+    <Compile Include="Excel\ClipboardHelper.cs" />
+    <Compile Include="Excel\DS\DataSetXML.cs">
+      <DependentUpon>DataSetXML.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\DS\DataSetXML.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetXML.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\ds_write_xml.cs" />
+    <Compile Include="Excel\Execute_sql_txt.cs" />
+    <Compile Include="Excel\UC_EXEC_DATA.xaml.cs">
+      <DependentUpon>UC_EXEC_DATA.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\UC_Konfig.xaml.cs">
+      <DependentUpon>UC_Konfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\WPF_EDYCJA_KOLUMN.xaml.cs">
+      <DependentUpon>WPF_EDYCJA_KOLUMN.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\WPF_NOWY_PROJEKT.xaml.cs">
+      <DependentUpon>WPF_NOWY_PROJEKT.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\WPF_ZAPIS_EXCEL_SQL.xaml.cs">
+      <DependentUpon>WPF_ZAPIS_EXCEL_SQL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\WPF_ZAPIS_SQL.xaml.cs">
+      <DependentUpon>WPF_ZAPIS_SQL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\WPF_KONFIG_SQL.xaml.cs">
+      <DependentUpon>WPF_KONFIG_SQL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\zamien_wybrane.cs" />
+    <Compile Include="Indeksy\IndeksTable.xaml.cs">
+      <DependentUpon>IndeksTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Indeksy\WPF_TYPY_INDEKSOW.xaml.cs">
+      <DependentUpon>WPF_TYPY_INDEKSOW.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MoveThumb.cs" />
+    <Compile Include="Python\CIronPython.cs" />
+    <Compile Include="Python\UC_AppPython.xaml.cs">
+      <DependentUpon>UC_AppPython.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ResizeThumb.cs" />
     <Compile Include="RotateThumb.cs" />
     <Compile Include="DXF\UC_RYS_DXF.xaml.cs">
       <DependentUpon>UC_RYS_DXF.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SQL\SQL_SELECT\ColumsTable.xaml.cs">
+      <DependentUpon>ColumsTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SQL\SQL_SELECT\MainWindowSQL.xaml.cs" />
+    <Compile Include="SQL\SQL_SELECT\OpisSQL.xaml.cs">
+      <DependentUpon>OpisSQL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SQL\SQL_SELECT\ResultWindow.xaml.cs" />
+    <Compile Include="SQL\SQL_SELECT\SqlHandler.cs" />
+    <Compile Include="SQL\UWPF_EXCEL_SQL .xaml.cs">
+      <DependentUpon>UWPF_EXCEL_SQL .xaml</DependentUpon>
+    </Compile>
     <Compile Include="SQL\UWPF_ZAPYTANIE_SQL.xaml.cs">
       <DependentUpon>UWPF_ZAPYTANIE_SQL.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SQL\WPF_DODAJ_EXCEL.xaml.cs">
+      <DependentUpon>WPF_DODAJ_EXCEL.xaml</DependentUpon>
     </Compile>
     <Compile Include="USTAWIENIA_PROGRAMU\LadujIni.cs" />
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SQL.cs" />
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SqlLite.cs" />
+    <Compile Include="_connect_mssql.cs" />
+    <Page Include="DrzewoProcesu\FRM_ZMIEN_NAZ_PLIKU.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DrzewoSQL\UC_SQL_TREE.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DrzewoProcesu\UC_PROCES_TREE.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DXF\W_EDIT_DATA_DXF.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Excel\UC_EXEC_DATA.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Excel\UC_Konfig.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Excel\WPF_EDYCJA_KOLUMN.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Excel\WPF_NOWY_PROJEKT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Excel\WPF_ZAPIS_EXCEL_SQL.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Excel\WPF_ZAPIS_SQL.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Excel\WPF_KONFIG_SQL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Indeksy\IndeksTable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Indeksy\WPF_TYPY_INDEKSOW.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Python\UC_AppPython.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,7 +372,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\SearchBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SQL\SQL_SELECT\ColumsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SQL\SQL_SELECT\MainWindowSQL.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SQL\SQL_SELECT\OpisSQL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SQL\SQL_SELECT\ResultWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SQL\UWPF_EXCEL_SQL .xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SQL\UWPF_ZAPYTANIE_SQL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SQL\WPF_DODAJ_EXCEL.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,6 +424,17 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Excel\DS\DataSetXML.xsc">
+      <DependentUpon>DataSetXML.xsd</DependentUpon>
+    </None>
+    <None Include="Excel\DS\DataSetXML.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetXML.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Excel\DS\DataSetXML.xss">
+      <DependentUpon>DataSetXML.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -199,12 +446,119 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Konfiguracja\iokno.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\status_ok.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\staus_notok.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IKONY\iokno.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SQL\SQL_SELECT\Images\bug.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\bullet_blue.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\bullet_red.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\cut.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\database.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\database_connect.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\database_table.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\disconnect.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\disk.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\folder_page.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\lightning.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\page_white_copy.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\page_white_paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IKONY\save_all.ico" />
+    <Resource Include="IKONY\update.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IKONY\excel.ico" />
+    <Resource Include="IKONY\zip.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IKONY\del.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SQL\SQL_SELECT\Images\exit.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SQL\SQL_SELECT\Images\auto.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\auto_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IKONY\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DrzewoSQL\Images\drive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DrzewoProcesu\Images\drive.png" />
+    <Resource Include="DrzewoProcesu\Images\file.png" />
+    <Resource Include="DrzewoProcesu\Images\folder-closed.png" />
+    <Resource Include="DrzewoProcesu\Images\folder-open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DrzewoSQL\Images\file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DrzewoSQL\Images\folder-closed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DrzewoSQL\Images\folder-open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DrzewoProcesu\Images\excel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IKONY\sql.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IKONY\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="update.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6 %28x86 i x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IKONY\iokno.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="iokno.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Excel\ikony\save_xml.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Excel\ikony\chek_ok.ico" />
+    <Resource Include="Excel\ikony\error.ico" />
+    <Resource Include="Excel\ikony\find.ico" />
+    <Resource Include="Excel\ikony\save.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SQL\SQL_SELECT\Images\replace.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SQL\SQL_SELECT\Images\status_uwaga.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SQL\SQL_SELECT\Images\lightning_ds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SQL\SQL_SELECT\Images\paste.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -215,8 +569,11 @@
     <Error Condition="!Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLite.3.13.0\build\net45\SQLite.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.6.8.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.8.0\build\Fody.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
-  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Import Project="..\packages\Fody.6.8.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.8.0\build\Fody.targets')" />
 </Project>

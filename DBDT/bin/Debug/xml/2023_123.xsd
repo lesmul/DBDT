@@ -1,0 +1,104 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="DataSetXML" targetNamespace="http://tempuri.org/DataSetXML.xsd" xmlns:mstns="http://tempuri.org/DataSetXML.xsd" xmlns="http://tempuri.org/DataSetXML.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified" xmlns:app1="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False" xmlns:app2="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;TEST|TEST1|TEST2" xmlns:app3="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;{opcje|Nazwa}">
+  <xs:import namespace="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;{opcje|Nazwa}" schemaLocation="2023_123_app3.xsd" />
+  <xs:import namespace="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False" schemaLocation="2023_123_app1.xsd" />
+  <xs:import namespace="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;TEST|TEST1|TEST2" schemaLocation="2023_123_app2.xsd" />
+  <xs:element name="DataSetXML" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="_x0024_SYSTEM_x0024_" msdata:id="0" msprop:Generator_UserTableName="$SYSTEM$" msprop:Generator_TableVarName="_table_SYSTEM_">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" />
+              <xs:element name="Objekt" type="xs:string" minOccurs="0" />
+              <xs:element name="NumerProjektu" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa_Kom_Excel_NrProj" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa_Arkusz_NrProj" type="xs:string" minOccurs="0" />
+              <xs:element name="SQL_Tlumaczenia" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa_Kom_Excel" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa_Arkusz" type="xs:string" minOccurs="0" />
+              <xs:element name="KomurkaStart" type="xs:string" minOccurs="0" />
+              <xs:element name="LokalizPlikExcel" type="xs:string" minOccurs="0" />
+              <xs:element name="WlaczTlumaczenie" type="xs:boolean" default="true" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="_x0024_SYSTEM_CONFIG_x0024_" msdata:id="0" msprop:Generator_UserTableName="$SYSTEM_CONFIG$" msprop:Generator_TableVarName="_table_SYSTEM_CONFIG_">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" />
+              <xs:element name="LP" type="xs:short" minOccurs="0" />
+              <xs:element name="TypParametru" type="xs:string" minOccurs="0" />
+              <xs:element name="TypDanych" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa_Arkusz_NrProj" type="xs:string" minOccurs="0" />
+              <xs:element name="NazwaParametru" type="xs:string" minOccurs="0" />
+              <xs:element name="PolePowiazane" type="xs:string" minOccurs="0" />
+              <xs:element name="DodatkowOpcje" type="xs:string" minOccurs="0" />
+              <xs:element name="PoleSQL" type="xs:string" minOccurs="0" />
+              <xs:element name="NazwaZakladki" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="_x0024_Konfigurator_x0020_zakładak_x0024_" msdata:id="0" msprop:Generator_UserTableName="$Konfigurator zakładak$" msprop:Generator_TableVarName="_table_Konfigurator_zakładak_">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:int" minOccurs="0" />
+              <xs:element name="Ilość_Znaków" type="xs:short" default="0" minOccurs="0" />
+              <xs:element name="Objekt" type="xs:string" minOccurs="0" />
+              <xs:element name="Nazwa" type="xs:string" minOccurs="0" />
+              <xs:element name="Wartość" type="xs:string" minOccurs="0" />
+              <xs:element name="Tekst" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="opcje" msprop:Generator_UserTableName="$Konfigurator zakładak$" msprop:Generator_TableVarName="_table_Konfigurator_zakładak_">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="app1:ID" />
+              <xs:element ref="app1:Ilość_Znaków" minOccurs="0" />
+              <xs:element ref="app1:Objekt" minOccurs="0" />
+              <xs:element ref="app1:Nazwa" minOccurs="0" />
+              <xs:element ref="app2:Wartość" minOccurs="0" />
+              <xs:element ref="app1:Tekst" minOccurs="0" />
+              <xs:element ref="app1:bool" />
+              <xs:element ref="app1:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="opcje_x0020_wartosc" msprop:Generator_UserTableName="$Konfigurator zakładak$" msprop:Generator_TableVarName="_table_Konfigurator_zakładak_">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="app1:ID" />
+              <xs:element ref="app1:Ilość_Znaków" minOccurs="0" />
+              <xs:element ref="app1:Objekt" minOccurs="0" />
+              <xs:element ref="app3:Nazwa" minOccurs="0" />
+              <xs:element ref="app1:Wartość" minOccurs="0" />
+              <xs:element ref="app1:Tekst" minOccurs="0" />
+              <xs:element ref="app1:Nazwa_x003F_" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:_x0024_SYSTEM_x0024_" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="_x0024_SYSTEM_CONFIG_x0024__Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:_x0024_SYSTEM_CONFIG_x0024_" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="Konfigurator_x0020_zakładakKey1">
+      <xs:selector xpath=".//mstns:_x0024_Konfigurator_x0020_zakładak_x0024_" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="opcje_Constraint1" msdata:ConstraintName="Constraint1">
+      <xs:selector xpath=".//mstns:opcje" />
+      <xs:field xpath="app1:ID" />
+    </xs:unique>
+    <xs:unique name="opcje_x0020_wartosc_Constraint1" msdata:ConstraintName="Constraint1">
+      <xs:selector xpath=".//mstns:opcje_x0020_wartosc" />
+      <xs:field xpath="app1:ID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema targetNamespace="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;{opcje|Nazwa}" xmlns:mstns="http://tempuri.org/DataSetXML.xsd" xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;{opcje|Nazwa}" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified" xmlns:app3="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;{opcje|Nazwa}" xmlns:app2="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;TEST|TEST1|TEST2" xmlns:app1="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False">
+  <xs:import namespace="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False" schemaLocation="2023_123_app1.xsd" />
+  <xs:import namespace="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;TEST|TEST1|TEST2" schemaLocation="2023_123_app2.xsd" />
+  <xs:import namespace="http://tempuri.org/DataSetXML.xsd" schemaLocation="2023_123.xsd" />
+  <xs:element name="Nazwa" type="xs:string" default="" />
+</xs:schema>

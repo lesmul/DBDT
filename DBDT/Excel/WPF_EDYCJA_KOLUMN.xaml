@@ -1,0 +1,163 @@
+﻿<Window x:Class="DBDT.Excel.WPF_EDYCJA_KOLUMN"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBDT.Excel"
+        mc:Ignorable="d"
+        Title="Edytuj kolumny" Height="445" Width="700" MaxWidth="1250" SizeChanged="state_changed" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button x:Name="B_OK" Content="OK" HorizontalAlignment="Right" Margin="0,0,115,10" VerticalAlignment="Bottom" Width="110" Height="25" Click="B_OK_Click"/>
+        <Button x:Name="B_ANULUJ" Content="Anuluj" HorizontalAlignment="Right" Margin="0,0,5,10" VerticalAlignment="Bottom" Width="105" Height="25" Click="Button_Click"/>
+        <Button x:Name="B_USUN_DANE" Content="Usuń dane" HorizontalAlignment="Right" Margin="0,0,230,10" VerticalAlignment="Bottom" Width="105" Height="25" Click="DEL_Click" ToolTip="Wyczyść wszystkie dane w powiązanej tabeli, kliknik OK aby potwierdzić."/>
+        <DataGrid x:Name="DG_XML_KOLUMNY" Margin="5,5,5,45" AutoGenerateColumns="False" ColumnWidth="Auto"
+                CanUserAddRows="True" CanUserDeleteRows="True" CanUserResizeColumns="False" SelectionUnit="Cell" CellEditEnding="MyList_BeginningEdit" BeginningEdit="MyList_BeginningEdit" PreviewKeyUp="prev_key_up">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsReadOnly}" Value="True" >
+                            <Setter Property="IsEnabled" Value="False" />
+                            <!-- You can also set "IsHitTestVisble" = False but please note that this won't prevent the user from changing the values using the keyboard arrows -->
+                        </DataTrigger>
+
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="LP" Binding="{Binding Path=id}" FontStyle="Italic" IsReadOnly="True" />
+                <DataGridTextColumn Header="Nazwa kolumny" Binding="{Binding Path=Nazwa}"/>
+                <DataGridComboBoxColumn Header="Typy kolumny" x:Name="gtypy_kolumn" SelectedItemBinding="{Binding Typ}" SelectedValuePath="pole1" SelectedValueBinding="{Binding TYPY_KOLUMN, Mode=OneWayToSource}" DisplayMemberPath="{Binding TYPY_KOLUMN}" />
+                <DataGridComboBoxColumn Header="Pole może być puste" x:Name="gtypy_pole_wymagane" SelectedItemBinding="{Binding PoleWymagane}" SelectedValuePath="pole1" SelectedValueBinding="{Binding TYPY_WART_WYMAGANA, Mode=OneWayToSource}" DisplayMemberPath="{Binding TYPY_WART_WYMAGANA}" />
+                <DataGridTextColumn Header="Wartość domyślna" Binding="{Binding Path=DefaultValue}"/>
+                <DataGridTextColumn Header="Ilość znaków" Binding="{Binding Path=MaxLength}"/>
+                <DataGridCheckBoxColumn Header="PL" Binding="{Binding Path=PL}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Polski"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="DE" Binding="{Binding Path=DE}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Niemiecki"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="IT" Binding="{Binding Path=IT}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Włoski"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="FR" Binding="{Binding Path=FR}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Francuski"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="ES" Binding="{Binding Path=ES}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Hiszpański"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="CZ" Binding="{Binding Path=CZ}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Czeski"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="SK" Binding="{Binding Path=SK}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Słowacki"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="SI" Binding="{Binding Path=SI}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Słoweński"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="DK" Binding="{Binding Path=DK}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Duński"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="NL" Binding="{Binding Path=NL}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Holenderski"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="US" Binding="{Binding Path=US}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="USA - Angielski"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="HU" Binding="{Binding Path=HU}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Węgierski"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="NO" Binding="{Binding Path=NO}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Norweski"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="PT" Binding="{Binding Path=PT}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Portugalski"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="CH" Binding="{Binding Path=CH}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Szwajcarski"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="SE" Binding="{Binding Path=SE}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Szwedzki"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridCheckBoxColumn Header="TR" Binding="{Binding Path=TR}">
+                    <DataGridCheckBoxColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Turecki"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.HeaderStyle>
+                </DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="Dane do pola listy" Binding="{Binding Path=PoleListy}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="ToolTip" Value="Wybór z pola listy oddziel | lub pobierz z innej zakładki w formacie np. {nazwa_zakładki|nazwa_kolumny}"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <CheckBox x:Name="CB_POKAZ_UKRYTE_KOLUMY" Content="Pokaż ukryte objekty (w konfiguratorze po zamknięciu)" HorizontalAlignment="Left" Height="25" Margin="10,0,0,9" VerticalAlignment="Bottom" Width="325"/>
+    </Grid>
+</Window>

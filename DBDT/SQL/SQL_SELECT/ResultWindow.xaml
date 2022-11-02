@@ -1,0 +1,142 @@
+﻿<Window x:Class="DBDT.SQL.SQL_SELECT.ResultWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Wynik :)" Height="768" Width="1024" SizeToContent="Width" WindowStartupLocation="CenterScreen" MinWidth="610" MinHeight="193">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="10,0,10,0">
+            <Grid Height="24">
+                <Label Width="55" HorizontalAlignment="Left" Margin="0,-1,0,-2" FontSize="12" FontWeight="Bold">Wyniki:</Label>
+                <RadioButton Name="copy_memory" Content="Kopiuj do schowka" Margin="55,5,819,0"/>
+                <RadioButton Name="new_window" Content="Otwórz w nowym oknie SQL" IsChecked="True" Margin="185,5,644,0"/>
+                <Button Content="Wyczyść schowek" Margin="360,1,0,2" Click="click_clear" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="100"/>
+                <ComboBox x:Name="FullTabele" SelectionChanged="FullTabele_SelectionChanged" Margin="465,0,329,0" Visibility="Collapsed" FontSize="14" FontStretch="Medium" FontWeight="DemiBold" Foreground="#FF2B1212" />
+            </Grid>
+
+        </StackPanel>
+        <Expander Grid.Row="1" Name="filtersExpander" Header="Filtry">
+            <StackPanel Grid.Row="1" Margin="5,5,5,5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ComboBox Grid.Row="0" Name="CB_FILTR" Margin="5,5,5,5" Text="" Height="23" Grid.ColumnSpan="2" IsEditable="True" HorizontalAlignment="Left" Width="200" SelectionChanged="CB_FILTR_SelectionChanged"/>
+                    <RadioButton Grid.Row="0" x:Name="ruwnum" Margin="216,4,0,3" IsChecked="True" VerticalContentAlignment="Center" Padding="15,-1,0,0" HorizontalAlignment="Left" >=</RadioButton>
+                    <RadioButton Grid.Row="1" x:Name="like" Margin="216,0,0,0" HorizontalAlignment="Left" >Like %%</RadioButton>
+                    <RadioButton Grid.Row="1" x:Name="Notlike" Margin="5,0,0,0" HorizontalAlignment="Left" Width="89" >Not Like %%</RadioButton>
+                    <RadioButton Grid.Row="1" x:Name="Notlike2" Margin="124,0,0,0" HorizontalAlignment="Left" Width="81" >Not Like</RadioButton>
+                    <TextBox Grid.Row="0" x:Name="TXT_FILTR" TextWrapping="Wrap" Width="600" UndoLimit="10" MaxLines="1" MaxLength="25" TextChanged="text_changed" RenderTransformOrigin="1,1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="284,2,0,5"/>
+                    <TextBox Grid.Row="0" x:Name="TXT_FILTR_COPY" TextWrapping="Wrap" Width="600" UndoLimit="10" RenderTransformOrigin="1,1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="284,29,0,0" Grid.RowSpan="2" IsReadOnly="True" MaxHeight="350" />
+                    <Button x:Name="B_INTELIGENTNE_WKLEJ" Tag="" Grid.Row="0" Margin="889,2,0,5" HorizontalAlignment="Left" Width="120" Content="Inteligentny filtr like" ToolTip="Skopiuj wartości np  z Excel kliknij w ten przycisk aby utworzyć filtr wartości zawierają" Click="B_INTELIGENTNE_WKLEJ_Click"/>
+                    <Button x:Name="B_INTELIGENTNE_WKLEJ_RUWNASIE" Tag="=" Grid.Row="0" Margin="889,29,0,0" HorizontalAlignment="Left" Width="120" Content="Inteligentny filtr =" ToolTip="Skopiuj wartości np  z Excel kliknij w ten przycisk aby utworzyć filtr wartości równe" Click="B_INTELIGENTNE_WKLEJ_Click" Grid.RowSpan="2"/>
+                </Grid>
+            </StackPanel>
+        </Expander>
+        <DataGrid Grid.Row="2" Name="resultGrid" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,1,0,1" IsReadOnly="True" SelectedCellsChanged="selectde_cells" MouseLeftButtonDown="mouse_down" ContextMenuOpening="cont_menu_opening" MaxColumnWidth="900" MinRowHeight="10" CanUserAddRows="False" CanUserDeleteRows="False" MouseDoubleClick="mouse_double_click" >
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="MinHeight" Value="10"/>
+                    <Setter Property="MaxHeight" Value="150"/>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="MinHeight" Value="10"/>
+                    <Setter Property="MaxHeight" Value="150"/>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Kopiuj i usuń polskie znaki" Click="ClickCopy_bez_pl" />
+                    <MenuItem Header="Kopiuj i usuń białe znaki" Click="ClickCopy" />
+                    <MenuItem Header="Kopiuj oryginał" Click="ClickCopyOryg" />
+                    <Separator/>
+                    <MenuItem Header="Ustaw szybki filtr" Tag="" Click="resultGrid_szybki_filtr_Click" />
+                    <MenuItem Header="Ustaw szybki filtr z zaznaczonych" Tag="SELECT" Click="resultGrid_szybki_filtr_Click" />
+                    <MenuItem Header="Kopiuj z warunkiem where" Click="resultGrid_Click" />
+                    <Separator/>
+                    <MenuItem Header="Kopiuj z warunkiem select -> where" Click="resultGrid_select_Click" />
+                    <Separator/>
+                    <MenuItem Header="Utwórz warunek UPDATE SET / DELETE">
+                        <MenuItem Header="Kolumny UPDATE" Click="resultGrid_Update_U_Click"/>
+                        <MenuItem Header="Kolumny WHERE" Click="resultGrid_Update_W_Click"/>
+                        <MenuItem Header="Kolumny DELETE WHERE" Click="resultGrid_Delete_W_Click" />
+                        <MenuItem x:Name="MI_UPDATE_WIDOCZNE_AND" Header="UPDATE widoczne AND" Tag="AND" Click="resultGrid_Update_Widoczne_Click" />
+                        <MenuItem x:Name="MI_UPDATE_WIDOCZNE_OR" Header="UPDATE widoczne OR" Tag="OR" Click="resultGrid_Update_Widoczne_Click" />
+                        <Separator/>
+                        <MenuItem x:Name="MI_UPDATE_WIDOCZNE_1_KOL" Header="UPDATE zaznaczone każde w nowej linii" Tag="" Click="resultGrid_Update_Widoczne_Click" FontWeight="Bold" >
+                            <MenuItem.Icon>
+                                <Image Source="/DrzewoSQL/Images/file.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem x:Name="MI_DELETE_WIDOCZNE_1_KOL" Header="DELETE zaznaczone każde w nowej linii" Tag="DELETE" Click="resultGrid_Update_Widoczne_Click" FontWeight="Bold" >
+                            <MenuItem.Icon>
+                                <Image Source="/DrzewoSQL/Images/file.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Kolumny">
+                        <MenuItem Header="Kopiuj nazwy zaznaczonych kolumn" Tag="" Click="Columns_select_Click" />
+                        <MenuItem Header="Usuń kolumny zaznaczone" Tag="DEL" Click="Columns_Del_select_Click" />
+                        <MenuItem Header="Usuń kolumny oprócz zaznaczonych" Tag="" Click="Columns_Del_select_Click" />
+                    </MenuItem>
+                    <MenuItem Header="Ustaw SELECT z zaznaczonych kolumn" Tag="SELECT" Click="Columns_select_Click" />
+                    <MenuItem Header="Wygeneruj INSERT z widocznych wartości" Click="generuj_insert_click" />
+                    <Separator/>
+                    <MenuItem Header="Automatyzacja skryptów" FontWeight="Bold" Foreground="#FF164A25">
+                        <MenuItem Header="Kopiuj nazwy wartości każde w nowej linii" Tag="NEW" Click="ColumnsOR_select_Click" FontWeight="Bold" Foreground="#FF7E0A51" />
+                        <Separator/>
+                        <MenuItem Header="Kopiuj nazwy wartości --> OR" Tag="" Click="ColumnsOR_select_Click" FontWeight="Normal" />
+                        <MenuItem Header="Kopiuj nazwy wartości --> OR [FALSE]" Tag="=FALSE" Click="ColumnsOR_select_Click" FontWeight="Normal" />
+                        <Separator/>
+                        <MenuItem Header="Kopiuj nazwy wartości --> AND" Tag="" Click="ColumnsAND_select_Click" FontWeight="Normal" />
+                        <MenuItem Header="Kopiuj nazwy wartości --> AND [FALSE]" Tag="=FALSE" Click="ColumnsAND_select_Click" FontWeight="Normal" />
+                        <Separator/>
+                        <MenuItem  x:Name="MI_DOWOLNY_OPTION_AUTO_K" Tag="K" Header="Ustaw wartość OPTION zaznaczonej kolumny" Click="Columns_select_option_Click" FontWeight="Normal" />
+                        <MenuItem  x:Name="MI_DOWOLNY_OPTION_AUTO_W" Tag="W" Header="Ustaw wartość OPTION zaznaczonej wartości" Click="Columns_select_option_Click" FontWeight="Normal" />
+                        <Separator/>
+                        <MenuItem x:Name="MI_DOWOLNY_OPTION" Tag="NAZ_OPCJI" Click="zmien_nazwe_skrypt_porown" FontWeight="Normal" >
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Zmień na: OPTION(&quot;" />
+                                    <TextBox Width="122" Name="tbCustomDataRangeOption" Margin="1,0" UndoLimit="10" ToolTip="Zmień nazwę opcji" MaxLines="1" MaxLength="30" />
+                                    <Label Content="&quot;,&quot;?&quot;)" />
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem x:Name="MI_DOWOLNY_NAZ_TAB" Tag="NAZ_TAB" Click="zmien_nazwe_skrypt_porown" FontWeight="Normal">
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Nazwa tabeli &quot;" />
+                                    <TextBox Width="122" Name="tbCustomDataRange" Margin="1,0" UndoLimit="10" ToolTip="Zmień tabeli" MaxLines="1" MaxLength="50" />
+                                    <Label Content="&quot;" HorizontalAlignment="Left" />
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Kopiuj pole jako polecenie SETERROREX" Click="click_seterror" Foreground="#FF980C0C" />
+                        <MenuItem Header="Kopiuj pole jako polecenie SETOPTION" Tag="SETOPTION" Click="ColumnsAND_select_Click" Foreground="#FF1D0E4E" />
+                        <MenuItem Header="Kopiuj pole jako polecenie IF ENDIF" Tag="IF" Click="ColumnsAND_select_Click" Foreground="#FF085C19" />
+                        <MenuItem Header="Kopiuj pole jako polecenie tylko IF" Tag="IFTYLKO" Click="ColumnsAND_select_Click" Foreground="#FF085C19" />
+                    </MenuItem>
+                    <MenuItem Header="Dodaj indesk do boom">
+                        <MenuItem Header="Zaznaczone" Tag="OK" Click="Dodaj_do_boom_Click" />
+                        <MenuItem Header="Zaznaczone oraz wytnij do znaku - " Tag="LIKE" Click="Dodaj_do_boom_Click" />
+                        <MenuItem Header="Zaznaczone opisem" Tag="NOK" Click="Dodaj_do_boom_Click" />
+                    </MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <Label  Grid.Row="3"  x:Name="LBL_INFO" Content="Informacja......" Height="23" VerticalAlignment="Center" Padding="10,2,10,2" VerticalContentAlignment="Center" Margin="0,0,219,0"/>
+        <Label  Grid.Row="3"  x:Name="LBL_INFO_2" Content="Ilość zaznaczonych: 0" Height="23" VerticalAlignment="Center" Padding="10,2,10,2" VerticalContentAlignment="Center" Margin="645,0,0,0" HorizontalAlignment="Right"/>
+    </Grid>
+</Window>

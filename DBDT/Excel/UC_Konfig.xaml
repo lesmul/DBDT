@@ -1,0 +1,153 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DBDT.Excel"
+             xmlns:MDI="clr-namespace:WPF.MDI;assembly=WPF.MDI" 
+             xmlns:SQL_SELECT="clr-namespace:DBDT.SQL.SQL_SELECT" x:Class="DBDT.Excel.UC_Konfig"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1050" Loaded="uc_loaded" Unloaded="unloaded">
+    <Grid>
+        <StackPanel Margin="0,0,0,220">
+            <SQL_SELECT:MainWindowSQL x:Name="MW_SQL" Height="215"/>
+        </StackPanel>
+        <StackPanel Margin="0,215,0,407">
+            <Grid>
+                <Label HorizontalAlignment="Left" Width="73" Content="Nr projektu:" VerticalAlignment="Top" HorizontalContentAlignment="Right" />
+                <ComboBox Name="CB_NR_PROJEKTU" Margin="78,0,0,2" Text="" VerticalAlignment="Bottom" Height="23" IsEditable="True" SelectionChanged="CB_NR_PROJEKTU_SelectionChanged" KeyUp="cb_nr_pr_key_up" PreviewMouseDown="pmd" HorizontalAlignment="Left" Width="162" />
+                <Button Name="B_ZAPISZ" Content="Dodaj zakładkę" Height="24" Click="B_ZAPISZ_Click" HorizontalAlignment="Left" Margin="245,0,0,2" Width="235" />
+                <Button Name="B_USUN_PROJEKT" Content="Usuń projekt" Height="24" HorizontalAlignment="Left" Margin="485,0,0,2" Width="115" Click="B_USUN_PROJEKT_Click" />
+                <Button Name="B_Usun" Grid.Column="1" Content="Usuń zakładkę" Margin="605,0,0,0" VerticalAlignment="Bottom" Height="25" Click="B_USUN_ZAKL_Click" HorizontalAlignment="Left" Width="112" />
+                <Button x:Name="B_Wyslij_Excel" Grid.Column="0" Content="Wyślij zmiany do EXCEL" HorizontalAlignment="Left" Margin="722,0,0,-1" VerticalAlignment="Center" Width="178" Click="click_wyslij_zmiany_excel" Height="25"/>
+                <Label Grid.Column="1" Margin="900,-2,0,0" HorizontalAlignment="Left" Width="85" VerticalAlignment="Top" >Opis zakładki:</Label>
+                <TextBox Grid.Column="1" Name="TXT_NAZ_ZAKLADKI" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" ToolTip="Opis zakłądki" HorizontalAlignment="Left" Width="188" Margin="980,2,0,0" TextChanged="TXT_NAZ_ZAKLADKI_TextChanged" />
+            </Grid>
+        </StackPanel>
+        <TabControl Name="TC_Zakl" Margin="1,245,1,10" SelectionChanged="tc_selection_changed">
+            <TabItem x:Name="TI_M" Header="$Konfigurator zakładak$" >
+                <Grid Margin="1,1,1,1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="600" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Background="#FF9FC051" Orientation="Horizontal" Margin="0,0,0,0" Grid.Column="0" Grid.Row="0">
+                        <DataGrid x:Name="DG_MOJE_USTAWIENIA" AutoGenerateColumns="True" Margin="2,2,2,2" Width="596" BeginningEdit="MyList_BeginningEdit" CellEditEnding="MyList_BeginningEdit" ContextMenuOpening="contex_menu_opening" ColumnDisplayIndexChanged="column_dis_ind_changed" PreviewKeyUp="PrevKeyUp" CanUserAddRows="False" >
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem x:Name="MI_CKONF_KOLUM" Tag="" Header="Edytuj kolumny w zakładce" Visibility="Collapsed" Click="MenuItem_KONF_KOL"/>
+                                    <Separator/>
+                                    <MenuItem Tag="0" Header="Kopiuj kolumny w zakładce" Click="MenuItem_KONF_KOL"/>
+                                    <MenuItem x:Name="MI_CKONF_KOLUM_DEFAULT" Tag="DEFAULT" Header="Edytuj domyślne kolumny" Visibility="Collapsed" Click="MenuItem_KONF_KOL"/>
+                                    <MenuItem x:Name="MI_CRTL_PLUS_V" Header="Wklej z EXCEL" Click="MenuItem_Click_Paste"/>
+                                    <Separator/>
+                                    <MenuItem x:Name="MI_WR" Header="Zaznaczone klonuj i dodaj WR" Tag="WR" Click="MenuItem_Klonuj" />
+                                    <MenuItem x:Name="MI_ALU" Header="Zaznaczone klonuj i dodaj ALU" Tag="ALU" Click="MenuItem_Klonuj"/>
+                                    <MenuItem x:Name="MI_PVC" Header="Zaznaczone klonuj i dodaj PVC" Tag="PVC" Click="MenuItem_Klonuj"/>
+                                    <Separator/>
+                                    <MenuItem x:Name="MI_WR_" Header="Zaznaczone klonuj WR zamień do znaku _" Tag="WR_" Click="MenuItem_Klonuj"/>
+                                    <MenuItem x:Name="MI_ALU_" Header="Zaznaczone klonuj ALU zamień do znaku _" Tag="ALU_" Click="MenuItem_Klonuj"/>
+                                    <MenuItem x:Name="MI_PVC_" Header="Zaznaczone klonuj PVC zamień do znaku _" Tag="PVC_" Click="MenuItem_Klonuj"/>
+                                    <Separator/>
+                                    <MenuItem x:Name="MI_DOWOLNY" Tag="XX_DOWOLNY" Click="MenuItem_Klonuj">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Zaznaczone zamień" />
+                                                <TextBox Width="42" Name="tbCustomDataRange" Margin="1,0" UndoLimit="10" ToolTip="Podaj wartość np: PL - dodaj PL_ - zamień" MaxLines="1" MaxLength="5" />
+                                                <Label Content=" - wpisz frezę do zmiany" />
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+                                    <Separator/>
+                                    <MenuItem x:Name="MI_USUN_DO_" Header="Zaznaczone usuń, przedrostek do znaku _" Tag="DEL_" Click="MenuItem_Klonuj"/>
+                                    <Separator/>
+                                    <MenuItem Header="Klonuj indeksy na typ">
+                                        <MenuItem x:Name="MI_INDEKS_DUMMY" Tag="" Header="Indeks: " Click="MenuItem_Klonuj"/>
+                                        <MenuItem x:Name="MI_INDEKS_DOPLATA" Tag="" Header="Indeks: " Click="MenuItem_Klonuj"/>
+                                        <MenuItem x:Name="MI_INDEKS_INNY" Tag="" Header="Indeks: " Click="MenuItem_Klonuj"/>
+                                        <MenuItem x:Name="MI_INDEKS_DRUK" Tag="" Header="Indeks: " Click="MenuItem_Klonuj"/>
+                                        <MenuItem x:Name="MI_INDEKS_UZYTKOWNIKA" Tag="" Header="Indeks: " Click="MenuItem_Klonuj"/>
+                                    </MenuItem>
+                                    <Separator/>
+                                    <MenuItem x:Name="MI_KONFIG_SQL" Header="Konfigurator zapisu danych SQL" Tag="" Click="MI_KONFIG_SQL_Click" />
+                                    <MenuItem x:Name="MI_KONFIG_EXECUTE_SQL" Header="Zapis danych do bazy SQL" Tag="" Click="MI_KONFIG_SQL_EXECUTE_Click" />
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                            <DataGrid.Resources>
+                                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
+                                    <Setter Property="Background" Value="LightSeaGreen" />
+                                    <Setter Property="Foreground" Value="white" />
+                                    <Setter Property="BorderBrush" Value="Black"/>
+                                    <Setter Property="BorderThickness" Value="1 1 1 1"/>
+                                    <Setter Property="Margin" Value="-1,-1,0,0" />
+                                    <Setter Property="Height" Value="28" />
+                                    <Setter Property="Width" Value="auto"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="HorizontalContentAlignment" Value="Right" />
+
+                                    <Style.Triggers>
+                                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                            <Setter Property="Background" Value="Goldenrod" />
+                                            <Setter Property="BorderBrush" Value="white" />
+                                            <Setter Property="Foreground" Value="black" />
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                            <!--<Setter Property="FontSize" Value="15"/>-->
+                                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content.Text}" />
+                                        </Trigger>
+
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Red" />
+                                        </Trigger>
+
+                                    </Style.Triggers>
+
+                                </Style>
+
+
+                            </DataGrid.Resources>
+
+                        </DataGrid>
+                    </StackPanel>
+                    <Label Name="LBL_INF" Content="Informacja" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Foreground="#FFBB0606" FontStyle="Oblique" FontStretch="UltraCondensed" FontWeight="Light" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="8,0,151,0" FlowDirection="RightToLeft"/>
+
+                    <Label Grid.Column="1" Margin="0,31,103,0" HorizontalAlignment="Right" Width="107" VerticalAlignment="Top" Grid.ColumnSpan="2" >Komórka projekt:</Label>
+                    <TextBox Grid.Column="2" Name="TXT_POLE_NR_PROJEKT" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" ToolTip="Gdzie wpisać numer projektu w EXCEL nr komórki" HorizontalAlignment="Right" Width="98" Margin="0,31,5,0"/>
+                    <Label Grid.Column="1" Margin="0,31,103,0" HorizontalAlignment="Left" Width="107" VerticalAlignment="Top" Grid.ColumnSpan="2" >Nazwa ark. Excel:</Label>
+                    <TextBox Grid.Column="1" Name="TXT_ARKUSZ_POLE_NR_PROJEKT" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" ToolTip="Gdzie wpisać numer projektu w EXCEL nazwa arkusza" HorizontalAlignment="Left" Width="84" Margin="97,31,0,0" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="1" Margin="5,53,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="350" >Procedura tłumaczenia (Edytuj kolumny i dokończ konfiguracje):</Label>
+                    <TextBox Grid.Column="1" Name="TXT_SQL" Margin="5,78,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="73" Grid.ColumnSpan="2"/>
+                    <Button x:Name="B_SQL_T" Grid.Column="2" HorizontalAlignment="Right" Height="21" Margin="0,130,5,0" VerticalAlignment="Top" Width="20" ToolTip="Procedura tłumaczeń" Background="#FF3C260B" Click="b_sql_x_click">
+                        <Button.Content>
+                            <Image  Source="/IKONY/sql.png" Stretch="Fill" />
+                        </Button.Content>
+                    </Button>
+                    <Label Grid.Column="1" Margin="5,156,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Nazwa pliku EXCEL:</Label>
+                    <ComboBox Grid.Column="1" Name="CB_NAZ_EXCEL" Margin="127,156,5,0" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2" IsEditable="True"/>
+                    <Label Grid.Column="1" Margin="5,186,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Nazwa arkusza:</Label>
+                    <TextBox Grid.Column="1" Name="TXT_NAZ_ARKUSZA" Margin="127,186,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="1" Margin="5,216,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Komórka start:</Label>
+                    <TextBox Grid.Column="1" Name="TXT_KOMORKA_START" Margin="127,216,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2" ToolTip="np. A1;C1;D1 - wartość kolumna 1; kolumna 2; kolumna 3" MaxLines="250" CharacterCasing="Upper"/>
+                    <Label Grid.Column="1" Margin="5,246,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Plik wynikowy:</Label>
+                    <TextBox Grid.Column="1" Name="TXT_LOK_PLIK_WYNIKOWY" Margin="127,246,25,0" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2" MaxLines="1" MaxLength="2500" UndoLimit="5" TextAlignment="Right" FlowDirection="RightToLeft"/>
+                    <CheckBox Name="CB_UNIKAT" Grid.Column="1" Content="Włącz procedurę tłumaczeń" HorizontalAlignment="Left" Margin="127,275,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="263"/>
+                    <Button x:Name="B_Open" Grid.Column="2" HorizontalAlignment="Right" Height="21" Margin="0,246,5,0" VerticalAlignment="Top" Width="20" Click="b_open_xls_click" ToolTip="Otwórz plik Excel" Background="#FF08290F">
+                        <Button.Content>
+                            <Image  Source="/IKONY/excel.ico" Stretch="Fill" />
+                        </Button.Content>
+                    </Button>
+                    <!--<Label Grid.Column="2" Margin="22,-2,0,0" HorizontalAlignment="Left" Width="73" Content="Nr projektu:" VerticalAlignment="Top" HorizontalContentAlignment="Right" />
+                    <ComboBox Grid.Column="2" Name="CB_NR_PROJEKTU" Margin="95,2,5,0" Text="" VerticalAlignment="Top" Height="23" Grid.ColumnSpan="2" IsEditable="True" SelectionChanged="CB_NR_PROJEKTU_SelectionChanged" KeyUp="cb_nr_pr_key_up" PreviewMouseDown="pmd" />-->
+                    <Label Name="LBL_INF_2" Content="" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Foreground="#FFBB0606" VerticalContentAlignment="Center" Margin="11,0,0,0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="279"/>
+                </Grid>
+            </TabItem>
+        </TabControl >
+    </Grid>
+</UserControl>

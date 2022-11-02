@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema targetNamespace="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False" xmlns:mstns="http://tempuri.org/DataSetXML.xsd" xmlns="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified" xmlns:app1="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False" xmlns:app2="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;TEST|TEST1|TEST2" xmlns:app3="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;{opcje|Nazwa}">
+  <xs:import namespace="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;{opcje|Nazwa}" schemaLocation="2023_123_app3.xsd" />
+  <xs:import namespace="True;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;TEST|TEST1|TEST2" schemaLocation="2023_123_app2.xsd" />
+  <xs:import namespace="http://tempuri.org/DataSetXML.xsd" schemaLocation="2023_123.xsd" />
+  <xs:element name="ID" msdata:AutoIncrement="true" type="xs:int" />
+  <xs:element name="Ilość_Znaków" type="xs:short" />
+  <xs:element name="Objekt" type="xs:string" default="opcje" />
+  <xs:element name="Nazwa" type="xs:string" default="" />
+  <xs:element name="Tekst" type="xs:string" default="" />
+  <xs:element name="bool" type="xs:boolean" default="false" />
+  <xs:element name="int" type="xs:int" default="0" />
+  <xs:element name="Wartość" type="xs:string" default="" />
+  <xs:element name="Nazwa_x003F_" type="xs:string" default=" " />
+</xs:schema>
