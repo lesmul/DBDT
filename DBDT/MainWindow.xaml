@@ -8,9 +8,9 @@
             <mdi:MdiContainer Name="Container">
                 <mdi:MdiContainer.Menu>
                     <Menu DockPanel.Dock="Top">
-                        <MenuItem Header="Konfiguracja">
+                        <MenuItem Header="Narzędzia">
                             <MenuItem Header="Połączenie do bazy danych" Click="KonfiguracjaPolaczenia_Click" />
-                            <MenuItem Header="DXF" Click="AddDXFWindow_Click" />
+                            <MenuItem Header="Podgląd DXF" Click="AddDXFWindow_Click" />
                             <MenuItem Header="Zapytania SQL" Click="AddScrollWindow_Click" />
                         </MenuItem>
                         <MenuItem Header="Styl okien">

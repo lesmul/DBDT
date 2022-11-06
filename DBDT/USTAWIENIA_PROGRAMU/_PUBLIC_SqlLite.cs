@@ -7,7 +7,6 @@ using System.Windows;
 
 namespace DBDT.USTAWIENIA_PROGRAMU
 {
-
     internal class _PUBLIC_SqlLite
     {
         public static string sqlite_file;
@@ -185,6 +184,8 @@ namespace DBDT.USTAWIENIA_PROGRAMU
         public static Boolean DODAJ_REKORD_PAR_POLACZENIA(string str_serwer, string str_nazwa_bazy)
         {
 
+            if (str_serwer.Trim() == "" || str_nazwa_bazy.Trim() == "") return false;
+
             SQLiteCommand command_insert = new SQLiteCommand();
 
             try
@@ -216,6 +217,50 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             command_insert.Parameters.AddWithValue("@serwer", str_serwer);
             command_insert.Parameters.AddWithValue("@nazwa_bazy", str_nazwa_bazy);
+
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
+
+        public static Boolean USUN_REKORDY_PAR_POLACZENIA()
+        {
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            command_insert.CommandText = "DELETE FROM`ParametryPalaczenia`";
+
+            command_insert.CommandType = CommandType.Text;
 
             try
             {

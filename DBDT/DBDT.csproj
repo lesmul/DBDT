@@ -109,6 +109,7 @@
     <Compile Include="USTAWIENIA_PROGRAMU\LadujIni.cs" />
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SQL.cs" />
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SqlLite.cs" />
+    <Compile Include="_connect_mssql.cs" />
     <Page Include="DXF\W_EDIT_DATA_DXF.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
