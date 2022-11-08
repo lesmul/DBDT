@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace DBDT.Konfiguracja
 {
@@ -35,8 +36,14 @@ namespace DBDT.Konfiguracja
                 {
 
                     _PUBLIC_SqlLite.Existsdb("");
+           
+                    DataTable dt = new DataTable();
+                    dt = _PUBLIC_SqlLite.SelectQuery("select count(*) from ParametryPalaczenia");
 
-                    _PUBLIC_SqlLite.USUN_REKORDY_PAR_POLACZENIA();
+                    if (dt.Rows.Count > 21)
+                    {
+                        _PUBLIC_SqlLite.USUN_REKORDY_PAR_POLACZENIA();
+                    }
 
                     _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA(TXT_NAZWA_SERWERA.Text.Trim(), TXT_NAZWA_BAZY.Text.Trim());
 
@@ -50,21 +57,49 @@ namespace DBDT.Konfiguracja
         {
             if (TXT_NAZWA_SERWERA.Text.Trim() == "" || TXT_NAZWA_BAZY.Text.Trim() == "")
             {
-                MessageBox.Show("Wypełnij pola - nazwa bazy danych oraz nazwa serwera");
+                MessageBox.Show("Wypełnij pola - nazwa bazy danych oraz nazwa serwera","Uwaga!!!");
                 return;
             }
-                _connect_mssql.connetionString = @"Server=SQLServer\\" + TXT_NAZWA_SERWERA.Text.Trim() + ";Database=" + TXT_NAZWA_BAZY.Text.Trim() + ";Trusted_Connection=True;MultipleActiveResultSets=true";
+                _connect_mssql.connetionString = @"Server=" + TXT_NAZWA_SERWERA.Text.Trim() + ";Database=" + TXT_NAZWA_BAZY.Text.Trim() + ";Trusted_Connection=True";
     
             try
             {
                 _connect_mssql.cnn = new SqlConnection(_connect_mssql.connetionString);
                 _connect_mssql.cnn.Open();
                 _connect_mssql.cnn.Close();
+
+                MessageBox.Show("Połączyłem się z serwerem", "Jest OK :)");
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void zapisane_polaczenia(object sender, RoutedEventArgs e)
+        {
+            DataTable dt = new DataTable();
+
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, serwer, nazwa_bazy, serwer || ' - ' || nazwa_bazy as SerwerIBaza FROM ParametryPalaczenia order by id desc");
+
+            CB_HIST_POL.ItemsSource = dt.AsDataView();
+
+            if (dt.Rows.Count > 0)
+            {
+                TXT_NAZWA_BAZY.Text = dt.Rows[0][2].ToString();
+
+                TXT_NAZWA_SERWERA.Text = dt.Rows[0][1].ToString();
+            }
+
+        }
+
+        private void CB_HIST_POL_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+             Object selectedItem = CB_HIST_POL.SelectedItem;
+
+            TXT_NAZWA_SERWERA.Text = ((System.Data.DataRowView)selectedItem).Row.ItemArray[0].ToString();
+            TXT_NAZWA_SERWERA.Text = ((System.Data.DataRowView)selectedItem).Row.ItemArray[1].ToString();
         }
     }
 }

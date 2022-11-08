@@ -1,6 +1,7 @@
 ﻿using DBDT.DXF;
 using DBDT.Konfiguracja;
 using DBDT.SQL;
+using DBDT.SQL.SQL_SELECT;
 using DBDT.USTAWIENIA_PROGRAMU;
 using Microsoft.SqlServer.Server;
 using System;
@@ -141,7 +142,7 @@ namespace DBDT
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        private void AddScrollWindow_Click(object sender, RoutedEventArgs e)
+        private void FindSQLWindow_Click(object sender, RoutedEventArgs e)
         {
             //StackPanel sp = new StackPanel { Orientation = Orientation.Vertical };
             //sp.Children.Add(new TextBlock { Text = "Window with scroll", Margin = new Thickness(5) });
@@ -157,6 +158,28 @@ namespace DBDT
             Container.Children.Add(new MdiChild { Content = sp, Title = "Zapytanie SQL " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
 
         }
+
+        private void AddNewSQLWindow_Click(object sender, RoutedEventArgs e)
+        {
+            //StackPanel sp = new StackPanel { Orientation = Orientation.Vertical };
+            //sp.Children.Add(new TextBlock { Text = "Window with scroll", Margin = new Thickness(5) });
+            //sp.Children.Add(new ComboBox { Margin = new Thickness(20), Width = 300 });
+            //ScrollViewer sv = new ScrollViewer { Content = sp, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
+            //Container.Children.Add(new MdiChild { Content = sv, Title = "Okno " + ooo++ });
+
+            MainWindowSQL sp = new MainWindowSQL();
+
+            ScrollViewer sv = new ScrollViewer
+            {
+                Content = sp,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+            //Container.Children.Add(new MdiChild { Content = sv, Title = "Zapytanie SQL " + ooo++, WindowState=WindowState.Maximized, Width= SHT_W, Height= SHT_H });
+            Container.Children.Add(new MdiChild { Content = sp, Title = "Dodaj nowe zaptanie SQL " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+
+        }
+  
 
         /// <summary>
         /// Refresh windows list

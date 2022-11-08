@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBDT.Konfiguracja"
         mc:Ignorable="d"
-        Title="Konfiguracja połączenia do bazy danych" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png" WindowStyle="ToolWindow" Width="415" Height="210" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-    <Grid>
-        <Button Content="Zakończ" Height="25" Margin="265,136,0,0" Width="130" Click="zakoncz_click" BorderThickness="1,1,1,1" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-        <Label Content="Nazwa serwera" HorizontalAlignment="Left" Margin="7,6,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TXT_NAZWA_SERWERA" HorizontalAlignment="Left" Height="28" Margin="7,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" ToolTip="Uwagi do pozycji" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+        Title="Konfiguracja połączenia do bazy danych" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png" WindowStyle="ToolWindow" Width="420" Height="210" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5,5,5,5" Margin="-1,0,0,0">
+    <Grid Margin="-5,-5,-5,-5">
+        <Button Content="Zakończ i zapisz" Height="25" Margin="270,143,0,0" Width="130" Click="zakoncz_click" BorderThickness="1,1,1,1" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <Label Content="Nazwa serwera" HorizontalAlignment="Left" Margin="7,62,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TXT_NAZWA_SERWERA" HorizontalAlignment="Left" Height="28" Margin="7,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" ToolTip="Podaj adre IP lub nazwę serwera" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
             <TextBox.Style>
                 <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
                     <Style.Resources>
@@ -33,9 +33,9 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <Button Content="Test" HorizontalAlignment="Left" Height="88" Margin="265,32,0,0" VerticalAlignment="Top" Width="130" Click="test_click"/>
-        <Label Content="Nazwa bazy danych" HorizontalAlignment="Left" Margin="7,65,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TXT_NAZWA_BAZY" HorizontalAlignment="Left" Height="28" Margin="7,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" ToolTip="Uwagi do pozycji" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+        <Button Content="Test" HorizontalAlignment="Left" Height="28" Margin="270,108,0,0" VerticalAlignment="Top" Width="130" Click="test_click"/>
+        <Label Content="Nazwa bazy danych" HorizontalAlignment="Left" Margin="7,114,0,0" VerticalAlignment="Top" Loaded="zapisane_polaczenia"/>
+        <TextBox x:Name="TXT_NAZWA_BAZY" HorizontalAlignment="Left" Height="28" Margin="10,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" ToolTip="Podaj nazwę bazy danych" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
             <TextBox.Style>
                 <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
                     <Style.Resources>
@@ -59,6 +59,8 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
+        <ComboBox x:Name="CB_HIST_POL" DisplayMemberPath="SerwerIBaza" SelectedValuePath="SerwerIBaza" HorizontalAlignment="Left" Height="30" Margin="10,31,0,0" VerticalAlignment="Top" Width="385" SelectionChanged="CB_HIST_POL_SelectionChanged"/>
+        <Label Content="Historia zapisanych połączeń:" HorizontalAlignment="Left" Margin="7,5,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

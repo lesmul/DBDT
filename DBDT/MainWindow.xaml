@@ -11,7 +11,11 @@
                         <MenuItem Header="Narzędzia">
                             <MenuItem Header="Połączenie do bazy danych" Click="KonfiguracjaPolaczenia_Click" />
                             <MenuItem Header="Podgląd DXF" Click="AddDXFWindow_Click" />
-                            <MenuItem Header="Zapytania SQL" Click="AddScrollWindow_Click" />
+                            <!--<MenuItem Header="Zapytania SQL" Click="AddScrollWindow_Click" />-->
+                        </MenuItem>
+                        <MenuItem Header="Narzędzia SQL">
+                            <MenuItem Header="Zapytania SQL" Click="FindSQLWindow_Click" />
+                            <MenuItem Header="Dodaj nowe zapytanie SQL" Click="AddNewSQLWindow_Click" />
                         </MenuItem>
                         <MenuItem Header="Styl okien">
                             <MenuItem Header="Generic" Name="Generic" ToolTip="Generic Visual Studio designer theme" Click="Generic_Click" />
