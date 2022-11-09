@@ -310,5 +310,58 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
+
+        public static Boolean DODAJ_REKORD_SQL_ZAPYTANIA(string nazwa_zapytania, string sql)
+        {
+
+            if (sql.Trim() == "") return false;
+
+            if (nazwa_zapytania.Trim() == "") nazwa_zapytania = string.Format("Zapisano dnia: {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            command_insert.CommandText = "INSERT INTO `sql_zapytania` (`nazwa_zapytania`,`sql`, `kto_zmienil`)" +
+                " VALUES(@nazwa_zapytania, @sql, @kto_zmienil)";
+
+            command_insert.CommandType = CommandType.Text;
+
+            command_insert.Parameters.AddWithValue("@nazwa_zapytania", nazwa_zapytania);
+            command_insert.Parameters.AddWithValue("@sql", sql);
+            command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
+
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
     }
 }

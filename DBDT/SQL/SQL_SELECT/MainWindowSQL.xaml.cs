@@ -42,7 +42,7 @@ namespace DBDT.SQL.SQL_SELECT
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Connection Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -59,7 +59,7 @@ namespace DBDT.SQL.SQL_SELECT
                 logo.UriSource = new Uri("Images/bullet_blue.png", UriKind.Relative);
                 logo.EndInit();
                 connStatusIcon.Source = logo;
-                txtStatus.Text = "Connected:  ";
+                txtStatus.Text = "Połączony:  ";
                 txtConnection.Text = sqlHandler.ConnectionString;
             }
             else
@@ -69,7 +69,7 @@ namespace DBDT.SQL.SQL_SELECT
                 logo.UriSource = new Uri("Images/bullet_red.png", UriKind.Relative);
                 logo.EndInit();
                 connStatusIcon.Source = logo;
-                txtStatus.Text = "Not Connected";
+                txtStatus.Text = "Nie połączony";
                 txtConnection.Text = string.Empty;
             }
         }
@@ -86,10 +86,10 @@ namespace DBDT.SQL.SQL_SELECT
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             OpenFileDialog fileChooser = new OpenFileDialog();
-            fileChooser.Filter = "Sql files|*.sql|Text files|*.txt|All files|*.*";
+            fileChooser.Filter = "Sql pliki|*.sql|Text files|*.txt|Wszystkie pliki|*.*";
             fileChooser.CheckPathExists = true;
             fileChooser.Multiselect = false;
-            fileChooser.Title = "Choose a file containing T-SQL code to open";
+            fileChooser.Title = "Wybierz plik zawierający kod SQL";
             if (fileChooser.ShowDialog().Value == false)
                 return;
 
@@ -100,13 +100,22 @@ namespace DBDT.SQL.SQL_SELECT
             }
         }
 
+        private void Save_ExecutedSQL(object sender, ExecutedRoutedEventArgs e)
+        {
+
+            if (txtCode.Text.Trim() == "") return;
+
+            string opis = sqlHandler.SQL_Title();
+
+            _PUBLIC_SqlLite.DODAJ_REKORD_SQL_ZAPYTANIA(opis, txtCode.Text.Trim());
+        }
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             SaveFileDialog fileChooser = new SaveFileDialog();
-            fileChooser.Filter = "Sql files|*.sql|Text files|*.txt|All files|*.*";
+            fileChooser.Filter = "Sql pliki|*.sql|Text files|*.txt|Wszystkie pliki|*.*";
             fileChooser.AddExtension = true;
             fileChooser.OverwritePrompt = true;
-            fileChooser.Title = "Choose a path and file name";
+            fileChooser.Title = "Wybierz ścieżkę i nazwę pliku";
             if (fileChooser.ShowDialog().Value == false)
                 return;
 
@@ -158,6 +167,7 @@ namespace DBDT.SQL.SQL_SELECT
         {
             try
             {
+                b_wykonaj.IsEnabled = false;
                 SqlError[] errors;
                 DataTable result = sqlHandler.Execute(txtCode.Text, out errors);
                 errorsGrid.ItemsSource = errors;
@@ -184,8 +194,22 @@ namespace DBDT.SQL.SQL_SELECT
         {
             if (IsLoaded)
                 e.CanExecute = sqlHandler.IsConnected;
+            b_wykonaj.IsEnabled = true;
         }
 
         #endregion
+
+        private void close_sql(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue == true) return;
+            try
+            {
+                sqlHandler.Disconnect();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

@@ -13,12 +13,15 @@ namespace DBDT.SQL.SQL_SELECT
         public static RoutedUICommand ExecuteCommand;
         public static RoutedUICommand ConnectCommand;
         public static RoutedUICommand DisconnectCommand;
+        public static RoutedUICommand ParseOpis;
 
         static SqlHandler()
         {
             InputGestureCollection parseGestures = new InputGestureCollection();
             parseGestures.Add(new KeyGesture(Key.F6));
             ParseCommand = new RoutedUICommand("Parse", "Parse", typeof(SqlHandler), parseGestures);
+
+            ParseOpis = new RoutedUICommand("SQL_Title", "SQL_Title", typeof(SqlHandler));
 
             InputGestureCollection executeGestures = new InputGestureCollection();
             executeGestures.Add(new KeyGesture(Key.F5));
@@ -27,6 +30,7 @@ namespace DBDT.SQL.SQL_SELECT
             ConnectCommand = new RoutedUICommand("Connect", "Connect", typeof(SqlHandler));
 
             DisconnectCommand = new RoutedUICommand("Disconnect", "Disconnect", typeof(SqlHandler));
+           
         }
         #endregion
 
@@ -108,6 +112,16 @@ namespace DBDT.SQL.SQL_SELECT
             SqlError[] errorsFound = new SqlError[e.Errors.Count];
             e.Errors.CopyTo(errorsFound, 0);
             errors.AddRange(errorsFound);
+        }
+
+        public string SQL_Title()
+        {
+
+            OpisSQL opis = new OpisSQL();
+            opis.ShowDialog();
+            var opisx = opis.TXT_OPIS_ZAPYTANIA_SQL.Text.Trim();
+            return opisx;
+
         }
     }
 }

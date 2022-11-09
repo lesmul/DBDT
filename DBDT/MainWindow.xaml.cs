@@ -151,7 +151,10 @@ namespace DBDT
             //Container.Children.Add(new MdiChild { Content = sv, Title = "Okno " + ooo++ });
 
             UWPF_ZAPYTANIE_SQL sp = new UWPF_ZAPYTANIE_SQL();
-        
+
+            sp.szer = (int)SHT_W;
+            sp.wys = (int)SHT_H;
+
             ScrollViewer sv = new ScrollViewer { Content = sp,HorizontalContentAlignment = HorizontalAlignment.Center, 
                 VerticalContentAlignment = VerticalAlignment.Center };
             //Container.Children.Add(new MdiChild { Content = sv, Title = "Zapytanie SQL " + ooo++, WindowState=WindowState.Maximized, Width= SHT_W, Height= SHT_H });
@@ -219,6 +222,11 @@ namespace DBDT
         {
             SHT_W = e.NewSize.Width - 15;
             SHT_H = e.NewSize.Height - 57;
+        }
+
+        private void close_sql(object sender, CancelEventArgs e)
+        {
+            Container.Children.Clear();
         }
     }
 }
