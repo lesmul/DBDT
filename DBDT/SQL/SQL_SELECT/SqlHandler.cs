@@ -3,6 +3,12 @@ using System.Windows.Input;
 using System.Data.SqlClient;
 using System.Data;
 using System.Collections.Generic;
+using System.Collections;
+using System.Reflection.Emit;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Documents;
+using System.Linq;
 
 namespace DBDT.SQL.SQL_SELECT
 {
@@ -38,6 +44,7 @@ namespace DBDT.SQL.SQL_SELECT
         private SqlCommand cmd;
         private SqlDataAdapter adapter;
         private List<SqlError> errors;
+        private ArrayList infoCount;
 
         public string ConnectionString
         {
@@ -104,6 +111,103 @@ namespace DBDT.SQL.SQL_SELECT
             cmd.ExecuteNonQuery();
 
             return errors.ToArray();
+        }
+
+        public double RowCount(string sqlText)
+        {
+            if (!IsConnected)
+                throw new InvalidOperationException("Nie można przeanalizować zapytania SQL, gdy połączenie jest zamknięte!");
+            
+            if(infoCount != null)
+            {
+                infoCount.Clear();
+            }
+            else
+            {
+                infoCount = new ArrayList();
+            }
+   
+            string sql = sqlText.ToLower().Trim();
+            sql = sql.Replace("\nset", " ");
+            sql = sql.Replace("\n", " ");
+            sql = Regex.Replace(sql, @"\s+",(match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+
+            string sprCountSp = null;
+
+            if (sql.StartsWith("select"))
+            {
+                int from = 0;
+                from = sql.IndexOf("from") + 4;
+                int spac = 0;
+                spac = sql.IndexOf(" ", from);
+
+                int top = -1;
+                top = sql.IndexOf("select top");
+
+                string sprCount = null;
+                string sprFrom = null;
+                string sprTopCount = "count(*)";
+
+                if(spac <= from)
+                {
+                    sprFrom = sql.Substring(from, sql.Length - from);
+                }
+                else
+                {
+                    sprCount = sql.Substring(from + 4, spac);
+                }
+
+                sprCountSp = "select " + sprTopCount + " from " + sprFrom;
+
+                if (top > -1)
+                {
+                    //SELECT * FROM (select top 6 * from [dbo].[DOKUMENTY]) T
+                    string[] aSpacja = sql.Split(' '); 
+                    sprCount = sql.Substring(top + 7, spac - 10);
+
+                    sprCountSp = "select count(*) from (select " + aSpacja[1] + " " + aSpacja[2] + " * from " + sprFrom + ") T";
+                }
+
+            }
+            else if(sql.StartsWith("delete"))
+            {
+                string[] aSpacja = sql.Split(' ');
+
+                int firstIndex = sql.IndexOf("where");
+
+                sprCountSp = "select count(*) from " + aSpacja[2] + " " + sql.Substring(firstIndex, sql.Length - firstIndex);
+
+            }
+            else if (sql.StartsWith("update"))
+            {
+                string[] aSpacja = sql.Split(' ');
+
+                int firstIndex = sql.IndexOf("where");
+
+                sprCountSp = "select count(*) from " + aSpacja[1] + " " + sql.Substring(firstIndex, sql.Length - firstIndex) ;
+            }
+
+            cmd.CommandText = sprCountSp;
+
+            object count = 0;
+
+            try
+            {
+                count = cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            if (count == null)
+            {
+                return -1;
+            }
+            else
+            {
+                return (int)count;
+            }
         }
 
         private void conn_InfoMessage(object sender, SqlInfoMessageEventArgs e)

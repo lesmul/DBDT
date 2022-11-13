@@ -54,3 +54,7 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\SQL_SELECT\
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\SQL_SELECT\MainWindowSQL.baml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\SQL_SELECT\OpisSQL.g.cs
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\SQL_SELECT\OpisSQL.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\UWPF_EXCEL_SQL .baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\UWPF_EXCEL_SQL .g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\WPF_DODAJ_EXCEL.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\WPF_DODAJ_EXCEL.baml

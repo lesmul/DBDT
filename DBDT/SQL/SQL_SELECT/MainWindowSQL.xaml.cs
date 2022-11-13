@@ -16,7 +16,6 @@ namespace DBDT.SQL.SQL_SELECT
     public partial class MainWindowSQL : UserControl
     {
         private SqlHandler sqlHandler;
-
         public MainWindowSQL()
         {
             InitializeComponent();
@@ -50,27 +49,50 @@ namespace DBDT.SQL.SQL_SELECT
             }
         }
 
-        private void UpdateUIStatus()
+        private void UpdateUIStatus(bool status_zapytania = false, string stausAnalizy = null)
         {
-            if (sqlHandler.IsConnected)
+            if(stausAnalizy !=null) 
             {
+
                 BitmapImage logo = new BitmapImage();
                 logo.BeginInit();
-                logo.UriSource = new Uri("Images/bullet_blue.png", UriKind.Relative);
+
+                if(status_zapytania)
+                {
+                    logo.UriSource = new Uri("Images/status_ok.png", UriKind.Relative);
+                }
+                else
+                {
+                    logo.UriSource = new Uri("Images/staus_notok.png", UriKind.Relative);
+                }
+               
                 logo.EndInit();
                 connStatusIcon.Source = logo;
-                txtStatus.Text = "Połączony:  ";
-                txtConnection.Text = sqlHandler.ConnectionString;
+                txtStatus.Text = "Analiza zapytania SQL: ";
+                txtConnection.Text = stausAnalizy;
             }
             else
             {
-                BitmapImage logo = new BitmapImage();
-                logo.BeginInit();
-                logo.UriSource = new Uri("Images/bullet_red.png", UriKind.Relative);
-                logo.EndInit();
-                connStatusIcon.Source = logo;
-                txtStatus.Text = "Nie połączony";
-                txtConnection.Text = string.Empty;
+                if (sqlHandler.IsConnected)
+                {
+                    BitmapImage logo = new BitmapImage();
+                    logo.BeginInit();
+                    logo.UriSource = new Uri("Images/bullet_blue.png", UriKind.Relative);
+                    logo.EndInit();
+                    connStatusIcon.Source = logo;
+                    txtStatus.Text = "Połączony:  ";
+                    txtConnection.Text = sqlHandler.ConnectionString;
+                }
+                else
+                {
+                    BitmapImage logo = new BitmapImage();
+                    logo.BeginInit();
+                    logo.UriSource = new Uri("Images/bullet_red.png", UriKind.Relative);
+                    logo.EndInit();
+                    connStatusIcon.Source = logo;
+                    txtStatus.Text = "Nie połączony";
+                    txtConnection.Text = string.Empty;
+                }
             }
         }
         #endregion
@@ -79,6 +101,7 @@ namespace DBDT.SQL.SQL_SELECT
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Connect();
+            b_wykonaj.IsEnabled = false;
         }
         #endregion
 
@@ -155,11 +178,37 @@ namespace DBDT.SQL.SQL_SELECT
                 errorsGrid.ItemsSource = errors;
                 errorsExpander.IsExpanded = (errors.Length != 0);
                 if (errors.Length == 0)
-                    MessageBox.Show("Zapytanie wykonano pomyślnie", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                {
+
+                    double info = sqlHandler.RowCount(txtCode.Text);
+
+                    //MessageBox.Show("Zapytanie wykonano pomyślnie", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                    if (info < 0)
+                    {
+                        UpdateUIStatus(false, "Sprwdź poprawność zapytania: " + info.ToString() + "]");
+                    }
+                    else
+                    {
+                        UpdateUIStatus(true, "Zapytanie nie ma błędów [ilość wyników: " + info.ToString() + "]");
+                    }
+                    
+                    b_wykonaj.IsEnabled = true;
+
+                    if (info > 1000)
+                    {
+                        UpdateUIStatus(false, "Zapytanie zwróciło dużo wyników jest ich: " + info);
+                    }
+                }
+                else
+                {
+                    UpdateUIStatus(false, "Sprawdź składnie SQL");
+                    b_wykonaj.IsEnabled = false;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Błąd zapytania SQL", MessageBoxButton.OK, MessageBoxImage.Error);
+                b_wykonaj.IsEnabled = false;
             }
         }
 
@@ -194,7 +243,7 @@ namespace DBDT.SQL.SQL_SELECT
         {
             if (IsLoaded)
                 e.CanExecute = sqlHandler.IsConnected;
-            b_wykonaj.IsEnabled = true;
+            //b_wykonaj.IsEnabled = true;
         }
 
         #endregion
@@ -210,6 +259,11 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 MessageBox.Show(ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void textChengen(object sender, TextChangedEventArgs e)
+        {
+            b_wykonaj.IsEnabled = false;
         }
     }
 }

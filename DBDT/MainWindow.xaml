@@ -14,8 +14,13 @@
                             <!--<MenuItem Header="Zapytania SQL" Click="AddScrollWindow_Click" />-->
                         </MenuItem>
                         <MenuItem Header="Narzędzia SQL">
-                            <MenuItem Header="Zapytania SQL" Click="FindSQLWindow_Click" />
+                            <MenuItem Header="Lista zapytań SQL" Click="FindSQLWindow_Click" />
                             <MenuItem Header="Dodaj nowe zapytanie SQL" Click="AddNewSQLWindow_Click" />
+                            <Separator/>
+                            <MenuItem Header="Procedury - uruchom" Click="AddNewSQLWindow_Click" />
+                            <MenuItem Header="Funkcjie - uruchom" Click="AddNewSQLWindow_Click" />
+                            <Separator/>
+                            <MenuItem Header="Pliki EXCEL" Click="AddNewEXCEL_Click" />
                         </MenuItem>
                         <MenuItem Header="Styl okien">
                             <MenuItem Header="Generic" Name="Generic" ToolTip="Generic Visual Studio designer theme" Click="Generic_Click" />

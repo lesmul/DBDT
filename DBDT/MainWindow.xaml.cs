@@ -150,6 +150,16 @@ namespace DBDT
             //ScrollViewer sv = new ScrollViewer { Content = sp, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
             //Container.Children.Add(new MdiChild { Content = sv, Title = "Okno " + ooo++ });
 
+            for (int i = 0; i <= this.Container.Children.Count - 1; i++)
+            {
+                MdiChild child = this.Container.Children[i];
+                if (child.Name == "FindSQLWindow")
+                {
+                    child.Focus();
+                    return;
+                }
+            }
+
             UWPF_ZAPYTANIE_SQL sp = new UWPF_ZAPYTANIE_SQL();
 
             sp.szer = (int)SHT_W;
@@ -158,17 +168,11 @@ namespace DBDT
             ScrollViewer sv = new ScrollViewer { Content = sp,HorizontalContentAlignment = HorizontalAlignment.Center, 
                 VerticalContentAlignment = VerticalAlignment.Center };
             //Container.Children.Add(new MdiChild { Content = sv, Title = "Zapytanie SQL " + ooo++, WindowState=WindowState.Maximized, Width= SHT_W, Height= SHT_H });
-            Container.Children.Add(new MdiChild { Content = sp, Title = "Zapytanie SQL " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+            Container.Children.Add(new MdiChild { Content = sp, Name= "FindSQLWindow", Title = "Zapytanie SQL " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
 
         }
-
         private void AddNewSQLWindow_Click(object sender, RoutedEventArgs e)
         {
-            //StackPanel sp = new StackPanel { Orientation = Orientation.Vertical };
-            //sp.Children.Add(new TextBlock { Text = "Window with scroll", Margin = new Thickness(5) });
-            //sp.Children.Add(new ComboBox { Margin = new Thickness(20), Width = 300 });
-            //ScrollViewer sv = new ScrollViewer { Content = sp, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
-            //Container.Children.Add(new MdiChild { Content = sv, Title = "Okno " + ooo++ });
 
             MainWindowSQL sp = new MainWindowSQL();
 
@@ -182,7 +186,23 @@ namespace DBDT
             Container.Children.Add(new MdiChild { Content = sp, Title = "Dodaj nowe zaptanie SQL " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
 
         }
-  
+
+        private void AddNewEXCEL_Click(object sender, RoutedEventArgs e)
+        {
+
+            UWPF_EXCEL_SQL sp = new UWPF_EXCEL_SQL();
+
+            ScrollViewer sv = new ScrollViewer
+            {
+                Content = sp,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+            //Container.Children.Add(new MdiChild { Content = sv, Title = "Zapytanie SQL " + ooo++, WindowState=WindowState.Maximized, Width= SHT_W, Height= SHT_H });
+            Container.Children.Add(new MdiChild { Content = sp, Title = "Dodaj automatyzacja w plikach EXCEL " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+
+        }
+
 
         /// <summary>
         /// Refresh windows list
