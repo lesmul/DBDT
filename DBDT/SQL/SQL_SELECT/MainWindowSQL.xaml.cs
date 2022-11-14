@@ -185,7 +185,7 @@ namespace DBDT.SQL.SQL_SELECT
                     //MessageBox.Show("Zapytanie wykonano pomyślnie", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
                     if (info < 0)
                     {
-                        UpdateUIStatus(false, "Sprwdź poprawność zapytania: " + info.ToString() + "]");
+                        UpdateUIStatus(false, "Sprawdź poprawność zapytania: " + info.ToString() + "]");
                     }
                     else
                     {

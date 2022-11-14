@@ -157,6 +157,11 @@ namespace DBDT.SQL.SQL_SELECT
                     sprCount = sql.Substring(from + 4, spac);
                 }
 
+                if(sprFrom.IndexOf("order by") > -1)
+                {
+                    sprFrom = sprFrom.Substring(0, sprFrom.IndexOf("order by"));
+                }
+
                 sprCountSp = "select " + sprTopCount + " from " + sprFrom;
 
                 if (top > -1)
