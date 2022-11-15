@@ -352,9 +352,14 @@ namespace DBDT.USTAWIENIA_PROGRAMU
         {
 
             if (sql.Trim() == "") return false;
+            
+            if (MessageBox.Show("Nie podałeś opisu czy mimo to zapisac?", "Uwaga!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+              if (nazwa_zapytania.Trim() == "") nazwa_zapytania = string.Format("Zapisano dnia: {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
+            }
 
-            if (nazwa_zapytania.Trim() == "") nazwa_zapytania = string.Format("Zapisano dnia: {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
-
+            if (nazwa_zapytania.Trim() == "") return false;
+      
             SQLiteCommand command_insert = new SQLiteCommand();
 
             try
@@ -499,6 +504,98 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             command_insert.CommandText = "DELETE FROM `objekty` WHERE`id` = " + id_obj;
    
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
+
+        public static Boolean USUN_REKORD_SQL_ZAPYTANIA(string id_obj)
+        {
+
+            if (id_obj.Trim() == "") return false;
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+   
+            command_insert.CommandType = CommandType.Text;
+
+            command_insert.CommandText = "DELETE FROM `sql_zapytania` WHERE`id` = " + id_obj;
+
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
+
+        public static Boolean ZMIEN_OPIS_REKORD_SQL_ZAPYTANIA(string str_opis, string id_obj)
+        {
+
+            if (id_obj.Trim() == "") return false;
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            command_insert.CommandType = CommandType.Text;
+     
+            command_insert.CommandText = "UPDATE `sql_zapytania` SET `nazwa_zapytania` = '" + str_opis + "' WHERE`id` = " + id_obj;
+
             try
             {
                 command_insert.ExecuteNonQuery();

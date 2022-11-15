@@ -94,7 +94,7 @@
                  VerticalScrollBarVisibility="Auto"
                  Padding="5"
                  FontFamily="Courier New"
-                 Grid.Row="2" TextChanged="textChengen" />
+                 Grid.Row="2" TextChanged="textChengen" FontSize="16" />
         <Expander Grid.Row="3" Name="errorsExpander" Header="Błędy">
             <DataGrid Name="errorsGrid" Height="120" AutoGenerateColumns="False">
                 <DataGrid.RowStyle>

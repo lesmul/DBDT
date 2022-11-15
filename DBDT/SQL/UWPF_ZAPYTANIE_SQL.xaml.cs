@@ -29,6 +29,8 @@ namespace DBDT.SQL
         public int wys;
         DataTable dt = new DataTable();
 
+        private SqlHandler sqlHandler;
+
         public UWPF_ZAPYTANIE_SQL()
         {
             InitializeComponent();
@@ -86,6 +88,34 @@ namespace DBDT.SQL
                 dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql from sql_zapytania order by id desc");
                 LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
             }
+        }
+
+        private void Click_Zmien(object sender, RoutedEventArgs e)
+        {
+            sqlHandler = new SqlHandler();
+
+            Object selectedItem = LB_HIST_ZAPYTAN_SQL.SelectedItem;
+            string opis = sqlHandler.SQL_Title(((System.Data.DataRowView)selectedItem).Row.ItemArray[1].ToString());
+
+            if (opis != "")
+            {
+                _PUBLIC_SqlLite.ZMIEN_OPIS_REKORD_SQL_ZAPYTANIA(opis, ((System.Data.DataRowView)selectedItem).Row.ItemArray[0].ToString());
+                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql from sql_zapytania order by id desc");
+                LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
+            }
+        }
+        private void Click_Usun(object sender, RoutedEventArgs e)
+        {
+            if (LB_HIST_ZAPYTAN_SQL.SelectedItems.Count == 0) return;
+
+            if (MessageBox.Show("Czy usunąć zapisaną procedurę SQL?", "Uwaga!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                Object selectedItem = LB_HIST_ZAPYTAN_SQL.SelectedItem;
+                _PUBLIC_SqlLite.USUN_REKORD_SQL_ZAPYTANIA(((System.Data.DataRowView)selectedItem).Row.ItemArray[0].ToString());
+                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql from sql_zapytania order by id desc");
+                LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
+            }
+
         }
     }
 }

@@ -187,6 +187,22 @@ namespace DBDT
 
         }
 
+        private void AddNewSQLWindowProc_Click(object sender, RoutedEventArgs e)
+        {
+
+            MainWindowSQL sp = new MainWindowSQL();
+            sp.procedura= true;
+            ScrollViewer sv = new ScrollViewer
+            {
+                Content = sp,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+            //Container.Children.Add(new MdiChild { Content = sv, Title = "Zapytanie SQL " + ooo++, WindowState=WindowState.Maximized, Width= SHT_W, Height= SHT_H });
+            Container.Children.Add(new MdiChild { Content = sp , Title = "Dodaj nowe zaptanie SQL " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+
+        }
+
         private void AddNewEXCEL_Click(object sender, RoutedEventArgs e)
         {
 

@@ -16,6 +16,7 @@ namespace DBDT.SQL.SQL_SELECT
     public partial class MainWindowSQL : UserControl
     {
         private SqlHandler sqlHandler;
+        public bool procedura = false;
         public MainWindowSQL()
         {
             InitializeComponent();
@@ -195,7 +196,7 @@ namespace DBDT.SQL.SQL_SELECT
                     
                     b_wykonaj.IsEnabled = true;
 
-                    if (info > 1000)
+                    if (info > 10000)
                     {
                         UpdateUIStatus(false, "Zapytanie zwróciło dużo wyników jest ich: " + info);
                     }
@@ -219,7 +220,7 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 b_wykonaj.IsEnabled = false;
                 SqlError[] errors;
-                DataTable result = sqlHandler.Execute(txtCode.Text, out errors);
+                DataTable result = sqlHandler.Execute(txtCode.Text, out errors, procedura);
                 errorsGrid.ItemsSource = errors;
                 errorsExpander.IsExpanded = (errors.Length != 0);
 

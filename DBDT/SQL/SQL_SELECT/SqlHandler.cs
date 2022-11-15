@@ -82,17 +82,29 @@ namespace DBDT.SQL.SQL_SELECT
             conn.Close();
         }
 
-        public DataTable Execute(string sqlText, out SqlError[] errorsArray)
+        public DataTable Execute(string sqlText, out SqlError[] errorsArray, bool bprocesura = false)
         {
             if (!IsConnected)
                 throw new InvalidOperationException("Nie można wykonać zapytania SQL, gdy połączenie jest zamknięte!");
 
             errors.Clear();
-            cmd.CommandText = sqlText;
-            DataTable tbl = new DataTable();
-            adapter.Fill(tbl);
-            errorsArray = errors.ToArray();
-            return tbl;
+            if (bprocesura == false)
+            {
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sqlText;
+                DataTable tbl = new DataTable();
+                adapter.Fill(tbl);
+                errorsArray = errors.ToArray();
+                return tbl;
+            }
+            else
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = sqlText;
+                DataTable tbl = new DataTable();
+                errorsArray = errors.ToArray();
+                return tbl;
+            }
         }
 
         public SqlError[] Parse(string sqlText)
@@ -223,10 +235,11 @@ namespace DBDT.SQL.SQL_SELECT
             errors.AddRange(errorsFound);
         }
 
-        public string SQL_Title()
+        public string SQL_Title(string str_opis = "")
         {
 
             OpisSQL opis = new OpisSQL();
+            opis.TXT_OPIS_ZAPYTANIA_SQL.Text = str_opis;
             opis.ShowDialog();
             var opisx = opis.TXT_OPIS_ZAPYTANIA_SQL.Text.Trim();
             return opisx;

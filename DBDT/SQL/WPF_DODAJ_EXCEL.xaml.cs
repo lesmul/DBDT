@@ -48,12 +48,10 @@ namespace DBDT.SQL
                 BackgroundColor = color;
             }
         }
-
         private void MI_W_ZMIEN_NAZWE_PLIKU(object sender, RoutedEventArgs e)
         {
 
         }
-
         private void MI_ZAPISZ_PLIK(object sender, RoutedEventArgs e)
         {
 
@@ -64,7 +62,7 @@ namespace DBDT.SQL
                 SaveFileDialog saveFileDialogxls = new SaveFileDialog();
 
                 string[] typ_pliku = items[0].TextExcel.Split('.');
-                string rozsz = typ_pliku[typ_pliku.Length-1];
+                string rozsz = typ_pliku[typ_pliku.Length-1].ToLower();
 
                 if (rozsz == "xlsx")
                 {
@@ -96,12 +94,10 @@ namespace DBDT.SQL
             }
 
         }
-
         private void TextBox_PreviewDragOver(object sender, DragEventArgs e)
         {
             e.Handled = true;
         }
-
         private void TextBox_Drop(object sender, DragEventArgs e)
         {
             if (LV_XLSX.ItemsSource == null)
@@ -133,7 +129,7 @@ namespace DBDT.SQL
 
                         if (items.Exists(x => x.CalaScieszka == itemN))
                             MessageBox.Show("Plik o nazwie: " + REDIMX[REDIMX.Length - 1] + " jest już na liście", "Uwaga!!!", MessageBoxButton.OK, MessageBoxImage.Information);
-                        else if (itemN.ToUpper().EndsWith("XLS") | itemN.ToUpper().EndsWith("XLSX") | itemN.ToUpper().EndsWith("ZIP"))
+                        else if (itemN.ToUpper().EndsWith("XLS") | itemN.ToUpper().EndsWith("XLSX") | itemN.ToUpper().EndsWith("XLSM") | itemN.ToUpper().EndsWith("ZIP"))
                         {
                             if (items.Count > 1)
                             {
@@ -192,13 +188,11 @@ namespace DBDT.SQL
                 LV_XLSX.Items.Add(inv);
             }
         }
-
         private void MI_USUN_PLIK(object sender, RoutedEventArgs e)
         {
             items.Clear();
             LV_XLSX.ItemsSource = null;
         }
-
         private void ContMenuOpen(object sender, ContextMenuEventArgs e)
         {
             if (LV_XLSX.ItemsSource == null)
@@ -220,7 +214,6 @@ namespace DBDT.SQL
             this.DialogResult = true;
             this.Close();
         }
-
         private void txtChanged(object sender, TextChangedEventArgs e)
         {
             if (TXT_NAZWA_OBJ.Text.Trim() == "")
@@ -233,7 +226,6 @@ namespace DBDT.SQL
             }
 
         }
-
         private void loadXSLX(object sender, RoutedEventArgs e)
         {
             if (id_rec != "-1")

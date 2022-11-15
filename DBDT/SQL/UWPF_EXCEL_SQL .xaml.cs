@@ -89,7 +89,6 @@ namespace DBDT.SQL
                 LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
             }
         }
-
         private void Click_Dodaj(object sender, RoutedEventArgs e)
         {
             WPF_DODAJ_EXCEL FRM = new WPF_DODAJ_EXCEL();
@@ -101,7 +100,6 @@ namespace DBDT.SQL
                 LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
             }
         }
-
         private void Click_Usun(object sender, RoutedEventArgs e)
         {
             if (LB_HIST_ZAPYTAN_SQL.SelectedItems.Count == 0) return;
@@ -113,7 +111,6 @@ namespace DBDT.SQL
                 dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_objektu, opis, pole1 from objekty order by id desc");
                 LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
             }
-
             
         }
     }
