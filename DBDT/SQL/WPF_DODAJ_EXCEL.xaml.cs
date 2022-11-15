@@ -57,21 +57,40 @@ namespace DBDT.SQL
         private void MI_ZAPISZ_PLIK(object sender, RoutedEventArgs e)
         {
 
-          if(LV_XLSX.SelectedIndex > -1)
+            if (LV_XLSX.SelectedIndex > -1)
             {
                 //if (LV_XLSX.Items.CurrentItem[LV_XLSX.SelectedIndex].TextDXF != "")
                 //{
-                    SaveFileDialog saveFileDialogxls = new SaveFileDialog();
+                SaveFileDialog saveFileDialogxls = new SaveFileDialog();
 
-                    saveFileDialogxls.Filter = "Excel (*.xslt)|*.xslt";
-                    saveFileDialogxls.FileName = items[0].TextExcel;
-     
+                string[] typ_pliku = items[0].TextExcel.Split('.');
+                string rozsz = typ_pliku[typ_pliku.Length-1];
+
+                if (rozsz == "xlsx")
+                {
+                    saveFileDialogxls.Filter = "Excel (*.xlsx)|*.xlsx";
+                }
+                else if (rozsz == "xls")
+                {
+                    saveFileDialogxls.Filter = "Excel (*.xls)|*.xls";
+                }
+                else if (rozsz == "xlsm")
+                {
+                    saveFileDialogxls.Filter = "Excel z obługą makr (*.xls)|*.xlsm";
+                }
+                else if (rozsz == "zip")
+                {
+                    saveFileDialogxls.Filter = "Plik ZIP (*.zip)|*.zip";
+                }
+
+                saveFileDialogxls.FileName = items[0].TextExcel;
+
                 //saveFileDialogxls.FilterIndex = 2;
                 saveFileDialogxls.RestoreDirectory = true;
-                    if (saveFileDialogxls.ShowDialog() == true)
-                    {
-                        string str_inf = _PUBLIC_SqlLite.ZAPISZ_DO_PLIKU_XSL(saveFileDialogxls.FileName, saveFileDialogxls.SafeFileName, id_rec);
-                    }
+                if (saveFileDialogxls.ShowDialog() == true)
+                {
+                    string str_inf = _PUBLIC_SqlLite.ZAPISZ_DO_PLIKU_XSL(saveFileDialogxls.FileName, saveFileDialogxls.SafeFileName, id_rec);
+                }
 
                 //}   
             }
@@ -101,7 +120,7 @@ namespace DBDT.SQL
                     BOOL_CZYSC_WSZYSTKO = false;
                 }
 
-                 LV_XLSX.ItemsSource = null;
+                LV_XLSX.ItemsSource = null;
 
                 if (files != null && files.Length > 0)
                 {
@@ -121,12 +140,7 @@ namespace DBDT.SQL
                                 MessageBox.Show("Osiągnięto maksymalna ilość załączników", "Uwaga!!!", MessageBoxButton.OK, MessageBoxImage.Information);
                                 break;
                             }
-                            else if (itemN.ToUpper().EndsWith(".XLS"))
-                            {
-                                XLSX iXLSX = new XLSX(REDIMX[REDIMX.Length - 1], itemN, "/IKONY/excel.ico", new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Green));
-                                items.Add(iXLSX);
-                            }
-                            else if (itemN.ToUpper().EndsWith(".XLSX"))
+                            else if (itemN.ToUpper().EndsWith(".XLS") || itemN.ToUpper().EndsWith(".XLSX") || itemN.ToUpper().EndsWith(".XLSM"))
                             {
                                 XLSX iXLSX = new XLSX(REDIMX[REDIMX.Length - 1], itemN, "/IKONY/excel.ico", new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Green));
                                 items.Add(iXLSX);
@@ -217,18 +231,18 @@ namespace DBDT.SQL
             {
                 B_ZAPISZ.IsEnabled = true;
             }
-           
+
         }
 
         private void loadXSLX(object sender, RoutedEventArgs e)
         {
             if (id_rec != "-1")
             {
-                this.Title= "Zapisz plik automatyzacji";
+                this.Title = "Zapisz plik automatyzacji";
                 B_ZAPISZ.Visibility = Visibility.Hidden;
                 MI_USUN_P.Visibility = Visibility.Hidden;
-                MI_ZMIEN_NAZWE.Visibility = Visibility.Hidden; 
-                this.Topmost= false;
+                MI_ZMIEN_NAZWE.Visibility = Visibility.Hidden;
+                this.Topmost = false;
             }
             else
             {

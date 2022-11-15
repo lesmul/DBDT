@@ -172,6 +172,7 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void Parse_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            if (txtCode.Text.Trim() == "") return;
             try
             {
                 SqlError[] errors = sqlHandler.Parse(txtCode.Text);
