@@ -176,7 +176,17 @@ namespace DBDT.SQL.SQL_SELECT
             if (txtCode.Text.Trim() == "") return;
             try
             {
-                SqlError[] errors = sqlHandler.Parse(txtCode.Text);
+                SqlError[] errors;
+                    
+                if (txtCode.SelectedText.Trim()=="")
+                {
+                    errors = sqlHandler.Parse(txtCode.Text);
+                }
+                else
+                {
+                    errors = sqlHandler.Parse(txtCode.SelectedText);
+                }
+                 
                 errorsGrid.ItemsSource = errors;
                 errorsExpander.IsExpanded = (errors.Length != 0);
                 if (errors.Length == 0)
@@ -220,7 +230,19 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 b_wykonaj.IsEnabled = false;
                 SqlError[] errors;
-                DataTable result = sqlHandler.Execute(txtCode.Text, out errors, procedura);
+
+                string strSQL = "";
+
+                if (txtCode.SelectedText.Trim() == "")
+                {
+                    strSQL = txtCode.Text;
+                }
+                else
+                {
+                    strSQL = txtCode.SelectedText;
+                }
+
+                DataTable result = sqlHandler.Execute(strSQL, out errors, procedura);
                 errorsGrid.ItemsSource = errors;
                 errorsExpander.IsExpanded = (errors.Length != 0);
 

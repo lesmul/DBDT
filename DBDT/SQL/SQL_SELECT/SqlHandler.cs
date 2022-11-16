@@ -144,6 +144,8 @@ namespace DBDT.SQL.SQL_SELECT
             sql = sql.Replace("\n", " ");
             sql = Regex.Replace(sql, @"\s+",(match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
 
+            if (sql.StartsWith("exec")) return 0;
+
             string sprCountSp = null;
 
             if (sql.StartsWith("select"))
