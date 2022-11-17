@@ -10,6 +10,8 @@ using DBDT.SQL.SQL_SELECT;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 using System.Windows.Controls;
 using DBDT.USTAWIENIA_PROGRAMU;
+using System.ComponentModel;
+using WPF.MDI;
 
 namespace DBDT.SQL.SQL_SELECT
 {
@@ -17,6 +19,7 @@ namespace DBDT.SQL.SQL_SELECT
     {
         private SqlHandler sqlHandler;
         public bool procedura = false;
+    
         public MainWindowSQL()
         {
             InitializeComponent();
@@ -52,13 +55,13 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void UpdateUIStatus(bool status_zapytania = false, string stausAnalizy = null)
         {
-            if(stausAnalizy !=null) 
+            if (stausAnalizy != null)
             {
 
                 BitmapImage logo = new BitmapImage();
                 logo.BeginInit();
 
-                if(status_zapytania)
+                if (status_zapytania)
                 {
                     logo.UriSource = new Uri("Images/status_ok.png", UriKind.Relative);
                 }
@@ -66,7 +69,7 @@ namespace DBDT.SQL.SQL_SELECT
                 {
                     logo.UriSource = new Uri("Images/staus_notok.png", UriKind.Relative);
                 }
-               
+
                 logo.EndInit();
                 connStatusIcon.Source = logo;
                 txtStatus.Text = "Analiza zapytania SQL: ";
@@ -99,10 +102,37 @@ namespace DBDT.SQL.SQL_SELECT
         #endregion
 
         #region Events
+
+        void frm_exit(object sender, RoutedEventArgs e)
+        {
+            this.Tag = "CLOSE";
+
+            var parentWindow = Window.GetWindow(this.Parent);
+            //parentWindow.Close(); // zakończ program
+
+            foreach (MdiChild mdiChild in ((DBDT.MainWindow)parentWindow).Container.Children)
+            {
+
+                if (((System.Windows.FrameworkElement)mdiChild.Content).Tag.ToString() == "CLOSE")
+                {
+                    mdiChild.Content = null;
+                    mdiChild.Close();
+;                    return;
+                }
+
+            }
+        }
+        void currentWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Connect();
             b_wykonaj.IsEnabled = false;
+
+            Window currentWindow = Window.GetWindow(this);
+            currentWindow.Closing += currentWindow_Closing;
         }
         #endregion
 
@@ -173,12 +203,14 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void Parse_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            UpdateUIStatus(false, "Staus  - Analiza SQL");
+
             if (txtCode.Text.Trim() == "") return;
             try
             {
                 SqlError[] errors;
-                    
-                if (txtCode.SelectedText.Trim()=="")
+
+                if (txtCode.SelectedText.Trim() == "")
                 {
                     errors = sqlHandler.Parse(txtCode.Text);
                 }
@@ -186,7 +218,7 @@ namespace DBDT.SQL.SQL_SELECT
                 {
                     errors = sqlHandler.Parse(txtCode.SelectedText);
                 }
-                 
+
                 errorsGrid.ItemsSource = errors;
                 errorsExpander.IsExpanded = (errors.Length != 0);
                 if (errors.Length == 0)
@@ -203,7 +235,7 @@ namespace DBDT.SQL.SQL_SELECT
                     {
                         UpdateUIStatus(true, "Zapytanie nie ma błędów [ilość wyników: " + info.ToString() + "]");
                     }
-                    
+
                     b_wykonaj.IsEnabled = true;
 
                     if (info > 10000)
@@ -289,5 +321,7 @@ namespace DBDT.SQL.SQL_SELECT
         {
             b_wykonaj.IsEnabled = false;
         }
+
     }
+
 }

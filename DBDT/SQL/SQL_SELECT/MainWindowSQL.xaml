@@ -86,6 +86,11 @@
             <Button Command="cc:SqlHandler.ParseCommand" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Analizuj">
                 <Image Source="Images/bug.png"/>
             </Button>
+            
+            <Separator />
+            <Button Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Zamknij" Click="frm_exit">
+                <Image Source="Images/exit.ico"/>
+            </Button>
         </ToolBar>
         <TextBox Name="txtCode"
                  AcceptsReturn="True"

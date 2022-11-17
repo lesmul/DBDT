@@ -269,6 +269,9 @@
   <ItemGroup>
     <Resource Include="IKONY\del.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SQL\SQL_SELECT\Images\exit.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
