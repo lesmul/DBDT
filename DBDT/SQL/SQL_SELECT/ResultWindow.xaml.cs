@@ -20,7 +20,7 @@ namespace DBDT.SQL.SQL_SELECT
 {
     public partial class ResultWindow : Window
     {
-    
+
         private static string Nazwa_Tabeli;
         public ResultWindow(DataTable resultTable, string TableName)
         {
@@ -35,48 +35,59 @@ namespace DBDT.SQL.SQL_SELECT
         void resultGrid_select_Click(object sender, RoutedEventArgs e)
         {
 
-           if(resultGrid.SelectedCells.Count == 0) return;
+            if (resultGrid.SelectedCells.Count == 0) return;
 
-           //System.Data.DataRowView F_R = (DataRowView)resultGrid.SelectedCells[0].Item;
+            //System.Data.DataRowView F_R = (DataRowView)resultGrid.SelectedCells[0].Item;
 
-            string copy_data = "select * from " + Nazwa_Tabeli.Trim() + " ";
-            int intdindex = -1;
-            int intdindexst = -1;
-
-            for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+            try
             {
 
-                DataGridCellInfo cell = resultGrid.SelectedCells[i];
-                string value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text;
 
-                if (intdindexst == -1)
+
+                string copy_data = "select * from " + Nazwa_Tabeli.Trim() + " ";
+                int intdindex = -1;
+                int intdindexst = -1;
+
+                for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
                 {
-                    intdindexst = cell.Column.DisplayIndex;
+
+                    DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                    string value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text;
+
+                    if (intdindexst == -1)
+                    {
+                        intdindexst = cell.Column.DisplayIndex;
+                    }
+
+                    if (intdindex == -1)
+                    {
+                        copy_data += " where ";
+                    }
+
+                    if (intdindex == intdindexst)
+                    {
+                        //copy_data += "\r\n";
+                        copy_data += " ";
+                    }
+
+                    intdindex = cell.Column.DisplayIndex;
+                    Regex rgx2 = new Regex("\t|\\s+");
+                    string result = rgx2.Replace(value, " ");
+                    copy_data += cell.Column.Header.ToString() + " = '" + result.Trim() + "'" + "\r\n" + " and ";
+
                 }
-
-                if (intdindex == -1)
-                {
-                    copy_data += " where ";
-                }
-
-                if (intdindex == intdindexst)
-                {
-                    //copy_data += "\r\n";
-                    copy_data += " ";
-                }
-
-                intdindex = cell.Column.DisplayIndex;
-                copy_data += cell.Column.Header.ToString() + " = '" + value.Trim() + "'" + " " + " and ";
-
+                copy_data = copy_data.Substring(0, copy_data.Length - 4);
+                //Clipboard.SetText(copy_data.Trim());
+                //string sql = copy_data.ToLower().Trim();
+                //sql = sql.Replace("\nset", " ");
+                //sql = sql.Replace("\n", " ");
+                //sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+                Clipboard.SetDataObject(copy_data);
             }
-            copy_data = copy_data.Substring(0, copy_data.Length - 4);
-            //Clipboard.SetText(copy_data.Trim());
-            //string sql = copy_data.ToLower().Trim();
-            //sql = sql.Replace("\nset", " ");
-            //sql = sql.Replace("\n", " ");
-            //sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
-            Clipboard.SetDataObject(copy_data);
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         void resultGrid_Click(object sender, RoutedEventArgs e)
@@ -94,7 +105,7 @@ namespace DBDT.SQL.SQL_SELECT
                 DataGridCellInfo cell = resultGrid.SelectedCells[i];
                 string value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text;
 
-                if(intdindexst == -1)
+                if (intdindexst == -1)
                 {
                     intdindexst = cell.Column.DisplayIndex;
                 }
@@ -106,18 +117,20 @@ namespace DBDT.SQL.SQL_SELECT
 
                 if (intdindex == intdindexst)
                 {
-                     copy_data += "\r\n";
+                    copy_data += "\r\n";
                 }
 
                 intdindex = cell.Column.DisplayIndex;
-                copy_data += cell.Column.Header.ToString() + " = '" + value + "'" + "\t" + " and ";
- 
+                Regex rgx2 = new Regex("\t|\\s+");
+                string result = rgx2.Replace(value, " ");
+                copy_data += cell.Column.Header.ToString() + " = '" + result.Trim() + "'" + "\r\n" + " and ";
+
             }
             copy_data = copy_data.Substring(0, copy_data.Length - 4);
             Clipboard.SetText(copy_data.Trim());
 
         }
- 
+
     }
 
 }

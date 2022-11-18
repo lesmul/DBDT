@@ -86,7 +86,7 @@ namespace DBDT.SQL.SQL_SELECT
 
         public string Nazwa_Tabeli()
         {
-            return NazwaTabeli;
+            return NazwaTabeli.Trim();
         }
 
         public DataTable Execute(string sqlText, out SqlError[] errorsArray, bool bprocesura = false)
