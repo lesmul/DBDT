@@ -61,21 +61,21 @@ namespace DBDT.SQL.SQL_SELECT
 
                 if (intdindex == intdindexst)
                 {
-                    copy_data += "\r\n";
+                    //copy_data += "\r\n";
+                    copy_data += " ";
                 }
 
                 intdindex = cell.Column.DisplayIndex;
-                copy_data += cell.Column.Header.ToString() + " = '" + value + "'" + "\t" + " and ";
+                copy_data += cell.Column.Header.ToString() + " = '" + value.Trim() + "'" + " " + " and ";
 
             }
             copy_data = copy_data.Substring(0, copy_data.Length - 4);
             //Clipboard.SetText(copy_data.Trim());
-            string sql = copy_data.ToLower().Trim();
-            sql = sql.Replace("\nset", " ");
-            sql = sql.Replace("\n", " ");
-            sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
-            Clipboard.SetDataObject(sql);
-
+            //string sql = copy_data.ToLower().Trim();
+            //sql = sql.Replace("\nset", " ");
+            //sql = sql.Replace("\n", " ");
+            //sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+            Clipboard.SetDataObject(copy_data);
 
         }
 
