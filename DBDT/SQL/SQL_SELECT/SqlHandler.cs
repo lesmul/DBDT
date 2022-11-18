@@ -120,7 +120,6 @@ namespace DBDT.SQL.SQL_SELECT
             if (!IsConnected)
                 throw new InvalidOperationException("Nie można przeanalizować zapytania SQL, gdy połączenie jest zamknięte!");
 
-            NazwaTabeli = "";
             errors.Clear();
             cmd.CommandText = "SET PARSEONLY ON";
             cmd.ExecuteNonQuery();

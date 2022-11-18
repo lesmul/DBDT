@@ -303,7 +303,6 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
-
         public static Boolean USUN_REKORDY_PAR_POLACZENIA()
         {
 
@@ -347,7 +346,6 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
-
         public static Boolean DODAJ_REKORD_SQL_ZAPYTANIA(string nazwa_zapytania, string sql)
         {
 
@@ -405,7 +403,6 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
-
         public static Boolean DODAJ_REKORD_OBJEKT(string nazwa_objektu, string opis, string scieszka_do_pliku, string nazwa_pliku)
         {
 
@@ -470,7 +467,6 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
-
         public static Boolean ZMIEN_REKORD_OBJEKT(string nazwa_objektu, string opis, string id_obj)
         {
 
@@ -568,7 +564,6 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
-
         public static Boolean USUN_REKORD_SQL_ZAPYTANIA(string id_obj)
         {
 
@@ -614,7 +609,6 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
-
         public static Boolean ZMIEN_OPIS_REKORD_SQL_ZAPYTANIA(string str_opis, string id_obj)
         {
 
@@ -660,7 +654,6 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
-
         public static string ZAPISZ_DO_PLIKU_XSL(string STR_KATALOG, string STR_NAZWA_PLIKU, string INT_ID)
         {
 
@@ -726,7 +719,6 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return "";
         }
-
         public static object ARR_BYTE_FILE_XSL(string STR_SCIESZKA)
         {
             if (STR_SCIESZKA == "") return null;
