@@ -98,6 +98,7 @@ namespace DBDT.SQL.SQL_SELECT
            
             if (bprocesura == false)
             {
+
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sqlText;
                 DataTable tbl = new DataTable();
@@ -113,6 +114,7 @@ namespace DBDT.SQL.SQL_SELECT
                 errorsArray = errors.ToArray();
                 return tbl;
             }
+
         }
 
         public SqlError[] Parse(string sqlText)
@@ -193,8 +195,9 @@ namespace DBDT.SQL.SQL_SELECT
                     sprCount = sql.Substring(top + 7, spac - 10);
 
                     sprCountSp = "select count(*) from (select " + aSpacja[1] + " " + aSpacja[2] + " * from " + sprFrom + ") T";
-                    NazwaTabeli = sprFrom;
                 }
+
+                NazwaTabeli = sprFrom;
 
             }
             else if(sql.StartsWith("delete"))
@@ -227,7 +230,7 @@ namespace DBDT.SQL.SQL_SELECT
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message + " " + ex.StackTrace, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 

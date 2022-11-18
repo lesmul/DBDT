@@ -303,7 +303,7 @@ namespace DBDT.SQL.SQL_SELECT
                  * When FireInfoMessageEventOnUserErrors = true:  Errors will be raised as an Event (InfoMessage).
                  * SqlHandler encapsulates and hides the implementation of the event, and both the SqlHandler.Execute and SqlHandler.Parse methods will return these errors caught through the event
                 */
-                MessageBox.Show(ex.Message, "Błąd zapytania SQL", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message + " " + ex.StackTrace, "Błąd zapytania SQL", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
