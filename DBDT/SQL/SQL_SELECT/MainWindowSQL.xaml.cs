@@ -214,7 +214,7 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void Parse_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            UpdateUIStatus(false, "Staus  - Analiza SQL");
+            UpdateUIStatus();
 
             if (txtCode.Text.Trim() == "") return;
             try
@@ -269,6 +269,8 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void Execute_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            UpdateUIStatus();
+
             try
             {
                 b_wykonaj.IsEnabled = false;
@@ -288,6 +290,8 @@ namespace DBDT.SQL.SQL_SELECT
                 DataTable result = sqlHandler.Execute(strSQL, out errors, procedura);
                 errorsGrid.ItemsSource = errors;
                 errorsExpander.IsExpanded = (errors.Length != 0);
+
+                UpdateUIStatus(false, "Zapytanie zwróciło dużo wyników jest ich: " + result.Rows.Count.ToString());
 
                 if (result.Rows.Count > 0)
                     new ResultWindow(result, sqlHandler.Nazwa_Tabeli()).Show();

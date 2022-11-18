@@ -45,8 +45,6 @@ namespace DBDT.SQL.SQL_SELECT
             try
             {
 
-
-
                 string copy_data = "select * from " + Nazwa_Tabeli.Trim() + " ";
                 int intdindex = -1;
                 int intdindexst = -1;
@@ -64,7 +62,10 @@ namespace DBDT.SQL.SQL_SELECT
 
                     if (intdindex == -1)
                     {
-                        copy_data += " where ";
+                        if (copy_data.IndexOf("where") < 0)
+                        {
+                            copy_data += " where ";
+                        }
                     }
 
                     if (intdindex == intdindexst)
@@ -115,7 +116,10 @@ namespace DBDT.SQL.SQL_SELECT
 
                 if (intdindex == -1)
                 {
-                    copy_data += " where ";
+                    if (copy_data.IndexOf("where") < 0)
+                    {
+                        copy_data += " where ";
+                    }
                 }
 
                 if (intdindex == intdindexst)
