@@ -8,6 +8,8 @@
                     <MenuItem Header="Dodaj nowy plik automatyzacji" Click="Click_Dodaj"/>
                     <Separator/>
                     <MenuItem Header="Usuń plik automatyzacji" Click="Click_Usun"/>
+                    <Separator/>
+                    <MenuItem Header="Zmień opis" Click="Click_Zmien"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>

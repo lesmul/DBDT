@@ -113,12 +113,16 @@ namespace DBDT.SQL.SQL_SELECT
             foreach (MdiChild mdiChild in ((DBDT.MainWindow)parentWindow).Container.Children)
             {
 
-                if (((System.Windows.FrameworkElement)mdiChild.Content).Tag.ToString() == "CLOSE")
+                if (((System.Windows.FrameworkElement)mdiChild.Content).Tag != null)
                 {
-                    mdiChild.Content = null;
-                    mdiChild.Close();
-;                    return;
+                    if (((System.Windows.FrameworkElement)mdiChild.Content).Tag.ToString() == "CLOSE")
+                    {
+                        mdiChild.Content = null;
+                        mdiChild.Close();
+    ;                    return;
+                    }
                 }
+
 
             }
         }

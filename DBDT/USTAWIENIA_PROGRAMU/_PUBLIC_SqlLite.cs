@@ -471,6 +471,58 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             return true;
         }
 
+        public static Boolean ZMIEN_REKORD_OBJEKT(string nazwa_objektu, string opis, string id_obj)
+        {
+
+            if (nazwa_objektu.Trim() == "") return false;
+
+            if (nazwa_objektu.Trim() == "") nazwa_objektu = string.Format("Zmieniono dnia: {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+
+            command_insert.CommandType = CommandType.Text;
+
+            command_insert.Parameters.AddWithValue("@nazwa_objektu", nazwa_objektu);
+            command_insert.Parameters.AddWithValue("@opis", opis);
+            command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
+
+            command_insert.CommandText = "UPDATE `objekty`SET nazwa_objektu=@nazwa_objektu, opis=@opis WHERE `id` = " + id_obj;
+
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
         public static Boolean USUN_REKORD_OBJEKT(string id_obj)
         {
 
@@ -502,7 +554,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             command_insert.CommandType = CommandType.Text;
 
-            command_insert.CommandText = "DELETE FROM `objekty` WHERE`id` = " + id_obj;
+            command_insert.CommandText = "DELETE FROM `objekty` WHERE `id` = " + id_obj;
    
             try
             {

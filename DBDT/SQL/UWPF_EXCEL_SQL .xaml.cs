@@ -113,5 +113,24 @@ namespace DBDT.SQL
             }
             
         }
+        private void Click_Zmien(object sender, RoutedEventArgs e)
+        {
+            if (LB_HIST_ZAPYTAN_SQL.SelectedItems.Count == 0) return;
+
+            WPF_DODAJ_EXCEL FRM = new WPF_DODAJ_EXCEL();
+            Object selectedItem = LB_HIST_ZAPYTAN_SQL.SelectedItem;
+            FRM.LV_XLSX.IsEnabled = false;
+            FRM.TXT_NAZWA_OBJ.Text = ((System.Data.DataRowView)selectedItem).Row.ItemArray[1].ToString();
+            FRM.TXT_OPIS.Text = ((System.Data.DataRowView)selectedItem).Row.ItemArray[2].ToString();
+
+            if (FRM.ShowDialog() == true)
+            {
+                
+                _PUBLIC_SqlLite.ZMIEN_REKORD_OBJEKT(FRM.TXT_NAZWA_OBJ.Text.Trim(), FRM.TXT_OPIS.Text.Trim(), ((System.Data.DataRowView)selectedItem).Row.ItemArray[0].ToString());
+                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_objektu, opis, pole1 from objekty order by id desc");
+                LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
+            }
+        }
+        
     }
 }
