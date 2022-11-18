@@ -279,7 +279,8 @@ namespace DBDT.SQL.SQL_SELECT
                 errorsExpander.IsExpanded = (errors.Length != 0);
 
                 if (result.Rows.Count > 0)
-                    new ResultWindow(result).Show();
+                    new ResultWindow(result, sqlHandler.Nazwa_Tabeli()).Show();
+                    
                 else if (errors == null)
                     MessageBox.Show("Nie zwrócono żadnych wyników.", "Wykonano zapytanie", MessageBoxButton.OK, MessageBoxImage.Information);
             }

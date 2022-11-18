@@ -21,6 +21,8 @@ namespace DBDT.SQL.SQL_SELECT
         public static RoutedUICommand DisconnectCommand;
         public static RoutedUICommand ParseOpis;
 
+        public static string NazwaTabeli;
+
         static SqlHandler()
         {
             InputGestureCollection parseGestures = new InputGestureCollection();
@@ -82,12 +84,18 @@ namespace DBDT.SQL.SQL_SELECT
             conn.Close();
         }
 
+        public string Nazwa_Tabeli()
+        {
+            return NazwaTabeli;
+        }
+
         public DataTable Execute(string sqlText, out SqlError[] errorsArray, bool bprocesura = false)
         {
             if (!IsConnected)
                 throw new InvalidOperationException("Nie można wykonać zapytania SQL, gdy połączenie jest zamknięte!");
 
             errors.Clear();
+           
             if (bprocesura == false)
             {
                 cmd.CommandType = CommandType.Text;
@@ -112,6 +120,7 @@ namespace DBDT.SQL.SQL_SELECT
             if (!IsConnected)
                 throw new InvalidOperationException("Nie można przeanalizować zapytania SQL, gdy połączenie jest zamknięte!");
 
+            NazwaTabeli = "";
             errors.Clear();
             cmd.CommandText = "SET PARSEONLY ON";
             cmd.ExecuteNonQuery();
@@ -185,6 +194,7 @@ namespace DBDT.SQL.SQL_SELECT
                     sprCount = sql.Substring(top + 7, spac - 10);
 
                     sprCountSp = "select count(*) from (select " + aSpacja[1] + " " + aSpacja[2] + " * from " + sprFrom + ") T";
+                    NazwaTabeli = sprFrom;
                 }
 
             }
@@ -195,6 +205,7 @@ namespace DBDT.SQL.SQL_SELECT
                 int firstIndex = sql.IndexOf("where");
 
                 sprCountSp = "select count(*) from " + aSpacja[2] + " " + sql.Substring(firstIndex, sql.Length - firstIndex);
+                NazwaTabeli = aSpacja[2].ToString();
 
             }
             else if (sql.StartsWith("update"))
@@ -204,6 +215,7 @@ namespace DBDT.SQL.SQL_SELECT
                 int firstIndex = sql.IndexOf("where");
 
                 sprCountSp = "select count(*) from " + aSpacja[1] + " " + sql.Substring(firstIndex, sql.Length - firstIndex) ;
+                NazwaTabeli = aSpacja[1].ToString();
             }
 
             cmd.CommandText = sprCountSp;
@@ -218,6 +230,7 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
 
             if (count == null)
             {
@@ -242,6 +255,7 @@ namespace DBDT.SQL.SQL_SELECT
 
             OpisSQL opis = new OpisSQL();
             opis.TXT_OPIS_ZAPYTANIA_SQL.Text = str_opis;
+            opis.Focus();
             opis.ShowDialog();
             var opisx = opis.TXT_OPIS_ZAPYTANIA_SQL.Text.Trim();
             return opisx;

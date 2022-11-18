@@ -20,13 +20,14 @@ namespace DBDT.SQL.SQL_SELECT
     public partial class ResultWindow : Window
     {
     
-
-        public ResultWindow(DataTable resultTable)
+        private static string Nazwa_Tabeli;
+        public ResultWindow(DataTable resultTable, string TableName)
         {
             InitializeComponent();
             resultGrid.ItemsSource = resultTable.DefaultView;
             Title = string.Format("Dane z {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
             this.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            Nazwa_Tabeli = TableName;
 
         }
 
@@ -35,15 +36,14 @@ namespace DBDT.SQL.SQL_SELECT
 
            if(resultGrid.SelectedCells.Count == 0) return;
 
-           System.Data.DataRowView F_R = (DataRowView)resultGrid.SelectedCells[0].Item;
+           //System.Data.DataRowView F_R = (DataRowView)resultGrid.SelectedCells[0].Item;
 
-            string copy_data = "select * from " + F_R.DataView.Table.TableName.ToString() + "  ";
+            string copy_data = "select * from " + Nazwa_Tabeli.Trim() + " ";
             int intdindex = -1;
             int intdindexst = -1;
 
             for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
             {
-               
 
                 DataGridCellInfo cell = resultGrid.SelectedCells[i];
                 string value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text;
@@ -68,7 +68,8 @@ namespace DBDT.SQL.SQL_SELECT
 
             }
             copy_data = copy_data.Substring(0, copy_data.Length - 4);
-            Clipboard.SetText(copy_data.Trim());
+            //Clipboard.SetText(copy_data.Trim());
+            Clipboard.SetDataObject(copy_data.Trim());
 
 
         }
