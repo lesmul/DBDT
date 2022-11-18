@@ -21,15 +21,18 @@ namespace DBDT.SQL.SQL_SELECT
     public partial class ResultWindow : Window
     {
 
-        private static string Nazwa_Tabeli;
+        private static string Nazwa_Tabeli = "";
         public ResultWindow(DataTable resultTable, string TableName)
         {
             InitializeComponent();
             resultGrid.ItemsSource = resultTable.DefaultView;
             Title = string.Format("Dane z {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
             this.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
-            Nazwa_Tabeli = TableName;
-
+            
+            if (TableName != null )
+            {
+                Nazwa_Tabeli = TableName;
+            }
         }
 
         void resultGrid_select_Click(object sender, RoutedEventArgs e)
