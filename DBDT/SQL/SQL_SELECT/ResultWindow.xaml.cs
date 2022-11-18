@@ -127,7 +127,7 @@ namespace DBDT.SQL.SQL_SELECT
 
             }
             copy_data = copy_data.Substring(0, copy_data.Length - 4);
-            Clipboard.SetText(copy_data.Trim());
+            Clipboard.SetDataObject(copy_data.Trim());
 
         }
 

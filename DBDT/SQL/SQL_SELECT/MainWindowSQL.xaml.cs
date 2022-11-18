@@ -119,12 +119,19 @@ namespace DBDT.SQL.SQL_SELECT
                     {
                         mdiChild.Content = null;
                         mdiChild.Close();
-    ;                    return;
+    ;                   return;
                     }
                 }
 
+                if(((DBDT.MainWindow)parentWindow).Container.Children.Count == 1)
+                {
+                    mdiChild.Content = null;
+                    mdiChild.Close();
+                    ; return;
+                }
 
             }
+
         }
         void currentWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
