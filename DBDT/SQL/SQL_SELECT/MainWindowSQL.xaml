@@ -88,7 +88,7 @@
             </Button>
             
             <Separator />
-            <Button Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Zamknij" Click="frm_exit">
+            <Button Name="B_EXIT" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Zamknij" Click="frm_exit">
                 <Image Source="Images/exit.ico"/>
             </Button>
         </ToolBar>
@@ -99,7 +99,32 @@
                  VerticalScrollBarVisibility="Auto"
                  Padding="5"
                  FontFamily="Courier New"
-                 Grid.Row="2" TextChanged="textChengen" FontSize="16" />
+                 Grid.Row="2" TextChanged="textChengen" FontSize="14" >
+            <TextBox.ContextMenu>
+                <ContextMenu  Name="cxm" Opened="CxmOpened">
+                    <MenuItem Header="Wytnij" Name="cxmItemCut" Click="ClickCut" />
+                    <MenuItem Header="Kopiuj" Name="cxmItemCopy" Click="ClickCopy" />
+                    <MenuItem Header="Wklej" Name="cxmItemPaste" Click="ClickPaste" />
+                    <Separator/>
+                    <MenuItem Header="Zaznacz wszystko" Name="cxmItemSelectAll" Click="ClickSelectAll" />
+                    <MenuItem Header="Wybierz bieżącą linię" Name="cxmItemSelectLine" Click="ClickSelectLine" />
+                    <Separator/>
+                    <MenuItem Header="Cofnij ostatnią akcję" Name="cxmItemUndo" Click="ClickUndo" />
+                    <MenuItem Header="Powtórz ostatnią akcję" Name="cxmItemRedo" Click="ClickRedo" />
+                    <Separator/>
+                    <MenuItem Header="Wyczyść cały tekst"  Name="cxmItemClear" Click="ClickClear" />
+                    <Separator/>
+                    <MenuItem Header="W zaznaczonym fragmencie">
+                        <MenuItem Header="zamień na LIKE" Name="cxmItemLike" Click="ClickLike" />
+                        <MenuItem Header="zamień na LIKE%...%" Name="cxmItemLikeProc" Click="ClickLikeProc" />
+                        <MenuItem Header="zamień na =" Name="cxmItemLikeRow" Click="ClickRowna" />
+                        <MenuItem Header="zamień na AND" Name="cxmItemLikeAnd" Click="ClickAnd" />
+                        <MenuItem Header="zamień na OR" Name="cxmItemLikeOr" Click="ClickOr" />
+                    </MenuItem>
+                    
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
         <Expander Grid.Row="3" Name="errorsExpander" Header="Błędy">
             <DataGrid Name="errorsGrid" Height="120" AutoGenerateColumns="False">
                 <DataGrid.RowStyle>

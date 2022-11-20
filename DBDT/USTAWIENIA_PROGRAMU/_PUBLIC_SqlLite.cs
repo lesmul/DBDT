@@ -330,10 +330,56 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 MessageBox.Show(ex.Message, "Błąd");
             }
 
-            command_insert.CommandText = "DELETE FROM `ParametryPalaczenia` where `id` IN (SELECT `id` from `ParametryPalaczenia` order by `id` asc limit 20)";
+            command_insert.CommandText = "DELETE FROM `ParametryPalaczenia` where `id` IN (SELECT `id` from `ParametryPalaczenia` order by `id` asc limit 500)";
          
             command_insert.CommandType = CommandType.Text;
 
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
+        public static Boolean USUN_REKORD_PAR_POLACZENIA(string str_serwer, string str_nazwa_bazy)
+        {
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            command_insert.CommandText = "DELETE FROM `ParametryPalaczenia` where serwer=@serwer and nazwa_bazy=@nazwa_bazy";
+
+            command_insert.CommandType = CommandType.Text;
+
+            command_insert.Parameters.AddWithValue("@serwer", str_serwer);
+            command_insert.Parameters.AddWithValue("@nazwa_bazy", str_nazwa_bazy);
+   
             try
             {
                 command_insert.ExecuteNonQuery();
@@ -350,10 +396,15 @@ namespace DBDT.USTAWIENIA_PROGRAMU
         {
 
             if (sql.Trim() == "") return false;
-            
-            if (MessageBox.Show("Nie podałeś opisu czy mimo to zapisac?", "Uwaga!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+   
+            if (nazwa_zapytania.Trim() == "")
             {
-              if (nazwa_zapytania.Trim() == "") nazwa_zapytania = string.Format("Zapisano dnia: {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
+                if (MessageBox.Show("Nie podałeś opisu czy mimo to zapisac?", "Uwaga!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                {
+                    return false;
+                }
+
+                nazwa_zapytania = string.Format("Zapisano dnia: {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
             }
 
             if (nazwa_zapytania.Trim() == "") return false;

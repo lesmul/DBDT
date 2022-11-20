@@ -22,6 +22,8 @@ namespace DBDT.SQL.SQL_SELECT
     {
 
         private static string Nazwa_Tabeli = "";
+        string copy_data_update = "";
+        string copy_data_where ="";
         public ResultWindow(DataTable resultTable, string TableName)
         {
             InitializeComponent();
@@ -35,6 +37,165 @@ namespace DBDT.SQL.SQL_SELECT
             }
         }
 
+        void resultGrid_Update_U_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultGrid.SelectedCells.Count == 0) return;
+
+            try
+            {
+
+                copy_data_update = "UPDATE " + Nazwa_Tabeli.Trim() + " SET ";
+                int intdindex = -1;
+                int intdindexst = -1;
+
+                for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+                {
+                    string value = "";
+                    DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                    if (cell.Item != null)
+                    {
+                        value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text;
+                    }
+                    else
+                    {
+                        goto pomin_null;
+                    }
+
+                    if (intdindexst == -1)
+                    {
+                        intdindexst = cell.Column.DisplayIndex;
+
+                        //if (copy_data.IndexOf("where") > -1)
+                        //{
+                        //    copy_data = copy_data.Substring(0, copy_data.IndexOf("where"));
+                        //}
+                    }
+
+                    //if (intdindex == -1)
+                    //{
+                    //    if (copy_data.IndexOf("where") < 0)
+                    //    {
+                    //        copy_data += " where ";
+                    //    }
+                    //}
+
+                    if (intdindex == intdindexst)
+                    {
+                        //copy_data += "\r\n";
+                        copy_data_update += " ";
+                    }
+
+                    intdindex = cell.Column.DisplayIndex;
+                    Regex rgx2 = new Regex("\t|\\s+");
+                    string result = rgx2.Replace(value, " ");
+                    copy_data_update += cell.Column.Header.ToString() + " = '" + result.Trim() + "'" + "\r\n" + ", ";
+
+                pomin_null:;
+
+                }
+                copy_data_update = copy_data_update.Substring(0, copy_data_update.Length - 2);
+
+            if (copy_memory.IsChecked == true)  Clipboard.SetDataObject(copy_data_update + copy_data_where);
+
+            if (new_window.IsChecked == true && copy_data_update != "" && copy_data_where != "")
+            {
+                MainWindowSQL sp = new MainWindowSQL();
+                sp.txtCode.Text = copy_data_update + copy_data_where;
+                sp.B_EXIT.Visibility = Visibility.Hidden;
+
+                Window nw = new Window();
+                nw.Title = "Zmiany w tabeli: " + Nazwa_Tabeli;
+                nw.Content = sp;
+                nw.Show();
+            }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+        void resultGrid_Update_W_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultGrid.SelectedCells.Count == 0) return;
+
+            try
+            {
+
+                copy_data_where = " ";
+                int intdindex = -1;
+                int intdindexst = -1;
+
+                for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+                {
+                    string value = "";
+                    DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                    if (cell.Item != null)
+                    {
+                        value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text;
+                    }
+                    else
+                    {
+                        goto pomin_null;
+                    }
+
+                    if (intdindexst == -1)
+                    {
+                        intdindexst = cell.Column.DisplayIndex;
+
+                        if (copy_data_where.IndexOf("where") > -1)
+                        {
+                            copy_data_where = copy_data_where.Substring(0, copy_data_where.IndexOf("where"));
+                        }
+                    }
+
+                    if (intdindex == -1)
+                    {
+                        if (copy_data_where.IndexOf("where") < 0)
+                        {
+                            copy_data_where += " where ";
+                        }
+                    }
+
+                    if (intdindex == intdindexst)
+                    {
+                        //copy_data += "\r\n";
+                        copy_data_where += " ";
+                    }
+
+                    intdindex = cell.Column.DisplayIndex;
+                    Regex rgx2 = new Regex("\t|\\s+");
+                    string result = rgx2.Replace(value, " ");
+                    copy_data_where += cell.Column.Header.ToString() + " = '" + result.Trim() + "'" + "\r\n" + " and ";
+
+                pomin_null:;
+
+                }
+                copy_data_where = copy_data_where.Substring(0, copy_data_where.Length - 4);
+
+                if (copy_memory.IsChecked == true) Clipboard.SetDataObject(copy_data_update + copy_data_where);
+
+                if (new_window.IsChecked == true && copy_data_update !="" && copy_data_where !="")
+                {
+                    MainWindowSQL sp = new MainWindowSQL();
+                    sp.txtCode.Text = copy_data_update + copy_data_where;
+                    sp.B_EXIT.Visibility = Visibility.Hidden;
+
+                    Window nw = new Window();
+                    nw.Title = "Zmiany w tabeli: " + Nazwa_Tabeli;
+                    nw.Content = sp;
+                    nw.Show();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
         void resultGrid_select_Click(object sender, RoutedEventArgs e)
         {
 
@@ -51,13 +212,25 @@ namespace DBDT.SQL.SQL_SELECT
 
                 for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
                 {
-
+                    string value = "";
                     DataGridCellInfo cell = resultGrid.SelectedCells[i];
-                    string value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text;
+                    if (cell.Item != null)
+                    {
+                        value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text;
+                    }
+                    else
+                    {
+                        goto pomin_null;
+                    }
 
                     if (intdindexst == -1)
                     {
                         intdindexst = cell.Column.DisplayIndex;
+
+                        if (copy_data.IndexOf("where") > -1)
+                        {
+                            copy_data = copy_data.Substring(0, copy_data.IndexOf("where"));
+                        }
                     }
 
                     if (intdindex == -1)
@@ -79,6 +252,8 @@ namespace DBDT.SQL.SQL_SELECT
                     string result = rgx2.Replace(value, " ");
                     copy_data += cell.Column.Header.ToString() + " = '" + result.Trim() + "'" + "\r\n" + " and ";
 
+                pomin_null:;
+
                 }
                 copy_data = copy_data.Substring(0, copy_data.Length - 4);
                 //Clipboard.SetText(copy_data.Trim());
@@ -98,46 +273,80 @@ namespace DBDT.SQL.SQL_SELECT
         {
             if (resultGrid.SelectedCells.Count == 0) return;
 
-            string copy_data = "";
-            int intdindex = -1;
-            int intdindexst = -1;
+            //System.Data.DataRowView F_R = (DataRowView)resultGrid.SelectedCells[0].Item;
 
-            for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+            try
             {
-                // System.Data.DataRowView F_R = (DataRowView)resultGrid.SelectedCells[i].Item;
 
-                DataGridCellInfo cell = resultGrid.SelectedCells[i];
-                string value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text;
+                string copy_data = "";
+                int intdindex = -1;
+                int intdindexst = -1;
 
-                if (intdindexst == -1)
+                for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
                 {
-                    intdindexst = cell.Column.DisplayIndex;
-                }
-
-                if (intdindex == -1)
-                {
-                    if (copy_data.IndexOf("where") < 0)
+                    string value = "";
+                    DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                    if (cell.Item != null)
                     {
-                        copy_data += " where ";
+                        value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text;
                     }
+                    else
+                    {
+                        goto pomin_null;
+                    }
+
+                    if (intdindexst == -1)
+                    {
+                        intdindexst = cell.Column.DisplayIndex;
+
+                        if (copy_data.IndexOf("where") > -1)
+                        {
+                            copy_data = copy_data.Substring(0, copy_data.IndexOf("where"));
+                        }
+                    }
+
+                    if (intdindex == -1)
+                    {
+                        if (copy_data.IndexOf("where") < 0)
+                        {
+                            copy_data += " where ";
+                        }
+                    }
+
+                    if (intdindex == intdindexst)
+                    {
+                        //copy_data += "\r\n";
+                        copy_data += " ";
+                    }
+
+                    intdindex = cell.Column.DisplayIndex;
+                    Regex rgx2 = new Regex("\t|\\s+");
+                    string result = rgx2.Replace(value, " ");
+                    copy_data += cell.Column.Header.ToString() + " = '" + result.Trim() + "'" + "\r\n" + " and ";
+
+                pomin_null:;
+
                 }
-
-                if (intdindex == intdindexst)
-                {
-                    copy_data += "\r\n";
-                }
-
-                intdindex = cell.Column.DisplayIndex;
-                Regex rgx2 = new Regex("\t|\\s+");
-                string result = rgx2.Replace(value, " ");
-                copy_data += cell.Column.Header.ToString() + " = '" + result.Trim() + "'" + "\r\n" + " and ";
-
+                copy_data = copy_data.Substring(0, copy_data.Length - 4);
+                //Clipboard.SetText(copy_data.Trim());
+                //string sql = copy_data.ToLower().Trim();
+                //sql = sql.Replace("\nset", " ");
+                //sql = sql.Replace("\n", " ");
+                //sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+                Clipboard.SetDataObject(copy_data);
             }
-            copy_data = copy_data.Substring(0, copy_data.Length - 4);
-            Clipboard.SetDataObject(copy_data.Trim());
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
+        private void click_clear(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetDataObject("");
+            copy_data_update = "";
+            copy_data_where = "";
+        }
     }
 
 }

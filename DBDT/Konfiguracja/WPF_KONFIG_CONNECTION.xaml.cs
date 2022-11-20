@@ -40,10 +40,12 @@ namespace DBDT.Konfiguracja
                     DataTable dt = new DataTable();
                     dt = _PUBLIC_SqlLite.SelectQuery("select count(*) from ParametryPalaczenia");
 
-                    if (dt.Rows.Count > 21)
+                    if (dt.Rows.Count > 500)
                     {
                         _PUBLIC_SqlLite.USUN_REKORDY_PAR_POLACZENIA();
                     }
+
+                    _PUBLIC_SqlLite.USUN_REKORD_PAR_POLACZENIA(TXT_NAZWA_SERWERA.Text.Trim(), TXT_NAZWA_BAZY.Text.Trim());
 
                     _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA(TXT_NAZWA_SERWERA.Text.Trim(), TXT_NAZWA_BAZY.Text.Trim());
 
@@ -98,8 +100,8 @@ namespace DBDT.Konfiguracja
         {
              Object selectedItem = CB_HIST_POL.SelectedItem;
 
-            TXT_NAZWA_SERWERA.Text = ((System.Data.DataRowView)selectedItem).Row.ItemArray[0].ToString();
             TXT_NAZWA_SERWERA.Text = ((System.Data.DataRowView)selectedItem).Row.ItemArray[1].ToString();
+            TXT_NAZWA_BAZY.Text = ((System.Data.DataRowView)selectedItem).Row.ItemArray[2].ToString();
         }
     }
 }

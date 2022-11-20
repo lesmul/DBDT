@@ -1,14 +1,28 @@
 ﻿<Window x:Class="DBDT.SQL.SQL_SELECT.ResultWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Result" Height="768" Width="1024" SizeToContent="Width" WindowStartupLocation="CenterScreen">
+        Title="Wynik :)" Height="768" Width="1024" SizeToContent="Width" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid Name="resultGrid" AutoGenerateColumns="True" SelectionUnit="Cell" >
-             <DataGrid.ContextMenu>
+        <StackPanel Margin="10" Grid.ColumnSpan="3">
+            <Grid Width="180" HorizontalAlignment="Left" Height="24">
+                <Label FontWeight="Bold" Width="190" HorizontalAlignment="Left" Margin="0,-1,0,-9">Sposób wyświetlania wyników:</Label>
+                <RadioButton Name="copy_memory" Content="Kopiuj do schowka" Margin="189,5,-215,-5"/>
+                <RadioButton Name="new_window" Content="Otwórz w nowym oknie SQL" IsChecked="True" Margin="352,5,-342,-2"/>
+                <Button Content="Wyczyść schowek" Margin="545,-6,-550,2" Click="click_clear"/>
+            </Grid>
+
+        </StackPanel>
+        <DataGrid Name="resultGrid" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,34,0,0" >
+            <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Kopiuj z warunkiem where" Click="resultGrid_Click" />
                     <Separator/>
                     <MenuItem Header="Kopiuj z warunkiem select -> where" Click="resultGrid_select_Click" />
+                    <Separator/>
+                    <MenuItem Header="Utwórz warunek UPDATE SET">
+                        <MenuItem Header="Kolumny UPDATE" Click="resultGrid_Update_U_Click"/>
+                        <MenuItem Header="Kolumny WHERE" Click="resultGrid_Update_W_Click"/>
+                    </MenuItem>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

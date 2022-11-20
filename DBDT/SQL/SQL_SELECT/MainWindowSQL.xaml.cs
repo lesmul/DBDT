@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using DBDT.USTAWIENIA_PROGRAMU;
 using System.ComponentModel;
 using WPF.MDI;
+using System.Text.RegularExpressions;
 
 namespace DBDT.SQL.SQL_SELECT
 {
@@ -19,7 +20,7 @@ namespace DBDT.SQL.SQL_SELECT
     {
         private SqlHandler sqlHandler;
         public bool procedura = false;
-    
+
         public MainWindowSQL()
         {
             InitializeComponent();
@@ -119,11 +120,11 @@ namespace DBDT.SQL.SQL_SELECT
                     {
                         mdiChild.Content = null;
                         mdiChild.Close();
-    ;                   return;
+                        ; return;
                     }
                 }
 
-                if(((DBDT.MainWindow)parentWindow).Container.Children.Count == 1)
+                if (((DBDT.MainWindow)parentWindow).Container.Children.Count == 1)
                 {
                     mdiChild.Content = null;
                     mdiChild.Close();
@@ -249,7 +250,7 @@ namespace DBDT.SQL.SQL_SELECT
 
                     b_wykonaj.IsEnabled = true;
 
-                    if (info > 10000)
+                    if (info > 100000)
                     {
                         UpdateUIStatus(false, "Zapytanie zwróciło dużo wyników jest ich: " + info);
                     }
@@ -295,9 +296,9 @@ namespace DBDT.SQL.SQL_SELECT
 
                 if (result.Rows.Count > 0)
                     new ResultWindow(result, sqlHandler.Nazwa_Tabeli()).Show();
-                    
+
                 else if (errors == null)
-                    MessageBox.Show("Nie zwrócono żadnych wyników.", "Wykonano zapytanie", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Ilość wyników <null>.", "Wykonano zapytanie", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -336,6 +337,209 @@ namespace DBDT.SQL.SQL_SELECT
         private void textChengen(object sender, TextChangedEventArgs e)
         {
             b_wykonaj.IsEnabled = false;
+        }
+
+        private void MenuChange(Object sender, RoutedEventArgs ags)
+        {
+            RadioButton rb = sender as RadioButton;
+            if (rb == null || cxm == null) return;
+
+            switch (rb.Name)
+            {
+                case "rbCustom":
+                    txtCode.ContextMenu = cxm;
+                    break;
+                case "rbDefault":
+                    // Clearing the value of the ContextMenu property
+                    // restores the default TextBox context menu.
+                    txtCode.ClearValue(ContextMenuProperty);
+                    break;
+                case "rbDisabled":
+                    // Setting the ContextMenu propety to
+                    // null disables the context menu.
+                    txtCode.ContextMenu = null;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void ClickPaste(Object sender, RoutedEventArgs args) { txtCode.Paste(); }
+        void ClickCopy(Object sender, RoutedEventArgs args) { txtCode.Copy(); }
+        void ClickCut(Object sender, RoutedEventArgs args) { txtCode.Cut(); }
+        void ClickSelectAll(Object sender, RoutedEventArgs args) { txtCode.SelectAll(); }
+        void ClickClear(Object sender, RoutedEventArgs args) { txtCode.Clear(); }
+        void ClickUndo(Object sender, RoutedEventArgs args) { txtCode.Undo(); }
+        void ClickRedo(Object sender, RoutedEventArgs args) { txtCode.Redo(); }
+        void ClickLike(Object sender, RoutedEventArgs args)
+        {
+            //string sql = txtCode.SelectedText.ToLower();
+            string sql = txtCode.SelectedText;
+            //sql = sql.Replace("\nset", " ");
+            //sql = sql.Replace("\n", " ");
+            //sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+            string[] spl = sql.Split(' ');
+            string sqlr = "";
+            foreach (var sub in spl)
+            {
+                if (sub.IndexOf("=") > -1)
+                {
+                    sqlr += "like ";
+                }
+                else
+                {
+                    sqlr += sub + " ";
+                }
+            }
+
+            txtCode.SelectedText = sqlr;
+
+        }
+        void ClickLikeProc(Object sender, RoutedEventArgs args)
+        {
+            string sql = txtCode.SelectedText;
+            //sql = sql.Replace("\nset", " ");
+            //sql = sql.Replace("\n", " ");
+            //sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+            string[] spl = sql.Split(' ');
+            string sqlr = "";
+            foreach (var sub in spl)
+            {
+           
+                if (sub.StartsWith("="))
+                {
+                    sqlr += "like ";
+                }
+                else if(sub.IndexOf((char)39) > -1)
+                {
+
+                    int starz = sub.IndexOf((char)39);
+                    int koniecz = sub.IndexOf((char)39, starz + 1);
+
+                    if (sub.StartsWith(Convert.ToString((char)39)))
+                    {
+                        sqlr += "'%" + sub.TrimStart((char)39) + " ";
+                    }
+
+                    if (sub.EndsWith(Convert.ToString((char)39)))
+                    {
+                        sqlr += "" + sub.TrimEnd((char)39) + "%' ";
+                    }
+                }
+                else
+                {
+                    sqlr += sub + " ";
+                }
+            }
+           
+            txtCode.SelectedText = sqlr;
+        }
+        void ClickRowna(Object sender, RoutedEventArgs args)
+        {
+            //string sql = txtCode.SelectedText.ToLower();
+            string sql = txtCode.SelectedText;
+            //sql = sql.Replace("\nset", " ");
+            //sql = sql.Replace("\n", " ");
+            //sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+            string[] spl = sql.Split(' ');
+            string sqlr = "";
+            foreach (var sub in spl)
+            {
+                if (sub.ToLower().StartsWith("like"))
+                {
+                    sqlr += "= ";
+                }
+                else
+                {
+                    sqlr += sub + " ";
+                }
+            }
+
+            txtCode.SelectedText = sqlr;
+        }
+        void ClickAnd(Object sender, RoutedEventArgs args)
+        {
+            //string sql = txtCode.SelectedText.ToLower();
+            string sql = txtCode.SelectedText;
+            //sql = sql.Replace("\nset", " ");
+            //sql = sql.Replace("\n", " ");
+            //sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+            string[] spl = sql.Split(' ');
+            string sqlr = "";
+            foreach (var sub in spl)
+            {
+                if (sub.ToLower().ToString().StartsWith("or"))
+                {
+                    sqlr += "and ";
+                }
+                else
+                {
+                    sqlr += sub + " ";
+                }
+            }
+
+            txtCode.SelectedText = sqlr;
+        }
+        void ClickOr(Object sender, RoutedEventArgs args)
+        {
+            //string sql = txtCode.SelectedText.ToLower();
+            string sql = txtCode.SelectedText;
+            //sql = sql.Replace("\nset", " ");
+            //sql = sql.Replace("\n", " ");
+            //sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+            string[] spl = sql.Split(' ');
+            string sqlr = "";
+            foreach (var sub in spl)
+            {
+                if (sub.ToLower().ToString().StartsWith("and"))
+                {
+                    sqlr += "or ";
+                }
+                else
+                {
+                    sqlr += sub + " ";
+                }
+            }
+
+            txtCode.SelectedText = sqlr;
+        }
+        void ClickSelectLine(Object sender, RoutedEventArgs args)
+        {
+            int lineIndex = txtCode.GetLineIndexFromCharacterIndex(txtCode.CaretIndex);
+            int lineStartingCharIndex = txtCode.GetCharacterIndexFromLineIndex(lineIndex);
+            int lineLength = txtCode.GetLineLength(lineIndex);
+            txtCode.Select(lineStartingCharIndex, lineLength);
+        }
+
+        void CxmOpened(Object sender, RoutedEventArgs args)
+        {
+            // Only allow copy/cut if something is selected to copy/cut.
+            if (txtCode.SelectedText == "") 
+            { 
+                cxmItemCopy.IsEnabled = cxmItemCut.IsEnabled = false;
+                cxmItemLike.IsEnabled = cxmItemLike.IsEnabled = false;
+                cxmItemLikeProc.IsEnabled = cxmItemLikeProc.IsEnabled = false;
+                cxmItemLikeRow.IsEnabled = cxmItemLikeRow.IsEnabled = false;
+                cxmItemLikeAnd.IsEnabled = cxmItemLikeAnd.IsEnabled = false;
+                cxmItemLikeOr.IsEnabled = cxmItemLikeOr.IsEnabled = false;
+
+            }
+            else
+            {
+                cxmItemCopy.IsEnabled = cxmItemCut.IsEnabled = true;
+                cxmItemLike.IsEnabled = cxmItemLike.IsEnabled = true;
+                cxmItemLikeProc.IsEnabled = cxmItemLikeProc.IsEnabled = true;
+                cxmItemLikeRow.IsEnabled = cxmItemLikeRow.IsEnabled = true;
+                cxmItemLikeAnd.IsEnabled = cxmItemLikeAnd.IsEnabled = true;
+                cxmItemLikeOr.IsEnabled = cxmItemLikeOr.IsEnabled = true;
+
+            }
+
+            // Only allow paste if there is text on the clipboard to paste.
+            if (Clipboard.ContainsText())
+                cxmItemPaste.IsEnabled = true;
+            else
+                cxmItemPaste.IsEnabled = false;
         }
 
     }

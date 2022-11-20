@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Podaj opis komendy SQL" Height="120" Width="670" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="ToolWindow">
     <Grid>
-        <TextBox x:Name="TXT_OPIS_ZAPYTANIA_SQL" HorizontalAlignment="Left" Height="24" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="640" ToolTip="Podaj opis czego dotyczy komenda SQL" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+        <TextBox x:Name="TXT_OPIS_ZAPYTANIA_SQL" HorizontalAlignment="Left" Height="24" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="640" ToolTip="Podaj opis czego dotyczy komenda SQL" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="0" SpellCheck.IsEnabled="True">
             <TextBox.Style>
                 <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
                     <Style.Resources>
