@@ -86,7 +86,10 @@
             <Button Command="cc:SqlHandler.ParseCommand" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Analizuj">
                 <Image Source="Images/bug.png"/>
             </Button>
-            
+            <Separator />
+            <Button Name="B_Auto" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Włącz auto uzupełnianie" Click="ClickAuto">
+                <Image x:Name="auto_on" Source="/SQL/SQL_SELECT/Images/auto.png"/>
+            </Button>
             <Separator />
             <Button Name="B_EXIT" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Zamknij" Click="frm_exit">
                 <Image Source="Images/exit.ico"/>

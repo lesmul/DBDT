@@ -20,7 +20,6 @@ namespace DBDT.SQL.SQL_SELECT
 {
     public partial class ResultWindow : Window
     {
-
         private static string Nazwa_Tabeli = "";
         string copy_data_update = "";
         string copy_data_where ="";
@@ -28,7 +27,7 @@ namespace DBDT.SQL.SQL_SELECT
         {
             InitializeComponent();
             resultGrid.ItemsSource = resultTable.DefaultView;
-            Title = string.Format("Dane z {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
+            Title = string.Format("Dane z {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString()) + " [" + resultTable.Rows.Count + "]";
             this.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
             
             if (TableName != null )
@@ -194,7 +193,6 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
         void resultGrid_select_Click(object sender, RoutedEventArgs e)
         {

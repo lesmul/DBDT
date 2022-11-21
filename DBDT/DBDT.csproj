@@ -272,6 +272,10 @@
   <ItemGroup>
     <Resource Include="SQL\SQL_SELECT\Images\exit.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SQL\SQL_SELECT\Images\auto.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\auto_on.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

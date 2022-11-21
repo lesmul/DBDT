@@ -13,6 +13,9 @@ using DBDT.USTAWIENIA_PROGRAMU;
 using System.ComponentModel;
 using WPF.MDI;
 using System.Text.RegularExpressions;
+using System.Linq;
+using System.Windows.Documents;
+using System.Collections;
 
 namespace DBDT.SQL.SQL_SELECT
 {
@@ -20,6 +23,8 @@ namespace DBDT.SQL.SQL_SELECT
     {
         private SqlHandler sqlHandler;
         public bool procedura = false;
+        private bool auto_u = false;
+        private DataTable dt_str_danych = new DataTable();
 
         public MainWindowSQL()
         {
@@ -103,7 +108,35 @@ namespace DBDT.SQL.SQL_SELECT
         #endregion
 
         #region Events
+        void ClickAuto(object sender, RoutedEventArgs e)
+        {
+            if (auto_u == false)
+            {
+                auto_u = true;
+                BitmapImage Image1 = new BitmapImage(new Uri("/SQL/SQL_SELECT/Images/auto_on.png", UriKind.Relative));
+                auto_on.Source = Image1;
+            }
+            else
+            {
+                auto_u = false;
+                BitmapImage Image1 = new BitmapImage(new Uri("/SQL/SQL_SELECT/Images/auto.png", UriKind.Relative));
+                auto_on.Source = Image1;
+            }
 
+
+            if (SuggestionValuesTbName == null)
+            {
+                //DataTable dt_str_danych = new DataTable();
+
+                dt_str_danych = sqlHandler.StrukturaTabel();
+
+                var distinctRows = (from r in dt_str_danych.AsEnumerable()
+                                    select r["TableName"]).Distinct().ToList();
+
+                string myStringOutput = String.Join(",", distinctRows.ToArray().Select(p => p.ToString()).ToArray());
+                SuggestionValuesTbName = myStringOutput.Split(',');
+            }
+        }
         void frm_exit(object sender, RoutedEventArgs e)
         {
             this.Tag = "CLOSE";
@@ -334,11 +367,116 @@ namespace DBDT.SQL.SQL_SELECT
             }
         }
 
+        private string _currentInput = "";
+        private string _currentSuggestion = "";
+        private string _currentText = "";
+
+        private int _selectionStart;
+        private int _selectionLength;
+
+
+        private static string[] SuggestionValuesTbName;
+        private static string[] SuggestionValuesColName;
         private void textChengen(object sender, TextChangedEventArgs e)
         {
             b_wykonaj.IsEnabled = false;
-        }
 
+            if (auto_u == true)
+            {
+                string[] strCurText = txtCode.Text.Split(' ');
+
+                var input = strCurText[strCurText.Length - 1];
+
+                if (strCurText.Length > 1 && input.Length > 1)
+                {
+                    if (strCurText[strCurText.Length - 2].ToLower() == "from"
+                    || strCurText[strCurText.Length - 2].ToLower() == "update" || strCurText[strCurText.Length - 2].ToLower() == "insert into")
+                    {
+
+                        SuggestionValuesColName = null;
+
+                        if (input.Length > _currentInput.Length && input != _currentSuggestion)
+                        {
+                            _currentSuggestion = SuggestionValuesTbName.FirstOrDefault(x => x.StartsWith(input));
+                            if (_currentSuggestion != null)
+                            {
+                                _currentText = _currentSuggestion;
+                                _selectionStart = input.Length;
+                                _selectionLength = _currentSuggestion.Length - input.Length;
+
+                                char znak = Convert.ToChar(input.Substring(input.Length - 1, 1));
+                                _currentText = _currentText.TrimStart(znak);
+                                txtCode.Text += _currentText.Substring(_selectionStart, _currentText.Length - _selectionStart);
+
+                                int ile = 0;
+                                //txtCode.Select(_selectionStart + 1, _selectionLength);
+                                for (int i = 0; i < strCurText.Length; i++)
+                                {
+                                    ile += strCurText[i].Length + 1;
+                                }
+
+                                txtCode.Select(ile - 1, _selectionLength);
+
+                            }
+                        }
+                        _currentInput = input;
+
+                    }
+
+                    if (strCurText[strCurText.Length - 2].ToLower() == "select"
+                    || strCurText[strCurText.Length - 2].ToLower() == "where" || strCurText[strCurText.Length - 2].ToLower() == "and"
+                    || strCurText[strCurText.Length - 2].ToLower() == "or")
+                    {
+
+                        if (input.Length > _currentInput.Length && input != _currentSuggestion && SuggestionValuesColName != null)
+                        {
+                            _currentSuggestion = SuggestionValuesColName.FirstOrDefault(x => x.StartsWith(input));
+                            if (_currentSuggestion != null)
+                            {
+                                _currentText = _currentSuggestion;
+                                _selectionStart = input.Length;
+                                _selectionLength = _currentSuggestion.Length - input.Length;
+
+                                char znak = Convert.ToChar(input.Substring(input.Length - 1, 1));
+                                _currentText = _currentText.TrimStart(znak);
+                                txtCode.Text += _currentText.Substring(_selectionStart, _currentText.Length - _selectionStart);
+
+                                int ile = 0;
+                                //txtCode.Select(_selectionStart + 1, _selectionLength);
+                                for (int i = 0; i < strCurText.Length; i++)
+                                {
+                                    ile += strCurText[i].Length + 1;
+                                }
+
+                                txtCode.Select(ile - 1, _selectionLength);
+
+                            }
+                        }
+                        _currentInput = input;
+                    }
+
+                }
+
+                if (_currentSuggestion != "" && _currentSuggestion != null && SuggestionValuesColName == null)
+                {
+                    var distinctRows = (from r in dt_str_danych.AsEnumerable()
+                                        .Where(myRow => myRow.Field<string>("TableName") == _currentSuggestion)
+                                        select r["ColumnName"]).Distinct().ToList();
+
+                    //var distinctRows = from myRow in dt_str_danych.Rows.Cast<DataRow>()
+                    //              where myRow.Field<string>("TableName") == _currentSuggestion
+                    //              select myRow;
+
+                    string myStringOutput = String.Join(",", distinctRows.ToArray().Select(p => p.ToString()).ToArray());
+
+                    SuggestionValuesColName = myStringOutput.Split(',');
+
+                }
+
+                _currentSuggestion = "";
+
+            }
+        }
         private void MenuChange(Object sender, RoutedEventArgs ags)
         {
             RadioButton rb = sender as RadioButton;
@@ -393,7 +531,6 @@ namespace DBDT.SQL.SQL_SELECT
             }
 
             txtCode.SelectedText = sqlr;
-
         }
         void ClickLikeProc(Object sender, RoutedEventArgs args)
         {
@@ -405,12 +542,12 @@ namespace DBDT.SQL.SQL_SELECT
             string sqlr = "";
             foreach (var sub in spl)
             {
-           
+
                 if (sub.StartsWith("="))
                 {
                     sqlr += "like ";
                 }
-                else if(sub.IndexOf((char)39) > -1)
+                else if (sub.IndexOf((char)39) > -1)
                 {
 
                     int starz = sub.IndexOf((char)39);
@@ -431,7 +568,7 @@ namespace DBDT.SQL.SQL_SELECT
                     sqlr += sub + " ";
                 }
             }
-           
+
             txtCode.SelectedText = sqlr;
         }
         void ClickRowna(Object sender, RoutedEventArgs args)
@@ -514,8 +651,8 @@ namespace DBDT.SQL.SQL_SELECT
         void CxmOpened(Object sender, RoutedEventArgs args)
         {
             // Only allow copy/cut if something is selected to copy/cut.
-            if (txtCode.SelectedText == "") 
-            { 
+            if (txtCode.SelectedText == "")
+            {
                 cxmItemCopy.IsEnabled = cxmItemCut.IsEnabled = false;
                 cxmItemLike.IsEnabled = cxmItemLike.IsEnabled = false;
                 cxmItemLikeProc.IsEnabled = cxmItemLikeProc.IsEnabled = false;

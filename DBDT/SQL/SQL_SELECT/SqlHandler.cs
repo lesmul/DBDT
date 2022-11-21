@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Documents;
 using System.Linq;
+using System.Xml;
 
 namespace DBDT.SQL.SQL_SELECT
 {
@@ -135,6 +136,19 @@ namespace DBDT.SQL.SQL_SELECT
             return errors.ToArray();
         }
 
+        public DataTable StrukturaTabel()
+        {
+            if (!IsConnected)
+                throw new InvalidOperationException("Nie można wykonać zapytania SQL, gdy połączenie jest zamknięte!");
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT SchemaName = sch.name, TableName = t.Name, ColumnName = c.Name, TypeName = ty.Name,  MaxLength = c.max_length, Precision = c.precision, Scale = c.scale FROM sys.columns c INNER JOIN sys.tables t ON t.object_id = c.object_id INNER JOIN sys.schemas sch ON sch.schema_id = t.schema_id INNER JOIN sys.types ty ON c.user_type_id = ty.user_type_id";
+
+                DataTable tbl = new DataTable();
+                adapter.Fill(tbl);
+                return tbl;
+        }
+
         public double RowCount(string sqlText)
         {
             if (!IsConnected)
@@ -243,7 +257,6 @@ namespace DBDT.SQL.SQL_SELECT
                 return (int)count;
             }
         }
-
         private void conn_InfoMessage(object sender, SqlInfoMessageEventArgs e)
         {
             //ensure that all errors are caught
@@ -251,7 +264,6 @@ namespace DBDT.SQL.SQL_SELECT
             e.Errors.CopyTo(errorsFound, 0);
             errors.AddRange(errorsFound);
         }
-
         public string SQL_Title(string str_opis = "")
         {
 
