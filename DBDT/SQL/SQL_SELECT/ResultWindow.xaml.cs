@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
+using System.Text;
 
 namespace DBDT.SQL.SQL_SELECT
 {
@@ -347,11 +348,10 @@ namespace DBDT.SQL.SQL_SELECT
             copy_data_where = "";
         }
 
-        void ClickCopy(Object sender, RoutedEventArgs args) 
+        
+        void ClickCopy_bez_pl(Object sender, RoutedEventArgs args)
         {
             if (resultGrid.SelectedCells.Count == 0) return;
-
-            //System.Data.DataRowView F_R = (DataRowView)resultGrid.SelectedCells[0].Item;
 
             try
             {
@@ -370,9 +370,113 @@ namespace DBDT.SQL.SQL_SELECT
                     {
                         goto pomin_null;
                     }
+                    if (i == resultGrid.SelectedCells.Count)
+                    {
+                        string str_cls = value.Trim();
+                        str_cls = str_cls.Replace("\nset", " ");
+                        str_cls = str_cls.Replace("\n", " ");
+                        str_cls = Regex.Replace(str_cls, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+                        str_cls = str_cls.Replace("Ś", "S");
+                        str_cls = str_cls.Replace("ś", "s");
+                        str_cls = str_cls.Replace("Ć", "c");
+                        str_cls = str_cls.Replace("ć", "c");
+                        str_cls = str_cls.Replace("Ń", "N");
+                        str_cls = str_cls.Replace("ń", "n");
+                        str_cls = str_cls.Replace("Ł", "L");
+                        str_cls = str_cls.Replace("ł", "l");
+                        str_cls = str_cls.Replace("Ż", "Z");
+                        str_cls = str_cls.Replace("ż", "z");
+                        str_cls = str_cls.Replace("Ź", "Z");
+                        str_cls = str_cls.Replace("ź", "z");
+                        str_cls = str_cls.Replace("Ó", "O");
+                        str_cls = str_cls.Replace("ó", "o");
+                        str_cls = str_cls.Replace("Ą", "A");
+                        str_cls = str_cls.Replace("ą", "a");
+                        str_cls = str_cls.Replace("Ę", "E");
+                        str_cls = str_cls.Replace("ę", "e");
 
-                    copy_data += value + "\r\n";
+                        copy_data += str_cls;
+                    }
+                    else
+                    {
+                        string str_cls = value.Trim();
+                        str_cls = str_cls.Replace("\nset", " ");
+                        str_cls = str_cls.Replace("\n", " ");
+                        str_cls = Regex.Replace(str_cls, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+                        str_cls = str_cls.Replace("Ś", "S");
+                        str_cls = str_cls.Replace("ś", "s");
+                        str_cls = str_cls.Replace("Ć", "c");
+                        str_cls = str_cls.Replace("ć", "c");
+                        str_cls = str_cls.Replace("Ń", "N");
+                        str_cls = str_cls.Replace("ń", "n");
+                        str_cls = str_cls.Replace("Ł", "L");
+                        str_cls = str_cls.Replace("ł", "l");
+                        str_cls = str_cls.Replace("Ż", "Z");
+                        str_cls = str_cls.Replace("ż", "z");
+                        str_cls = str_cls.Replace("Ź", "Z");
+                        str_cls = str_cls.Replace("ź", "z");
+                        str_cls = str_cls.Replace("Ó", "O");
+                        str_cls = str_cls.Replace("ó", "o");
+                        str_cls = str_cls.Replace("Ą", "A");
+                        str_cls = str_cls.Replace("ą", "a");
+                        str_cls = str_cls.Replace("Ę", "E");
+                        str_cls = str_cls.Replace("ę", "e");
 
+                        copy_data += str_cls + "\r\n";
+                    }
+
+                pomin_null:;
+
+                }
+
+                Clipboard.SetDataObject(copy_data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        void ClickCopy(Object sender, RoutedEventArgs args) 
+        {
+            if (resultGrid.SelectedCells.Count == 0) return;
+
+            try
+            {
+
+                string copy_data = "";
+
+                for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+                {
+                    string value = "";
+                    DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                    if (cell.Item != null)
+                    {
+                        value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim();
+                    }
+                    else
+                    {
+                        goto pomin_null;
+                    }
+                    if(i == resultGrid.SelectedCells.Count)
+                    {
+                        string str_cls = value.Trim();
+                        str_cls = str_cls.Replace("\nset", " ");
+                        str_cls = str_cls.Replace("\n", " ");
+                        str_cls = Regex.Replace(str_cls, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+
+                        copy_data += str_cls;
+                    }
+                    else
+                    {
+                        string str_cls = value.Trim();
+                        str_cls = str_cls.Replace("\nset", " ");
+                        str_cls = str_cls.Replace("\n", " ");
+                        str_cls = Regex.Replace(str_cls, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
+
+                        copy_data += str_cls + "\r\n";
+                    }
+                    
                 pomin_null:;
 
                 }
