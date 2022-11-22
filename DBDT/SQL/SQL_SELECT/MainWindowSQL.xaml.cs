@@ -289,7 +289,7 @@ namespace DBDT.SQL.SQL_SELECT
                     }
                     else
                     {
-                        UpdateUIStatus(false, "Zapytanie wyników: " + info);
+                        UpdateUIStatus(true, "Zapytanie zwróciło wyników: " + info);
                     }
                 }
                 else
@@ -329,7 +329,16 @@ namespace DBDT.SQL.SQL_SELECT
                 errorsGrid.ItemsSource = errors;
                 errorsExpander.IsExpanded = (errors.Length != 0);
 
-                UpdateUIStatus(false, "Zapytanie zwróciło dużo wyników jest ich: " + result.Rows.Count.ToString());
+                
+
+                if (result.Rows.Count > 100000)
+                {
+                    UpdateUIStatus(false, "Zapytanie zwróciło dużo wyników jest ich: " + result.Rows.Count.ToString());
+                }
+                else
+                {
+                    UpdateUIStatus(true, "Zapytanie zwróciło wyników: " + result.Rows.Count.ToString()); ;
+                }
 
                 if (result.Rows.Count > 0)
                     new ResultWindow(result, sqlHandler.Nazwa_Tabeli()).Show();
