@@ -51,9 +51,7 @@ namespace DBDT.SQL
             string curItem = ((System.Data.DataRowView)selectedItem).Row.ItemArray[2].ToString();
             string curItemID = ((System.Data.DataRowView)selectedItem).Row.ItemArray[0].ToString();
 
-            //((System.Windows.Controls.Panel)((System.Windows.FrameworkElement)sender).Parent).Children
-
-            MainWindowSQL sp = new MainWindowSQL();
+             MainWindowSQL sp = new MainWindowSQL();
 
             sp.txtCode.Text = curItem;
             sp.txtCode.Tag = ((System.Data.DataRowView)selectedItem).Row.ItemArray[1].ToString(); ;
@@ -64,9 +62,12 @@ namespace DBDT.SQL
                 HorizontalContentAlignment = HorizontalAlignment.Center,
                 VerticalContentAlignment = VerticalAlignment.Center
             };
-            //Container.Children.Add(new MdiChild { Content = sv, Title = "Zapytanie SQL " + ooo++, WindowState=WindowState.Maximized, Width= SHT_W, Height= SHT_H });
-            ((System.Windows.Controls.Panel)((System.Windows.FrameworkElement)sender).Parent).Children.Add(new MdiChild { Content = sp, Title = "Dodaj nowe zaptanie SQL - " + curItemID, WindowState = WindowState.Maximized, Width = szer, Height = wys });
+   
+            var parentWindow = Window.GetWindow(this.Parent);
 
+            ((DBDT.MainWindow)parentWindow).Container.Children.Add(new MdiChild { Content = sp, Name = "FindSQLWindow", Title = "Zapytanie SQL " + ((DBDT.MainWindow)parentWindow).ooo++, WindowState = WindowState.Maximized, Width = ((DBDT.MainWindow)parentWindow).SHT_W, Height = ((DBDT.MainWindow)parentWindow).SHT_H });
+            //parentWindow.Close(); // zakończ program
+       
         }
         private void buttonSzukaj_Click(object sender, RoutedEventArgs e)
         {

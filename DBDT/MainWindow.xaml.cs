@@ -30,8 +30,8 @@ namespace DBDT
     public partial class MainWindow : Window
     {
 
-        double SHT_W = 1280;
-        double SHT_H = 620;
+        public double SHT_W = 1280;
+        public double SHT_H = 620;
         public MainWindow()
         {
             InitializeComponent();
@@ -103,7 +103,7 @@ namespace DBDT
 
         #region Menu Events
 
-        int ooo = 1;
+        public int ooo = 1;
 
         /// <summary>
         /// Handles the Click event of the 'Normal window' menu item.
