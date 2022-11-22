@@ -261,7 +261,22 @@ namespace DBDT.SQL.SQL_SELECT
                 //sql = sql.Replace("\nset", " ");
                 //sql = sql.Replace("\n", " ");
                 //sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
-                Clipboard.SetDataObject(copy_data);
+                
+
+                if (copy_memory.IsChecked == true) Clipboard.SetDataObject(copy_data); ;
+
+                if (new_window.IsChecked == true && copy_data != "")
+                {
+                    MainWindowSQL sp = new MainWindowSQL();
+                    sp.txtCode.Text = copy_data;
+                    sp.B_EXIT.Visibility = Visibility.Hidden;
+
+                    Window nw = new Window();
+                    nw.Title = "Zmiany w tabeli: " + Nazwa_Tabeli;
+                    nw.Content = sp;
+                    nw.Show();
+                }
+
             }
             catch (Exception ex)
             {

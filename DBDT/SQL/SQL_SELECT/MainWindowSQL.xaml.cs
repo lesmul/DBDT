@@ -123,12 +123,17 @@ namespace DBDT.SQL.SQL_SELECT
                 auto_on.Source = Image1;
             }
 
-
             if (SuggestionValuesTbName == null)
             {
-                //DataTable dt_str_danych = new DataTable();
-
-                dt_str_danych = sqlHandler.StrukturaTabel();
+                try
+                {
+                    dt_str_danych = sqlHandler.StrukturaTabel();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
                 var distinctRows = (from r in dt_str_danych.AsEnumerable()
                                     select r["TableName"]).Distinct().ToList();
@@ -548,37 +553,26 @@ namespace DBDT.SQL.SQL_SELECT
         void ClickLikeProc(Object sender, RoutedEventArgs args)
         {
             string sql = txtCode.SelectedText;
-            //sql = sql.Replace("\nset", " ");
-            //sql = sql.Replace("\n", " ");
-            //sql = Regex.Replace(sql, @"\s+", (match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
-            string[] spl = sql.Split(' ');
+            sql = sql.Replace("\nset", "");
+            sql = sql.Replace("\n", "");
+            sql = sql.Replace("\r\n", "");
+            sql = sql.Replace("\t", "");
+            string[] spl = sql.Split((char)39);
             string sqlr = "";
             foreach (var sub in spl)
             {
-
-                if (sub.StartsWith("="))
+                string str_cls = sub.Trim();
+                
+                if (str_cls.TrimEnd().EndsWith("="))
                 {
-                    sqlr += "like ";
-                }
-                else if (sub.IndexOf((char)39) > -1)
-                {
-
-                    int starz = sub.IndexOf((char)39);
-                    int koniecz = sub.IndexOf((char)39, starz + 1);
-
-                    if (sub.StartsWith(Convert.ToString((char)39)))
-                    {
-                        sqlr += "'%" + sub.TrimStart((char)39) + " ";
-                    }
-
-                    if (sub.EndsWith(Convert.ToString((char)39)))
-                    {
-                        sqlr += "" + sub.TrimEnd((char)39) + "%' ";
-                    }
+                    sqlr += str_cls.TrimEnd('=').TrimEnd() + " like ";
                 }
                 else
                 {
-                    sqlr += sub + " ";
+                    if (str_cls.Trim() != "")
+                    {
+                        sqlr += "'%" + str_cls + "%'" + "\r\n";
+                    }
                 }
             }
 

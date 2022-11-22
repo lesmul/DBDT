@@ -232,6 +232,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Konfiguracja\iokno.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\status_ok.png" />
+    <Resource Include="SQL\SQL_SELECT\Images\staus_notok.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IKONY\iokno.png" />
@@ -253,10 +255,6 @@
     <Resource Include="SQL\SQL_SELECT\Images\lightning.png" />
     <Resource Include="SQL\SQL_SELECT\Images\page_white_copy.png" />
     <Resource Include="SQL\SQL_SELECT\Images\page_white_paste.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="SQL\SQL_SELECT\Images\status_ok.png" />
-    <Resource Include="SQL\SQL_SELECT\Images\staus_notok.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IKONY\save_all.ico" />
