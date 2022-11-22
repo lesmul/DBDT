@@ -12,6 +12,7 @@
         <CommandBinding Command="cc:SqlHandler.ExecuteCommand" Executed="Execute_Executed" CanExecute="IsConnected_Executed"/>
         <CommandBinding Command="cc:SqlHandler.ConnectCommand" Executed="Connect_Executed"/>
         <CommandBinding Command="cc:SqlHandler.DisconnectCommand" Executed="Disconnect_Executed"/>
+        <CommandBinding Command="cc:SqlHandler.ParseTable" Executed="ClickAuto" CanExecute="IsConnected_Executed"/>
     </UserControl.CommandBindings>
 
     <Grid>
@@ -87,7 +88,7 @@
                 <Image Source="Images/bug.png"/>
             </Button>
             <Separator />
-            <Button Name="B_Auto" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Włącz auto uzupełnianie" Click="ClickAuto">
+            <Button Command="cc:SqlHandler.ParseTable" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Włącz auto uzupełnianie">
                 <Image x:Name="auto_on" Source="/SQL/SQL_SELECT/Images/auto.png"/>
             </Button>
             <Separator />

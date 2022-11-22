@@ -367,7 +367,6 @@ namespace DBDT.SQL.SQL_SELECT
         {
             if (IsLoaded)
                 e.CanExecute = sqlHandler.IsConnected;
-            //b_wykonaj.IsEnabled = true;
         }
 
         #endregion

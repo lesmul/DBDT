@@ -21,6 +21,7 @@ namespace DBDT.SQL.SQL_SELECT
         public static RoutedUICommand ConnectCommand;
         public static RoutedUICommand DisconnectCommand;
         public static RoutedUICommand ParseOpis;
+        public static RoutedUICommand ParseTable;
 
         public static string NazwaTabeli;
 
@@ -32,6 +33,10 @@ namespace DBDT.SQL.SQL_SELECT
 
             ParseOpis = new RoutedUICommand("SQL_Title", "SQL_Title", typeof(SqlHandler));
 
+            InputGestureCollection executeStrGestures = new InputGestureCollection();
+            ParseTable = new RoutedUICommand("StrukturaTabel", "StrukturaTabel", typeof(SqlHandler), executeStrGestures);
+            executeStrGestures.Add(new KeyGesture(Key.F12));
+
             InputGestureCollection executeGestures = new InputGestureCollection();
             executeGestures.Add(new KeyGesture(Key.F5));
             ExecuteCommand = new RoutedUICommand("Execute", "Execute", typeof(SqlHandler), executeGestures);
@@ -39,8 +44,8 @@ namespace DBDT.SQL.SQL_SELECT
             ConnectCommand = new RoutedUICommand("Connect", "Connect", typeof(SqlHandler));
 
             DisconnectCommand = new RoutedUICommand("Disconnect", "Disconnect", typeof(SqlHandler));
-           
         }
+
         #endregion
 
         private SqlConnection conn;
@@ -246,7 +251,6 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 MessageBox.Show(ex.Message + " " + ex.StackTrace, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
 
             if (count == null)
             {
