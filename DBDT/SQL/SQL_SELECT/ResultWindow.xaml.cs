@@ -15,6 +15,7 @@ using System.Windows.Documents;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace DBDT.SQL.SQL_SELECT
 {
@@ -344,6 +345,44 @@ namespace DBDT.SQL.SQL_SELECT
             Clipboard.SetDataObject("");
             copy_data_update = "";
             copy_data_where = "";
+        }
+
+        void ClickCopy(Object sender, RoutedEventArgs args) 
+        {
+            if (resultGrid.SelectedCells.Count == 0) return;
+
+            //System.Data.DataRowView F_R = (DataRowView)resultGrid.SelectedCells[0].Item;
+
+            try
+            {
+
+                string copy_data = "";
+
+                for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+                {
+                    string value = "";
+                    DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                    if (cell.Item != null)
+                    {
+                        value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim();
+                    }
+                    else
+                    {
+                        goto pomin_null;
+                    }
+
+                    copy_data += value + "\r\n";
+
+                pomin_null:;
+
+                }
+
+                Clipboard.SetDataObject(copy_data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 
