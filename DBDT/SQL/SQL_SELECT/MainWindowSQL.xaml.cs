@@ -283,9 +283,13 @@ namespace DBDT.SQL.SQL_SELECT
 
                     b_wykonaj.IsEnabled = true;
 
-                    if (info > 100000)
+                    if ((int)info > 100000)
                     {
                         UpdateUIStatus(false, "Zapytanie zwróciło dużo wyników jest ich: " + info);
+                    }
+                    else
+                    {
+                        UpdateUIStatus(false, "Zapytanie wyników: " + info);
                     }
                 }
                 else
