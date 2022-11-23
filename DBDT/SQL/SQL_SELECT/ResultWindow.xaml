@@ -16,7 +16,8 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Kopiuj i usuń polskie znaki" Click="ClickCopy_bez_pl" />
-                    <MenuItem Header="Kopiuj" Click="ClickCopy" />
+                    <MenuItem Header="Kopiuj i usuń białe znaki" Click="ClickCopy" />
+                    <MenuItem Header="Kopiuj oryginał" Click="ClickCopyOryg" />
                     <Separator/>
                     <MenuItem Header="Kopiuj z warunkiem where" Click="resultGrid_Click" />
                     <Separator/>

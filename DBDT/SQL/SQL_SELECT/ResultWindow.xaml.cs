@@ -66,19 +66,7 @@ namespace DBDT.SQL.SQL_SELECT
                     {
                         intdindexst = cell.Column.DisplayIndex;
 
-                        //if (copy_data.IndexOf("where") > -1)
-                        //{
-                        //    copy_data = copy_data.Substring(0, copy_data.IndexOf("where"));
-                        //}
                     }
-
-                    //if (intdindex == -1)
-                    //{
-                    //    if (copy_data.IndexOf("where") < 0)
-                    //    {
-                    //        copy_data += " where ";
-                    //    }
-                    //}
 
                     if (intdindex == intdindexst)
                     {
@@ -437,6 +425,50 @@ namespace DBDT.SQL.SQL_SELECT
                         str_cls = str_cls.Replace("Ę", "E");
                         str_cls = str_cls.Replace("ę", "e");
 
+                        copy_data += str_cls + "\r\n";
+                    }
+
+                pomin_null:;
+
+                }
+
+                Clipboard.SetDataObject(copy_data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        void ClickCopyOryg(Object sender, RoutedEventArgs args)
+        {
+            if (resultGrid.SelectedCells.Count == 0) return;
+
+            try
+            {
+
+                string copy_data = "";
+
+                for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+                {
+                    string value = "";
+                    DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                    if (cell.Item != null)
+                    {
+                        value = ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim();
+                    }
+                    else
+                    {
+                        goto pomin_null;
+                    }
+                    if (i == resultGrid.SelectedCells.Count)
+                    {
+                        string str_cls = value;
+                        copy_data += str_cls;
+                    }
+                    else
+                    {
+                        string str_cls = value;
                         copy_data += str_cls + "\r\n";
                     }
 

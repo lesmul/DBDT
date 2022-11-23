@@ -97,6 +97,9 @@
     <Compile Include="DXF\W_EDIT_DATA_DXF.xaml.cs">
       <DependentUpon>W_EDIT_DATA_DXF.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Excel\UC_Kolory.xaml.cs">
+      <DependentUpon>UC_Kolory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MoveThumb.cs" />
     <Compile Include="ResizeThumb.cs" />
     <Compile Include="RotateThumb.cs" />
@@ -123,6 +126,10 @@
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SqlLite.cs" />
     <Compile Include="_connect_mssql.cs" />
     <Page Include="DXF\W_EDIT_DATA_DXF.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Excel\UC_Kolory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

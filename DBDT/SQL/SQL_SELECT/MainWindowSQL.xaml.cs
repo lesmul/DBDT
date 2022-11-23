@@ -271,6 +271,7 @@ namespace DBDT.SQL.SQL_SELECT
 
                 errorsGrid.ItemsSource = errors;
                 errorsExpander.IsExpanded = (errors.Length != 0);
+
                 if (errors.Length == 0)
                 {
 
@@ -288,13 +289,13 @@ namespace DBDT.SQL.SQL_SELECT
 
                     b_wykonaj.IsEnabled = true;
 
-                    if ((int)info > 100000)
+                    if ((double)info > 100000)
                     {
                         UpdateUIStatus(false, "Zapytanie zwróciło dużo wyników jest ich: " + info);
-                    }
-                    else
-                    {
-                        UpdateUIStatus(true, "Zapytanie zwróciło wyników: " + info);
+                    //}
+                    //else
+                    //{
+                    //    UpdateUIStatus(true, "Zapytanie zwróciło wyników: " + info);
                     }
                 }
                 else
@@ -336,7 +337,7 @@ namespace DBDT.SQL.SQL_SELECT
 
                 
 
-                if (result.Rows.Count > 100000)
+                if ((double)result.Rows.Count > 100000)
                 {
                     UpdateUIStatus(false, "Zapytanie zwróciło dużo wyników jest ich: " + result.Rows.Count.ToString());
                 }
@@ -568,9 +569,13 @@ namespace DBDT.SQL.SQL_SELECT
                 }
                 else
                 {
-                    if (str_cls.Trim() != "")
+                    if (str_cls.Trim() != "" && str_cls.IndexOf("=") < 0)
                     {
                         sqlr += "'%" + str_cls + "%'" + "\r\n";
+                    }
+                    else
+                    {
+                        sqlr += str_cls;
                     }
                 }
             }
@@ -611,7 +616,7 @@ namespace DBDT.SQL.SQL_SELECT
             string sqlr = "";
             foreach (var sub in spl)
             {
-                if (sub.ToLower().ToString().StartsWith("or"))
+                if (sub.ToLower().ToString().StartsWith("or") || sub.ToLower().ToString().EndsWith("\r\nor"))
                 {
                     sqlr += "and ";
                 }
@@ -634,7 +639,7 @@ namespace DBDT.SQL.SQL_SELECT
             string sqlr = "";
             foreach (var sub in spl)
             {
-                if (sub.ToLower().ToString().StartsWith("and"))
+                if (sub.ToLower().ToString().StartsWith("and") || sub.ToLower().ToString().EndsWith("\r\nand"))
                 {
                     sqlr += "or ";
                 }
