@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\SQLite.3.13.0\build\net45\SQLite.props" Condition="Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -53,6 +54,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Desktop\PRZYKLADY\DXF\netDxf-master\netDxf\bin\Debug\net45\netDxf.dll</HintPath>
     </Reference>
+    <Reference Include="PropertyChanged, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.4.1.0\lib\net40\PropertyChanged.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -91,6 +95,17 @@
     <Compile Include="Adorners\SizeAdorner.cs" />
     <Compile Include="Adorners\SizeChrome.cs" />
     <Compile Include="DesignerItemDecorator.cs" />
+    <Compile Include="DrzewoProcesu\Directory\Data\DirectoryItem.cs" />
+    <Compile Include="DrzewoProcesu\Directory\Data\DirectoryItemType.cs" />
+    <Compile Include="DrzewoProcesu\Directory\DirectoryStructure.cs" />
+    <Compile Include="DrzewoProcesu\Directory\ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="DrzewoProcesu\Directory\ViewModels\Base\RelayCommand.cs" />
+    <Compile Include="DrzewoProcesu\Directory\ViewModels\DirectoryItemViewModel.cs" />
+    <Compile Include="DrzewoProcesu\Directory\ViewModels\DirectoryStructureViewModel.cs" />
+    <Compile Include="DrzewoProcesu\HeaderToImageConverter.cs" />
+    <Compile Include="DrzewoProcesu\UC_PROCES_TREE.xaml.cs">
+      <DependentUpon>UC_PROCES_TREE.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DXF\CDxfOBJ.cs" />
     <Compile Include="DXF\DXF.cs" />
     <Compile Include="DXF\LOAD_SAVE_DXF.cs" />
@@ -125,6 +140,10 @@
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SQL.cs" />
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SqlLite.cs" />
     <Compile Include="_connect_mssql.cs" />
+    <Page Include="DrzewoProcesu\UC_PROCES_TREE.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DXF\W_EDIT_DATA_DXF.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -281,6 +300,16 @@
     <Resource Include="SQL\SQL_SELECT\Images\auto.png" />
     <Resource Include="SQL\SQL_SELECT\Images\auto_on.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IKONY\logo.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="DrzewoProcesu\Images\drive.png" />
+    <Resource Include="DrzewoProcesu\Images\file.png" />
+    <Resource Include="DrzewoProcesu\Images\folder-closed.png" />
+    <Resource Include="DrzewoProcesu\Images\folder-open.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -290,7 +319,10 @@
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.6.6.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.6.4\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.4.1.0\build\PropertyChanged.Fody.props'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.116.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Import Project="..\packages\Fody.6.6.4\build\Fody.targets" Condition="Exists('..\packages\Fody.6.6.4\build\Fody.targets')" />
 </Project>

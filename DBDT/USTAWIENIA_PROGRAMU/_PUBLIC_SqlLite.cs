@@ -253,10 +253,11 @@ namespace DBDT.USTAWIENIA_PROGRAMU
         /// <param name="str_serwer"></param>
         /// <param name="str_nazwa_bazy"></param>
         /// <returns></returns>
-        public static Boolean DODAJ_REKORD_PAR_POLACZENIA(string str_serwer, string str_nazwa_bazy)
+        public static Boolean DODAJ_REKORD_PAR_POLACZENIA(string str_serwer, string str_nazwa_bazy, 
+            string pole10 ="", string nazwa_pola = "", bool boolZastap = false)
         {
 
-            if (str_serwer.Trim() == "" || str_nazwa_bazy.Trim() == "") return false;
+            if ((str_serwer.Trim() == "" || str_nazwa_bazy.Trim() == "") && boolZastap == false) return false;
 
             SQLiteCommand command_insert = new SQLiteCommand();
 
@@ -282,13 +283,22 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 MessageBox.Show(ex.Message, "Błąd");
             }
 
-            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `kto_zmienil`)" +
-                " VALUES(@serwer, @nazwa_bazy, @kto_zmienil)";
-
             command_insert.CommandType = CommandType.Text;
+
+            if (boolZastap == true)
+            {
+                command_insert.CommandText = "DELETE FROM `ParametryPalaczenia` WHERE `serwer` ='" + str_serwer + "' and `nazwa_bazy` = '" + str_nazwa_bazy 
+                    + "' and `pole9` = '" + nazwa_pola + "'";
+                command_insert.ExecuteNonQuery();
+            }
+
+            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole9`, `kto_zmienil`)" +
+                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole9, @kto_zmienil)";
 
             command_insert.Parameters.AddWithValue("@serwer", str_serwer);
             command_insert.Parameters.AddWithValue("@nazwa_bazy", str_nazwa_bazy);
+            command_insert.Parameters.AddWithValue("@pole10", pole10);
+            command_insert.Parameters.AddWithValue("@pole9", nazwa_pola);
             command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
 
             try
@@ -330,7 +340,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 MessageBox.Show(ex.Message, "Błąd");
             }
 
-            command_insert.CommandText = "DELETE FROM `ParametryPalaczenia` where `id` IN (SELECT `id` from `ParametryPalaczenia` order by `id` asc limit 500)";
+            command_insert.CommandText = "DELETE FROM `ParametryPalaczenia` where `id` IN (SELECT `id` from `ParametryPalaczenia` order by `id` asc limit 500) AND nazwa_bazy <> ''";
          
             command_insert.CommandType = CommandType.Text;
 

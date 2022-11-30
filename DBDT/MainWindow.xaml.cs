@@ -1,4 +1,6 @@
-﻿using DBDT.DXF;
+﻿using DBDT.DrzewoProcesu;
+using DBDT.DXF;
+using DBDT.Excel;
 using DBDT.Konfiguracja;
 using DBDT.SQL;
 using DBDT.SQL.SQL_SELECT;
@@ -219,7 +221,6 @@ namespace DBDT
 
         }
 
-
         /// <summary>
         /// Refresh windows list
         /// </summary>
@@ -264,6 +265,40 @@ namespace DBDT
         private void close_sql(object sender, CancelEventArgs e)
         {
             Container.Children.Clear();
+        }
+
+        private void FindColorWindow_Click(object sender, RoutedEventArgs e)
+        {
+            UC_Kolory sp = new UC_Kolory();
+
+            ScrollViewer sv = new ScrollViewer
+            {
+                Content = sp,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+
+            Container.Children.Add(new MdiChild { Content = sp, Title = "Kolory - automat " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+
+        }
+        private void Window_Tree_Click(object sender, RoutedEventArgs e)
+        {
+            UC_PROCES_TREE sp = new UC_PROCES_TREE();
+
+            ScrollViewer sv = new ScrollViewer
+            {
+                Content = sp,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+
+            Container.Children.Add(new MdiChild { Content = sp, Title = "Drzewo procesu " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+
+        }
+
+        private void Lokalizacja_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -40,7 +40,7 @@ namespace DBDT.SQL.SQL_SELECT
 
                 DataTable dt = new DataTable();
 
-                dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, serwer, nazwa_bazy FROM ParametryPalaczenia order by id desc");
+                dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, serwer, nazwa_bazy FROM ParametryPalaczenia WHERE nazwa_bazy <> '' order by id desc");
 
                 if (dt.Rows.Count == 0)
                 {

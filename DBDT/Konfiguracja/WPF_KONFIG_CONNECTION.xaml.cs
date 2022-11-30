@@ -25,6 +25,15 @@ namespace DBDT.Konfiguracja
         public WPF_KONFIG_CONNECTION()
         {
             InitializeComponent();
+
+            DataTable dt = new DataTable();
+
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = 'TXT_LOKALIZACJA_PLIKOW_1' order by id desc");
+
+            if (dt.Rows.Count > 0)
+            {
+                TXT_LOKALIZACJA_PLIKOW_1.Text = dt.Rows[0]["pole10"].ToString();
+            }
         }
 
         private void zakoncz_click(object sender, RoutedEventArgs e)
@@ -38,9 +47,9 @@ namespace DBDT.Konfiguracja
                     _PUBLIC_SqlLite.Existsdb("");
            
                     DataTable dt = new DataTable();
-                    dt = _PUBLIC_SqlLite.SelectQuery("select count(*) from ParametryPalaczenia");
+                    dt = _PUBLIC_SqlLite.SelectQuery("select count(*) from ParametryPalaczenia where `nazwa_bazy` <> ''");
 
-                    if (dt.Rows.Count > 500)
+                    if (dt.Rows.Count > 1500)
                     {
                         _PUBLIC_SqlLite.USUN_REKORDY_PAR_POLACZENIA();
                     }
@@ -83,7 +92,7 @@ namespace DBDT.Konfiguracja
         {
             DataTable dt = new DataTable();
 
-            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, serwer, nazwa_bazy, serwer || ' - ' || nazwa_bazy as SerwerIBaza FROM ParametryPalaczenia order by id desc");
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, serwer, nazwa_bazy, serwer || ' - ' || nazwa_bazy as SerwerIBaza FROM ParametryPalaczenia WHERE nazwa_bazy <> '' order by id desc");
 
             CB_HIST_POL.ItemsSource = dt.AsDataView();
 
@@ -102,6 +111,19 @@ namespace DBDT.Konfiguracja
 
             TXT_NAZWA_SERWERA.Text = ((System.Data.DataRowView)selectedItem).Row.ItemArray[1].ToString();
             TXT_NAZWA_BAZY.Text = ((System.Data.DataRowView)selectedItem).Row.ItemArray[2].ToString();
+        }
+        private void ZAPISZ_LOK_KATALAGU_Click(object sender, RoutedEventArgs e)
+        {
+            if (TXT_LOKALIZACJA_PLIKOW_1.Text.Trim() == "")
+            {
+                return;
+            }
+
+            var dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
+            if (dr == MessageBoxResult.Yes)
+            {
+                _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_1.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_1",true);
+            }
         }
     }
 }

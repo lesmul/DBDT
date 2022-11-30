@@ -54,3 +54,14 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DBDT.csproj.C
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DBDT.csproj.CopyComplete
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DBDT.exe
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DBDT.pdb
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\PropertyChanged.dll
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\PropertyChanged.pdb
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\PropertyChanged.xml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\SQL\UWPF_EXCEL_SQL .baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DrzewoProcesu\UC_PROCES_TREE.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\Excel\UC_Kolory.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\SQL\UWPF_EXCEL_SQL .g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\SQL\WPF_DODAJ_EXCEL.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DrzewoProcesu\UC_PROCES_TREE.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\Excel\UC_Kolory.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\SQL\WPF_DODAJ_EXCEL.baml
