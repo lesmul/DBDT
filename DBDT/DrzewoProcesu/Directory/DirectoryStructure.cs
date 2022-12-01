@@ -23,7 +23,7 @@ namespace DBDT
             }
             else
             {
-                return Directory.GetLogicalDrives().Select(drive => new DirectoryItem { FullPath = lokalizacja_start, Type = DirectoryItemType.Drive }).Where(drive => drive.FullPath == lokalizacja_start).ToList();
+                return Directory.GetLogicalDrives().Select(drive => new DirectoryItem { FullPath = lokalizacja_start, Type = DirectoryItemType.Folder }).Where(drive => drive.FullPath == lokalizacja_start).ToList();
             }
 
         }
