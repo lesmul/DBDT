@@ -41,6 +41,59 @@ namespace DBDT
             Container.Children.CollectionChanged += (o, e) => Menu_RefreshWindows();
             Container.MdiChildTitleChanged += Container_MdiChildTitleChanged;
 
+            DataTable dt = new DataTable();
+
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole8, pole9 FROM ParametryPalaczenia WHERE pole9 LIKE 'TXT_LOKALIZACJA_PLIKOW_%'");
+
+            if (dt.Rows.Count > 0)
+            {
+                DataView dv = new DataView(dt);
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_1'";
+                if (dv.Count > 0)
+                {
+                   if(dv[0]["pole8"].ToString() !="") Drzewo_1.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_1.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_2'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_2.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_2.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_3'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_3.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_3.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_4'";
+                if (dv.Count > 0)
+                {
+                   if (dv[0]["pole8"].ToString() != "") Drzewo_4.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_4.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_5'";
+                if (dv.Count > 0)
+                {
+                   if (dv[0]["pole8"].ToString() != "") Drzewo_5.Header = dv[0]["pole8"].ToString();
+                }
+                //else
+                //{
+                //    Drzewo_5.IsEnabled = false;
+               // }
+            }
         }
 
         #region Mdi-like title

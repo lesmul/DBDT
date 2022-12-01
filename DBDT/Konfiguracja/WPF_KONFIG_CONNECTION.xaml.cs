@@ -28,11 +28,41 @@ namespace DBDT.Konfiguracja
 
             DataTable dt = new DataTable();
 
-            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = 'TXT_LOKALIZACJA_PLIKOW_1' order by id desc");
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10, pole8, pole9 FROM ParametryPalaczenia WHERE pole9 LIKE 'TXT_LOKALIZACJA_PLIKOW_%' order by id desc");
 
             if (dt.Rows.Count > 0)
             {
-                TXT_LOKALIZACJA_PLIKOW_1.Text = dt.Rows[0]["pole10"].ToString();
+                DataView dv = new DataView(dt);
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_1'";
+                if (dv.Count > 0)
+                {
+                    TXT_LOKALIZACJA_PLIKOW_1.Text = dv[0]["pole10"].ToString();
+                    TXT_LOKALIZACJA_PLIKOW_OPIS_1.Text = dv[0]["pole8"].ToString();
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_2'";
+                if (dv.Count > 0)
+                {
+                    TXT_LOKALIZACJA_PLIKOW_2.Text = dv[0]["pole10"].ToString();
+                    TXT_LOKALIZACJA_PLIKOW_OPIS_2.Text = dv[0]["pole8"].ToString();
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_3'";
+                if (dv.Count > 0)
+                {
+                    TXT_LOKALIZACJA_PLIKOW_3.Text = dv[0]["pole10"].ToString();
+                    TXT_LOKALIZACJA_PLIKOW_OPIS_3.Text = dv[0]["pole8"].ToString();
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_4'";
+                if (dv.Count > 0)
+                {
+                    TXT_LOKALIZACJA_PLIKOW_4.Text = dv[0]["pole10"].ToString();
+                    TXT_LOKALIZACJA_PLIKOW_OPIS_4.Text = dv[0]["pole8"].ToString();
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_5'";
+                if (dv.Count > 0)
+                {
+                    TXT_LOKALIZACJA_PLIKOW_5.Text = dv[0]["pole10"].ToString();
+                    TXT_LOKALIZACJA_PLIKOW_OPIS_5.Text = dv[0]["pole8"].ToString();
+                }
             }
         }
 
@@ -125,7 +155,7 @@ namespace DBDT.Konfiguracja
                 var dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
                 if (dr == MessageBoxResult.Yes)
                 {
-                    _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_1.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_1",true);
+                    _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_1.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_1.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_1",true);
                 }
                 break;
                 case "T2":
@@ -137,7 +167,7 @@ namespace DBDT.Konfiguracja
                     dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
                     if (dr == MessageBoxResult.Yes)
                     {
-                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_2.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_2", true);
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "",TXT_LOKALIZACJA_PLIKOW_OPIS_2.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_2.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_2", true);
                     }
                     break;
                 case "T3":
@@ -149,7 +179,7 @@ namespace DBDT.Konfiguracja
                     dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
                     if (dr == MessageBoxResult.Yes)
                     {
-                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_3.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_3", true);
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_3.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_3.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_3", true);
                     }
                     break;
                 case "T4":
@@ -161,7 +191,7 @@ namespace DBDT.Konfiguracja
                     dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
                     if (dr == MessageBoxResult.Yes)
                     {
-                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_4.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_4", true);
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_4.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_4.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_4", true);
                     }
                     break;
                 case "T5":
@@ -173,7 +203,7 @@ namespace DBDT.Konfiguracja
                     dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
                     if (dr == MessageBoxResult.Yes)
                     {
-                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_5.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_5", true);
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_5.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_5.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_5", true);
                     }
                     break;
                 default:

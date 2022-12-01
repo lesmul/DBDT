@@ -38,7 +38,7 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
             else
             {
                 this.Items = new ObservableCollection<DirectoryItemViewModel>(
-                children.Select(drive => new DirectoryItemViewModel(drive.FullPath, DirectoryItemType.Drive)));
+                children.Select(folder => new DirectoryItemViewModel(folder.FullPath, DirectoryItemType.Drive)));
             }
        
         }

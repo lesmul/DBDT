@@ -6,6 +6,7 @@ using System.Windows;
 using System.Data.Common;
 using System.Xml.Linq;
 using System.CodeDom;
+using System.Net.NetworkInformation;
 
 
 namespace DBDT.USTAWIENIA_PROGRAMU
@@ -253,8 +254,8 @@ namespace DBDT.USTAWIENIA_PROGRAMU
         /// <param name="str_serwer"></param>
         /// <param name="str_nazwa_bazy"></param>
         /// <returns></returns>
-        public static Boolean DODAJ_REKORD_PAR_POLACZENIA(string str_serwer, string str_nazwa_bazy, 
-            string pole10 ="", string nazwa_pola = "", bool boolZastap = false)
+        public static Boolean DODAJ_REKORD_PAR_POLACZENIA(string str_serwer, string str_nazwa_bazy,
+            string pole8 = "",string pole10 ="", string nazwa_pola = "", bool boolZastap = false)
         {
 
             if ((str_serwer.Trim() == "" || str_nazwa_bazy.Trim() == "") && boolZastap == false) return false;
@@ -292,12 +293,13 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 command_insert.ExecuteNonQuery();
             }
 
-            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole9`, `kto_zmienil`)" +
-                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole9, @kto_zmienil)";
+            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole9`, `pole8`, `kto_zmienil`)" +
+                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole9, @pole8, @kto_zmienil)";
 
             command_insert.Parameters.AddWithValue("@serwer", str_serwer);
             command_insert.Parameters.AddWithValue("@nazwa_bazy", str_nazwa_bazy);
             command_insert.Parameters.AddWithValue("@pole10", pole10);
+            command_insert.Parameters.AddWithValue("@pole8", pole8);
             command_insert.Parameters.AddWithValue("@pole9", nazwa_pola);
             command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
 
