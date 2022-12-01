@@ -24,13 +24,16 @@ namespace DBDT.DrzewoProcesu
     /// </summary>
     public partial class UC_PROCES_TREE : UserControl
     {
-        public UC_PROCES_TREE()
+        string nazwa_obiektu;
+        public UC_PROCES_TREE(string nazwa_ob)
         {
             InitializeComponent();
 
+            nazwa_obiektu = nazwa_ob;
+
             DataTable dt = new DataTable();
 
-            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = 'TXT_LOKALIZACJA_PLIKOW_1' order by id desc");
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = '" + nazwa_obiektu +  "' order by id desc");
       
             if(dt.Rows.Count == 0)
             {
@@ -46,7 +49,7 @@ namespace DBDT.DrzewoProcesu
         {
             DataTable dt = new DataTable();
 
-            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = 'TXT_LOKALIZACJA_PLIKOW_1' order by id desc");
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = '" + nazwa_obiektu + "' order by id desc");
 
             if (dt.Rows.Count == 0)
             {

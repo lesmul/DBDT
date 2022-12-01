@@ -114,16 +114,72 @@ namespace DBDT.Konfiguracja
         }
         private void ZAPISZ_LOK_KATALAGU_Click(object sender, RoutedEventArgs e)
         {
-            if (TXT_LOKALIZACJA_PLIKOW_1.Text.Trim() == "")
+            switch (((System.Windows.FrameworkElement)sender).Tag.ToString())
             {
-                return;
-            }
+                case "T1":
+                if (TXT_LOKALIZACJA_PLIKOW_1.Text.Trim() == "")
+                {
+                    return;
+                }
 
-            var dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
-            if (dr == MessageBoxResult.Yes)
-            {
-                _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_1.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_1",true);
+                var dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
+                if (dr == MessageBoxResult.Yes)
+                {
+                    _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_1.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_1",true);
+                }
+                break;
+                case "T2":
+                    if (TXT_LOKALIZACJA_PLIKOW_2.Text.Trim() == "")
+                    {
+                        return;
+                    }
+
+                    dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
+                    if (dr == MessageBoxResult.Yes)
+                    {
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_2.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_2", true);
+                    }
+                    break;
+                case "T3":
+                    if (TXT_LOKALIZACJA_PLIKOW_3.Text.Trim() == "")
+                    {
+                        return;
+                    }
+
+                    dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
+                    if (dr == MessageBoxResult.Yes)
+                    {
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_3.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_3", true);
+                    }
+                    break;
+                case "T4":
+                    if (TXT_LOKALIZACJA_PLIKOW_2.Text.Trim() == "")
+                    {
+                        return;
+                    }
+
+                    dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
+                    if (dr == MessageBoxResult.Yes)
+                    {
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_4.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_4", true);
+                    }
+                    break;
+                case "T5":
+                    if (TXT_LOKALIZACJA_PLIKOW_2.Text.Trim() == "")
+                    {
+                        return;
+                    }
+
+                    dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
+                    if (dr == MessageBoxResult.Yes)
+                    {
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_5.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_5", true);
+                    }
+                    break;
+                default:
+                break;
             }
+            
         }
     }
 }

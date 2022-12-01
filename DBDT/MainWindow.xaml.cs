@@ -283,7 +283,28 @@ namespace DBDT
         }
         private void Window_Tree_Click(object sender, RoutedEventArgs e)
         {
-            UC_PROCES_TREE sp = new UC_PROCES_TREE();
+            string nazwa_obiektu = "";
+
+            switch (((System.Windows.FrameworkElement)sender).Tag.ToString())
+            {
+                case "WT_1":
+                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_1";
+                break;
+                case "WT_2":
+                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_2";
+                    break;
+                case "WT_3":
+                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_3";
+                    break;
+                case "WT_4":
+                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_4";
+                    break;
+                case "WT_5":
+                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_5";
+                    break;
+            }
+
+            UC_PROCES_TREE sp = new UC_PROCES_TREE(nazwa_obiektu);
 
             ScrollViewer sv = new ScrollViewer
             {

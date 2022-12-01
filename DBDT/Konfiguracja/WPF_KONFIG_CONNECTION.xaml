@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBDT.Konfiguracja"
         mc:Ignorable="d"
-        Title="Konfiguracja połączenia do bazy danych" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png" WindowStyle="ToolWindow" Width="637" Height="295" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5,5,5,5" Margin="-1,0,0,0">
+        Title="Konfiguracja połączenia do bazy danych" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png" WindowStyle="ToolWindow" Width="637" Height="395" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5,5,5,5" Margin="-1,0,0,0">
     <Grid Margin="-5,-5,-5,4">
 
-        <TabControl HorizontalAlignment="Center" Height="266" VerticalAlignment="Top" Width="627" Margin="0,14,0,0">
+        <TabControl HorizontalAlignment="Center" Height="356" VerticalAlignment="Top" Width="627" Margin="0,14,0,0">
             <TabItem Header="Połączenia do bazy danych">
                 <Grid Background="#FFE5E5E5">
                     <Button Content="Zakończ i zapisz" Height="43" Margin="0,186,0,0" Width="601" Click="zakoncz_click" BorderThickness="1,1,1,1" VerticalAlignment="Top" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
@@ -69,8 +69,8 @@
             </TabItem>
             <TabItem Header="Konfiguracja lokalizacji katalogów">
                 <Grid Background="#FFE5E5E5">
-                    <Label Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,13,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_1" HorizontalAlignment="Left" Height="28" Margin="7,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="525" ToolTip="Podaj adre IP lub nazwę serwera" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                    <Label Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,10,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_1" HorizontalAlignment="Left" Height="28" Margin="7,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="525" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
                         <TextBox.Style>
                             <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
                                 <Style.Resources>
@@ -94,7 +94,116 @@
                             </Style>
                         </TextBox.Style>
                     </TextBox>
-                    <Button Name="ZAPISZ_LOK_KATALAGU" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,37,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
+                    <Button Name="ZAPISZ_LOK_KATALAGU_1" Tag="T1" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,37,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
+                   
+                    <Label Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,70,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_2" HorizontalAlignment="Left" Height="28" Margin="7,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="525" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj lokalizację plików do bazy wiedzy" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button Name="ZAPISZ_LOK_KATALAGU_2"  Tag="T2" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,95,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
+
+                    <Label Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,130,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_3" HorizontalAlignment="Left" Height="28" Margin="7,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="525" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj lokalizację plików do bazy wiedzy" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button Name="ZAPISZ_LOK_KATALAGU_3"  Tag="T3" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,155,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
+
+                    <Label Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,190,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_4" HorizontalAlignment="Left" Height="28" Margin="7,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="525" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj lokalizację plików do bazy wiedzy" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button Name="ZAPISZ_LOK_KATALAGU_4"  Tag="T4" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,215,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
+
+                    <Label Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,250,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_5" HorizontalAlignment="Left" Height="28" Margin="7,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="525" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Podaj lokalizację plików do bazy wiedzy" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button Name="ZAPISZ_LOK_KATALAGU_5" Tag="T5" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,275,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
+                    
                 </Grid>
             </TabItem>
         </TabControl>
