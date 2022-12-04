@@ -268,16 +268,32 @@ namespace DBDT.SQL.SQL_SELECT
             e.Errors.CopyTo(errorsFound, 0);
             errors.AddRange(errorsFound);
         }
-        public string SQL_Title(string str_opis = "")
+        public string[] SQL_Title(string str_opis = "", string str_poziom1 = "", string str_poziom2 = "", string str_poziom3 = "", 
+            string str_poziom4 = "", string str_poziom5 = "", string str_poziom6 = "", bool blokuj_zmiane_opisu = false)
         {
 
             OpisSQL opis = new OpisSQL();
             opis.TXT_OPIS_ZAPYTANIA_SQL.Text = str_opis;
             opis.Focus();
-            opis.ShowDialog();
-            var opisx = opis.TXT_OPIS_ZAPYTANIA_SQL.Text.Trim();
-            return opisx;
-
+            if (blokuj_zmiane_opisu == true) opis.TXT_OPIS_ZAPYTANIA_SQL.IsEnabled= false;
+            opis.CBpoziom1.Text = str_poziom1;
+            opis.CBpoziom2.Text = str_poziom2;
+            opis.CBpoziom3.Text = str_poziom3;
+            opis.CBpoziom4.Text = str_poziom4;
+            opis.CBpoziom5.Text = str_poziom5;
+            opis.CBpoziom6.Text = str_poziom6;
+            if ( opis.ShowDialog() == true)
+            {
+                string[] danezw = { opis.TXT_OPIS_ZAPYTANIA_SQL.Text.Trim(), opis.CBpoziom1.Text.Trim(), opis.CBpoziom2.Text.Trim(),
+                    opis.CBpoziom3.Text.Trim(), opis.CBpoziom4.Text.Trim(), opis.CBpoziom5.Text.Trim(), opis.CBpoziom6.Text.Trim() };
+      
+                return danezw;
+            }
+            else
+            {
+                return null;
+            }
+ 
         }
     }
 }

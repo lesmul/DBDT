@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBDT.SQL.SQL_SELECT"
         mc:Ignorable="d"
-        Title="Podaj opis komendy SQL" Height="120" Width="670" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="ToolWindow">
+        Title="Podaj opis komendy SQL" Height="310" Width="675" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="ToolWindow">
     <Grid>
-        <TextBox x:Name="TXT_OPIS_ZAPYTANIA_SQL" HorizontalAlignment="Left" Height="24" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="640" ToolTip="Podaj opis czego dotyczy komenda SQL" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="0" SpellCheck.IsEnabled="True">
+        <TextBox x:Name="TXT_OPIS_ZAPYTANIA_SQL" HorizontalAlignment="Left" Height="24" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="640" ToolTip="Podaj opis czego dotyczy komenda SQL" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="100" SpellCheck.IsEnabled="True">
             <TextBox.Style>
                 <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
                     <Style.Resources>
@@ -31,7 +31,19 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <Button Content="OK" HorizontalAlignment="Left" Height="30" Margin="10,39,0,0" VerticalAlignment="Top" Width="640" Click="Button_Click"/>
+        <Button Content="OK" HorizontalAlignment="Left" Height="30" Margin="80,228,0,0" VerticalAlignment="Top" Width="570" Click="Button_Click"/>
+        <Label Content="Poziom 1:" HorizontalAlignment="Left" Height="25" Margin="10,40,0,0" VerticalAlignment="Top" Width="65"/>
+        <ComboBox x:Name="CBpoziom1" HorizontalAlignment="Left" Height="25" Margin="80,40,0,0" VerticalAlignment="Top" Width="570" IsSynchronizedWithCurrentItem="False" IsEditable="True"/>
+        <Label Content="Poziom 2:" HorizontalAlignment="Left" Height="25" Margin="10,70,0,0" VerticalAlignment="Top" Width="65"/>
+        <ComboBox x:Name="CBpoziom2" HorizontalAlignment="Left" Height="25" Margin="80,70,0,0" VerticalAlignment="Top" Width="570" IsSynchronizedWithCurrentItem="False" IsEditable="True"/>
+        <Label Content="Poziom 3:" HorizontalAlignment="Left" Height="25" Margin="10,100,0,0" VerticalAlignment="Top" Width="65"/>
+        <ComboBox x:Name="CBpoziom3" HorizontalAlignment="Left" Height="25" Margin="80,100,0,0" VerticalAlignment="Top" Width="570" IsSynchronizedWithCurrentItem="False" IsEditable="True"/>
+        <Label Content="Poziom 4:" HorizontalAlignment="Left" Height="25" Margin="10,130,0,0" VerticalAlignment="Top" Width="65"/>
+        <ComboBox x:Name="CBpoziom4" HorizontalAlignment="Left" Height="25" Margin="80,130,0,0" VerticalAlignment="Top" Width="570" IsSynchronizedWithCurrentItem="False" IsEditable="True"/>
+        <Label Content="Poziom 5:" HorizontalAlignment="Left" Height="25" Margin="10,160,0,0" VerticalAlignment="Top" Width="65"/>
+        <ComboBox x:Name="CBpoziom5" HorizontalAlignment="Left" Height="25" Margin="80,160,0,0" VerticalAlignment="Top" Width="570" IsSynchronizedWithCurrentItem="False" IsEditable="True"/>
+        <Label Content="Poziom 6:" HorizontalAlignment="Left" Height="25" Margin="10,190,0,0" VerticalAlignment="Top" Width="65"/>
+        <ComboBox x:Name="CBpoziom6" HorizontalAlignment="Left" Height="25" Margin="80,190,0,0" VerticalAlignment="Top" Width="570" IsSynchronizedWithCurrentItem="False" IsEditable="True"/>
 
     </Grid>
 </Window>

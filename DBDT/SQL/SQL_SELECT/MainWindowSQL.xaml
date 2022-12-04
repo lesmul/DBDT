@@ -103,7 +103,7 @@
                  VerticalScrollBarVisibility="Auto"
                  Padding="5"
                  FontFamily="Courier New"
-                 Grid.Row="2" TextChanged="textChengen" FontSize="14" >
+                 Grid.Row="2" TextChanged="textChengen" FontSize="14" MaxLength="9000" >
             <TextBox.ContextMenu>
                 <ContextMenu  Name="cxm" Opened="CxmOpened">
                     <MenuItem Header="Wytnij" Name="cxmItemCut" Click="ClickCut" />

@@ -65,3 +65,5 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DrzewoProcesu\U
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fody.CopyLocal.cache
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fody.RuntimeCopyLocal.cache
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DrzewoSQL\UC_SQL_TREE.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DrzewoSQL\UC_SQL_TREE.baml

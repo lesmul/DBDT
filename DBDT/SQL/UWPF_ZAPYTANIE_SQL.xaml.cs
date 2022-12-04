@@ -39,7 +39,7 @@ namespace DBDT.SQL
         private void load_data(object sender, RoutedEventArgs e)
         {
             
-            dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql from sql_zapytania order by id desc");
+            dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql, pole1, pole2, pole3, pole4, pole5, pole6 from sql_zapytania order by id desc");
 
             LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
         }
@@ -65,7 +65,7 @@ namespace DBDT.SQL
    
             var parentWindow = Window.GetWindow(this.Parent);
 
-            ((DBDT.MainWindow)parentWindow).Container.Children.Add(new MdiChild { Content = sp, Name = "FindSQLWindow", Title = "Zapytanie SQL " + ((DBDT.MainWindow)parentWindow).ooo++, WindowState = WindowState.Maximized, Width = ((DBDT.MainWindow)parentWindow).SHT_W, Height = ((DBDT.MainWindow)parentWindow).SHT_H });
+            ((MainWindow)parentWindow).Container.Children.Add(new MdiChild { Content = sp, Name = "FindSQLWindow", Title = "Zapytanie SQL " + ((DBDT.MainWindow)parentWindow).ooo++, WindowState = WindowState.Maximized, Width = ((DBDT.MainWindow)parentWindow).SHT_W, Height = ((DBDT.MainWindow)parentWindow).SHT_H });
             //parentWindow.Close(); // zakończ program
        
         }
@@ -73,7 +73,7 @@ namespace DBDT.SQL
         {
             try
             {
-                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql from sql_zapytania where nazwa_zapytania like '%" + txtWhere.Text.Trim() + "%' order by id desc");
+                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql, pole1, pole2, pole3, pole4, pole5, pole6 from sql_zapytania where nazwa_zapytania like '%" + txtWhere.Text.Trim() + "%' order by id desc");
                 LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace DBDT.SQL
         {
             if (txtWhere.Text.Trim() == "")
             {
-                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql from sql_zapytania order by id desc");
+                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql, pole1, pole2, pole3, pole4, pole5, pole6 from sql_zapytania order by id desc");
                 LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
             }
         }
@@ -96,12 +96,19 @@ namespace DBDT.SQL
             sqlHandler = new SqlHandler();
 
             Object selectedItem = LB_HIST_ZAPYTAN_SQL.SelectedItem;
-            string opis = sqlHandler.SQL_Title(((System.Data.DataRowView)selectedItem).Row.ItemArray[1].ToString());
+            string[] opiszw = sqlHandler.SQL_Title(((DataRowView)selectedItem).Row.ItemArray[1].ToString(),
+                ((DataRowView)selectedItem).Row.ItemArray[3].ToString(),
+                ((DataRowView)selectedItem).Row.ItemArray[4].ToString(),
+                ((DataRowView)selectedItem).Row.ItemArray[5].ToString(),
+                ((DataRowView)selectedItem).Row.ItemArray[6].ToString(),
+                ((DataRowView)selectedItem).Row.ItemArray[7].ToString(),
+                ((DataRowView)selectedItem).Row.ItemArray[8].ToString());
 
-            if (opis != "")
+            if (opiszw != null)
             {
-                _PUBLIC_SqlLite.ZMIEN_OPIS_REKORD_SQL_ZAPYTANIA(opis, ((System.Data.DataRowView)selectedItem).Row.ItemArray[0].ToString());
-                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql from sql_zapytania order by id desc");
+                _PUBLIC_SqlLite.ZMIEN_OPIS_REKORD_SQL_ZAPYTANIA(opiszw[0], opiszw[1], opiszw[2], opiszw[3], opiszw[4], opiszw[5], opiszw[6],
+                    ((DataRowView)selectedItem).Row.ItemArray[0].ToString());
+                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql, pole1, pole2, pole3, pole4, pole5, pole6 from sql_zapytania order by id desc");
                 LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
             }
         }
@@ -113,7 +120,7 @@ namespace DBDT.SQL
             {
                 Object selectedItem = LB_HIST_ZAPYTAN_SQL.SelectedItem;
                 _PUBLIC_SqlLite.USUN_REKORD_SQL_ZAPYTANIA(((System.Data.DataRowView)selectedItem).Row.ItemArray[0].ToString());
-                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql from sql_zapytania order by id desc");
+                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_zapytania, sql, pole1, pole2, pole3, pole4, pole5, pole6 from sql_zapytania order by id desc");
                 LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
             }
 

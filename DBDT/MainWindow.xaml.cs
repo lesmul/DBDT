@@ -1,4 +1,5 @@
 ﻿using DBDT.DrzewoProcesu;
+using DBDT.DrzewoSQL;
 using DBDT.DXF;
 using DBDT.Excel;
 using DBDT.Konfiguracja;
@@ -334,6 +335,21 @@ namespace DBDT
             Container.Children.Add(new MdiChild { Content = sp, Title = "Kolory - automat " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
 
         }
+        private void Window_TreeSQL_Click(object sender, RoutedEventArgs e)
+        {
+            UC_SQL_TREE sp = new UC_SQL_TREE("");
+
+            ScrollViewer sv = new ScrollViewer
+            {
+                Content = sp,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+
+            Container.Children.Add(new MdiChild { Content = sp, Title = "Drzewo informacji SQL " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+
+        }
+
         private void Window_Tree_Click(object sender, RoutedEventArgs e)
         {
             string nazwa_obiektu = "";

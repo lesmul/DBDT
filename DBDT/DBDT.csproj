@@ -95,6 +95,17 @@
     <Compile Include="Adorners\SizeAdorner.cs" />
     <Compile Include="Adorners\SizeChrome.cs" />
     <Compile Include="DesignerItemDecorator.cs" />
+    <Compile Include="DrzewoSQL\Directory\Data\DirectoryItemSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\Data\DirectoryItemTypeSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\DirectoryStructureSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\ViewModels\Base\BaseViewModelSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\ViewModels\Base\RelayCommandSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\ViewModels\DirectoryItemViewModelSQL.cs" />
+    <Compile Include="DrzewoSQL\Directory\ViewModels\DirectoryStructureViewModelSQL.cs" />
+    <Compile Include="DrzewoSQL\HeaderToImageConverter.cs" />
+    <Compile Include="DrzewoSQL\UC_SQL_TREE.xaml.cs">
+      <DependentUpon>UC_SQL_TREE.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DrzewoProcesu\Directory\Data\DirectoryItem.cs" />
     <Compile Include="DrzewoProcesu\Directory\Data\DirectoryItemType.cs" />
     <Compile Include="DrzewoProcesu\Directory\DirectoryStructure.cs" />
@@ -140,6 +151,10 @@
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SQL.cs" />
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SqlLite.cs" />
     <Compile Include="_connect_mssql.cs" />
+    <Page Include="DrzewoSQL\UC_SQL_TREE.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DrzewoProcesu\UC_PROCES_TREE.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -303,12 +318,23 @@
   <ItemGroup>
     <Resource Include="IKONY\logo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="DrzewoSQL\Images\drive.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="DrzewoProcesu\Images\drive.png" />
     <Resource Include="DrzewoProcesu\Images\file.png" />
     <Resource Include="DrzewoProcesu\Images\folder-closed.png" />
     <Resource Include="DrzewoProcesu\Images\folder-open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DrzewoSQL\Images\file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DrzewoSQL\Images\folder-closed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DrzewoSQL\Images\folder-open.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

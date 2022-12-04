@@ -209,9 +209,9 @@ namespace DBDT.SQL.SQL_SELECT
 
             if (txtCode.Text.Trim() == "") return;
 
-            string opis = sqlHandler.SQL_Title();
+            string[] opiszw = sqlHandler.SQL_Title();
 
-            _PUBLIC_SqlLite.DODAJ_REKORD_SQL_ZAPYTANIA(opis, txtCode.Text.Trim());
+            _PUBLIC_SqlLite.DODAJ_REKORD_SQL_ZAPYTANIA(opiszw[0], txtCode.Text.Trim(), opiszw[1], opiszw[2], opiszw[3], opiszw[4], opiszw[5], opiszw[6]);
         }
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {

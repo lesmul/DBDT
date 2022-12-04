@@ -83,7 +83,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             string str_2 = "CREATE TABLE IF NOT EXISTS `sql_zapytania` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 " `nazwa_zapytania` varchar(255) NOT NULL DEFAULT '', " +
-                " `sql` varchar(5000) NOT NULL DEFAULT '', " +
+                " `sql` varchar(9000) NOT NULL DEFAULT '', " +
                 " `pole1` varchar(255) NOT NULL DEFAULT '', " +
                 " `pole2` varchar(255) NOT NULL DEFAULT '', " +
                 " `pole3` varchar(255) NOT NULL DEFAULT '', " +
@@ -404,7 +404,8 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
-        public static Boolean DODAJ_REKORD_SQL_ZAPYTANIA(string nazwa_zapytania, string sql)
+        public static Boolean DODAJ_REKORD_SQL_ZAPYTANIA(string nazwa_zapytania, string sql, string poziom1, string poziom2,
+             string poziom3, string poziom4, string poziom5, string poziom6)
         {
 
             if (sql.Trim() == "") return false;
@@ -445,13 +446,22 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 MessageBox.Show(ex.Message, "Błąd");
             }
 
-            command_insert.CommandText = "INSERT INTO `sql_zapytania` (`nazwa_zapytania`,`sql`, `kto_zmienil`)" +
-                " VALUES(@nazwa_zapytania, @sql, @kto_zmienil)";
+            command_insert.CommandText = "INSERT INTO `sql_zapytania` (`nazwa_zapytania`,`sql`, `pole1`, `pole2`, " +
+                "`pole3`, `pole4`, `pole5`, `pole6`, `kto_zmienil`)" +
+                " VALUES(@nazwa_zapytania, @sql, @pole1, @pole2, @pole3, @pole4, @pole5, @pole6, @kto_zmienil)";
 
             command_insert.CommandType = CommandType.Text;
 
+            if (poziom1 == "") poziom1 = "nieprzypisany";
+
             command_insert.Parameters.AddWithValue("@nazwa_zapytania", nazwa_zapytania);
             command_insert.Parameters.AddWithValue("@sql", sql);
+            command_insert.Parameters.AddWithValue("@pole1", poziom1);
+            command_insert.Parameters.AddWithValue("@pole2", poziom2);
+            command_insert.Parameters.AddWithValue("@pole3", poziom3);
+            command_insert.Parameters.AddWithValue("@pole4", poziom4);
+            command_insert.Parameters.AddWithValue("@pole5", poziom5);
+            command_insert.Parameters.AddWithValue("@pole6", poziom6);
             command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
 
             try
@@ -672,7 +682,8 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
-        public static Boolean ZMIEN_OPIS_REKORD_SQL_ZAPYTANIA(string str_opis, string id_obj)
+        public static Boolean ZMIEN_OPIS_REKORD_SQL_ZAPYTANIA(string str_opis, string poziom1, string poziom2,
+             string poziom3, string poziom4, string poziom5, string poziom6, string id_obj)
         {
 
             if (id_obj.Trim() == "") return false;
@@ -703,7 +714,66 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             command_insert.CommandType = CommandType.Text;
      
-            command_insert.CommandText = "UPDATE `sql_zapytania` SET `nazwa_zapytania` = '" + str_opis + "' WHERE`id` = " + id_obj;
+            command_insert.CommandText = "UPDATE `sql_zapytania` SET `nazwa_zapytania` = '" + str_opis + "'"
+                + ", `pole1` = '" + poziom1 + "'"
+                + ", `pole2` = '" + poziom2 + "'"
+                + ", `pole3` = '" + poziom3 + "'"
+                + ", `pole4` = '" + poziom4 + "'"
+                + ", `pole5` = '" + poziom5 + "'"
+                + ", `pole6` = '" + poziom6 + "'"
+                + " WHERE `id` = " + id_obj;
+
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
+        public static Boolean ZMIEN_OPIS_POZIOMU_SQL_ZAPYTANIA(string poziom1, string poziom2,
+     string poziom3, string poziom4, string poziom5, string poziom6, string id_obj)
+        {
+
+            if (id_obj.Trim() == "") return false;
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            command_insert.CommandType = CommandType.Text;
+
+            command_insert.CommandText = "UPDATE `sql_zapytania` SET `pole1` = '" + poziom1 + "'"
+                + ", `pole2` = '" + poziom2 + "'"
+                + ", `pole3` = '" + poziom3 + "'"
+                + ", `pole4` = '" + poziom4 + "'"
+                + ", `pole5` = '" + poziom5 + "'"
+                + ", `pole6` = '" + poziom6 + "'"
+                + " WHERE `id` = " + id_obj;
 
             try
             {
