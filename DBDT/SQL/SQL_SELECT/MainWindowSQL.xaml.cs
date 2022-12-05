@@ -726,7 +726,7 @@ namespace DBDT.SQL.SQL_SELECT
             string sql = txtCode.SelectedText;
 
             var distinctRows = (from r in dt_str_danych.AsEnumerable()
-                                        .Where(myRow => myRow.Field<string>("TableName") == sql.ToLower())
+                                        .Where(myRow => myRow.Field<string>("TableName") == sql.ToLower().Trim())
                                 select r["ColumnName"]).Distinct().ToList();
 
             if (distinctRows.Count > 0)
