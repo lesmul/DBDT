@@ -178,8 +178,8 @@ namespace DBDT.DrzewoSQL.Directory.ViewModels
             var children = DirectoryStructureSQL.GetDirectoryContentsSQL(this.FullPath, this.idItem + 1, this.level1, this.level2, 
                 this.level3, this.level4, this.level5, this.level6, this.idRec);
             this.Children = new ObservableCollection<DirectoryItemViewModelSQL>(
-                                children.Select(content => new DirectoryItemViewModelSQL(content.FullPath, content.Type, 
-                                this.idItem  + 1, this.level1, this.level2, this.level3, this.level4, this.level5, this.level6, this.idRec)));
+                                children.Select(content => new DirectoryItemViewModelSQL(content.FullPath, content.Type,
+                                this.idItem  + 1, this.level1, this.level2, this.level3, this.level4, this.level5, this.level6, content.idRec)));
         }
     }
 }

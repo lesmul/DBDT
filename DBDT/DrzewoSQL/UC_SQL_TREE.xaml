@@ -8,11 +8,11 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <TreeView x:Name="FolderView" ItemsSource="{Binding Items}" MouseDoubleClick="TreeViewItem_MouseDoubleClick">
-            <!--<TreeView.ContextMenu>
+            <TreeView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Zmień opis" Click="MenuItem_OnClick" />
                 </ContextMenu>
-            </TreeView.ContextMenu>-->
+            </TreeView.ContextMenu>
             <TreeView.ItemContainerStyle>
                 <Style TargetType="{x:Type TreeViewItem}">
                     <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />

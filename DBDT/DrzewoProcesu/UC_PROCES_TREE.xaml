@@ -9,6 +9,11 @@
     <Grid>
 
         <TreeView x:Name="FolderView" ItemsSource="{Binding Items}" MouseDoubleClick="TreeViewItem_MouseDoubleClick">
+            <TreeView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Kopiuj scieszkę" Click="MenuItem_OnClick" />
+                </ContextMenu>
+            </TreeView.ContextMenu>
             <TreeView.ItemContainerStyle>
                 <Style TargetType="{x:Type TreeViewItem}">
                     <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />

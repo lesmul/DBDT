@@ -63,8 +63,6 @@ namespace DBDT.DrzewoProcesu
         private void TreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 
         {
-           // MessageBox.Show(((DBDT.DrzewoProcesu.Directory.ViewModels.DirectoryItemViewModel)((System.Windows.Controls.TreeView)e.Source).SelectedItem).FullPath);
-
             var tree = sender as TreeView;
 
             // ... Determine type of SelectedItem.
@@ -84,6 +82,31 @@ namespace DBDT.DrzewoProcesu
             else if (tree.SelectedItem !=null)
             {
                 Process.Start(((DBDT.DrzewoProcesu.Directory.ViewModels.DirectoryItemViewModel)tree.SelectedItem).FullPath);
+            }
+        }
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+           var tree = this.FolderView;
+           if (tree != null) return;
+
+            // ... Determine type of SelectedItem.
+            if (tree.SelectedItem is TreeViewItem)
+            {
+                // ... Handle a TreeViewItem.
+                var item = tree.SelectedItem as TreeViewItem;
+                // this.Title = "Selected header: " + item.Header.ToString();
+                MessageBox.Show(item.Header.ToString());
+            }
+            else if (tree.SelectedItem is string)
+            {
+                // ... Handle a string.
+                // this.Title = "Selected: " + tree.SelectedItem.ToString();
+                MessageBox.Show(tree.SelectedItem.ToString());
+            }
+            else if (tree.SelectedItem != null)
+            {
+                Clipboard.SetDataObject(((DirectoryItemViewModel)tree.SelectedItem).FullPath);
             }
         }
 

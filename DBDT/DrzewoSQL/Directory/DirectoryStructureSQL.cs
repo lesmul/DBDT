@@ -1,12 +1,15 @@
 ﻿using DBDT.DrzewoSQL.Directory.Data;
 using DBDT.USTAWIENIA_PROGRAMU;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 
 namespace DBDT
@@ -90,13 +93,23 @@ namespace DBDT
                                                 " pole4 = '" + level4.TrimEnd('%') + "' and pole5 = '" + level5.TrimEnd('%') + "' and pole6 = '" + level6.TrimEnd('%') + "'" +
                                                 " order by nazwa_zapytania");
 
-                var sql = from DataRow myRow in dt.Rows where (string)myRow["nazwa_zapytania"] != "" select myRow["nazwa_zapytania"];
-          
-                if (sql.Count() > 0)
-                    items.AddRange(sql.Select(pole2 => new DirectoryItemSQL { FullPath = pole2.ToString(), Type = DirectoryItemTypeSQL.File, idRec = -1 }).ToList());
+               // var sql = from DataRow myRow in dt.Rows where (string)myRow["nazwa_zapytania"] != "" select myRow["nazwa_zapytania"];
+         
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        items.Add( new DirectoryItemSQL { FullPath = dt.Rows[i]["nazwa_zapytania"].ToString(), Type = DirectoryItemTypeSQL.File, idRec = Convert.ToInt32(dt.Rows[i]["id"]) });
+                    }
+                }
+                    //items.AddRange(sql.Select(pole2 => new DirectoryItemSQL { FullPath = pole2.ToString(), Type = DirectoryItemTypeSQL.File, idRec = -1 }).ToList());
 
             }
-            catch { }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message, "Błąd");
+            }
 
             #endregion
 

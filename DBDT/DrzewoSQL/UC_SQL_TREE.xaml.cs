@@ -55,8 +55,6 @@ namespace DBDT.DrzewoSQL
         private void TreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 
         {
-           // MessageBox.Show(((DBDT.DrzewoProcesu.Directory.ViewModels.DirectoryItemViewModel)((System.Windows.Controls.TreeView)e.Source).SelectedItem).FullPath);
-
             var tree = sender as TreeView;
 
             // ... Determine type of SelectedItem.
@@ -93,6 +91,8 @@ namespace DBDT.DrzewoSQL
                     string Xlevel5 = ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level5;
                     string Xlevel6 = ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level6;
 
+                    string stId = ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).idItem.ToString();
+
                     if (((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level1 == null) Xlevel1 = "";
                     if (((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level2 == null) Xlevel2 = "";
                     if (((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level3 == null) Xlevel3 = "";
@@ -101,37 +101,37 @@ namespace DBDT.DrzewoSQL
                     if (((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level6 == null) Xlevel6 = "";
 
                     if (((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).FullPath 
-                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level1)
+                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level1 && stId == "1")
                     {
                         Xlevel1 = "";
                     }
 
                     if (((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).FullPath
-                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level2)
+                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level2 && stId == "2")
                     {
                         Xlevel2 = "";
                     }
 
                     if (((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).FullPath
-                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level3)
+                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level3 && stId == "3")
                     {
                         Xlevel3 = "";
                     }
 
                     if (((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).FullPath
-                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level4)
+                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level4 && stId == "4")
                     {
                         Xlevel4 = "";
                     }
 
                     if (((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).FullPath
-                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level5)
+                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level5 && stId == "5")
                     {
                         Xlevel5 = "";
                     }
 
                     if (((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).FullPath
-                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level6)
+                        == ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).level6 && stId == "6")
                     {
                         Xlevel6 = "";
                     }
@@ -140,7 +140,7 @@ namespace DBDT.DrzewoSQL
                                                     "WHERE sql <> '' and pole1 = '" + Xlevel1.ToString() + "' and " +
                                                     " pole2 = '" + Xlevel2.ToString() + "' and pole3 = '" + Xlevel3.ToString() + "' and " +
                                                     " pole4 = '" + Xlevel4.ToString() + "' and pole5 = '" + Xlevel5.ToString() + "' and pole6 = '" + Xlevel6.ToString() + "'" +
-                                                    " ");
+                                                    " and id = " + ((DirectoryItemViewModelSQL)((TreeView)e.Source).SelectedItem).idRec);
 
                     if (dt.Rows.Count == 0) return;
 
@@ -192,37 +192,37 @@ namespace DBDT.DrzewoSQL
                 if (((DirectoryItemViewModelSQL)item).Type == DirectoryItemTypeSQL.File) 
                 { 
                     if (((DirectoryItemViewModelSQL)item).FullPath
-                        == ((DirectoryItemViewModelSQL)item).level1)
+                        == ((DirectoryItemViewModelSQL)item).level1 && idR == "1")
                     {
                         Xlevel1 = "";
                     }
 
                     if (((DirectoryItemViewModelSQL)item).FullPath
-                        == ((DirectoryItemViewModelSQL)item).level2)
+                        == ((DirectoryItemViewModelSQL)item).level2 && idR == "2")
                     {
                         Xlevel2 = "";
                     }
 
                     if (((DirectoryItemViewModelSQL)item).FullPath
-                        == ((DirectoryItemViewModelSQL)item).level3)
+                        == ((DirectoryItemViewModelSQL)item).level3 && idR == "3")
                     {
                         Xlevel3 = "";
                     }
 
                     if (((DirectoryItemViewModelSQL)item).FullPath
-                        == ((DirectoryItemViewModelSQL)item).level4)
+                        == ((DirectoryItemViewModelSQL)item).level4 && idR == "4")
                     {
                         Xlevel4 = "";
                     }
 
                     if (((DirectoryItemViewModelSQL)item).FullPath
-                        == ((DirectoryItemViewModelSQL)item).level5)
+                        == ((DirectoryItemViewModelSQL)item).level5 && idR == "5")
                     {
                         Xlevel5 = "";
                     }
 
                     if (((DirectoryItemViewModelSQL)item).FullPath
-                        == ((DirectoryItemViewModelSQL)item).level6)
+                        == ((DirectoryItemViewModelSQL)item).level6 && idR == "6")
                     {
                         Xlevel6 = "";
                     }
@@ -242,7 +242,7 @@ namespace DBDT.DrzewoSQL
                     if (opiszw != null)
                     {
                         _PUBLIC_SqlLite.ZMIEN_OPIS_REKORD_SQL_ZAPYTANIA(opiszw[0], opiszw[1], opiszw[2], opiszw[3], opiszw[4], opiszw[5], opiszw[6],
-                            ((DataRowView)item).Row.ItemArray[0].ToString());
+                            ((DirectoryItemViewModelSQL)item).idRec.ToString());
 
                         DataTable dt = new DataTable();
 
@@ -252,30 +252,7 @@ namespace DBDT.DrzewoSQL
 
                     }
                 }
-               else 
-                {
-                    opiszw = sqlHandler.SQL_Title("",
-                    Xlevel1,
-                    Xlevel2,
-                    Xlevel3,
-                    Xlevel4,
-                    Xlevel5,
-                    Xlevel6, true);
-
-                    if (opiszw != null)
-                    {
-                        _PUBLIC_SqlLite.ZMIEN_OPIS_POZIOMU_SQL_ZAPYTANIA(opiszw[1], opiszw[2], opiszw[3], opiszw[4], opiszw[5], opiszw[6],
-                            ((DataRowView)item).Row.ItemArray[0].ToString());
-
-                        DataTable dt = new DataTable();
-
-                        dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = '" + nazwa_obiektu + "' order by id desc");
-
-                        this.DataContext = new DirectoryStructureViewModelSQL();
-
-                    }
-                }
-
+          
             }
         }
     }
