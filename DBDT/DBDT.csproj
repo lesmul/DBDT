@@ -132,6 +132,9 @@
     <Compile Include="DXF\UC_RYS_DXF.xaml.cs">
       <DependentUpon>UC_RYS_DXF.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SQL\SQL_SELECT\ColumsTable.xaml.cs">
+      <DependentUpon>ColumsTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SQL\SQL_SELECT\MainWindowSQL.xaml.cs" />
     <Compile Include="SQL\SQL_SELECT\OpisSQL.xaml.cs">
       <DependentUpon>OpisSQL.xaml</DependentUpon>
@@ -217,6 +220,10 @@
     <Page Include="Resources\SizeChrome.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SQL\SQL_SELECT\ColumsTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SQL\SQL_SELECT\MainWindowSQL.xaml">
       <Generator>MSBuild:Compile</Generator>

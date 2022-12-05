@@ -146,6 +146,7 @@ namespace DBDT.DrzewoSQL
 
                     MainWindowSQL sp = new MainWindowSQL();
 
+                    sp.id_rec = Convert.ToInt32 (dt.Rows[0]["id"]);
                     sp.txtCode.Text = dt.Rows[0]["sql"].ToString();
                     sp.txtCode.Tag = dt.Rows[0]["id"].ToString();
 

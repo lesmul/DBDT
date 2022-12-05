@@ -23,6 +23,7 @@ namespace DBDT.SQL.SQL_SELECT
     {
         private SqlHandler sqlHandler;
         public bool procedura = false;
+        public int id_rec = -1;
         private bool auto_u = false;
         private DataTable dt_str_danych = new DataTable();
 
@@ -209,9 +210,36 @@ namespace DBDT.SQL.SQL_SELECT
 
             if (txtCode.Text.Trim() == "") return;
 
-            string[] opiszw = sqlHandler.SQL_Title();
+            if (id_rec != -1)
+            {
+                var dr = MessageBox.Show("Czy chcesz dodać nowe zapytanie SQL ?", "Uwaga!!!", MessageBoxButton.YesNo);
+                if (dr == MessageBoxResult.Yes)
+                {
+                    id_rec = -1;
+                }
+            }
 
-            _PUBLIC_SqlLite.DODAJ_REKORD_SQL_ZAPYTANIA(opiszw[0], txtCode.Text.Trim(), opiszw[1], opiszw[2], opiszw[3], opiszw[4], opiszw[5], opiszw[6]);
+            if (id_rec == -1)
+            {
+                string[] opiszw = sqlHandler.SQL_Title();
+
+                if (opiszw == null) return;
+
+                if (opiszw[0] == null) opiszw[0] = "Brak opisu";
+                if (opiszw[1] == null) opiszw[0] = "nieprzypisany";
+                if (opiszw[2] == null) opiszw[0] = "";
+                if (opiszw[3] == null) opiszw[0] = "";
+                if (opiszw[4] == null) opiszw[0] = "";
+                if (opiszw[5] == null) opiszw[0] = "";
+                if (opiszw[6] == null) opiszw[0] = "";
+
+                _PUBLIC_SqlLite.DODAJ_REKORD_SQL_ZAPYTANIA(opiszw[0], txtCode.Text.Trim(), opiszw[1], opiszw[2], opiszw[3], opiszw[4], opiszw[5], opiszw[6]);
+            }
+            else
+            {
+                _PUBLIC_SqlLite.ZMIEN_OPIS_POZIOMU_SQL_ZAPYTANIA(txtCode.Text.Trim(), id_rec.ToString());
+            }
+
         }
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -253,9 +281,10 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void Parse_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            UpdateUIStatus(true,"");
+            UpdateUIStatus();
 
             if (txtCode.Text.Trim() == "") return;
+
             try
             {
                 SqlError[] errors;
@@ -478,7 +507,7 @@ namespace DBDT.SQL.SQL_SELECT
                 if (_currentSuggestion != "" && _currentSuggestion != null && SuggestionValuesColName == null)
                 {
                     var distinctRows = (from r in dt_str_danych.AsEnumerable()
-                                        .Where(myRow => myRow.Field<string>("TableName") == _currentSuggestion)
+                                        .Where(myRow => myRow.Field<string>("TableName") == _currentSuggestion.ToLower())
                                         select r["ColumnName"]).Distinct().ToList();
 
                     //var distinctRows = from myRow in dt_str_danych.Rows.Cast<DataRow>()
@@ -664,22 +693,24 @@ namespace DBDT.SQL.SQL_SELECT
             // Only allow copy/cut if something is selected to copy/cut.
             if (txtCode.SelectedText == "")
             {
-                cxmItemCopy.IsEnabled = cxmItemCut.IsEnabled = false;
-                cxmItemLike.IsEnabled = cxmItemLike.IsEnabled = false;
-                cxmItemLikeProc.IsEnabled = cxmItemLikeProc.IsEnabled = false;
-                cxmItemLikeRow.IsEnabled = cxmItemLikeRow.IsEnabled = false;
-                cxmItemLikeAnd.IsEnabled = cxmItemLikeAnd.IsEnabled = false;
-                cxmItemLikeOr.IsEnabled = cxmItemLikeOr.IsEnabled = false;
+                cxmItemCopy.IsEnabled = false;
+                cxmItemLike.IsEnabled = false;
+                cxmItemLikeProc.IsEnabled = false;
+                cxmItemLikeRow.IsEnabled = false;
+                cxmItemLikeAnd.IsEnabled = false;
+                cxmItemLikeOr.IsEnabled = false;
+                cxmItemColumsTable.IsEnabled = false;
 
             }
             else
             {
-                cxmItemCopy.IsEnabled = cxmItemCut.IsEnabled = true;
-                cxmItemLike.IsEnabled = cxmItemLike.IsEnabled = true;
-                cxmItemLikeProc.IsEnabled = cxmItemLikeProc.IsEnabled = true;
-                cxmItemLikeRow.IsEnabled = cxmItemLikeRow.IsEnabled = true;
-                cxmItemLikeAnd.IsEnabled = cxmItemLikeAnd.IsEnabled = true;
-                cxmItemLikeOr.IsEnabled = cxmItemLikeOr.IsEnabled = true;
+                cxmItemCopy.IsEnabled = true;
+                cxmItemLike.IsEnabled = true;
+                cxmItemLikeProc.IsEnabled = true;
+                cxmItemLikeRow.IsEnabled = true;
+                cxmItemLikeAnd.IsEnabled = true;
+                cxmItemLikeOr.IsEnabled  = true;
+                cxmItemColumsTable.IsEnabled = true;
 
             }
 
@@ -689,6 +720,39 @@ namespace DBDT.SQL.SQL_SELECT
             else
                 cxmItemPaste.IsEnabled = false;
         }
+
+        private void ClickColumnTable(object sender, RoutedEventArgs e)
+        {
+            string sql = txtCode.SelectedText;
+
+            var distinctRows = (from r in dt_str_danych.AsEnumerable()
+                                        .Where(myRow => myRow.Field<string>("TableName") == sql.ToLower())
+                                select r["ColumnName"]).Distinct().ToList();
+
+            if (distinctRows.Count > 0)
+            {
+                ColumsTable spc = new ColumsTable();
+
+                var positionOnRootGrid = Mouse.GetPosition(this);
+                var xDifference = (int)(positionOnRootGrid.X - spc.ActualWidth / 2);
+                var yDifference = (int)(positionOnRootGrid.Y - spc.ActualHeight / 2);
+        
+                spc.Left= xDifference;
+                spc.Top= yDifference/2;
+
+                spc.itContr.ItemsSource = distinctRows;
+                spc.ShowDialog();
+
+                txtCode.CaretIndex = txtCode.Text.Length;
+                txtCode.ScrollToEnd();
+                txtCode.Focus();
+              
+                txtCode.Text += "\r\n" + spc.columsselect.TrimEnd(',');
+
+            }
+
+        }
+
 
     }
 

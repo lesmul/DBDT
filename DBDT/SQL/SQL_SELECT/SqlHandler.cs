@@ -129,6 +129,7 @@ namespace DBDT.SQL.SQL_SELECT
                 throw new InvalidOperationException("Nie można przeanalizować zapytania SQL, gdy połączenie jest zamknięte!");
 
             errors.Clear();
+
             cmd.CommandText = "SET PARSEONLY ON";
             cmd.ExecuteNonQuery();
 
@@ -147,7 +148,7 @@ namespace DBDT.SQL.SQL_SELECT
                 throw new InvalidOperationException("Nie można wykonać zapytania SQL, gdy połączenie jest zamknięte!");
 
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT SchemaName = sch.name, TableName = t.Name, ColumnName = c.Name, TypeName = ty.Name,  MaxLength = c.max_length, Precision = c.precision, Scale = c.scale FROM sys.columns c INNER JOIN sys.tables t ON t.object_id = c.object_id INNER JOIN sys.schemas sch ON sch.schema_id = t.schema_id INNER JOIN sys.types ty ON c.user_type_id = ty.user_type_id";
+                cmd.CommandText = "SELECT SchemaName = LOWER(sch.name), TableName = LOWER(t.Name), ColumnName = LOWER(c.Name), TypeName = ty.Name,  MaxLength = c.max_length, Precision = c.precision, Scale = c.scale FROM sys.columns c INNER JOIN sys.tables t ON t.object_id = c.object_id INNER JOIN sys.schemas sch ON sch.schema_id = t.schema_id INNER JOIN sys.types ty ON c.user_type_id = ty.user_type_id";
 
                 DataTable tbl = new DataTable();
                 adapter.Fill(tbl);

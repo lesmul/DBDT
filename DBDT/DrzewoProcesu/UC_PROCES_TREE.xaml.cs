@@ -84,11 +84,10 @@ namespace DBDT.DrzewoProcesu
                 Process.Start(((DBDT.DrzewoProcesu.Directory.ViewModels.DirectoryItemViewModel)tree.SelectedItem).FullPath);
             }
         }
-
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
            var tree = this.FolderView;
-           if (tree != null) return;
+           if (tree == null) return;
 
             // ... Determine type of SelectedItem.
             if (tree.SelectedItem is TreeViewItem)

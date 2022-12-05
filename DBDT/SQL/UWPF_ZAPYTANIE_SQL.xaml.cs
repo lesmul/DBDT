@@ -54,7 +54,8 @@ namespace DBDT.SQL
              MainWindowSQL sp = new MainWindowSQL();
 
             sp.txtCode.Text = curItem;
-            sp.txtCode.Tag = ((System.Data.DataRowView)selectedItem).Row.ItemArray[1].ToString(); ;
+            sp.txtCode.Tag = ((DataRowView)selectedItem).Row.ItemArray[1].ToString();
+            sp.id_rec = Convert.ToInt32(curItemID);
 
             ScrollViewer sv = new ScrollViewer
             {

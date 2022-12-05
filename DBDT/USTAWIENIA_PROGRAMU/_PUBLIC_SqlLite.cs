@@ -735,13 +735,12 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
-        public static Boolean ZMIEN_OPIS_POZIOMU_SQL_ZAPYTANIA(string poziom1, string poziom2,
-     string poziom3, string poziom4, string poziom5, string poziom6, string id_obj)
+        public static Boolean ZMIEN_OPIS_POZIOMU_SQL_ZAPYTANIA(string strSQL, string id_obj)
         {
 
             if (id_obj.Trim() == "") return false;
 
-            SQLiteCommand command_insert = new SQLiteCommand();
+            SQLiteCommand command_update = new SQLiteCommand();
 
             try
             {
@@ -756,7 +755,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                     connection.Open();
                 }
 
-                command_insert = connection.CreateCommand();
+                command_update = connection.CreateCommand();
 
             }
             catch (SQLiteException ex)
@@ -765,19 +764,14 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 MessageBox.Show(ex.Message, "Błąd");
             }
 
-            command_insert.CommandType = CommandType.Text;
+            command_update.CommandType = CommandType.Text;
+            command_update.Parameters.AddWithValue("@sql", strSQL);
 
-            command_insert.CommandText = "UPDATE `sql_zapytania` SET `pole1` = '" + poziom1 + "'"
-                + ", `pole2` = '" + poziom2 + "'"
-                + ", `pole3` = '" + poziom3 + "'"
-                + ", `pole4` = '" + poziom4 + "'"
-                + ", `pole5` = '" + poziom5 + "'"
-                + ", `pole6` = '" + poziom6 + "'"
-                + " WHERE `id` = " + id_obj;
+            command_update.CommandText = "UPDATE `sql_zapytania` SET `sql` = @sql WHERE `id` = " + id_obj;
 
             try
             {
-                command_insert.ExecuteNonQuery();
+                command_update.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

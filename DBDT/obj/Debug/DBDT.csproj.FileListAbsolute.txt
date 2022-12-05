@@ -67,3 +67,5 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fod
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fody.RuntimeCopyLocal.cache
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DrzewoSQL\UC_SQL_TREE.g.cs
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DrzewoSQL\UC_SQL_TREE.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\SQL_SELECT\ColumsTable.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\SQL_SELECT\ColumsTable.baml
