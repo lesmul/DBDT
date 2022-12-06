@@ -128,7 +128,8 @@
                         <Separator/>
                         <MenuItem Header="Kolumny w tabeli" Name="cxmItemColumsTable" Click="ClickColumnTable" />
                     </MenuItem>
-                    
+                    <Separator/>
+                    <MenuItem Header="Pokaż wszystkie tabele"  Name="cxmSelecAllTable" Click="ClickSelecAllTable" />
                 </ContextMenu>
             </TextBox.ContextMenu>
         </TextBox>

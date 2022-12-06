@@ -29,7 +29,8 @@ namespace DBDT.SQL.SQL_SELECT
         private void Click_Close(object sender, RoutedEventArgs e)
         {
 
-          var aa = itContr.SelectedItems.Count;
+            //var aa = itContr.SelectedItems.Count;
+
             for (int i = 0; i < itContr.SelectedItems.Count; i++)
             {
                 columsselect += itContr.SelectedItems[i].ToString() + " ,";

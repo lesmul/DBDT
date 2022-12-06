@@ -16,6 +16,8 @@ using System.Text.RegularExpressions;
 using System.Linq;
 using System.Windows.Documents;
 using System.Collections;
+using System.Windows.Controls.Primitives;
+using System.Xml.Linq;
 
 namespace DBDT.SQL.SQL_SELECT
 {
@@ -738,7 +740,7 @@ namespace DBDT.SQL.SQL_SELECT
                 var yDifference = (int)(positionOnRootGrid.Y - spc.ActualHeight / 2);
         
                 spc.Left= xDifference;
-                spc.Top= yDifference/2;
+                spc.Top= yDifference;
 
                 spc.itContr.ItemsSource = distinctRows;
                 spc.ShowDialog();
@@ -753,6 +755,64 @@ namespace DBDT.SQL.SQL_SELECT
 
         }
 
+        private void ClickSelecAllTable(object sender, RoutedEventArgs e)
+        {
+            var distinctRows = (from r in dt_str_danych.AsEnumerable()
+                                        .Where(myRow => myRow.Field<string>("TableName") != "")
+                                select r["TableName"]).Distinct().ToList();
+
+            if (distinctRows.Count > 0)
+            {
+                ColumsTable spc = new ColumsTable();
+
+                var positionOnRootGrid = Mouse.GetPosition(this);
+                var xDifference = (int)(positionOnRootGrid.X - spc.ActualWidth / 2);
+                var yDifference = (int)(positionOnRootGrid.Y - spc.ActualHeight / 2);
+
+                spc.Left = xDifference;
+                spc.Top = yDifference;
+
+                spc.itContr.ItemsSource = distinctRows;
+                spc.ShowDialog();
+
+                txtCode.CaretIndex = txtCode.Text.Length;
+                txtCode.ScrollToEnd();
+                txtCode.Focus();
+
+                string[] zws = spc.columsselect.TrimEnd(',').Split(',');
+
+                switch (zws.Length)
+                {
+                    case 1:
+                        txtCode.Text += "\r\n" + "select * from " + spc.columsselect.TrimEnd(',').Trim();
+                        break;
+                    case 2:
+                        txtCode.Text += "\r\n" + "select * from " + zws[0].Trim() + " " + "a" +
+                            " inner join " + zws[1].Trim() + " " + "b" + " on " + "a" + ".???? = "
+                            + "b" + ".????";
+                        break;
+                    case 3:
+                        txtCode.Text += "\r\n" + "select * from " + zws[0].Trim() + " " + "a" +
+                            " inner join " + zws[1].Trim() + " " + "b" + " on " + "a" + ".???? = "
+                            + "b" + ".????" +
+                            " inner join " + zws[2].Trim() + " " + "c" + " on " + "a" + ".???? = " +
+                            "c" + ".????";
+                        break;
+                    case 4:
+                        txtCode.Text += "\r\n" + "select * from " + spc.columsselect.TrimEnd(',');
+                        break;
+                    case 5:
+                        txtCode.Text += "\r\n" + "select * from " + spc.columsselect.TrimEnd(',');
+                        break;
+                    case 6:
+                        txtCode.Text += "\r\n" + "select * from " + spc.columsselect.TrimEnd(',');
+                        break;
+                    default:
+                        txtCode.Text += "\r\n" + "select * from " + spc.columsselect.TrimEnd(',');
+                        break;
+                }
+            }
+        }
 
     }
 

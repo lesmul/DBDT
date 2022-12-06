@@ -239,7 +239,10 @@ namespace DBDT
                 VerticalContentAlignment = VerticalAlignment.Center
             };
             //Container.Children.Add(new MdiChild { Content = sv, Title = "Zapytanie SQL " + ooo++, WindowState=WindowState.Maximized, Width= SHT_W, Height= SHT_H });
-            Container.Children.Add(new MdiChild { Content = sp, Title = "Dodaj nowe zaptanie SQL " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+            Container.Children.Add(new MdiChild { Content = sp, Title = "Dodaj nowe zaptanie SQL " + ooo++,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
 
         }
 
@@ -337,16 +340,28 @@ namespace DBDT
         }
         private void Window_TreeSQL_Click(object sender, RoutedEventArgs e)
         {
+            for (int i = 0; i <= this.Container.Children.Count - 1; i++)
+            {
+                MdiChild child = this.Container.Children[i];
+                if (child.Name == "FindTreeSQLWindow")
+                {
+                    child.Focus();
+                    return;
+                }
+            }
+
             UC_SQL_TREE sp = new UC_SQL_TREE("");
 
-            ScrollViewer sv = new ScrollViewer
-            {
-                Content = sp,
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                VerticalContentAlignment = VerticalAlignment.Center
-            };
+            //ScrollViewer sv = new ScrollViewer
+            //{
+            //    Content = sp,
+            //    HorizontalContentAlignment = HorizontalAlignment.Center,
+            //    VerticalContentAlignment = VerticalAlignment.Center
+            //};
 
-            Container.Children.Add(new MdiChild { Content = sp, Title = "Drzewo informacji SQL " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+            Container.Children.Add(new MdiChild { Content = sp, Name= "FindTreeSQLWindow", HorizontalAlignment= HorizontalAlignment.Center, 
+                VerticalContentAlignment = VerticalAlignment.Center, Title = "Drzewo informacji SQL " + ooo++, WindowState = WindowState.Maximized, 
+                Width = SHT_W, Height = SHT_H });
 
         }
 

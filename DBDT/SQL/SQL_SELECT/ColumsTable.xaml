@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBDT.SQL.SQL_SELECT"
         mc:Ignorable="d"
-        Title="ColumsTable" Height="460" Width="305" Topmost="True" ResizeMode="NoResize" InputScope="Default" WindowStyle="None">
+        Title="Kolumy/Tabele" Height="460" Width="305" Topmost="True" ResizeMode="NoResize" InputScope="Default" WindowStyle="ToolWindow">
     <Grid>
-        <ListBox Name="itContr"  ItemsSource="{Binding MyItems}" SelectionMode="Multiple" Margin="0,0,0,55">
+        <ListBox Name="itContr" SelectionMode="Multiple" Margin="0,0,0,51">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="IsSelected" Value="{Binding Path=IsChecked, Mode=TwoWay}" />
@@ -15,12 +15,12 @@
             </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox IsChecked="{Binding IsChecked}"  Content="{Binding}" />
+                    <CheckBox Content="{Binding .}" IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Content="Zakończ" HorizontalAlignment="Center" Height="30" Margin="0,410,0,0" VerticalAlignment="Top" Width="285" Click="Click_Close"/>
+        <Button Content="Zakończ" HorizontalAlignment="Center" Height="30" Margin="0,384,0,0" VerticalAlignment="Top" Width="285" Click="Click_Close"/>
 
     </Grid>
 </Window>
