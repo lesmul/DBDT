@@ -16,6 +16,10 @@
         /// <summary>
         /// A folder
         /// </summary>
-        Folder
+        Folder,
+        /// <summary>
+        /// A type file
+        /// </summary>
+        TypeFile
     }
 }

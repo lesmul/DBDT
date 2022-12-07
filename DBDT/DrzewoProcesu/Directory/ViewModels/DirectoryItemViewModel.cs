@@ -19,7 +19,9 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
         /// </summary>
         public DirectoryItemType Type { get; set; }
 
-        public string ImageName => Type == DirectoryItemType.Drive ? "drive" : (Type == DirectoryItemType.File ? "file" : (IsExpanded ? "folder-open" : "folder-closed"));
+        public string TypeFile { get; set; }
+
+        public string ImageName => Type == DirectoryItemType.Drive ? "drive" : (Type == DirectoryItemType.File ? (TypeFile.ToLower() == ".xlsm" ? "excel" : "file") : (IsExpanded ? "folder-open" : "folder-closed"));
 
         /// <summary>
         /// The full path to the item
@@ -80,7 +82,7 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
         /// </summary>
         /// <param name="fullPath">The full path of this item</param>
         /// <param name="type">The type of item</param>
-        public DirectoryItemViewModel(string fullPath, DirectoryItemType type)
+        public DirectoryItemViewModel(string fullPath, DirectoryItemType type, string typeFile)
         {
             // Create commands
             this.ExpandCommand = new RelayCommand(Expand);
@@ -88,9 +90,11 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
             // Set path and type
             this.FullPath = fullPath;
             this.Type = type;
+            this.TypeFile = typeFile;
 
             // Setup the children as needed
             this.ClearChildren();
+            //TypeFile = typeFile;
         }
 
         #endregion
@@ -124,7 +128,7 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
             // Find all children
             var children = DirectoryStructure.GetDirectoryContents(this.FullPath);
             this.Children = new ObservableCollection<DirectoryItemViewModel>(
-                                children.Select(content => new DirectoryItemViewModel(content.FullPath, content.Type)));
+                                children.Select(content => new DirectoryItemViewModel(content.FullPath, content.Type, content.TypeFile)));
         }
     }
 }

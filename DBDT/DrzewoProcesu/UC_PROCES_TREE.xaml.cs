@@ -81,7 +81,7 @@ namespace DBDT.DrzewoProcesu
             }
             else if (tree.SelectedItem !=null)
             {
-                Process.Start(((DBDT.DrzewoProcesu.Directory.ViewModels.DirectoryItemViewModel)tree.SelectedItem).FullPath);
+                Process.Start(((DirectoryItemViewModel)tree.SelectedItem).FullPath);
             }
         }
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
@@ -108,6 +108,5 @@ namespace DBDT.DrzewoProcesu
                 Clipboard.SetDataObject(((DirectoryItemViewModel)tree.SelectedItem).FullPath);
             }
         }
-
     }
 }

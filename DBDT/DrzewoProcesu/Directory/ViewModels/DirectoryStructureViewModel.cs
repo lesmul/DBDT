@@ -33,12 +33,12 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
             if (lokalizacja_start == "")
             {
                 this.Items = new ObservableCollection<DirectoryItemViewModel>(
-                children.Select(drive => new DirectoryItemViewModel(drive.FullPath, DirectoryItemType.Drive)));
+                children.Select(drive => new DirectoryItemViewModel(drive.FullPath, DirectoryItemType.Drive, "")));
             }
             else
             {
                 this.Items = new ObservableCollection<DirectoryItemViewModel>(
-                children.Select(folder => new DirectoryItemViewModel(folder.FullPath, DirectoryItemType.Drive)));
+                children.Select(folder => new DirectoryItemViewModel(folder.FullPath, DirectoryItemType.Drive, folder.TypeFile)));
             }
        
         }

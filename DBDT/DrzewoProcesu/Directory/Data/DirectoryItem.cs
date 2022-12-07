@@ -16,6 +16,11 @@
         public string FullPath { get; set; }
 
         /// <summary>
+        /// The type of this item type
+        /// </summary>
+        public string TypeFile { get; set; }
+
+        /// <summary>
         /// The name of this directory item
         /// </summary>
         public string Name { get { return this.Type == DirectoryItemType.Drive ? this.FullPath : DirectoryStructure.GetFileFolderName(this.FullPath); } }

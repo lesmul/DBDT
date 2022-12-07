@@ -1,4 +1,6 @@
 ﻿using DBDT.DrzewoProcesu.Directory.Data;
+using DBDT.DrzewoSQL.Directory.Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -65,8 +67,16 @@ namespace DBDT
             {
                 var fs = Directory.GetFiles(fullPath);
 
+                //if (fs.Length > 0)
+                //    items.AddRange(fs.Select(file => new DirectoryItem { FullPath = file, Type = DirectoryItemType.File, TypeFile = typeFile }));
                 if (fs.Length > 0)
-                    items.AddRange(fs.Select(file => new DirectoryItem { FullPath = file, Type = DirectoryItemType.File }));
+                {
+                    for (int i = 0; i < fs.Length; i++)
+                    {
+                        items.Add(new DirectoryItem { FullPath = fs[i].ToString(), Type = DirectoryItemType.File, 
+                            TypeFile = fs[i].Substring(fs[i].LastIndexOf('.')) });
+                    }
+                }
             }
             catch { }
 

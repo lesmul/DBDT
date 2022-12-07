@@ -784,31 +784,31 @@ namespace DBDT.SQL.SQL_SELECT
                 switch (zws.Length)
                 {
                     case 1:
-                        txtCode.Text += "\r\n" + "select * from " + spc.columsselect.TrimEnd(',').Trim();
+                        txtCode.Text += "\r\n" + "select top 100 * from " + spc.columsselect.TrimEnd(',').Trim();
                         break;
                     case 2:
-                        txtCode.Text += "\r\n" + "select * from " + zws[0].Trim() + " " + "a" +
+                        txtCode.Text += "\r\n" + "select top 100 * from " + zws[0].Trim() + " " + "a" +
                             " inner join " + zws[1].Trim() + " " + "b" + " on " + "a" + ".???? = "
                             + "b" + ".????";
                         break;
                     case 3:
-                        txtCode.Text += "\r\n" + "select * from " + zws[0].Trim() + " " + "a" +
+                        txtCode.Text += "\r\n" + "select top 100 * from " + zws[0].Trim() + " " + "a" +
                             " inner join " + zws[1].Trim() + " " + "b" + " on " + "a" + ".???? = "
                             + "b" + ".????" +
                             " inner join " + zws[2].Trim() + " " + "c" + " on " + "a" + ".???? = " +
                             "c" + ".????";
                         break;
                     case 4:
-                        txtCode.Text += "\r\n" + "select * from " + spc.columsselect.TrimEnd(',');
+                        txtCode.Text += "\r\n" + "select top 100 * from " + spc.columsselect.TrimEnd(',');
                         break;
                     case 5:
-                        txtCode.Text += "\r\n" + "select * from " + spc.columsselect.TrimEnd(',');
+                        txtCode.Text += "\r\n" + "select top 100 * from " + spc.columsselect.TrimEnd(',');
                         break;
                     case 6:
-                        txtCode.Text += "\r\n" + "select * from " + spc.columsselect.TrimEnd(',');
+                        txtCode.Text += "\r\n" + "select top 100 * from " + spc.columsselect.TrimEnd(',');
                         break;
                     default:
-                        txtCode.Text += "\r\n" + "select * from " + spc.columsselect.TrimEnd(',');
+                        txtCode.Text += "\r\n" + "select top 100 * from " + spc.columsselect.TrimEnd(',');
                         break;
                 }
             }
