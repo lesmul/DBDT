@@ -170,6 +170,7 @@ namespace DBDT.SQL.SQL_SELECT
             }
    
             string sql = sqlText.ToLower().Trim();
+        
             sql = sql.Replace("\nset", " ");
             sql = sql.Replace("\n", " ");
             sql = Regex.Replace(sql, @"\s+",(match) => match.Value.IndexOf('\n') > -1 ? "\n" : " ", RegexOptions.Multiline);
@@ -177,6 +178,12 @@ namespace DBDT.SQL.SQL_SELECT
             if (sql.StartsWith("exec")) return 0;
 
             string sprCountSp = null;
+
+            string strdins = " ";
+            if (sql.IndexOf("select distinct") > -1)
+            {
+                strdins = " distinct ";
+            }
 
             if (sql.StartsWith("select"))
             {
@@ -188,7 +195,7 @@ namespace DBDT.SQL.SQL_SELECT
                 int top = -1;
                 top = sql.IndexOf("select top");
 
-                string sprCount = null;
+                 string sprCount = null;
                 string sprFrom = null;
                 string sprTopCount = "count(*)";
 
@@ -206,7 +213,7 @@ namespace DBDT.SQL.SQL_SELECT
                     sprFrom = sprFrom.Substring(0, sprFrom.IndexOf("order by"));
                 }
 
-                sprCountSp = "select " + sprTopCount + " from " + sprFrom;
+                sprCountSp = "select" + strdins + sprTopCount + " from " + sprFrom;
 
                 if (top > -1)
                 {
@@ -214,7 +221,7 @@ namespace DBDT.SQL.SQL_SELECT
                     string[] aSpacja = sql.Split(' '); 
                     sprCount = sql.Substring(top + 7, spac - 10);
 
-                    sprCountSp = "select count(*) from (select " + aSpacja[1] + " " + aSpacja[2] + " * from " + sprFrom + ") T";
+                    sprCountSp = "select" + strdins + " count(*) from (select " + aSpacja[1] + " " + aSpacja[2] + " * from " + sprFrom + ") T";
                 }
 
                 NazwaTabeli = sprFrom;
@@ -226,7 +233,7 @@ namespace DBDT.SQL.SQL_SELECT
 
                 int firstIndex = sql.IndexOf("where");
 
-                sprCountSp = "select count(*) from " + aSpacja[2] + " " + sql.Substring(firstIndex, sql.Length - firstIndex);
+                sprCountSp = "select" + strdins + " count(*) from " + aSpacja[2] + " " + sql.Substring(firstIndex, sql.Length - firstIndex);
                 NazwaTabeli = aSpacja[2].ToString();
 
             }
@@ -236,7 +243,7 @@ namespace DBDT.SQL.SQL_SELECT
 
                 int firstIndex = sql.IndexOf("where");
 
-                sprCountSp = "select count(*) from " + aSpacja[1] + " " + sql.Substring(firstIndex, sql.Length - firstIndex) ;
+                sprCountSp = "select" + strdins + " count(*) from " + aSpacja[1] + " " + sql.Substring(firstIndex, sql.Length - firstIndex) ;
                 NazwaTabeli = aSpacja[1].ToString();
             }
 

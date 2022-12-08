@@ -16,8 +16,6 @@
                             <MenuItem Header="Lista zapytań SQL" Click="FindSQLWindow_Click" />
                             <MenuItem Header="Dodaj nowe zapytanie SQL" Click="AddNewSQLWindow_Click" />
                             <Separator/>
-                            <MenuItem Header="Dodaj nowe zapytanie SQL/Procedura" Click="AddNewSQLWindowProc_Click" />
-                            <Separator/>
                             <MenuItem Header="Pliki EXCEL" Click="AddNewEXCEL_Click" />
                             <Separator/>
                             <MenuItem Header="Struktura poleceń SQL" Click="Window_TreeSQL_Click" />

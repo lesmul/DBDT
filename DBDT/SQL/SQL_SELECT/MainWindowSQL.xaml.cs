@@ -365,9 +365,7 @@ namespace DBDT.SQL.SQL_SELECT
                 DataTable result = sqlHandler.Execute(strSQL, out errors, procedura);
                 errorsGrid.ItemsSource = errors;
                 errorsExpander.IsExpanded = (errors.Length != 0);
-
                 
-
                 if ((double)result.Rows.Count > 100000)
                 {
                     UpdateUIStatus(false, "Zapytanie zwróciło dużo wyników jest ich: " + result.Rows.Count.ToString());
@@ -393,6 +391,7 @@ namespace DBDT.SQL.SQL_SELECT
                 */
                 MessageBox.Show(ex.Message + " " + ex.StackTrace, "Błąd zapytania SQL", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
         }
 
         private void IsConnected_Executed(object sender, CanExecuteRoutedEventArgs e)
@@ -813,7 +812,20 @@ namespace DBDT.SQL.SQL_SELECT
                 }
             }
         }
-
+        private void click_procedura(object sender, RoutedEventArgs e)
+        {
+            if (procedura == false)
+            {
+                praca_procedura.Header = "Ustaw tryb pracy - wykonaj";
+                procedura = true;
+            }
+            else
+            {
+                praca_procedura.Header = "Ustaw tryb pracy - procedura";
+                procedura = false;
+            }
+          
+        }
     }
 
 }

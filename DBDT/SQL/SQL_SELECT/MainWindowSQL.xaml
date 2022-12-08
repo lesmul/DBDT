@@ -127,6 +127,8 @@
                         <MenuItem Header="zamień na OR" Name="cxmItemLikeOr" Click="ClickOr" />
                         <Separator/>
                         <MenuItem Header="Kolumny w tabeli" Name="cxmItemColumsTable" Click="ClickColumnTable" />
+                        <Separator/>
+                        <MenuItem Name="praca_procedura"  Header="Ustaw tryb pracy - procedura" Click="click_procedura" />
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="Pokaż wszystkie tabele"  Name="cxmSelecAllTable" Click="ClickSelecAllTable" />
