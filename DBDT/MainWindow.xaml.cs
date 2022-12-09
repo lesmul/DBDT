@@ -90,10 +90,10 @@ namespace DBDT
                 {
                    if (dv[0]["pole8"].ToString() != "") Drzewo_5.Header = dv[0]["pole8"].ToString();
                 }
-                //else
-                //{
-                //    Drzewo_5.IsEnabled = false;
-               // }
+                else
+                {
+                    Drzewo_5.IsEnabled = false;
+                }
             }
         }
 
@@ -369,6 +369,9 @@ namespace DBDT
                     break;
                 case "WT_5":
                     nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_5";
+                    break;
+                case "WT_6":
+                    nazwa_obiektu = "";
                     break;
             }
 

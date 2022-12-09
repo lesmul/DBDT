@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBDT.Konfiguracja"
         mc:Ignorable="d"
-        Title="Konfiguracja połączenia do bazy danych" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png" WindowStyle="ToolWindow" Width="637" Height="395" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5,5,5,5" Margin="-1,0,0,0">
+        Title="Konfiguracja programu połączenia/katalogi/synchronizacja" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png" WindowStyle="ToolWindow" Width="637" Height="395" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5,5,5,5" Margin="-1,0,0,0">
     <Grid Margin="-5,-5,-5,4">
 
         <TabControl HorizontalAlignment="Center" Height="356" VerticalAlignment="Top" Width="627" Margin="0,14,0,0">
@@ -325,6 +325,9 @@
                     <Button Name="ZAPISZ_LOK_KATALAGU_5" Tag="T5" Content="Zapisz" HorizontalAlignment="Left" Height="28" Margin="537,275,0,0" VerticalAlignment="Top" Width="74" Click="ZAPISZ_LOK_KATALAGU_Click"/>
 
                 </Grid>
+            </TabItem>
+            <TabItem Header="Synchronizacja programu">
+                <Button Name="button_synchronizuj" Content="Synchronizuj" HorizontalAlignment="Left" Height="28" Margin="537,275,0,0" VerticalAlignment="Top" Width="74"/>
             </TabItem>
         </TabControl>
 

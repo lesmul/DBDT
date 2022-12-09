@@ -27,7 +27,8 @@
                                 <MenuItem Tag="WT_2" Name="Drzewo_2" Header="Drzewo #2" Click="Window_Tree_Click" />
                                 <MenuItem Tag="WT_3" Name="Drzewo_3" Header="Drzewo #3" Click="Window_Tree_Click" />
                                 <MenuItem Tag="WT_4" Name="Drzewo_4" Header="Drzewo #4" Click="Window_Tree_Click" />
-                                <MenuItem Tag="WT_5" Name="Drzewo_5" Header="Mój komputer" Click="Window_Tree_Click" />
+                                <MenuItem Tag="WT_5" Name="Drzewo_5" Header="Drzewo #5" Click="Window_Tree_Click" />
+                                <MenuItem Tag="WT_6" Name="Drzewo_6" Header="Mój komputer" Click="Window_Tree_Click" />
                             </MenuItem>
                          </MenuItem>
                         <MenuItem Header="DXF">
