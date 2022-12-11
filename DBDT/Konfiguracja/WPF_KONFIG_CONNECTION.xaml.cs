@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.Win32;
 
 namespace DBDT.Konfiguracja
 {
@@ -26,43 +27,83 @@ namespace DBDT.Konfiguracja
         {
             InitializeComponent();
 
+            wart_pol();
+
+        }
+
+        private void wart_pol()
+        {
             DataTable dt = new DataTable();
 
-            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10, pole8, pole9 FROM ParametryPalaczenia WHERE pole9 LIKE 'TXT_LOKALIZACJA_PLIKOW_%' order by id desc");
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10, pole8, pole9 FROM ParametryPalaczenia WHERE pole9 LIKE 'TXT_LOKALIZACJA_PLIKOW_%' OR pole9 ='TXT_LOKALIZACJA_PLIKU_MATKI' order by id desc");
+
+            sbyte sb_poziom = 0;
+            LBL_LK_1.Content = "Lokalizacja - katalog głowny [#1]:";
+            LBL_LK_2.Content = "Lokalizacja - katalog głowny [#2]:";
+            LBL_LK_3.Content = "Lokalizacja - katalog głowny [#3]:";
+            LBL_LK_4.Content = "Lokalizacja - katalog głowny [#4]:";
+            LBL_LK_5.Content = "Lokalizacja - katalog głowny [#5]:";
+
+            if (SC_POZIOM.Value == 1)
+            {
+                sb_poziom = 5;
+                LBL_LK_1.Content = "Lokalizacja - katalog głowny [#6]:";
+                LBL_LK_2.Content = "Lokalizacja - katalog głowny [#7]:";
+                LBL_LK_3.Content = "Lokalizacja - katalog głowny [#8]:";
+                LBL_LK_4.Content = "Lokalizacja - katalog głowny [#9]:";
+                LBL_LK_5.Content = "Lokalizacja - katalog głowny [#10]:";
+            }
+
+            TXT_LOKALIZACJA_PLIKOW_1.Text = "";
+            TXT_LOKALIZACJA_PLIKOW_2.Text = "";
+            TXT_LOKALIZACJA_PLIKOW_3.Text = "";
+            TXT_LOKALIZACJA_PLIKOW_4.Text = "";
+            TXT_LOKALIZACJA_PLIKOW_5.Text = "";
+            TXT_LOKALIZACJA_PLIKOW_OPIS_1.Text = "";
+            TXT_LOKALIZACJA_PLIKOW_OPIS_2.Text = "";
+            TXT_LOKALIZACJA_PLIKOW_OPIS_3.Text = "";
+            TXT_LOKALIZACJA_PLIKOW_OPIS_4.Text = "";
+            TXT_LOKALIZACJA_PLIKOW_OPIS_5.Text = "";
 
             if (dt.Rows.Count > 0)
             {
                 DataView dv = new DataView(dt);
-                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_1'";
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_" +  (1 + sb_poziom) + "'";
                 if (dv.Count > 0)
                 {
                     TXT_LOKALIZACJA_PLIKOW_1.Text = dv[0]["pole10"].ToString();
                     TXT_LOKALIZACJA_PLIKOW_OPIS_1.Text = dv[0]["pole8"].ToString();
                 }
-                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_2'";
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_" +  (2 + sb_poziom) + "'";
                 if (dv.Count > 0)
                 {
                     TXT_LOKALIZACJA_PLIKOW_2.Text = dv[0]["pole10"].ToString();
                     TXT_LOKALIZACJA_PLIKOW_OPIS_2.Text = dv[0]["pole8"].ToString();
                 }
-                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_3'";
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_" + (3 + sb_poziom) + "'";
                 if (dv.Count > 0)
                 {
                     TXT_LOKALIZACJA_PLIKOW_3.Text = dv[0]["pole10"].ToString();
                     TXT_LOKALIZACJA_PLIKOW_OPIS_3.Text = dv[0]["pole8"].ToString();
                 }
-                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_4'";
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_" + (4 + sb_poziom) + "'";
                 if (dv.Count > 0)
                 {
                     TXT_LOKALIZACJA_PLIKOW_4.Text = dv[0]["pole10"].ToString();
                     TXT_LOKALIZACJA_PLIKOW_OPIS_4.Text = dv[0]["pole8"].ToString();
                 }
-                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_5'";
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_" + (5 + sb_poziom) + "'";
                 if (dv.Count > 0)
                 {
                     TXT_LOKALIZACJA_PLIKOW_5.Text = dv[0]["pole10"].ToString();
                     TXT_LOKALIZACJA_PLIKOW_OPIS_5.Text = dv[0]["pole8"].ToString();
                 }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKU_MATKI'";
+                if (dv.Count > 0)
+                {
+                    TXT_LOKALIZACJA_PLIKU_MATKI.Text = dv[0]["pole10"].ToString();
+                }
+
             }
         }
 
@@ -79,7 +120,7 @@ namespace DBDT.Konfiguracja
                     DataTable dt = new DataTable();
                     dt = _PUBLIC_SqlLite.SelectQuery("select count(*) from ParametryPalaczenia where `nazwa_bazy` <> ''");
 
-                    if (dt.Rows.Count > 1500)
+                    if (dt.Rows.Count > 10000)
                     {
                         _PUBLIC_SqlLite.USUN_REKORDY_PAR_POLACZENIA();
                     }
@@ -144,6 +185,13 @@ namespace DBDT.Konfiguracja
         }
         private void ZAPISZ_LOK_KATALAGU_Click(object sender, RoutedEventArgs e)
         {
+            sbyte sb_poziom = 0;
+
+            if (SC_POZIOM.Value == 1)
+            {
+                sb_poziom = 5;
+            }
+
             switch (((System.Windows.FrameworkElement)sender).Tag.ToString())
             {
                 case "T1":
@@ -155,7 +203,7 @@ namespace DBDT.Konfiguracja
                 var dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
                 if (dr == MessageBoxResult.Yes)
                 {
-                    _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_1.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_1.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_1",true);
+                    _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_1.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_1.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_" + (1 + sb_poziom) , true);
                 }
                 break;
                 case "T2":
@@ -167,7 +215,7 @@ namespace DBDT.Konfiguracja
                     dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
                     if (dr == MessageBoxResult.Yes)
                     {
-                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "",TXT_LOKALIZACJA_PLIKOW_OPIS_2.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_2.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_2", true);
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "",TXT_LOKALIZACJA_PLIKOW_OPIS_2.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_2.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_" + (2 + sb_poziom), true);
                     }
                     break;
                 case "T3":
@@ -179,11 +227,11 @@ namespace DBDT.Konfiguracja
                     dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
                     if (dr == MessageBoxResult.Yes)
                     {
-                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_3.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_3.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_3", true);
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_3.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_3.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_" + (3 + sb_poziom), true);
                     }
                     break;
                 case "T4":
-                    if (TXT_LOKALIZACJA_PLIKOW_2.Text.Trim() == "")
+                    if (TXT_LOKALIZACJA_PLIKOW_4.Text.Trim() == "")
                     {
                         return;
                     }
@@ -191,11 +239,11 @@ namespace DBDT.Konfiguracja
                     dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
                     if (dr == MessageBoxResult.Yes)
                     {
-                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_4.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_4.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_4", true);
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_4.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_4.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_" + (4 + sb_poziom), true);
                     }
                     break;
                 case "T5":
-                    if (TXT_LOKALIZACJA_PLIKOW_2.Text.Trim() == "")
+                    if (TXT_LOKALIZACJA_PLIKOW_5.Text.Trim() == "")
                     {
                         return;
                     }
@@ -203,11 +251,120 @@ namespace DBDT.Konfiguracja
                     dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
                     if (dr == MessageBoxResult.Yes)
                     {
-                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_5.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_5.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_5", true);
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", TXT_LOKALIZACJA_PLIKOW_OPIS_5.Text.Trim(), TXT_LOKALIZACJA_PLIKOW_5.Text.Trim(), "TXT_LOKALIZACJA_PLIKOW_" + (5 + sb_poziom), true);
                     }
                     break;
                 default:
                 break;
+            }
+            
+        }
+        private void ZAPISZ_LOK_MATKA_Click(object sender, RoutedEventArgs e)
+        {
+            var dr = MessageBox.Show("Czy zapisać zmiany ?", "Uwaga!!!", MessageBoxButton.YesNo);
+
+            if (dr == MessageBoxResult.Yes)
+            {
+                _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", "BAZA-ZRODLO", TXT_LOKALIZACJA_PLIKU_MATKI.Text.Trim(), "TXT_LOKALIZACJA_PLIKU_MATKI", true);
+            }
+        }
+
+        private void SC_POZIOM_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            wart_pol();
+        }
+
+        private void Open_file_click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Wybierz plik bazy jako żródło";
+            openFileDialog.Filter = "Plik bazy (_dbdt.db)|*_dbdt.db|Inny (*.db)|*.db";
+            openFileDialog.Multiselect= false;//_dbdt.db "Pliki obrazów (*.bmp, *.jpg)|*.bmp;*.jpg|Wszystkie pliki (*.*)|*.*"”
+            if (openFileDialog.ShowDialog() == true)
+                TXT_LOKALIZACJA_PLIKU_MATKI.Text = openFileDialog.FileName;
+        }
+
+        private void button_synchronizuj_Click(object sender, RoutedEventArgs e)
+        {
+            if (TXT_LOKALIZACJA_PLIKU_MATKI.Text.Trim() == "") return;
+
+            DataTable dtm = new DataTable();
+            DataTable dtl = new DataTable();
+
+            dtm = _PUBLIC_SqlLite.SelectQuery_DB_MASTER("SELECT nazwa_objektu, opis, pole1, pole7, kto_zmienil, objekt FROM objekty WHERE poleint1 = 1", TXT_LOKALIZACJA_PLIKU_MATKI.Text.Trim());
+
+            dtl = _PUBLIC_SqlLite.SelectQuery("SELECT pole7 FROM objekty");
+
+            if (dtm.Rows.Count > 0)
+            {
+                DataView dataView = new DataView(dtl);
+                for (int i = 0;i< dtm.Rows.Count; i++)
+                {
+                    dataView.RowFilter = "pole7 = '" + dtm.Rows[0]["pole7"].ToString() + "'";
+
+                    if(dataView.Count  == 0)
+                    {
+                        _PUBLIC_SqlLite.DODAJ_REKORD_OBJEKT_Z_MASTER(dtm.Rows[i]["nazwa_objektu"].ToString(),
+                            dtm.Rows[i]["opis"].ToString(),dtm.Rows[i]["pole1"].ToString(),dtm.Rows[i]["pole7"].ToString(), 
+                            dtm.Rows[i]["kto_zmienil"].ToString(),dtm.Rows[i]["objekt"].ToString());
+                    }
+                }
+            }
+
+            // dtm = _PUBLIC_SqlLite.SelectQuery_DB_MASTER("SELECT * FROM obrobki WHERE poleint1 = 1", TXT_LOKALIZACJA_PLIKU_MATKI.Text.Trim());
+
+           // dtl = _PUBLIC_SqlLite.SelectQuery("SELECT pole7 FROM obrobki");
+
+            dtm = _PUBLIC_SqlLite.SelectQuery_DB_MASTER("SELECT nazwa_zapytania, sql, pole1, pole2, pole3, pole4, pole5, pole6, kto_zmienil, pole7 FROM sql_zapytania WHERE poleint1 = 1", TXT_LOKALIZACJA_PLIKU_MATKI.Text.Trim());
+
+            dtl = _PUBLIC_SqlLite.SelectQuery("SELECT pole7 FROM sql_zapytania");
+            
+            if (dtm.Rows.Count > 0)
+            {
+                DataView dataView = new DataView(dtl);
+                for (int i = 0; i < dtm.Rows.Count; i++)
+                {
+                    dataView.RowFilter = "pole7 = '" + dtm.Rows[0]["pole7"].ToString() + "'";
+
+                    if (dataView.Count == 0)
+                    {
+                        _PUBLIC_SqlLite.DODAJ_REKORD_SQL_ZAPYTANIA_Z_MASTER(dtm.Rows[i]["nazwa_zapytania"].ToString(),
+                            dtm.Rows[i]["sql"].ToString(), dtm.Rows[i]["pole1"].ToString(), dtm.Rows[i]["pole2"].ToString(),
+                            dtm.Rows[i]["pole3"].ToString(), dtm.Rows[i]["pole4"].ToString(), dtm.Rows[i]["pole5"].ToString(),
+                            dtm.Rows[i]["pole6"].ToString(), dtm.Rows[i]["kto_zmienil"].ToString(), dtm.Rows[i]["pole7"].ToString());
+                    }
+                }
+            }
+
+            dtm = _PUBLIC_SqlLite.SelectQuery_DB_MASTER("SELECT serwer, nazwa_bazy, pole10, pole9, pole8, pole7, kto_zmienil FROM ParametryPalaczenia WHERE poleint1 = 1", TXT_LOKALIZACJA_PLIKU_MATKI.Text.Trim());
+
+            dtl = _PUBLIC_SqlLite.SelectQuery("SELECT pole7 FROM ParametryPalaczenia");
+
+            if (dtm.Rows.Count > 0)
+            {
+                DataView dataView = new DataView(dtl);
+                for (int i = 0; i < dtm.Rows.Count; i++)
+                {
+                    dataView.RowFilter = "pole7 = '" + dtm.Rows[0]["pole7"].ToString() + "'";
+
+                    if (dataView.Count == 0)
+                    {
+                        _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA_Z_MASTER(dtm.Rows[i]["serwer"].ToString(),
+                            dtm.Rows[i]["nazwa_bazy"].ToString(), dtm.Rows[i]["pole7"].ToString(), dtm.Rows[i]["pole8"].ToString(),
+                            dtm.Rows[i]["pole9"].ToString(), dtm.Rows[i]["pole10"].ToString(), dtm.Rows[i]["kto_zmienil"].ToString());
+                    }
+                }
+            }
+
+        }
+
+        private void Save_file_all_click(object sender, RoutedEventArgs e)
+        {
+            var dr = MessageBox.Show("Czy ustawić jako domyślne ustawienia dla źródła?", "Uwaga!!!", MessageBoxButton.YesNo);
+
+            if (dr == MessageBoxResult.Yes)
+            {
+                _PUBLIC_SqlLite.ZAPISZ_ZMIANY_SQL("UPDATE objekty SET poleint1 = 1; UPDATE obrobki SET poleint1 = 1; UPDATE sql_zapytania SET poleint1 = 1; UPDATE ParametryPalaczenia SET poleint1 = 1 WHERE nazwa_bazy = '';");
             }
             
         }

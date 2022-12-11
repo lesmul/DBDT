@@ -94,6 +94,51 @@ namespace DBDT
                 {
                     Drzewo_5.IsEnabled = false;
                 }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_6'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_6.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_6.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_7'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_7.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_7.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_8'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_8.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_8.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_9'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_9.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_9.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_10'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_10.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_10.IsEnabled = false;
+                }
             }
         }
 
@@ -371,6 +416,21 @@ namespace DBDT
                     nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_5";
                     break;
                 case "WT_6":
+                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_6";
+                    break;
+                case "WT_7":
+                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_7";
+                    break;
+                case "WT_8":
+                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_8";
+                    break;
+                case "WT_9":
+                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_9";
+                    break;
+                case "WT_10":
+                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_10";
+                    break;
+                case "WT_11":
                     nazwa_obiektu = "";
                     break;
             }

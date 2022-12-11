@@ -69,3 +69,4 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DrzewoSQL\UC_SQ
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DrzewoSQL\UC_SQL_TREE.baml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\SQL_SELECT\ColumsTable.g.cs
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\SQL\SQL_SELECT\ColumsTable.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Resources\SearchBox.baml

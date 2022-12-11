@@ -51,7 +51,6 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 return true;
             }
         }
-
         public static void SqliteCleate()
         {
             SQLiteConnection.CreateFile(sqlite_file);
@@ -79,11 +78,11 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 " `polesng3` single DEFAULT 0, " +
                 " `polereal` REAL DEFAULT 0, " +
                 " `kto_zmienil` varchar(500) NOT NULL, " +
-                " `data_utworzenia` DATETIME DEFAULT SYSDATE NOT NULL); ";
+                " `data_utworzenia` DATETIME DEFAULT current_timestamp); ";
 
             string str_2 = "CREATE TABLE IF NOT EXISTS `sql_zapytania` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 " `nazwa_zapytania` varchar(255) NOT NULL DEFAULT '', " +
-                " `sql` varchar(9000) NOT NULL DEFAULT '', " +
+                " `sql` varchar(15000) NOT NULL DEFAULT '', " +
                 " `pole1` varchar(255) NOT NULL DEFAULT '', " +
                 " `pole2` varchar(255) NOT NULL DEFAULT '', " +
                 " `pole3` varchar(255) NOT NULL DEFAULT '', " +
@@ -105,7 +104,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 " `polesng3` single DEFAULT 0, " +
                 " `polereal` REAL DEFAULT 0, " +
                 " `kto_zmienil` varchar(500) NOT NULL, " +
-                " `data_utworzenia` DATETIME DEFAULT SYSDATE NOT NULL); ";
+                " `data_utworzenia` DATETIME DEFAULT current_timestamp); ";
 
             string str_3 = "CREATE TABLE IF NOT EXISTS `obrobki` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 " `nazwa_obrobki` varchar(255) NOT NULL, " +
@@ -131,7 +130,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 " `polesng3` single DEFAULT 0, " +
                 " `polereal` REAL DEFAULT 0, " +
                 " `kto_zmienil` varchar(255) NOT NULL, " +
-                " `data_utworzenia` DATETIME DEFAULT SYSDATE NOT NULL); ";
+                " `data_utworzenia` DATETIME DEFAULT current_timestamp); ";
 
             string str_4 = "CREATE TABLE IF NOT EXISTS `objekty` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 " `nazwa_objektu` varchar(255) NOT NULL, " +
@@ -158,7 +157,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 " `polereal` REAL DEFAULT 0, " +
                 " `objekt` varbinary, " +
                 " `kto_zmienil` varchar(255) NOT NULL, " +
-                " `data_utworzenia` DATETIME DEFAULT SYSDATE NOT NULL); ";
+                " `data_utworzenia` DATETIME DEFAULT current_timestamp; ";
 
             string str_5 = "CREATE TABLE IF NOT EXISTS `procedury` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 " `nazwa_procedury` varchar(255) NOT NULL, " +
@@ -175,7 +174,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 " `pole10` varchar(2500) NOT NULL DEFAULT '', " +
                 " `pole11` text DEFAULT '', " +
                 " `kto_zmienil` varchar(255) NOT NULL, " +
-                " `data_utworzenia` DATETIME DEFAULT SYSDATE NOT NULL); ";
+                " `data_utworzenia` DATETIME DEFAULT current_timestamp); ";
 
             string str_6 = "CREATE TABLE IF NOT EXISTS `funkcje` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 " `nazwa_funkcji` varchar(255) NOT NULL, " +
@@ -192,7 +191,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 " `pole10` varchar(2500) NOT NULL DEFAULT '', " +
                 " `pole11` text DEFAULT '', " +
                 " `kto_zmienil` varchar(255) NOT NULL, " +
-                " `data_utworzenia` DATETIME DEFAULT SYSDATE NOT NULL); ";
+                " `data_utworzenia` DATETIME DEFAULT current_timestamp); ";
 
             //SQLiteConnection connection = new SQLiteConnection
             SQLiteConnection connection = new SQLiteConnection
@@ -212,7 +211,41 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             connection.Close();
             connection.Dispose();
         }
+        public static DataTable SelectQuery_DB_MASTER(string query, string path)
+        {
+            SQLiteDataAdapter ad;
+            DataTable dt = new DataTable();
 
+            try
+            {
+                SQLiteCommand cmd;
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + path
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                cmd = connection.CreateCommand();
+                cmd.CommandText = query;  //set the passed query
+                ad = new SQLiteDataAdapter(cmd);
+                ad.Fill(dt); //fill the datasource
+
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            return dt;
+        }
         public static DataTable SelectQuery(string query)
         {
             SQLiteDataAdapter ad;
@@ -284,6 +317,8 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 MessageBox.Show(ex.Message, "Błąd");
             }
 
+            var guid = Guid.NewGuid().ToString();
+
             command_insert.CommandType = CommandType.Text;
 
             if (boolZastap == true)
@@ -293,15 +328,69 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 command_insert.ExecuteNonQuery();
             }
 
-            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole9`, `pole8`, `kto_zmienil`)" +
-                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole9, @pole8, @kto_zmienil)";
+            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole9`, `pole8`, `pole7`, `kto_zmienil`)" +
+                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole9, @pole8, @pole7, @kto_zmienil)";
 
             command_insert.Parameters.AddWithValue("@serwer", str_serwer);
             command_insert.Parameters.AddWithValue("@nazwa_bazy", str_nazwa_bazy);
             command_insert.Parameters.AddWithValue("@pole10", pole10);
             command_insert.Parameters.AddWithValue("@pole8", pole8);
+            command_insert.Parameters.AddWithValue("@pole7", guid);
             command_insert.Parameters.AddWithValue("@pole9", nazwa_pola);
             command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
+
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
+        public static Boolean DODAJ_REKORD_PAR_POLACZENIA_Z_MASTER(string str_serwer, string str_nazwa_bazy,
+    string pole7 = "", string pole8 = "", string pole9 = "", string pole10 = "", string kto_zmienil = "")
+        {
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            command_insert.CommandType = CommandType.Text;
+
+            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole9`, `pole8`, `pole7`, `kto_zmienil`)" +
+                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole9, @pole8, @pole7, @kto_zmienil)";
+
+            command_insert.Parameters.AddWithValue("@serwer", str_serwer);
+            command_insert.Parameters.AddWithValue("@nazwa_bazy", str_nazwa_bazy);
+            command_insert.Parameters.AddWithValue("@pole8", pole8);
+            command_insert.Parameters.AddWithValue("@pole7", pole7);
+            command_insert.Parameters.AddWithValue("@pole9", pole9);
+            command_insert.Parameters.AddWithValue("@pole10", pole10);
+            command_insert.Parameters.AddWithValue("@kto_zmienil", kto_zmienil);
 
             try
             {
@@ -447,12 +536,14 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             }
 
             command_insert.CommandText = "INSERT INTO `sql_zapytania` (`nazwa_zapytania`,`sql`, `pole1`, `pole2`, " +
-                "`pole3`, `pole4`, `pole5`, `pole6`, `kto_zmienil`)" +
-                " VALUES(@nazwa_zapytania, @sql, @pole1, @pole2, @pole3, @pole4, @pole5, @pole6, @kto_zmienil)";
+                "`pole3`, `pole4`, `pole5`, `pole6`, `pole7`, `kto_zmienil`)" +
+                " VALUES(@nazwa_zapytania, @sql, @pole1, @pole2, @pole3, @pole4, @pole5, @pole6, @pole7, @kto_zmienil)";
 
             command_insert.CommandType = CommandType.Text;
 
             if (poziom1 == "") poziom1 = "nieprzypisany";
+
+            var guid = Guid.NewGuid().ToString();
 
             command_insert.Parameters.AddWithValue("@nazwa_zapytania", nazwa_zapytania);
             command_insert.Parameters.AddWithValue("@sql", sql);
@@ -462,7 +553,81 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             command_insert.Parameters.AddWithValue("@pole4", poziom4);
             command_insert.Parameters.AddWithValue("@pole5", poziom5);
             command_insert.Parameters.AddWithValue("@pole6", poziom6);
+            command_insert.Parameters.AddWithValue("@pole7", guid);
             command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
+
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
+        public static Boolean DODAJ_REKORD_SQL_ZAPYTANIA_Z_MASTER(string nazwa_zapytania, string sql, string pole1, string pole2,
+     string pole3, string pole4, string pole5, string pole6, string kto_zmienil, string pole7)
+        {
+
+            if (sql.Trim() == "") return false;
+
+            if (nazwa_zapytania.Trim() == "")
+            {
+                if (MessageBox.Show("Nie podałeś opisu czy mimo to zapisac?", "Uwaga!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                {
+                    return false;
+                }
+
+                nazwa_zapytania = string.Format("Zapisano dnia: {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
+            }
+
+            if (nazwa_zapytania.Trim() == "") return false;
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            command_insert.CommandText = "INSERT INTO `sql_zapytania` (`nazwa_zapytania`,`sql`, `pole1`, `pole2`, " +
+                "`pole3`, `pole4`, `pole5`, `pole6`, `pole7`, `kto_zmienil`)" +
+                " VALUES(@nazwa_zapytania, @sql, @pole1, @pole2, @pole3, @pole4, @pole5, @pole6, @pole7, @kto_zmienil)";
+
+            command_insert.CommandType = CommandType.Text;
+
+            if (pole1 == "") pole1 = "nieprzypisany";
+
+            command_insert.Parameters.AddWithValue("@nazwa_zapytania", nazwa_zapytania);
+            command_insert.Parameters.AddWithValue("@sql", sql);
+            command_insert.Parameters.AddWithValue("@pole1", pole1);
+            command_insert.Parameters.AddWithValue("@pole2", pole2);
+            command_insert.Parameters.AddWithValue("@pole3", pole3);
+            command_insert.Parameters.AddWithValue("@pole4", pole4);
+            command_insert.Parameters.AddWithValue("@pole5", pole5);
+            command_insert.Parameters.AddWithValue("@pole6", pole6);
+            command_insert.Parameters.AddWithValue("@pole7", pole7);
+            command_insert.Parameters.AddWithValue("@kto_zmienil",kto_zmienil);
 
             try
             {
@@ -507,26 +672,84 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 MessageBox.Show(ex.Message, "Błąd");
             }
 
+            var guid = Guid.NewGuid().ToString();
 
             command_insert.CommandType = CommandType.Text;
 
             command_insert.Parameters.AddWithValue("@nazwa_objektu", nazwa_objektu);
             command_insert.Parameters.AddWithValue("@opis", opis);
             command_insert.Parameters.AddWithValue("@pole1", nazwa_pliku);
+            command_insert.Parameters.AddWithValue("@pole7", guid);
             command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
 
             if (scieszka_do_pliku != "")
             {
-                command_insert.CommandText = "INSERT INTO `objekty` (`nazwa_objektu`,`opis`, `objekt`, `pole1`, `kto_zmienil`)" +
-                " VALUES(@nazwa_objektu, @opis, @objekt, @pole1, @kto_zmienil)";
+                command_insert.CommandText = "INSERT INTO `objekty` (`nazwa_objektu`,`opis`, `objekt`, `pole1`, `pole7`, `kto_zmienil`)" +
+                " VALUES(@nazwa_objektu, @opis, @objekt, @pole1, @pole7, @kto_zmienil)";
   
                 command_insert.Parameters.AddWithValue("@objekt", ARR_BYTE_FILE_XSL(scieszka_do_pliku));
             }
             else
             {
-                command_insert.CommandText = "INSERT INTO `objekty` (`nazwa_objektu`,`opis`, `pole1`, `kto_zmienil`)" +
-                " VALUES(@nazwa_objektu, @opis, @pole1, @kto_zmienil)";
+                command_insert.CommandText = "INSERT INTO `objekty` (`nazwa_objektu`,`opis`, `pole1`,`pole7`, `kto_zmienil`)" +
+                " VALUES(@nazwa_objektu, @opis, @pole1, @pole7, @kto_zmienil)";
             }
+
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
+        public static Boolean DODAJ_REKORD_OBJEKT_Z_MASTER(string nazwa_objektu, string opis, string pole1, 
+            string pole7, string kto_zmienil, object objekt)
+        {
+
+            if (nazwa_objektu.Trim() == "") return false;
+
+            if (nazwa_objektu.Trim() == "") nazwa_objektu = string.Format("Zapisano dnia: {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            command_insert.CommandType = CommandType.Text;
+
+            command_insert.Parameters.AddWithValue("@nazwa_objektu", nazwa_objektu);
+            command_insert.Parameters.AddWithValue("@opis", opis);
+            command_insert.Parameters.AddWithValue("@pole1", pole1);
+            command_insert.Parameters.AddWithValue("@pole7", pole7);
+            command_insert.Parameters.AddWithValue("@kto_zmienil", kto_zmienil);
+            command_insert.Parameters.AddWithValue("@objekt", objekt);
+
+            command_insert.CommandText = "INSERT INTO `objekty` (`nazwa_objektu`,`opis`, `objekt`, `pole1`, `pole7`, `kto_zmienil`)" +
+                " VALUES(@nazwa_objektu, @opis, @objekt, @pole1, @pole7, @kto_zmienil)";
 
             try
             {
@@ -571,14 +794,16 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 MessageBox.Show(ex.Message, "Błąd");
             }
 
+            var guid = Guid.NewGuid().ToString();
 
             command_insert.CommandType = CommandType.Text;
 
             command_insert.Parameters.AddWithValue("@nazwa_objektu", nazwa_objektu);
             command_insert.Parameters.AddWithValue("@opis", opis);
+            command_insert.Parameters.AddWithValue("@pole7", guid);
             command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
 
-            command_insert.CommandText = "UPDATE `objekty`SET nazwa_objektu=@nazwa_objektu, opis=@opis WHERE `id` = " + id_obj;
+            command_insert.CommandText = "UPDATE `objekty` SET nazwa_objektu=@nazwa_objektu, opis=@opis, pole7=@pole7 WHERE `id` = " + id_obj;
 
             try
             {
@@ -625,6 +850,51 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             command_insert.CommandText = "DELETE FROM `objekty` WHERE `id` = " + id_obj;
    
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
+        public static Boolean ZAPISZ_ZMIANY_SQL(string StrSQL)
+        {
+
+            if (StrSQL.Trim() == "") return false;
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            command_insert.CommandType = CommandType.Text;
+
+            command_insert.CommandText = StrSQL;
+
             try
             {
                 command_insert.ExecuteNonQuery();
@@ -712,6 +982,8 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 MessageBox.Show(ex.Message, "Błąd");
             }
 
+            var guid = Guid.NewGuid().ToString();
+
             command_insert.CommandType = CommandType.Text;
      
             command_insert.CommandText = "UPDATE `sql_zapytania` SET `nazwa_zapytania` = '" + str_opis + "'"
@@ -721,6 +993,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 + ", `pole4` = '" + poziom4 + "'"
                 + ", `pole5` = '" + poziom5 + "'"
                 + ", `pole6` = '" + poziom6 + "'"
+                + ", `pole7` = '" + guid + "'"
                 + " WHERE `id` = " + id_obj;
 
             try
@@ -764,10 +1037,13 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 MessageBox.Show(ex.Message, "Błąd");
             }
 
+            var guid = Guid.NewGuid().ToString();
+
             command_update.CommandType = CommandType.Text;
             command_update.Parameters.AddWithValue("@sql", strSQL);
+            command_update.Parameters.AddWithValue("@pole7", guid);
 
-            command_update.CommandText = "UPDATE `sql_zapytania` SET `sql` = @sql WHERE `id` = " + id_obj;
+            command_update.CommandText = "UPDATE `sql_zapytania` SET `sql` = @sql, pole7 = @pole7 WHERE `id` = " + id_obj;
 
             try
             {

@@ -17404,4 +17404,2679 @@
         </member>
         <member name="P:netDxf.Tables.ShapeStyle.File">
             <summary>
-            Gets or sets the shape SHX 
+            Gets or sets the shape SHX file name.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.ShapeStyle.Size">
+            <summary>
+            Gets the shape size.
+            </summary>
+            <remarks>This value seems to have no effect on shapes or complex line types with shapes. Default: 0.0.</remarks>
+        </member>
+        <member name="P:netDxf.Tables.ShapeStyle.WidthFactor">
+            <summary>
+            Gets the shape width factor.
+            </summary>
+            <remarks>This value seems to have no effect on shapes or complex line types with shapes. Default: 1.0.</remarks>
+        </member>
+        <member name="P:netDxf.Tables.ShapeStyle.ObliqueAngle">
+            <summary>
+            Gets the shape oblique angle in degrees.
+            </summary>
+            <remarks>This value seems to have no effect on shapes or complex line types with shapes. Default: 0.0.</remarks>
+        </member>
+        <member name="P:netDxf.Tables.ShapeStyle.Owner">
+            <summary>
+            Gets the owner of the actual shape style.
+            </summary>
+        </member>
+        <member name="M:netDxf.Tables.ShapeStyle.NamesFromFile(System.String)">
+            <summary>
+            Gets the list of shapes names defined in a SHX file.
+            </summary>
+            <param name="file">Shape SHX file.</param>
+            <returns>List of shape names contained in the specified SHX file.</returns>
+        </member>
+        <member name="M:netDxf.Tables.ShapeStyle.ContainsShapeName(System.String,System.String)">
+            <summary>
+            Checks if the shape SHP file contains a shape with the specified name.
+            </summary>
+            <param name="file">Shape SHX file.</param>
+            <param name="shapeName">Shape name.</param>
+            <returns>True if the shape SHX file that contains a shape with the specified name, false otherwise.</returns>
+        </member>
+        <member name="M:netDxf.Tables.ShapeStyle.NamesFromShapeStyle">
+            <summary>
+            Gets the list of shapes names defined in the actual shape style (the shape SHX file must be accessible).
+            </summary>
+            <returns>List of shape names contained in the actual shape style.</returns>
+            <remarks>
+            If the actual shape style belongs to a document, it will look for the SHX file also in the document support folders.
+            </remarks>
+        </member>
+        <member name="M:netDxf.Tables.ShapeStyle.ContainsShapeName(System.String)">
+            <summary>
+            Checks if the actual shape style contains a shape with the specified name (the shape SHX file must be accessible).
+            </summary>
+            <param name="name">Shape name.</param>
+            <returns>True if the shape style that contains a shape with the specified name, false otherwise.</returns>
+            <remarks>If the actual shape style belongs to a document, it will look for the SHX file also in the document support folders.</remarks>
+        </member>
+        <member name="M:netDxf.Tables.ShapeStyle.ShapeNumber(System.String)">
+            <summary>
+            Gets the number of the shape with the specified name.
+            </summary>
+            <param name="name">Name of the shape.</param>
+            <returns>The number of the shape, 0 in case the shape has not been found.</returns>
+            <remarks>If the actual shape style belongs to a document, it will look for the SHX file also in the document support folders.</remarks>
+        </member>
+        <member name="M:netDxf.Tables.ShapeStyle.ShapeName(System.Int16)">
+            <summary>
+            Gets the name of the shape with the specified number.
+            </summary>
+            <param name="number">Number of the shape.</param>
+            <returns>The name of the shape, empty in case the shape has not been found.</returns>
+            <remarks>If the actual shape style belongs to a document, it will look for the SHX file also in the document support folders.</remarks>
+        </member>
+        <member name="M:netDxf.Tables.ShapeStyle.Clone(System.String)">
+            <summary>
+            Creates a new TextStyle that is a copy of the current instance.
+            </summary>
+            <param name="newName">TextStyle name of the copy.</param>
+            <returns>A new TextStyle that is a copy of this instance.</returns>
+        </member>
+        <member name="M:netDxf.Tables.ShapeStyle.Clone">
+            <summary>
+            Creates a new TextStyle that is a copy of the current instance.
+            </summary>
+            <returns>A new TextStyle that is a copy of this instance.</returns>
+        </member>
+        <member name="T:netDxf.Tables.TableObject">
+            <summary>
+            Defines classes that can be accessed by name. They are usually part of the DXF TABLE section but can also be part of the OBJECTS section.
+            </summary>
+        </member>
+        <member name="M:netDxf.Tables.TableObject.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <c>TableObject</c> class.
+            </summary>
+            <param name="name">Table name. The following characters \&lt;&gt;/?":;*|,=` are not supported for table object names.</param>
+            <param name="codeName">Table <see cref="T:netDxf.DxfObjectCode">code name</see>.</param>
+            <param name="checkName">Defines if the table object name needs to be checked for invalid characters.</param>
+        </member>
+        <member name="P:netDxf.Tables.TableObject.Name">
+            <summary>
+            Gets the name of the table object.
+            </summary>
+            <remarks>Table object names are case insensitive.</remarks>
+        </member>
+        <member name="P:netDxf.Tables.TableObject.IsReserved">
+            <summary>
+            Gets if the table object is reserved and cannot be deleted.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.TableObject.InvalidCharacters">
+            <summary>
+            Gets the array of characters not supported as table object names.
+            </summary>
+        </member>
+        <member name="M:netDxf.Tables.TableObject.IsValidName(System.String)">
+            <summary>
+            Checks if a string is valid as a table object name.
+            </summary>
+            <param name="name">String to check.</param>
+            <returns>True if the string is valid as a table object name, or false otherwise.</returns>
+        </member>
+        <member name="M:netDxf.Tables.TableObject.ToString">
+            <summary>
+            Converts the value of this instance to its equivalent string representation.
+            </summary>
+            <returns>The string representation.</returns>
+        </member>
+        <member name="M:netDxf.Tables.TableObject.CompareTo(System.Object)">
+            <summary>
+            Compares the current TableObject with another TableObject of the same type.
+            </summary>
+            <param name="other">A TableObject to compare with this TableObject.</param>
+            <returns>
+            An integer that indicates the relative order of the table objects being compared.
+            The return value has the following meanings: Value Meaning Less than zero This object is less than the other parameter.
+            Zero This object is equal to other. Greater than zero This object is greater than other.
+            </returns>
+            <remarks>If both table objects are no of the same type it will return zero. The comparison is made by their names.</remarks>
+        </member>
+        <member name="M:netDxf.Tables.TableObject.CompareTo(netDxf.Tables.TableObject)">
+            <summary>
+            Compares the current TableObject with another TableObject of the same type.
+            </summary>
+            <param name="other">A TableObject to compare with this TableObject.</param>
+            <returns>
+            An integer that indicates the relative order of the table objects being compared.
+            The return value has the following meanings: Value Meaning Less than zero This object is less than the other parameter.
+            Zero This object is equal to other. Greater than zero This object is greater than other.
+            </returns>
+            <remarks>If both table objects are not of the same type it will return zero. The comparison is made by their names.</remarks>
+        </member>
+        <member name="M:netDxf.Tables.TableObject.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
+        </member>
+        <member name="M:netDxf.Tables.TableObject.Equals(System.Object)">
+            <summary>
+            Check if two TableObject are equal.
+            </summary>
+            <param name="other">Another TableObject to compare to.</param>
+            <returns>True if two TableObject are equal or false in any other case.</returns>
+            <remarks>
+            Two TableObjects are considered equals if their names are the same, regardless of their internal values.
+            This is done this way because in a DXF two TableObjects cannot have the same name.
+            </remarks>
+        </member>
+        <member name="M:netDxf.Tables.TableObject.Equals(netDxf.Tables.TableObject)">
+            <summary>
+            Check if two TableObject are equal.
+            </summary>
+            <param name="other">Another TableObject to compare to.</param>
+            <returns>True if two TableObject are equal or false in any other case.</returns>
+            <remarks>
+            Two TableObjects are considered equals if their names are the same, regardless of their internal values.
+            This is done this way because in a DXF two TableObjects cannot have the same name.
+            </remarks>
+        </member>
+        <member name="M:netDxf.Tables.TableObject.Clone(System.String)">
+            <summary>
+            Creates a new table object that is a copy of the current instance.
+            </summary>
+            <param name="newName">TableObject name of the copy.</param>
+            <returns>A new table object that is a copy of this instance.</returns>
+        </member>
+        <member name="M:netDxf.Tables.TableObject.Clone">
+            <summary>
+            Creates a new table object that is a copy of the current instance.
+            </summary>
+            <returns>A new table object that is a copy of this instance.</returns>
+        </member>
+        <member name="T:netDxf.Tables.TableObjectChangedEventArgs`1">
+            <summary>
+            Event data for changes or substitutions of table objects in entities or other tables.
+            </summary>
+            <typeparam name="T">A table object</typeparam>
+        </member>
+        <member name="M:netDxf.Tables.TableObjectChangedEventArgs`1.#ctor(`0,`0)">
+            <summary>
+            Initializes a new instance of <c>TableObjectModifiedEventArgs</c>.
+            </summary>
+            <param name="oldTable">The previous table object.</param>
+            <param name="newTable">The new table object.</param>
+        </member>
+        <member name="P:netDxf.Tables.TableObjectChangedEventArgs`1.OldValue">
+            <summary>
+            Gets the previous property value.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.TableObjectChangedEventArgs`1.NewValue">
+            <summary>
+            Gets or sets the new property value.
+            </summary>
+        </member>
+        <member name="T:netDxf.Tables.TextStyle">
+            <summary>
+            Represents a text style.
+            </summary>
+        </member>
+        <member name="F:netDxf.Tables.TextStyle.DefaultName">
+            <summary>
+            Default text style name.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.Default">
+            <summary>
+            Gets the default text style.
+            </summary>
+        </member>
+        <member name="M:netDxf.Tables.TextStyle.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <c>TextStyle</c> class.
+            </summary>
+            <param name="font">Text style font file name with full or relative path.</param>
+            <remarks>
+            The font file name, without the extension, will also be used as the name of the text style.
+            </remarks>
+        </member>
+        <member name="M:netDxf.Tables.TextStyle.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <c>TextStyle</c> class.
+            </summary>
+            <param name="name">Text style name.</param>
+            <param name="font">Text style font file name with full or relative path.</param>
+        </member>
+        <member name="M:netDxf.Tables.TextStyle.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <c>TextStyle</c> class.
+            </summary>
+            <param name="name">Text style name.</param>
+            <param name="font">Text style font file name with full or relative path.</param>
+            <param name="checkName">Specifies if the style name has to be checked.</param>
+        </member>
+        <member name="M:netDxf.Tables.TextStyle.#ctor(System.String,netDxf.Tables.FontStyle)">
+            <summary>
+            Initializes a new instance of the <c>TextStyle</c> class exclusively to be used with true type fonts.
+            </summary>
+            <param name="fontFamily">True type font family name.</param>
+            <param name="fontStyle">True type font style</param>
+            <remarks>
+            This constructor is to be use only with true type fonts.
+            The fontFamily value will also be used as the name of the text style.
+            </remarks>
+        </member>
+        <member name="M:netDxf.Tables.TextStyle.#ctor(System.String,System.String,netDxf.Tables.FontStyle)">
+            <summary>
+            Initializes a new instance of the <c>TextStyle</c> class exclusively to be used with true type fonts.
+            </summary>
+            <param name="name">Text style name.</param>
+            <param name="fontFamily">True type font family name.</param>
+            <param name="fontStyle">True type font style</param>
+            <remarks>This constructor is to be use only with true type fonts.</remarks>
+        </member>
+        <member name="M:netDxf.Tables.TextStyle.#ctor(System.String,System.String,netDxf.Tables.FontStyle,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <c>TextStyle</c> class exclusively to be used with true type fonts.
+            </summary>
+            <param name="name">Text style name.</param>
+            <param name="fontFamily">True type font family name.</param>
+            <param name="fontStyle">True type font style</param>
+            <param name="checkName">Specifies if the style name has to be checked.</param>
+            <remarks>This constructor is to be use only with true type fonts.</remarks>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.FontFile">
+            <summary>
+            Gets or sets the text style font file name.
+            </summary>
+            <remarks>
+            When this value is used for true type fonts should be present in the Font system folder.<br />
+            When the style does not contain any information for the file the font information will be saved in the extended data when saved to a DXF,
+            this is only applicable for true type fonts.
+            </remarks>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.BigFont">
+            <summary>
+            Gets or sets an Asian-language Big Font file.
+            </summary>
+            <remarks>Only ACAD compiled shape SHX fonts are valid for creating Big Fonts.</remarks>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.FontFamilyName">
+            <summary>
+            Gets or sets the true type font family name.
+            </summary>
+            <remarks>
+            When the font family name is manually specified the file font will not be used and it will be set to empty,
+            the font style will also we set to FontStyle.Regular.
+            In this case the font information will be stored in the style extended data when saved to a DXF.<br />
+            This value is only applicable for true type fonts.
+            </remarks>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.FontStyle">
+            <summary>
+            Gets or sets the true type font style.
+            </summary>
+            <remarks>
+            The font style value is ignored and will always return FontStyle.Regular when a font file has been specified.<br />
+            All styles may not be available for the current font family.
+            </remarks>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.Height">
+            <summary>
+            Gets or sets the text height.
+            </summary>
+            <remarks>Fixed text height; 0 if not fixed.</remarks>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.WidthFactor">
+            <summary>
+            Gets or sets the text width factor.
+            </summary>
+            <remarks>Valid values range from 0.01 to 100. Default: 1.0.</remarks>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.ObliqueAngle">
+            <summary>
+            Gets or sets the font oblique angle in degrees.
+            </summary>
+            <remarks>Valid values range from -85 to 85. Default: 0.0.</remarks>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.IsVertical">
+            <summary>
+            Gets or sets the text is vertical.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.IsBackward">
+            <summary>
+            Gets or sets if the text is backward (mirrored in X).
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.IsUpsideDown">
+            <summary>
+            Gets or sets if the text is upside down (mirrored in Y).
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.TextStyle.Owner">
+            <summary>
+            Gets the owner of the actual text style.
+            </summary>
+        </member>
+        <member name="M:netDxf.Tables.TextStyle.Clone(System.String)">
+            <summary>
+            Creates a new TextStyle that is a copy of the current instance.
+            </summary>
+            <param name="newName">TextStyle name of the copy.</param>
+            <returns>A new TextStyle that is a copy of this instance.</returns>
+        </member>
+        <member name="M:netDxf.Tables.TextStyle.Clone">
+            <summary>
+            Creates a new TextStyle that is a copy of the current instance.
+            </summary>
+            <returns>A new TextStyle that is a copy of this instance.</returns>
+        </member>
+        <member name="T:netDxf.Tables.UCS">
+            <summary>
+            Represents a User Coordinate System.
+            </summary>
+        </member>
+        <member name="M:netDxf.Tables.UCS.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <c>UCS</c> class.
+            </summary>
+            <param name="name">User coordinate system name.</param>
+        </member>
+        <member name="M:netDxf.Tables.UCS.#ctor(System.String,netDxf.Vector3,netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Initializes a new instance of the <c>UCS</c> class.
+            </summary>
+            <param name="name">User coordinate system name.</param>
+            <param name="origin">Origin in WCS.</param>
+            <param name="xDirection">X-axis direction in WCS.</param>
+            <param name="yDirection">Y-axis direction in WCS.</param>
+            <remarks>
+            The x-axis direction and y-axis direction must be perpendicular.
+            </remarks>
+        </member>
+        <member name="P:netDxf.Tables.UCS.Origin">
+            <summary>
+            Gets or sets the user coordinate system origin in WCS.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.UCS.XAxis">
+            <summary>
+            Gets the user coordinate system x-axis direction in WCS.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.UCS.YAxis">
+            <summary>
+            Gets the user coordinate system y-axis direction in WCS.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.UCS.ZAxis">
+            <summary>
+            Gets the user coordinate system z-axis direction in WCS.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.UCS.Owner">
+            <summary>
+            Gets the owner of the actual user coordinate system.
+            </summary>
+        </member>
+        <member name="M:netDxf.Tables.UCS.SetAxis(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Sets the user coordinate system x-axis and y-axis direction.
+            </summary>
+            <param name="xDirection">X-axis direction in WCS.</param>
+            <param name="yDirection">Y-axis direction in WCS.</param>
+        </member>
+        <member name="M:netDxf.Tables.UCS.FromXAxisAndPointOnXYplane(System.String,netDxf.Vector3,netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Creates a new user coordinate system from the x-axis and a point on XY plane.
+            </summary>
+            <param name="name">User coordinate system name.</param>
+            <param name="origin">Origin in WCS.</param>
+            <param name="xDirection">X-axis direction in WCS.</param>
+            <param name="pointOnPlaneXY">Point on the XY plane.</param>
+            <returns>A new user coordinate system.</returns>
+        </member>
+        <member name="M:netDxf.Tables.UCS.FromNormal(System.String,netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Creates a new user coordinate system from the XY plane normal (z-axis).
+            </summary>
+            <param name="name">User coordinate system name.</param>
+            <param name="origin">Origin in WCS.</param>
+            <param name="normal">XY plane normal (z-axis).</param>
+            <returns>A new user coordinate system.</returns>
+            <remarks>This method uses the ArbitraryAxis algorithm to obtain the user coordinate system x-axis and y-axis.</remarks>
+        </member>
+        <member name="M:netDxf.Tables.UCS.FromNormal(System.String,netDxf.Vector3,netDxf.Vector3,System.Double)">
+            <summary>
+            Creates a new user coordinate system from the XY plane normal (z-axis).
+            </summary>
+            <param name="name">User coordinate system name.</param>
+            <param name="origin">Origin in WCS.</param>
+            <param name="normal">XY plane normal (z-axis).</param>
+            <param name="rotation">The counter-clockwise angle in radians along the normal (z-axis).</param>
+            <returns>A new user coordinate system.</returns>
+            <remarks>This method uses the ArbitraryAxis algorithm to obtain the user coordinate system x-axis and y-axis.</remarks>
+        </member>
+        <member name="M:netDxf.Tables.UCS.GetTransformation">
+            <summary>
+            Gets the user coordinate system rotation matrix.
+            </summary>
+            <returns>A Matrix3.</returns>
+        </member>
+        <member name="M:netDxf.Tables.UCS.Transform(netDxf.Vector3,netDxf.CoordinateSystem,netDxf.CoordinateSystem)">
+            <summary>
+            Transforms a point between coordinate systems.
+            </summary>
+            <param name="point">Point to transform.</param>
+            <param name="from">Points coordinate system.</param>
+            <param name="to">Coordinate system of the transformed points.</param>
+            <returns>Transformed point list.</returns>
+        </member>
+        <member name="M:netDxf.Tables.UCS.Transform(System.Collections.Generic.IEnumerable{netDxf.Vector3},netDxf.CoordinateSystem,netDxf.CoordinateSystem)">
+            <summary>
+            Transforms a point list between coordinate systems.
+            </summary>
+            <param name="points">Points to transform.</param>
+            <param name="from">Points coordinate system.</param>
+            <param name="to">Coordinate system of the transformed points.</param>
+            <returns>Transformed point list.</returns>
+        </member>
+        <member name="M:netDxf.Tables.UCS.Clone(System.String)">
+            <summary>
+            Creates a new UCS that is a copy of the current instance.
+            </summary>
+            <param name="newName">UCS name of the copy.</param>
+            <returns>A new UCS that is a copy of this instance.</returns>
+        </member>
+        <member name="M:netDxf.Tables.UCS.Clone">
+            <summary>
+            Creates a new UCS that is a copy of the current instance.
+            </summary>
+            <returns>A new UCS that is a copy of this instance.</returns>
+        </member>
+        <member name="M:netDxf.Tables.View.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <c>View</c> class.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.View.Owner">
+            <summary>
+            Gets the owner of the actual view.
+            </summary>
+        </member>
+        <member name="M:netDxf.Tables.View.Clone(System.String)">
+            <summary>
+            Creates a new View that is a copy of the current instance.
+            </summary>
+            <param name="newName">View name of the copy.</param>
+            <returns>A new View that is a copy of this instance.</returns>
+        </member>
+        <member name="M:netDxf.Tables.View.Clone">
+            <summary>
+            Creates a new View that is a copy of the current instance.
+            </summary>
+            <returns>A new View that is a copy of this instance.</returns>
+        </member>
+        <member name="F:netDxf.Tables.ViewModeFlags.Off">
+            <summary>
+            Turned off.
+            </summary>
+        </member>
+        <member name="F:netDxf.Tables.ViewModeFlags.Perspective">
+            <summary>
+            Perspective view active.
+            </summary>
+        </member>
+        <member name="F:netDxf.Tables.ViewModeFlags.FrontClippingPlane">
+            <summary>
+            Front clipping on.
+            </summary>
+        </member>
+        <member name="F:netDxf.Tables.ViewModeFlags.BackClippingPlane">
+            <summary>
+            Back clipping on.
+            </summary>
+        </member>
+        <member name="F:netDxf.Tables.ViewModeFlags.UCSFollow">
+            <summary>
+            UCS Follow mode on.
+            </summary>
+        </member>
+        <member name="F:netDxf.Tables.ViewModeFlags.FrontClipNotAtEye">
+            <summary>
+            Front clip not at eye. If on, the front clip distance (FRONTZ) determines the front clipping plane.
+            If off, FRONTZ is ignored, and the front clipping plane is set to pass through the camera point (vectors behind the camera are not displayed).
+            This flag is ignored if the front-clipping bit (2) is off.
+            </summary>
+        </member>
+        <member name="T:netDxf.Tables.VPort">
+            <summary>
+            Represents a document viewport.
+            </summary>
+        </member>
+        <member name="F:netDxf.Tables.VPort.DefaultName">
+            <summary>
+            Default VPort name.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.Active">
+            <summary>
+            Gets the active viewport.
+            </summary>
+        </member>
+        <member name="M:netDxf.Tables.VPort.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <c>VPort</c> class.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.ViewCenter">
+            <summary>
+            Gets or sets the view center point in DCS (Display Coordinate System)
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.SnapBasePoint">
+            <summary>
+            Gets or sets the snap base point in DCS (Display Coordinate System)
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.SnapSpacing">
+            <summary>
+            Gets or sets the snap spacing X and Y.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.GridSpacing">
+            <summary>
+            Gets or sets the grid spacing X and Y.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.ViewDirection">
+            <summary>
+            Gets or sets the view direction from target point in WCS (World Coordinate System).
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.ViewTarget">
+            <summary>
+            Gets or sets the view target point in WCS (World Coordinate System).
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.ViewHeight">
+            <summary>
+            Gets or sets the view height.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.ViewAspectRatio">
+            <summary>
+            Gets or sets the view aspect ratio (view width/view height).
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.ShowGrid">
+            <summary>
+            Gets or sets the grid on/off.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.SnapMode">
+            <summary>
+            Gets or sets the snap mode on/off.
+            </summary>
+        </member>
+        <member name="P:netDxf.Tables.VPort.Owner">
+            <summary>
+            Gets the owner of the actual viewport.
+            </summary>
+        </member>
+        <member name="M:netDxf.Tables.VPort.Clone(System.String)">
+            <summary>
+            Creates a new VPort that is a copy of the current instance.
+            </summary>
+            <param name="newName">VPort name of the copy.</param>
+            <returns>A new VPort that is a copy of this instance.</returns>
+        </member>
+        <member name="M:netDxf.Tables.VPort.Clone">
+            <summary>
+            Creates a new VPort that is a copy of the current instance.
+            </summary>
+            <returns>A new VPort that is a copy of this instance.</returns>
+        </member>
+        <member name="T:netDxf.Transparency">
+            <summary>
+            Represents the transparency of a layer or an entity.
+            </summary>
+            <remarks>
+            When the transparency of an entity is ByLayer the code 440 will not appear in the dxf,
+            but for comparison purposes the ByLayer transparency is assigned a value of -1.
+            </remarks>
+        </member>
+        <member name="P:netDxf.Transparency.ByLayer">
+            <summary>
+            Gets the ByLayer transparency.
+            </summary>
+        </member>
+        <member name="P:netDxf.Transparency.ByBlock">
+            <summary>
+            Gets the ByBlock transparency.
+            </summary>
+        </member>
+        <member name="M:netDxf.Transparency.#ctor">
+            <summary>
+            Initializes a new instance of the <c>Transparency</c> class.
+            </summary>
+        </member>
+        <member name="M:netDxf.Transparency.#ctor(System.Int16)">
+            <summary>
+            Initializes a new instance of the <c>Transparency</c> class.
+            </summary>
+            <param name="value">Alpha value range from 0 to 90.</param>
+            <remarks>
+            Accepted transparency values range from 0 (opaque) to 90 (almost transparent), the reserved values -1 and 100 represents ByLayer and ByBlock transparency.
+            </remarks>
+        </member>
+        <member name="P:netDxf.Transparency.IsByLayer">
+            <summary>
+            Defines if the transparency is defined by layer.
+            </summary>
+        </member>
+        <member name="P:netDxf.Transparency.IsByBlock">
+            <summary>
+            Defines if the transparency is defined by block.
+            </summary>
+        </member>
+        <member name="P:netDxf.Transparency.Value">
+            <summary>
+            Gets or sets the transparency value range from 0 to 90.
+            </summary>
+            <remarks>
+            Accepted transparency values range from 0 to 90, the reserved values -1 and 100 represents ByLayer and ByBlock.
+            </remarks>
+        </member>
+        <member name="M:netDxf.Transparency.ToAlphaValue(netDxf.Transparency)">
+            <summary>
+            Gets the transparency value from a <see cref="T:netDxf.Transparency">transparency</see> object.
+            </summary>
+            <param name="transparency">A <see cref="T:netDxf.Transparency">transparency</see>.</param>
+            <returns>A transparency value.</returns>
+        </member>
+        <member name="M:netDxf.Transparency.FromAlphaValue(System.Int32)">
+            <summary>
+            Gets the <see cref="T:netDxf.Transparency">transparency</see> object from a transparency value.
+            </summary>
+            <param name="value">A transparency value.</param>
+            <returns>A <see cref="T:netDxf.Transparency">transparency</see></returns>
+        </member>
+        <member name="M:netDxf.Transparency.Clone">
+            <summary>
+            Creates a new transparency that is a copy of the current instance.
+            </summary>
+            <returns>A new transparency that is a copy of this instance.</returns>
+        </member>
+        <member name="M:netDxf.Transparency.Equals(netDxf.Transparency)">
+            <summary>
+            Check if the components of two transparencies are equal.
+            </summary>
+            <param name="other">Another transparency to compare to.</param>
+            <returns>True if their indexes are equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Transparency.ToString">
+            <summary>
+            Converts the value of this instance to its equivalent string representation.
+            </summary>
+            <returns>The string representation.</returns>
+        </member>
+        <member name="T:netDxf.Units.AngleDirection">
+            <summary>
+            Specifies the direction of an angle.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.AngleDirection.CCW">
+            <summary>
+            Counterclockwise (right handedness).
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.AngleDirection.CW">
+            <summary>
+            Clockwise (left handedness).
+            </summary>
+        </member>
+        <member name="T:netDxf.Units.AngleUnitFormat">
+            <summary>
+            Utility methods to format a decimal angle in degrees to its different string representations.
+            </summary>
+        </member>
+        <member name="M:netDxf.Units.AngleUnitFormat.ToDecimal(System.Double,netDxf.Units.UnitStyleFormat)">
+            <summary>
+            Converts an angle value in degrees into its decimal string representation.
+            </summary>
+            <param name="angle">The angle value in degrees.</param>
+            <param name="format">The unit style format.</param>
+            <returns>A string that represents the angle in decimal units.</returns>
+        </member>
+        <member name="M:netDxf.Units.AngleUnitFormat.ToDegreesMinutesSeconds(System.Double,netDxf.Units.UnitStyleFormat)">
+            <summary>
+            Converts an angle value in degrees into its degrees, minutes and seconds string representation.
+            </summary>
+            <param name="angle">The angle value in degrees.</param>
+            <param name="format">The unit style format.</param>
+            <returns>A string that represents the angle in degrees, minutes and seconds.</returns>
+        </member>
+        <member name="M:netDxf.Units.AngleUnitFormat.ToGradians(System.Double,netDxf.Units.UnitStyleFormat)">
+            <summary>
+            Converts an angle value in degrees into its gradians string representation.
+            </summary>
+            <param name="angle">The angle value in degrees.</param>
+            <param name="format">The unit style format.</param>
+            <returns>A string that represents the angle in gradians.</returns>
+        </member>
+        <member name="M:netDxf.Units.AngleUnitFormat.ToRadians(System.Double,netDxf.Units.UnitStyleFormat)">
+            <summary>
+            Converts an angle value in degrees into its radians string representation.
+            </summary>
+            <param name="angle">The angle value in degrees.</param>
+            <param name="format">The unit style format.</param>
+            <returns>A string that represents the angle in radians.</returns>
+        </member>
+        <member name="T:netDxf.Units.AngleUnitType">
+            <summary>
+            Angular units format for creating objects.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.AngleUnitType.DecimalDegrees">
+            <summary>
+            Decimal degrees.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.AngleUnitType.DegreesMinutesSeconds">
+            <summary>
+            Degrees/minutes/seconds.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.AngleUnitType.Gradians">
+            <summary>
+            Gradians
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.AngleUnitType.Radians">
+            <summary>
+            Radians
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.AngleUnitType.SurveyorUnits">
+            <summary>
+            Surveyor's units.
+            </summary>
+        </member>
+        <member name="T:netDxf.Units.DrawingTime">
+            <summary>
+            Utility functions to handle DateTime conversions.
+            </summary>
+        </member>
+        <member name="M:netDxf.Units.DrawingTime.ToJulianCalendar(System.DateTime)">
+            <summary>
+            Calculates a date represented as &lt;Julian date&gt;.&lt;Fraction of day&gt; from a <see cref="T:System.DateTime">DateTime</see> instance.
+            </summary>
+            <param name="date"><see cref="T:System.DateTime">DateTime</see> instance.</param>
+            <returns>The date represented as &lt;Julian date&gt;.&lt;Fraction of day&gt; equivalent to the <see cref="T:System.DateTime">DateTime</see> instance.</returns>
+        </member>
+        <member name="M:netDxf.Units.DrawingTime.FromJulianCalendar(System.Double)">
+            <summary>
+            Calculates the <see cref="T:System.DateTime">DateTime</see> from a date represented as &lt;Julian date&gt;&lt;.Fraction of day&gt;.
+            </summary>
+            <param name="date">A date represented as &lt;Julian date&gt;.&lt;Fraction of day&gt;.</param>
+            <returns>The <see cref="T:System.DateTime">DateTime</see> equivalent to the Julian date.</returns>
+        </member>
+        <member name="M:netDxf.Units.DrawingTime.EditingTime(System.Double)">
+            <summary>
+            Calculates the <see cref="T:System.TimeSpan">TimeSpan</see> from a elapsed time represented as &lt;Number of days&gt;.&lt;Fraction of day&gt;.
+            </summary>
+            <param name="elapsed">An elapsed time represented as &lt;Number of days&gt;.&lt;Fraction of day&gt;.</param>
+            <returns>The <see cref="T:System.TimeSpan">TimeSpan</see> equivalent to the elapsed time.</returns>
+        </member>
+        <member name="T:netDxf.Units.DrawingUnits">
+            <summary>
+            Default drawing units for AutoCAD DesignCenter blocks.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Unitless">
+            <summary>
+            Unitless.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Inches">
+            <summary>
+            Inches.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Feet">
+            <summary>
+            Feet.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Miles">
+            <summary>
+            Miles.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Millimeters">
+            <summary>
+            Millimeters.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Centimeters">
+            <summary>
+            Centimeters.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Meters">
+            <summary>
+            Meters.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Kilometers">
+            <summary>
+            Kilometers.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Microinches">
+            <summary>
+            Microinches.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Mils">
+            <summary>
+            Mils (a thousandth of an inch).
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Yards">
+            <summary>
+            Yards.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Angstroms">
+            <summary>
+            Angstroms.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Nanometers">
+            <summary>
+            Nanometers.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Microns">
+            <summary>
+            Microns.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Decimeters">
+            <summary>
+            Decimeters.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Decameters">
+            <summary>
+            Decameters
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Hectometers">
+            <summary>
+            Hectometers.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Gigameters">
+            <summary>
+            Gigameters.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.AstronomicalUnits">
+            <summary>
+            AstronomicalUnits.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.LightYears">
+            <summary>
+            LightYears.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.Parsecs">
+            <summary>
+            Parsecs.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.USSurveyFeet">
+            <summary>
+            US Survey Feet
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.USSurveyInches">
+            <summary>
+            US Survey Inches
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.USSurveyYards">
+            <summary>
+            US Survey Yards
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.DrawingUnits.USSurveyMiles">
+            <summary>
+            US Survey Miles
+            </summary>
+        </member>
+        <member name="T:netDxf.Units.FractionFormatType">
+            <summary>
+            Defines the fraction format when DIMLUNIT is set to 4 (Architectural) or 5 (Fractional).
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.FractionFormatType.Horizontal">
+            <summary>
+            Horizontal stacking.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.FractionFormatType.Diagonal">
+            <summary>
+            Diagonal stacking.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.FractionFormatType.NotStacked">
+            <summary>
+            Not stacked (for example, 1/2).
+            </summary>
+        </member>
+        <member name="T:netDxf.Units.ImageResolutionUnits">
+            <summary>
+            Defines the image resolution units.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.ImageResolutionUnits.Unitless">
+            <summary>
+            No units.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.ImageResolutionUnits.Centimeters">
+            <summary>
+            Centimeters.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.ImageResolutionUnits.Inches">
+            <summary>
+            Inches.
+            </summary>
+        </member>
+        <member name="T:netDxf.Units.ImageUnits">
+            <summary>
+            AutoCAD units for inserting images.
+            </summary>
+            <remarks>
+            This is what one AutoCAD unit is equal to for the purpose of inserting and scaling images with an associated resolution.
+            </remarks>
+        </member>
+        <member name="F:netDxf.Units.ImageUnits.Unitless">
+            <summary>
+            No units.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.ImageUnits.Millimeters">
+            <summary>
+            Millimeters.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.ImageUnits.Centimeters">
+            <summary>
+            Centimeters.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.ImageUnits.Meters">
+            <summary>
+            Meters.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.ImageUnits.Kilometers">
+            <summary>
+            Kilometers.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.ImageUnits.Inches">
+            <summary>
+            Inches.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.ImageUnits.Feet">
+            <summary>
+            Feet.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.ImageUnits.Yards">
+            <summary>
+            Yards.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.ImageUnits.Miles">
+            <summary>
+            Miles.
+            </summary>
+        </member>
+        <member name="T:netDxf.Units.LinearUnitFormat">
+            <summary>
+            Utility methods to format a decimal number to its different string representations.
+            </summary>
+        </member>
+        <member name="M:netDxf.Units.LinearUnitFormat.ToScientific(System.Double,netDxf.Units.UnitStyleFormat)">
+            <summary>
+            Converts a length value into its scientific string representation.
+            </summary>
+            <param name="length">The length value.</param>
+            <param name="format">The unit style format.</param>
+            <returns>A string that represents the length in scientific units.</returns>
+        </member>
+        <member name="M:netDxf.Units.LinearUnitFormat.ToDecimal(System.Double,netDxf.Units.UnitStyleFormat)">
+            <summary>
+            Converts a length value into its decimal string representation.
+            </summary>
+            <param name="length">The length value.</param>
+            <param name="format">The unit style format.</param>
+            <returns>A string that represents the length in decimal units.</returns>
+        </member>
+        <member name="M:netDxf.Units.LinearUnitFormat.ToArchitectural(System.Double,netDxf.Units.UnitStyleFormat)">
+            <summary>
+            Converts a length value into its feet and fractional inches string representation.
+            </summary>
+            <param name="length">The length value.</param>
+            <param name="format">The unit style format.</param>
+            <returns>A string that represents the length in feet and fractional inches.</returns>
+            <remarks>The Architectural format assumes that each drawing unit represents one inch.</remarks>
+        </member>
+        <member name="M:netDxf.Units.LinearUnitFormat.ToEngineering(System.Double,netDxf.Units.UnitStyleFormat)">
+            <summary>
+            Converts a length value into its feet and decimal inches string representation.
+            </summary>
+            <param name="length">The length value.</param>
+            <param name="format">The unit style format.</param>
+            <returns>A string that represents the length in feet and decimal inches.</returns>
+            <remarks>The Engineering format assumes that each drawing unit represents one inch.</remarks>
+        </member>
+        <member name="M:netDxf.Units.LinearUnitFormat.ToFractional(System.Double,netDxf.Units.UnitStyleFormat)">
+            <summary>
+            Converts a length value into its fractional string representation.
+            </summary>
+            <param name="length">The length value.</param>
+            <param name="format">The unit style format.</param>
+            <returns>A string that represents the length in fractional units.</returns>
+        </member>
+        <member name="T:netDxf.Units.LinearUnitType">
+            <summary>
+            Linear units format for creating objects.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.LinearUnitType.Scientific">
+            <summary>
+            Scientific.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.LinearUnitType.Decimal">
+            <summary>
+            Decimal.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.LinearUnitType.Engineering">
+            <summary>
+            Engineering.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.LinearUnitType.Architectural">
+            <summary>
+            Architectural.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.LinearUnitType.Fractional">
+            <summary>
+            Fractional.
+            </summary>
+        </member>
+        <member name="F:netDxf.Units.LinearUnitType.WindowsDesktop">
+            <summary>
+            Microsoft Windows Desktop (decimal format using Control Panel settings for decimal separator and number grouping symbols).
+            </summary>
+        </member>
+        <member name="T:netDxf.Units.UnitHelper">
+            <summary>
+            Helper methods for unit conversion.
+            </summary>
+        </member>
+        <member name="M:netDxf.Units.UnitHelper.ConvertUnit(System.Double,netDxf.Units.DrawingUnits,netDxf.Units.DrawingUnits)">
+            <summary>
+            Converts a value from one drawing unit to another.
+            </summary>
+            <param name="value">Number to convert.</param>
+            <param name="from">Original drawing units.</param>
+            <param name="to">Destination drawing units.</param>
+            <returns>The converted value to the new drawing units.</returns>
+        </member>
+        <member name="M:netDxf.Units.UnitHelper.ConversionFactor(netDxf.Units.DrawingUnits,netDxf.Units.DrawingUnits)">
+            <summary>
+            Gets the conversion factor between drawing units.
+            </summary>
+            <param name="from">Original drawing units.</param>
+            <param name="to">Destination drawing units.</param>
+            <returns>The conversion factor between the drawing units.</returns>
+        </member>
+        <member name="M:netDxf.Units.UnitHelper.ConversionFactor(netDxf.Units.ImageUnits,netDxf.Units.DrawingUnits)">
+            <summary>
+            Gets the conversion factor between image and drawing units.
+            </summary>
+            <param name="from">Original image units.</param>
+            <param name="to">Destination drawing units.</param>
+            <returns>The conversion factor between the units.</returns>
+        </member>
+        <member name="M:netDxf.Units.UnitHelper.ConversionFactor(netDxf.Units.DrawingUnits,netDxf.Units.ImageUnits)">
+            <summary>
+            Gets the conversion factor between units.
+            </summary>
+            <param name="from">Original value units.</param>
+            <param name="to">Destination value units.</param>
+            <returns>The conversion factor between the passed units.</returns>
+        </member>
+        <member name="T:netDxf.Units.UnitStyleFormat">
+            <summary>
+            Represents the parameters to convert linear and angular units to its string representation.
+            </summary>
+        </member>
+        <member name="M:netDxf.Units.UnitStyleFormat.#ctor">
+            <summary>
+            Initializes a new instance of the <c>UnitStyleFormat</c> class.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.LinearDecimalPlaces">
+            <summary>
+            Gets or sets the number of decimal places for linear units.
+            </summary>
+            <remarks>
+            For architectural and fractional the precision used for the minimum fraction is 1/2^LinearDecimalPlaces.
+            </remarks>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.AngularDecimalPlaces">
+            <summary>
+            Gets or sets the number of decimal places for angular units.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.DecimalSeparator">
+            <summary>
+            Gets or set the decimal separator.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.FeetInchesSeparator">
+            <summary>
+            Gets or sets the separator between feet and inches.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.DegreesSymbol">
+            <summary>
+            Gets or set the angle degrees symbol.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.MinutesSymbol">
+            <summary>
+            Gets or set the angle minutes symbol.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.SecondsSymbol">
+            <summary>
+            Gets or set the angle seconds symbol.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.RadiansSymbol">
+            <summary>
+            Gets or set the angle radians symbol.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.GradiansSymbol">
+            <summary>
+            Gets or set the angle gradians symbol.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.FeetSymbol">
+            <summary>
+            Gets or set the feet symbol.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.InchesSymbol">
+            <summary>
+            Gets or set the inches symbol.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.FractionHeightScale">
+            <summary>
+            Gets or sets the scale of fractions relative to dimension text height.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.FractionType">
+            <summary>
+            Gets or sets the fraction format for architectural or fractional units.
+            </summary>
+            <remarks>
+            Horizontal stacking<br/>
+            Diagonal stacking<br/>
+            Not stacked (for example, 1/2)
+            </remarks>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.SuppressLinearLeadingZeros">
+            <summary>
+            Suppresses leading zeros in linear decimal dimensions (for example, 0.5000 becomes .5000).
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.SuppressLinearTrailingZeros">
+            <summary>
+            Suppresses trailing zeros in linear decimal dimensions (for example, 12.5000 becomes 12.5).
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.SuppressAngularLeadingZeros">
+            <summary>
+            Suppresses leading zeros in angular decimal dimensions (for example, 0.5000 becomes .5000).
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.SuppressAngularTrailingZeros">
+            <summary>
+            Suppresses trailing zeros in angular decimal dimensions (for example, 12.5000 becomes 12.5).
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.SuppressZeroFeet">
+            <summary>
+            Suppresses zero feet in architectural dimensions.
+            </summary>
+        </member>
+        <member name="P:netDxf.Units.UnitStyleFormat.SuppressZeroInches">
+            <summary>
+            Suppresses zero inches in architectural dimensions.
+            </summary>
+        </member>
+        <member name="T:netDxf.Vector2">
+            <summary>
+            Represent a two component vector of double precision.
+            </summary>
+        </member>
+        <member name="M:netDxf.Vector2.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of Vector2.
+            </summary>
+            <param name="value">X, Y component.</param>
+        </member>
+        <member name="M:netDxf.Vector2.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of Vector2.
+            </summary>
+            <param name="x">X component.</param>
+            <param name="y">Y component.</param>
+        </member>
+        <member name="M:netDxf.Vector2.#ctor(System.Double[])">
+            <summary>
+            Initializes a new instance of Vector2.
+            </summary>
+            <param name="array">Array of two elements that represents the vector.</param>
+        </member>
+        <member name="P:netDxf.Vector2.Zero">
+            <summary>
+            Zero vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector2.UnitX">
+            <summary>
+            Unit X vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector2.UnitY">
+            <summary>
+            Unit Y vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector2.NaN">
+            <summary>
+            Represents a vector with not a number components.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector2.X">
+            <summary>
+            Gets or sets the X component.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector2.Y">
+            <summary>
+            Gets or sets the Y component.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector2.Item(System.Int32)">
+            <summary>
+            Gets or sets a vector element defined by its index.
+            </summary>
+            <param name="index">Index of the element.</param>
+        </member>
+        <member name="P:netDxf.Vector2.IsNormalized">
+            <summary>
+            Gets if the vector has been normalized.
+            </summary>
+        </member>
+        <member name="M:netDxf.Vector2.IsNaN(netDxf.Vector2)">
+            <summary>
+            Returns a value indicating if any component of the specified vector evaluates to a value that is not a number <see cref="F:System.Double.NaN"/>.
+            </summary>
+            <param name="u">Vector2.</param>
+            <returns>Returns true if any component of the specified vector evaluates to <see cref="F:System.Double.NaN"/>; otherwise, false.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.DotProduct(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Obtains the dot product of two vectors.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>The dot product.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.CrossProduct(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Obtains the cross product of two vectors.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>Vector2.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Perpendicular(netDxf.Vector2)">
+            <summary>
+            Obtains the counter clockwise perpendicular vector.
+            </summary>
+            <param name="u">Vector2.</param>
+            <returns>Vector2.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Rotate(netDxf.Vector2,System.Double)">
+            <summary>
+            Rotates a vector.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="angle">Rotation angles in radians.</param>
+            <returns></returns>
+        </member>
+        <member name="M:netDxf.Vector2.Polar(netDxf.Vector2,System.Double,System.Double)">
+            <summary>
+            Obtains the polar point of another point. 
+            </summary>
+            <param name="u">Reference point.</param>
+            <param name="distance">Distance from point u.</param>
+            <param name="angle">Angle in radians.</param>
+            <returns>The polar point of the specified point.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.SquareDistance(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Obtains the square distance between two points.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>Square distance.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Distance(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Obtains the distance between two points.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>Distance.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Angle(netDxf.Vector2)">
+            <summary>
+            Obtains the angle of a vector.
+            </summary>
+            <param name="u">A Vector2.</param>
+            <returns>Angle in radians.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Angle(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Obtains the angle of a line defined by two points.
+            </summary>
+            <param name="u">A Vector2.</param>
+            <param name="v">A Vector2.</param>
+            <returns>Angle in radians.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.AngleBetween(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Obtains the angle between two vectors.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>Angle in radians.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.MidPoint(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Obtains the midpoint.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>Vector2.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.ArePerpendicular(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Checks if two vectors are perpendicular.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>True if are perpendicular or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.ArePerpendicular(netDxf.Vector2,netDxf.Vector2,System.Double)">
+            <summary>
+            Checks if two vectors are perpendicular.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <param name="threshold">Tolerance used.</param>
+            <returns>True if are perpendicular or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.AreParallel(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Checks if two vectors are parallel.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>True if are parallel or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.AreParallel(netDxf.Vector2,netDxf.Vector2,System.Double)">
+            <summary>
+            Checks if two vectors are parallel.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <param name="threshold">Tolerance used.</param>
+            <returns>True if are parallel or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Round(netDxf.Vector2,System.Int32)">
+            <summary>
+            Rounds the components of a vector.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="numDigits">Number of decimal places in the return value.</param>
+            <returns>Vector2.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Normalize(netDxf.Vector2)">
+            <summary>
+            Normalizes the vector.
+            </summary>
+            <param name="u">Vector to normalize</param>
+            <returns>A normalized vector.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.op_Equality(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Check if the components of two vectors are equal.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>True if the two components are equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.op_Inequality(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Check if the components of two vectors are different.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>True if the two components are different or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.op_Addition(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>The addition of u plus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Add(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>The addition of u plus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.op_Subtraction(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>The subtraction of u minus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Subtract(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>The subtraction of u minus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.op_UnaryNegation(netDxf.Vector2)">
+            <summary>
+            Negates a vector.
+            </summary>
+            <param name="u">Vector2.</param>
+            <returns>The negative vector of u.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Negate(netDxf.Vector2)">
+            <summary>
+            Negates a vector.
+            </summary>
+            <param name="u">Vector2.</param>
+            <returns>The negative vector of u.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.op_Multiply(netDxf.Vector2,System.Double)">
+            <summary>
+            Multiplies a vector with an scalar.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="a">Scalar.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Multiply(netDxf.Vector2,System.Double)">
+            <summary>
+            Multiplies a vector with an scalar.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="a">Scalar.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.op_Multiply(System.Double,netDxf.Vector2)">
+            <summary>
+            Multiplies a scalar with a vector.
+            </summary>
+            <param name="a">Scalar.</param>
+            <param name="u">Vector3.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Multiply(System.Double,netDxf.Vector2)">
+            <summary>
+            Multiplies a scalar with a vector.
+            </summary>
+            <param name="a">Scalar.</param>
+            <param name="u">Vector3.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.op_Multiply(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Multiplies two vectors component by component.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Multiply(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Multiplies two vectors component by component.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.op_Division(netDxf.Vector2,System.Double)">
+            <summary>
+            Divides a vector with an scalar.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="a">Scalar.</param>
+            <returns>The division of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Divide(netDxf.Vector2,System.Double)">
+            <summary>
+            Divides a vector with an scalar.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="a">Scalar.</param>
+            <returns>The division of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.op_Division(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Divides two vectors component by component.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Divide(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Divides two vectors component by component.
+            </summary>
+            <param name="u">Vector2.</param>
+            <param name="v">Vector2.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Normalize">
+            <summary>
+            Normalizes the vector.
+            </summary>
+        </member>
+        <member name="M:netDxf.Vector2.Modulus">
+            <summary>
+            Obtains the modulus of the vector.
+            </summary>
+            <returns>Vector modulus.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.ToArray">
+            <summary>
+            Returns an array that represents the vector.
+            </summary>
+            <returns>Array.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Equals(netDxf.Vector2,netDxf.Vector2)">
+            <summary>
+            Check if the components of two vectors are approximate equal.
+            </summary>
+            <param name="a">Vector2.</param>
+            <param name="b">Vector2.</param>
+            <returns>True if the two components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Equals(netDxf.Vector2,netDxf.Vector2,System.Double)">
+            <summary>
+            Check if the components of two vectors are approximate equal.
+            </summary>
+            <param name="a">Vector2.</param>
+            <param name="b">Vector2.</param>
+            <param name="threshold">Maximum tolerance.</param>
+            <returns>True if the two components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Equals(netDxf.Vector2)">
+            <summary>
+            Check if the components of two vectors are approximate equals.
+            </summary>
+            <param name="other">Another Vector2 to compare to.</param>
+            <returns>True if the three components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Equals(netDxf.Vector2,System.Double)">
+            <summary>
+            Check if the components of two vectors are approximate equals.
+            </summary>
+            <param name="other">Another Vector2 to compare to.</param>
+            <param name="threshold">Maximum tolerance.</param>
+            <returns>True if the three components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="other">Another object to compare to.</param>
+            <returns>True if obj and this instance are the same type and represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.ToString">
+            <summary>
+            Obtains a string that represents the vector.
+            </summary>
+            <returns>A string text.</returns>
+        </member>
+        <member name="M:netDxf.Vector2.ToString(System.IFormatProvider)">
+            <summary>
+            Obtains a string that represents the vector.
+            </summary>
+            <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+            <returns>A string text.</returns>
+        </member>
+        <member name="T:netDxf.Vector3">
+            <summary>
+            Represent a three component vector of double precision.
+            </summary>
+        </member>
+        <member name="M:netDxf.Vector3.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of Vector3.
+            </summary>
+            <param name="value">X, Y, Z component.</param>
+        </member>
+        <member name="M:netDxf.Vector3.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of Vector3.
+            </summary>
+            <param name="x">X component.</param>
+            <param name="y">Y component.</param>
+            <param name="z">Z component.</param>
+        </member>
+        <member name="M:netDxf.Vector3.#ctor(System.Double[])">
+            <summary>
+            Initializes a new instance of Vector3.
+            </summary>
+            <param name="array">Array of three elements that represents the vector.</param>
+        </member>
+        <member name="P:netDxf.Vector3.Zero">
+            <summary>
+            Zero vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector3.UnitX">
+            <summary>
+            Unit X vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector3.UnitY">
+            <summary>
+            Unit Y vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector3.UnitZ">
+            <summary>
+            Unit Z vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector3.NaN">
+            <summary>
+            Represents a vector with not a number components.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector3.X">
+            <summary>
+            Gets or sets the X component.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector3.Y">
+            <summary>
+            Gets or sets the Y component.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector3.Z">
+            <summary>
+            Gets or sets the Z component.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector3.Item(System.Int32)">
+            <summary>
+            Gets or sets a vector element defined by its index.
+            </summary>
+            <param name="index">Index of the element.</param>
+        </member>
+        <member name="P:netDxf.Vector3.IsNormalized">
+            <summary>
+            Gets if the vector has been normalized.
+            </summary>
+        </member>
+        <member name="M:netDxf.Vector3.IsNaN(netDxf.Vector3)">
+            <summary>
+             Returns a value indicating if any component of the specified vector evaluates to a value that is not a number <see cref="F:System.Double.NaN"/>.
+            </summary>
+            <param name="u">Vector3.</param>
+            <returns>Returns true if any component of the specified vector evaluates to <see cref="F:System.Double.NaN"/>; otherwise, false.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.DotProduct(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Obtains the dot product of two vectors.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>The dot product.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.CrossProduct(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Obtains the cross product of two vectors.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>Vector3.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Distance(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Obtains the distance between two points.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>Distance.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.SquareDistance(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Obtains the square distance between two points.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>Square distance.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.AngleBetween(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Obtains the angle between two vectors.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>Angle in radians.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.MidPoint(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Obtains the midpoint.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>Vector3.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.ArePerpendicular(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Checks if two vectors are perpendicular.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>True if are perpendicular or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.ArePerpendicular(netDxf.Vector3,netDxf.Vector3,System.Double)">
+            <summary>
+            Checks if two vectors are perpendicular.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <param name="threshold">Tolerance used.</param>
+            <returns>True if are perpendicular or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.AreParallel(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Checks if two vectors are parallel.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>True if are parallel or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.AreParallel(netDxf.Vector3,netDxf.Vector3,System.Double)">
+            <summary>
+            Checks if two vectors are parallel.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <param name="threshold">Tolerance used.</param>
+            <returns>True if are parallel or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Round(netDxf.Vector3,System.Int32)">
+            <summary>
+            Rounds the components of a vector.
+            </summary>
+            <param name="u">Vector to round.</param>
+            <param name="numDigits">Number of decimal places in the return value.</param>
+            <returns>The rounded vector.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Normalize(netDxf.Vector3)">
+            <summary>
+            Normalizes the vector.
+            </summary>
+            <param name="u">Vector to normalize</param>
+            <returns>A normalized vector.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.op_Equality(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Check if the components of two vectors are equal.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>True if the three components are equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.op_Inequality(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Check if the components of two vectors are different.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>True if the three components are different or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.op_Addition(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>The addition of u plus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Add(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>The addition of u plus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.op_Subtraction(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>The subtraction of u minus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Subtract(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>The subtraction of u minus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.op_UnaryNegation(netDxf.Vector3)">
+            <summary>
+            Negates a vector.
+            </summary>
+            <param name="u">Vector3.</param>
+            <returns>The negative vector of u.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Negate(netDxf.Vector3)">
+            <summary>
+            Negates a vector.
+            </summary>
+            <param name="u">Vector3.</param>
+            <returns>The negative vector of u.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.op_Multiply(netDxf.Vector3,System.Double)">
+            <summary>
+            Multiplies a vector with an scalar (same as a*u, commutative property).
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="a">Scalar.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Multiply(netDxf.Vector3,System.Double)">
+            <summary>
+            Multiplies a vector with an scalar (same as a*u, commutative property).
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="a">Scalar.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.op_Multiply(System.Double,netDxf.Vector3)">
+            <summary>
+            Multiplies a scalar with a vector (same as u*a, commutative property).
+            </summary>
+            <param name="a">Scalar.</param>
+            <param name="u">Vector3.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Multiply(System.Double,netDxf.Vector3)">
+            <summary>
+            Multiplies a scalar with a vector (same as u*a, commutative property).
+            </summary>
+            <param name="a">Scalar.</param>
+            <param name="u">Vector3.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.op_Multiply(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Multiplies two vectors component by component.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Multiply(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Multiplies two vectors component by component.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.op_Division(netDxf.Vector3,System.Double)">
+            <summary>
+            Divides an scalar with a vector.
+            </summary>
+            <param name="a">Scalar.</param>
+            <param name="u">Vector3.</param>
+            <returns>The division of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Divide(netDxf.Vector3,System.Double)">
+            <summary>
+            Divides a vector with an scalar.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="a">Scalar.</param>
+            <returns>The division of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.op_Division(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Divides two vectors component by component.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Divide(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Divides two vectors component by component.
+            </summary>
+            <param name="u">Vector3.</param>
+            <param name="v">Vector3.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Normalize">
+            <summary>
+            Normalizes the current vector.
+            </summary>
+        </member>
+        <member name="M:netDxf.Vector3.Modulus">
+            <summary>
+            Obtains the modulus of the vector.
+            </summary>
+            <returns>Vector modulus.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.ToArray">
+            <summary>
+            Returns an array that represents the vector.
+            </summary>
+            <returns>Array.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Equals(netDxf.Vector3,netDxf.Vector3)">
+            <summary>
+            Check if the components of two vectors are approximate equal.
+            </summary>
+            <param name="a">Vector3.</param>
+            <param name="b">Vector3.</param>
+            <returns>True if the three components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Equals(netDxf.Vector3,netDxf.Vector3,System.Double)">
+            <summary>
+            Check if the components of two vectors are approximate equal.
+            </summary>
+            <param name="a">Vector3.</param>
+            <param name="b">Vector3.</param>
+            <param name="threshold">Maximum tolerance.</param>
+            <returns>True if the three components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Equals(netDxf.Vector3)">
+            <summary>
+            Check if the components of two vectors are approximate equal.
+            </summary>
+            <param name="other">Vector3.</param>
+            <returns>True if the three components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Equals(netDxf.Vector3,System.Double)">
+            <summary>
+            Check if the components of two vectors are approximate equal.
+            </summary>
+            <param name="other">Vector3.</param>
+            <param name="threshold">Maximum tolerance.</param>
+            <returns>True if the three components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="other">Another object to compare to.</param>
+            <returns>True if obj and this instance are the same type and represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.ToString">
+            <summary>
+            Obtains a string that represents the vector.
+            </summary>
+            <returns>A string text.</returns>
+        </member>
+        <member name="M:netDxf.Vector3.ToString(System.IFormatProvider)">
+            <summary>
+            Obtains a string that represents the vector.
+            </summary>
+            <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+            <returns>A string text.</returns>
+        </member>
+        <member name="T:netDxf.Vector4">
+            <summary>
+            Represent a four component vector of double precision.
+            </summary>
+        </member>
+        <member name="M:netDxf.Vector4.#ctor(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of Vector4.
+            </summary>
+            <param name="x">X component.</param>
+            <param name="y">Y component.</param>
+            <param name="z">Z component.</param>
+            <param name="w">W component.</param>
+        </member>
+        <member name="M:netDxf.Vector4.#ctor(System.Double[])">
+            <summary>
+            Initializes a new instance of Vector4.
+            </summary>
+            <param name="array">Array of four elements that represents the vector.</param>
+        </member>
+        <member name="P:netDxf.Vector4.Zero">
+            <summary>
+            Zero vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector4.UnitX">
+            <summary>
+            Unit X vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector4.UnitY">
+            <summary>
+            Unit Y vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector4.UnitZ">
+            <summary>
+            Unit Z vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector4.UnitW">
+            <summary>
+            Unit W vector.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector4.NaN">
+            <summary>
+            Represents a vector with not a number components.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector4.X">
+            <summary>
+            Gets or sets the X component.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector4.Y">
+            <summary>
+            Gets or sets the Y component.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector4.Z">
+            <summary>
+            Gets or sets the Z component.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector4.W">
+            <summary>
+            Gets or sets the W component.
+            </summary>
+        </member>
+        <member name="P:netDxf.Vector4.Item(System.Int32)">
+            <summary>
+            Gets or sets a vector element defined by its index.
+            </summary>
+            <param name="index">Index of the element.</param>
+        </member>
+        <member name="P:netDxf.Vector4.IsNormalized">
+            <summary>
+            Gets if the vector has been normalized.
+            </summary>
+        </member>
+        <member name="M:netDxf.Vector4.IsNaN(netDxf.Vector4)">
+            <summary>
+             Returns a value indicating if any component of the specified vector evaluates to a value that is not a number <see cref="F:System.Double.NaN"/>.
+            </summary>
+            <param name="u">Vector4.</param>
+            <returns>Returns true if any component of the specified vector evaluates to <see cref="F:System.Double.NaN"/>; otherwise, false.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.DotProduct(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Obtains the dot product of two vectors.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>The dot product.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Distance(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Obtains the distance between two points.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>Distance.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.SquareDistance(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Obtains the square distance between two points.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>Square distance.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Round(netDxf.Vector4,System.Int32)">
+            <summary>
+            Rounds the components of a vector.
+            </summary>
+            <param name="u">Vector to round.</param>
+            <param name="numDigits">Number of decimal places in the return value.</param>
+            <returns>The rounded vector.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Normalize(netDxf.Vector4)">
+            <summary>
+            Normalizes the vector.
+            </summary>
+            <param name="u">Vector to normalize</param>
+            <returns>A normalized vector.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.op_Equality(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Check if the components of two vectors are equal.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>True if the three components are equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.op_Inequality(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Check if the components of two vectors are different.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>True if the three components are different or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.op_Addition(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>The addition of u plus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Add(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>The addition of u plus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.op_Subtraction(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>The subtraction of u minus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Subtract(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>The subtraction of u minus v.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.op_UnaryNegation(netDxf.Vector4)">
+            <summary>
+            Negates a vector.
+            </summary>
+            <param name="u">Vector4.</param>
+            <returns>The negative vector of u.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Negate(netDxf.Vector4)">
+            <summary>
+            Negates a vector.
+            </summary>
+            <param name="u">Vector4.</param>
+            <returns>The negative vector of u.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.op_Multiply(netDxf.Vector4,System.Double)">
+            <summary>
+            Multiplies a vector with an scalar (same as a*u, commutative property).
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="a">Scalar.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Multiply(netDxf.Vector4,System.Double)">
+            <summary>
+            Multiplies a vector with an scalar (same as a*u, commutative property).
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="a">Scalar.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.op_Multiply(System.Double,netDxf.Vector4)">
+            <summary>
+            Multiplies a scalar with a vector (same as u*a, commutative property).
+            </summary>
+            <param name="a">Scalar.</param>
+            <param name="u">Vector4.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Multiply(System.Double,netDxf.Vector4)">
+            <summary>
+            Multiplies a scalar with a vector (same as u*a, commutative property).
+            </summary>
+            <param name="a">Scalar.</param>
+            <param name="u">Vector4.</param>
+            <returns>The multiplication of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.op_Multiply(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Multiplies two vectors component by component.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Multiply(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Multiplies two vectors component by component.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.op_Division(netDxf.Vector4,System.Double)">
+            <summary>
+            Divides an scalar with a vector.
+            </summary>
+            <param name="a">Scalar.</param>
+            <param name="u">Vector4.</param>
+            <returns>The division of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Divide(netDxf.Vector4,System.Double)">
+            <summary>
+            Divides a vector with an scalar.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="a">Scalar.</param>
+            <returns>The division of u times a.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.op_Division(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Divides two vectors component by component.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Divide(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Divides two vectors component by component.
+            </summary>
+            <param name="u">Vector4.</param>
+            <param name="v">Vector4.</param>
+            <returns>The multiplication of u times v.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Normalize">
+            <summary>
+            Normalizes the current vector.
+            </summary>
+        </member>
+        <member name="M:netDxf.Vector4.Modulus">
+            <summary>
+            Obtains the modulus of the vector.
+            </summary>
+            <returns>Vector modulus.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.ToArray">
+            <summary>
+            Returns an array that represents the vector.
+            </summary>
+            <returns>Array.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Equals(netDxf.Vector4,netDxf.Vector4)">
+            <summary>
+            Check if the components of two vectors are approximate equal.
+            </summary>
+            <param name="a">Vector4.</param>
+            <param name="b">Vector4.</param>
+            <returns>True if the four components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Equals(netDxf.Vector4,netDxf.Vector4,System.Double)">
+            <summary>
+            Check if the components of two vectors are approximate equal.
+            </summary>
+            <param name="a">Vector4.</param>
+            <param name="b">Vector4.</param>
+            <param name="threshold">Maximum tolerance.</param>
+            <returns>True if the four components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Equals(netDxf.Vector4)">
+            <summary>
+            Check if the components of two vectors are approximate equal.
+            </summary>
+            <param name="other">Vector4.</param>
+            <returns>True if the four components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Equals(netDxf.Vector4,System.Double)">
+            <summary>
+            Check if the components of two vectors are approximate equal.
+            </summary>
+            <param name="other">Vector4.</param>
+            <param name="threshold">Maximum tolerance.</param>
+            <returns>True if the four components are almost equal or false in any other case.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="other">Another object to compare to.</param>
+            <returns>True if obj and this instance are the same type and represent the same value; otherwise, false.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.ToString">
+            <summary>
+            Obtains a string that represents the vector.
+            </summary>
+            <returns>A string text.</returns>
+        </member>
+        <member name="M:netDxf.Vector4.ToString(System.IFormatProvider)">
+            <summary>
+            Obtains a string that represents the vector.
+            </summary>
+            <param name="provider">An IFormatProvider interface implementation that supplies culture-specific formatting information. </param>
+            <returns>A string text.</returns>
+        </member>
+        <member name="T:netDxf.XData">
+            <summary>
+            Represents the extended data information.
+            </summary>
+            <remarks>
+            Do not store your own data under the ACAD application registry it is used by some entities to store special data,
+            it might be overwritten when the file is saved. Instead, create a new application registry and store your data there.
+            </remarks>
+        </member>
+        <member name="M:netDxf.XData.#ctor(netDxf.Tables.ApplicationRegistry)">
+            <summary>
+            Initialize a new instance of the <c>XData</c> class .
+            </summary>
+            <param name="appReg">Name of the application associated with the list of extended data records.</param>
+        </member>
+        <member name="P:netDxf.XData.ApplicationRegistry">
+            <summary>
+            Gets or sets the name of the application associated with the list of extended data records.
+            </summary>
+        </member>
+        <member name="P:netDxf.XData.XDataRecord">
+            <summary>
+            Gets or sets the list of extended data records.
+            </summary>
+            <remarks>
+            This list cannot contain a XDataRecord with a XDataCode of AppReg, this code is reserved to register the name of the application.
+            Any record with this code will be omitted.
+            </remarks>
+        </member>
+        <member name="M:netDxf.XData.ToString">
+            <summary>
+            Converts the value of this instance to its equivalent string representation.
+            </summary>
+            <returns>The string representation.</returns>
+        </member>
+        <member name="M:netDxf.XData.Clone">
+            <summary>
+            Creates a new XData that is a copy of the current instance.
+            </summary>
+            <returns>A new XData that is a copy of this instance.</returns>
+        </member>
+        <member name="T:netDxf.XDataCode">
+            <summary>
+            Defines the extended data code.
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.String">
+            <summary>
+            Strings in extended data can be up to 255 bytes long.
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.AppReg">
+            <summary>
+            Application names can be up to 31 bytes long.
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.ControlString">
+            <summary>
+            An extended data control string can be either “{” or “}”.
+            These braces enable applications to organize their data by subdividing the data into lists.
+            The left brace begins a list, and the right brace terminates the most recent list. Lists can be nested.
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.LayerName">
+            <summary>
+            Name of the layer associated with the extended data
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.BinaryData">
+            <summary>
+            Binary data is organized into variable-length chunks.
+            The maximum length of each chunk is 127 bytes.
+            The binary data is represented as a string of hexadecimal digits, two per binary byte.
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.DatabaseHandle">
+            <summary>
+            Handles of entities in the drawing database.
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.RealX">
+            <summary>
+            Three real values, in the order X, Y, Z.
+            They can be used as a point or vector record. AutoCAD never alters their value.
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.RealY">
+            <summary>
+            Three real values, in the order X, Y, Z.
+            They can be used as a point or vector record. AutoCAD never alters their value.
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.RealZ">
+            <summary>
+            Three real values, in the order X, Y, Z.
+            They can be used as a point or vector record. AutoCAD never alters their value.
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.WorldSpacePositionX">
+            <summary>
+            Unlike a simple 3D point, the world space coordinates are moved, scaled, rotated, and mirrored 
+            along with the parent entity to which the extended data belongs. 
+            The world space position is also stretched when the STRETCH command is applied to the parent entity and
+            this point lies within the select window
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.WorldSpacePositionY">
+            <summary>
+            Unlike a simple 3D point, the world space coordinates are moved, scaled, rotated, and mirrored 
+            along with the parent entity to which the extended data belongs. 
+            The world space position is also stretched when the STRETCH command is applied to the parent entity and
+            this point lies within the select window
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.WorldSpacePositionZ">
+            <summary>
+            Unlike a simple 3D point, the world space coordinates are moved, scaled, rotated, and mirrored 
+            along with the parent entity to which the extended data belongs. 
+            The world space position is also stretched when the STRETCH command is applied to the parent entity and
+            this point lies within the select window
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.WorldSpaceDisplacementX">
+            <summary>
+            Also a 3D point that is scaled, rotated, and mirrored along with the parent (but is not moved or stretched)
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.WorldSpaceDisplacementY">
+            <summary>
+            Also a 3D point that is scaled, rotated, and mirrored along with the parent (but is not moved or stretched)
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.WorldSpaceDisplacementZ">
+            <summary>
+            Also a 3D point that is scaled, rotated, and mirrored along with the parent (but is not moved or stretched)
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.WorldDirectionX">
+            <summary>
+            Also a 3D point that is rotated and mirrored along with the parent (but is not moved, scaled, or stretched)
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.WorldDirectionY">
+            <summary>
+            Also a 3D point that is rotated and mirrored along with the parent (but is not moved, scaled, or stretched)
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.WorldDirectionZ">
+            <summary>
+            Also a 3D point that is rotated and mirrored along with the parent (but is not moved, scaled, or stretched)
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.Real">
+            <summary>
+            A real value.
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.Distance">
+            <summary>
+            A real value that is scaled along with the parent entity
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.ScaleFactor">
+            <summary>
+            Also a real value that is scaled along with the parent.
+            The difference between a distance and a scale factor is application-defined
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.Int16">
+            <summary>
+            A 16-bit integer (signed or unsigned).
+            </summary>
+        </member>
+        <member name="F:netDxf.XDataCode.Int32">
+            <summary>
+            A 32-bit signed integer.
+            </summary>
+        </member>
+        <member name="T:netDxf.XDataRecord">
+            <summary>
+            Represents an entry in the extended data of an entity.
+            </summary>
+        </member>
+        <member name="P:netDxf.XDataRecord.OpenControlString">
+            <summary>
+            An extended data control string can be either "{"or "}".
+            These braces enable applications to organize their data by subdividing the data into lists.
+            The left brace begins a list, and the right brace terminates the most recent list. Lists can be nested.
+            </summary>
+        </member>
+        <member name="P:netDxf.XDataRecord.CloseControlString">
+            <summary>
+            An extended data control string can be either "{" or "}".
+            These braces enable applications to organize their data by subdividing the data into lists.
+            The left brace begins a list, and the right brace terminates the most recent list. Lists can be nested.
+            </summary>
+        </member>
+        <member name="M:netDxf.XDataRecord.#ctor(netDxf.XDataCode,System.Object)">
+            <summary>
+            Initializes a new XDataRecord.
+            </summary>
+            <param name="code">XData code.</param>
+            <param name="value">XData value.</param>
+        </member>
+        <member name="P:netDxf.XDataRecord.Code">
+            <summary>
+            Gets the XData code.
+            </summary>
+            <remarks>The only valid values are the ones defined in the <see cref="T:netDxf.XDataCode">XDataCode</see> class.</remarks>
+        </member>
+        <member name="P:netDxf.XDataRecord.Value">
+            <summary>
+            Gets the XData value.
+            </summary>
+        </member>
+        <member name="M:netDxf.XDataRecord.ToString">
+            <summary>
+            Obtains a string that represents the XDataRecord.
+            </summary>
+            <returns>A string text.</returns>
+        </member>
+    </members>
+</doc>

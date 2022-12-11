@@ -33,9 +33,9 @@ namespace DBDT.DrzewoProcesu
 
             DataTable dt = new DataTable();
 
-            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = '" + nazwa_obiektu +  "' order by id desc");
-      
-            if(dt.Rows.Count == 0)
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = '" + nazwa_obiektu + "' order by id desc");
+
+            if (dt.Rows.Count == 0)
             {
                 this.DataContext = new DirectoryStructureViewModel();
             }
@@ -43,6 +43,7 @@ namespace DBDT.DrzewoProcesu
             {
                 this.DataContext = new DirectoryStructureViewModel(dt.Rows[0]["pole10"].ToString());
             }
+
         }
 
         private void click_refresh(object sender, RoutedEventArgs e)
@@ -59,6 +60,7 @@ namespace DBDT.DrzewoProcesu
             {
                 this.DataContext = new DirectoryStructureViewModel(dt.Rows[0]["pole10"].ToString());
             }
+
         }
         private void TreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 
@@ -79,15 +81,15 @@ namespace DBDT.DrzewoProcesu
                 // this.Title = "Selected: " + tree.SelectedItem.ToString();
                 MessageBox.Show(tree.SelectedItem.ToString());
             }
-            else if (tree.SelectedItem !=null)
+            else if (tree.SelectedItem != null)
             {
                 Process.Start(((DirectoryItemViewModel)tree.SelectedItem).FullPath);
             }
         }
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-           var tree = this.FolderView;
-           if (tree == null) return;
+            var tree = this.FolderView;
+            if (tree == null) return;
 
             // ... Determine type of SelectedItem.
             if (tree.SelectedItem is TreeViewItem)
@@ -107,6 +109,11 @@ namespace DBDT.DrzewoProcesu
             {
                 Clipboard.SetDataObject(((DirectoryItemViewModel)tree.SelectedItem).FullPath);
             }
+        }
+
+        private void cmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

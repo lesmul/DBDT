@@ -6,6 +6,15 @@
              xmlns:local="clr-namespace:DBDT.DrzewoProcesu"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/SearchBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid>
 
         <TreeView x:Name="FolderView" ItemsSource="{Binding Items}" MouseDoubleClick="TreeViewItem_MouseDoubleClick">
@@ -33,5 +42,26 @@
         <Button x:Name="B_ODSWIEZ" HorizontalAlignment="Right" Height="18" Margin="782,0,0,0" VerticalAlignment="Top" Width="18" Click="click_refresh" >
             <Image Source="/IKONY/iokno.png" Width="16" ToolTip="Odśwież dane z serwera" />
         </Button>
+        <Border Style="{StaticResource ResourceKey=searchBox}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="/IKONY/Search.png"/>
+                <ComboBox Grid.Column="1"
+                          IsEditable="True"
+                          SelectedItem="{Binding Children}"
+                          SelectionChanged="cmb_SelectionChanged"
+                          ItemsSource="{Binding ElementName = FolderView, Path = Items}">
+                    <ComboBox.ItemTemplate>
+                        <HierarchicalDataTemplate  ItemsSource = "{Binding Children}" >
+                            <TextBlock Text="{Binding Name}" />
+                        </HierarchicalDataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
