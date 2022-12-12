@@ -19,12 +19,14 @@ using System.Windows.Shapes;
 
 namespace DBDT.DrzewoProcesu
 {
+
     /// <summary>
     /// Logika interakcji dla klasy UC_PROCES_TREE.xaml
     /// </summary>
     public partial class UC_PROCES_TREE : UserControl
     {
         string nazwa_obiektu;
+        public string wartosc_obiektu;
         public UC_PROCES_TREE(string nazwa_ob)
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace DBDT.DrzewoProcesu
 
             DataTable dt = new DataTable();
 
-            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = '" + nazwa_obiektu + "' order by id desc");
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10, pole8 FROM ParametryPalaczenia WHERE pole9 = '" + nazwa_obiektu + "' order by id desc");
 
             if (dt.Rows.Count == 0)
             {
@@ -43,6 +45,8 @@ namespace DBDT.DrzewoProcesu
             {
                 this.DataContext = new DirectoryStructureViewModel(dt.Rows[0]["pole10"].ToString());
             }
+
+            wartosc_obiektu = dt.Rows[0]["pole8"].ToString();
 
         }
 
@@ -60,8 +64,26 @@ namespace DBDT.DrzewoProcesu
             {
                 this.DataContext = new DirectoryStructureViewModel(dt.Rows[0]["pole10"].ToString());
             }
-
+   
         }
+        private void zastosuj_filtr(object sender, RoutedEventArgs e)
+        {
+            DataTable dt = new DataTable();
+
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = '" + nazwa_obiektu + "' order by id desc");
+
+            this.DataContext = new DirectoryStructureViewModel(dt.Rows[0]["pole10"].ToString(), CB_FIND.Text);
+
+            if (CB_FIND.Text.Trim().Length > 3)
+            {
+                foreach (var item in FolderView.Items)
+                {
+                    if (FolderView.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeViewItem)
+                        treeViewItem.ExpandSubtree();
+                }
+            } 
+        }
+
         private void TreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 
         {

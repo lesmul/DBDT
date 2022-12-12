@@ -39,7 +39,7 @@ namespace DBDT
         /// </summary>
         /// <param name="fullPath">The full path to the directory</param>
         /// <returns></returns>
-        public static List<DirectoryItem> GetDirectoryContents(string fullPath)
+        public static List<DirectoryItem> GetDirectoryContents(string fullPath, string findFile = "")
         {
             // Create empty list
             var items = new List<DirectoryItem>();
@@ -50,6 +50,7 @@ namespace DBDT
             // ignoring any issues doing so
             try
             {
+
                 var dirs = Directory.GetDirectories(fullPath);
 
                 if (dirs.Length > 0)
@@ -65,7 +66,15 @@ namespace DBDT
             // ignoring any issues doing so
             try
             {
-                var fs = Directory.GetFiles(fullPath);
+                if (findFile != "")
+                {
+                    findFile = "*" + findFile + "*.*";
+                }
+                else
+                {
+                    findFile = "*";
+                }
+                var fs = Directory.GetFiles(fullPath, findFile);
 
                 //if (fs.Length > 0)
                 //    items.AddRange(fs.Select(file => new DirectoryItem { FullPath = file, Type = DirectoryItemType.File, TypeFile = typeFile }));

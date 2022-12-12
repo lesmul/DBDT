@@ -436,7 +436,7 @@ namespace DBDT
             }
 
             UC_PROCES_TREE sp = new UC_PROCES_TREE(nazwa_obiektu);
-
+      
             ScrollViewer sv = new ScrollViewer
             {
                 Content = sp,
@@ -444,10 +444,9 @@ namespace DBDT
                 VerticalContentAlignment = VerticalAlignment.Center
             };
 
-            Container.Children.Add(new MdiChild { Content = sp, Title = "Drzewo procesu " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+            Container.Children.Add(new MdiChild { Content = sp, Title = sp.wartosc_obiektu + " " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
 
         }
-
         private void Lokalizacja_Click(object sender, RoutedEventArgs e)
         {
 

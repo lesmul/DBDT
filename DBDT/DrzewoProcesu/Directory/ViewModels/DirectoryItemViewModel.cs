@@ -21,6 +21,8 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
 
         public string TypeFile { get; set; }
 
+        public string FindFile { get; set; }
+
         public string ImageName => Type == DirectoryItemType.Drive ? "drive" : (Type == DirectoryItemType.File ? (TypeFile.ToLower() == ".xlsm" ? "excel" : "file") : (IsExpanded ? "folder-open" : "folder-closed"));
 
         /// <summary>
@@ -82,7 +84,7 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
         /// </summary>
         /// <param name="fullPath">The full path of this item</param>
         /// <param name="type">The type of item</param>
-        public DirectoryItemViewModel(string fullPath, DirectoryItemType type, string typeFile)
+        public DirectoryItemViewModel(string fullPath, DirectoryItemType type, string typeFile, string findfile = "")
         {
             // Create commands
             this.ExpandCommand = new RelayCommand(Expand);
@@ -91,6 +93,7 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
             this.FullPath = fullPath;
             this.Type = type;
             this.TypeFile = typeFile;
+            this.FindFile = findfile;
 
             // Setup the children as needed
             this.ClearChildren();
@@ -126,9 +129,9 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
                 return;
 
             // Find all children
-            var children = DirectoryStructure.GetDirectoryContents(this.FullPath);
+            var children = DirectoryStructure.GetDirectoryContents(this.FullPath, this.FindFile);
             this.Children = new ObservableCollection<DirectoryItemViewModel>(
-                                children.Select(content => new DirectoryItemViewModel(content.FullPath, content.Type, content.TypeFile)));
+                                children.Select(content => new DirectoryItemViewModel(content.FullPath, content.Type, content.TypeFile, this.FindFile)));
         }
     }
 }

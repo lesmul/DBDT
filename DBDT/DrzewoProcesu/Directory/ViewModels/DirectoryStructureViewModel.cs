@@ -24,7 +24,7 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
         /// <summary>
         /// Default constructor
         /// </summary>
-        public DirectoryStructureViewModel(string lokalizacja_start = "")
+        public DirectoryStructureViewModel(string lokalizacja_start = "", string findfile = "")
         {
             // Get the logical drives
             var children = DirectoryStructure.GetLogicalDrives(lokalizacja_start);
@@ -38,7 +38,7 @@ namespace DBDT.DrzewoProcesu.Directory.ViewModels
             else
             {
                 this.Items = new ObservableCollection<DirectoryItemViewModel>(
-                children.Select(folder => new DirectoryItemViewModel(folder.FullPath, DirectoryItemType.Drive, folder.TypeFile)));
+                children.Select(folder => new DirectoryItemViewModel(folder.FullPath, DirectoryItemType.Drive, folder.TypeFile, findfile)));
             }
        
         }

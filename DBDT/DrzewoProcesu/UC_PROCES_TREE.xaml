@@ -29,7 +29,7 @@
                 </Style>
             </TreeView.ItemContainerStyle>
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                <HierarchicalDataTemplate ItemsSource="{Binding Children }">
                     <StackPanel Orientation="Horizontal">
                         <Image Width="20" Margin="3" 
                                     Source="{Binding ImageName, Converter={x:Static local:HeaderToImageConverter.Instance}}" />
@@ -47,20 +47,15 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" Source="/IKONY/Search.png"/>
-                <ComboBox Grid.Column="1"
+                <ComboBox Name="CB_FIND" Grid.Column="1"
                           IsEditable="True"
-                          SelectedItem="{Binding Children}"
-                          SelectionChanged="cmb_SelectionChanged"
-                          ItemsSource="{Binding ElementName = FolderView, Path = Items}">
-                    <ComboBox.ItemTemplate>
-                        <HierarchicalDataTemplate  ItemsSource = "{Binding Children}" >
-                            <TextBlock Text="{Binding Name}" />
-                        </HierarchicalDataTemplate>
-                    </ComboBox.ItemTemplate>
+                          DisplayMemberPath="Name"
+                          SelectionChanged="cmb_SelectionChanged" ToolTip="Minimum 4 znaki">
                 </ComboBox>
-
+                <Button Click="zastosuj_filtr" Grid.Column="2" MinWidth="50" MaxWidth="50" MaxHeight="25" MinHeight="25">Zastosuj filtr</Button>
             </Grid>
         </Border>
     </Grid>

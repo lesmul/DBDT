@@ -328,8 +328,8 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 command_insert.ExecuteNonQuery();
             }
 
-            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole9`, `pole8`, `pole7`, `kto_zmienil`)" +
-                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole9, @pole8, @pole7, @kto_zmienil)";
+            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole9`, `pole8`, `pole7`, `kto_zmienil`, `data_utworzenia`)" +
+                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole9, @pole8, @pole7, @kto_zmienil, @data_utworzenia)";
 
             command_insert.Parameters.AddWithValue("@serwer", str_serwer);
             command_insert.Parameters.AddWithValue("@nazwa_bazy", str_nazwa_bazy);
@@ -337,6 +337,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             command_insert.Parameters.AddWithValue("@pole8", pole8);
             command_insert.Parameters.AddWithValue("@pole7", guid);
             command_insert.Parameters.AddWithValue("@pole9", nazwa_pola);
+            command_insert.Parameters.AddWithValue("@data_utworzenia", DateTime.Now);
             command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
 
             try
@@ -381,8 +382,8 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             command_insert.CommandType = CommandType.Text;
 
-            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole9`, `pole8`, `pole7`, `kto_zmienil`)" +
-                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole9, @pole8, @pole7, @kto_zmienil)";
+            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole9`, `pole8`, `pole7`, `kto_zmienil`, `data_utworzenia`)" +
+                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole9, @pole8, @pole7, @kto_zmienil, @data_utworzenia)";
 
             command_insert.Parameters.AddWithValue("@serwer", str_serwer);
             command_insert.Parameters.AddWithValue("@nazwa_bazy", str_nazwa_bazy);
@@ -391,6 +392,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             command_insert.Parameters.AddWithValue("@pole9", pole9);
             command_insert.Parameters.AddWithValue("@pole10", pole10);
             command_insert.Parameters.AddWithValue("@kto_zmienil", kto_zmienil);
+            command_insert.Parameters.AddWithValue("@data_utworzenia", DateTime.Now);
 
             try
             {
@@ -536,8 +538,8 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             }
 
             command_insert.CommandText = "INSERT INTO `sql_zapytania` (`nazwa_zapytania`,`sql`, `pole1`, `pole2`, " +
-                "`pole3`, `pole4`, `pole5`, `pole6`, `pole7`, `kto_zmienil`)" +
-                " VALUES(@nazwa_zapytania, @sql, @pole1, @pole2, @pole3, @pole4, @pole5, @pole6, @pole7, @kto_zmienil)";
+                "`pole3`, `pole4`, `pole5`, `pole6`, `pole7`, `kto_zmienil`, `data_utworzenia`)" +
+                " VALUES(@nazwa_zapytania, @sql, @pole1, @pole2, @pole3, @pole4, @pole5, @pole6, @pole7, @kto_zmienil, @data_utworzenia)";
 
             command_insert.CommandType = CommandType.Text;
 
@@ -555,6 +557,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             command_insert.Parameters.AddWithValue("@pole6", poziom6);
             command_insert.Parameters.AddWithValue("@pole7", guid);
             command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
+            command_insert.Parameters.AddWithValue("@data_utworzenia", DateTime.Now);
 
             try
             {
@@ -611,8 +614,8 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             }
 
             command_insert.CommandText = "INSERT INTO `sql_zapytania` (`nazwa_zapytania`,`sql`, `pole1`, `pole2`, " +
-                "`pole3`, `pole4`, `pole5`, `pole6`, `pole7`, `kto_zmienil`)" +
-                " VALUES(@nazwa_zapytania, @sql, @pole1, @pole2, @pole3, @pole4, @pole5, @pole6, @pole7, @kto_zmienil)";
+                "`pole3`, `pole4`, `pole5`, `pole6`, `pole7`, `kto_zmienil`, `data_utworzenia`)" +
+                " VALUES(@nazwa_zapytania, @sql, @pole1, @pole2, @pole3, @pole4, @pole5, @pole6, @pole7, @kto_zmienil, @data_utworzenia)";
 
             command_insert.CommandType = CommandType.Text;
 
@@ -628,6 +631,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             command_insert.Parameters.AddWithValue("@pole6", pole6);
             command_insert.Parameters.AddWithValue("@pole7", pole7);
             command_insert.Parameters.AddWithValue("@kto_zmienil",kto_zmienil);
+            command_insert.Parameters.AddWithValue("@data_utworzenia", DateTime.Now);
 
             try
             {
@@ -681,18 +685,19 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             command_insert.Parameters.AddWithValue("@pole1", nazwa_pliku);
             command_insert.Parameters.AddWithValue("@pole7", guid);
             command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
+            command_insert.Parameters.AddWithValue("@data_utworzenia", DateTime.Now);
 
             if (scieszka_do_pliku != "")
             {
-                command_insert.CommandText = "INSERT INTO `objekty` (`nazwa_objektu`,`opis`, `objekt`, `pole1`, `pole7`, `kto_zmienil`)" +
-                " VALUES(@nazwa_objektu, @opis, @objekt, @pole1, @pole7, @kto_zmienil)";
+                command_insert.CommandText = "INSERT INTO `objekty` (`nazwa_objektu`,`opis`, `objekt`, `pole1`, `pole7`, `kto_zmienil`, `data_utworzenia`)" +
+                " VALUES(@nazwa_objektu, @opis, @objekt, @pole1, @pole7, @kto_zmienil, @data_utworzenia)";
   
                 command_insert.Parameters.AddWithValue("@objekt", ARR_BYTE_FILE_XSL(scieszka_do_pliku));
             }
             else
             {
-                command_insert.CommandText = "INSERT INTO `objekty` (`nazwa_objektu`,`opis`, `pole1`,`pole7`, `kto_zmienil`)" +
-                " VALUES(@nazwa_objektu, @opis, @pole1, @pole7, @kto_zmienil)";
+                command_insert.CommandText = "INSERT INTO `objekty` (`nazwa_objektu`,`opis`, `pole1`,`pole7`, `kto_zmienil`, `data_utworzenia`)" +
+                " VALUES(@nazwa_objektu, @opis, @pole1, @pole7, @kto_zmienil, @data_utworzenia)";
             }
 
             try
@@ -747,9 +752,10 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             command_insert.Parameters.AddWithValue("@pole7", pole7);
             command_insert.Parameters.AddWithValue("@kto_zmienil", kto_zmienil);
             command_insert.Parameters.AddWithValue("@objekt", objekt);
+            command_insert.Parameters.AddWithValue("@data_utworzenia", DateTime.Now);
 
-            command_insert.CommandText = "INSERT INTO `objekty` (`nazwa_objektu`,`opis`, `objekt`, `pole1`, `pole7`, `kto_zmienil`)" +
-                " VALUES(@nazwa_objektu, @opis, @objekt, @pole1, @pole7, @kto_zmienil)";
+            command_insert.CommandText = "INSERT INTO `objekty` (`nazwa_objektu`,`opis`, `objekt`, `pole1`, `pole7`, `kto_zmienil`, `data_utworzenia`)" +
+                " VALUES(@nazwa_objektu, @opis, @objekt, @pole1, @pole7, @kto_zmienil, @data_utworzenia)";
 
             try
             {
@@ -802,8 +808,9 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             command_insert.Parameters.AddWithValue("@opis", opis);
             command_insert.Parameters.AddWithValue("@pole7", guid);
             command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
+            command_insert.Parameters.AddWithValue("@data_utworzenia", DateTime.Now);
 
-            command_insert.CommandText = "UPDATE `objekty` SET nazwa_objektu=@nazwa_objektu, opis=@opis, pole7=@pole7 WHERE `id` = " + id_obj;
+            command_insert.CommandText = "UPDATE `objekty` SET nazwa_objektu=@nazwa_objektu, opis=@opis, pole7=@pole7, data_utworzenia=@data_utworzenia  WHERE `id` = " + id_obj;
 
             try
             {
@@ -1142,4 +1149,4 @@ namespace DBDT.USTAWIENIA_PROGRAMU
         }
 
     }
-}
+} 
