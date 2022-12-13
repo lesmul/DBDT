@@ -53,7 +53,7 @@
                 <ComboBox Name="CB_FIND" Grid.Column="1"
                           IsEditable="True"
                           DisplayMemberPath="Name"
-                          SelectionChanged="cmb_SelectionChanged" ToolTip="Minimum 4 znaki">
+                          SelectionChanged="cmb_SelectionChanged" ToolTip="Minimum 3 znaki">
                 </ComboBox>
                 <Button Click="zastosuj_filtr" Grid.Column="2" MinWidth="50" MaxWidth="50" MaxHeight="25" MinHeight="25">Zastosuj filtr</Button>
             </Grid>

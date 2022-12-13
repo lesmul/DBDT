@@ -65,3 +65,8 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\SQL\WPF_DODAJ
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DBDT.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DBDT.csproj.Fody.CopyLocal.cache
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DBDT.csproj.Fody.RuntimeCopyLocal.cache
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\Resources\SearchBox.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DrzewoSQL\UC_SQL_TREE.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\SQL\SQL_SELECT\ColumsTable.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DrzewoSQL\UC_SQL_TREE.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\SQL\SQL_SELECT\ColumsTable.baml
