@@ -1,4 +1,5 @@
 ﻿using DBDT.DrzewoProcesu.Directory.ViewModels;
+using DBDT.Konfiguracja;
 using DBDT.USTAWIENIA_PROGRAMU;
 using System;
 using System.Collections.Generic;
@@ -137,6 +138,27 @@ namespace DBDT.DrzewoProcesu
         private void cmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void MenuItem_Rename_File_OnClick(object sender, RoutedEventArgs e)
+        {
+            var tree = this.FolderView;
+            if (tree == null) return;
+
+            FRM_ZMIEN_NAZ_PLIKU FRM = new FRM_ZMIEN_NAZ_PLIKU(((DirectoryItemViewModel)tree.SelectedItem).FullPath);
+  
+          if(  FRM.ShowDialog() == true )
+            {
+                if (CB_FIND.Text.Trim().Length > 0)
+                {
+                    b_filtr.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                }
+                else
+                {
+                    B_ODSWIEZ.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                }
+                   
+            }
         }
     }
 }

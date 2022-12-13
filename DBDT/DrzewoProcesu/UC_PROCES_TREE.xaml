@@ -21,6 +21,8 @@
             <TreeView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Kopiuj scieszkę" Click="MenuItem_OnClick" />
+                    <Separator/>
+                    <MenuItem Header="Zmień (Kopiuj/Usuń) nazwę pliku" Click="MenuItem_Rename_File_OnClick" />
                 </ContextMenu>
             </TreeView.ContextMenu>
             <TreeView.ItemContainerStyle>
@@ -55,7 +57,7 @@
                           DisplayMemberPath="Name"
                           SelectionChanged="cmb_SelectionChanged" ToolTip="Minimum 3 znaki">
                 </ComboBox>
-                <Button Click="zastosuj_filtr" Grid.Column="2" MinWidth="50" MaxWidth="50" MaxHeight="25" MinHeight="25">Zastosuj filtr</Button>
+                <Button x:Name="b_filtr" Click="zastosuj_filtr" Grid.Column="2" MinWidth="50" MaxWidth="50" MaxHeight="25" MinHeight="25">Zastosuj filtr</Button>
             </Grid>
         </Border>
     </Grid>

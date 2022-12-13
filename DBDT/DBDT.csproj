@@ -95,6 +95,9 @@
     <Compile Include="Adorners\SizeAdorner.cs" />
     <Compile Include="Adorners\SizeChrome.cs" />
     <Compile Include="DesignerItemDecorator.cs" />
+    <Compile Include="DrzewoProcesu\FRM_ZMIEN_NAZ_PLIKU.xaml.cs">
+      <DependentUpon>FRM_ZMIEN_NAZ_PLIKU.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DrzewoSQL\Directory\Data\DirectoryItemSQL.cs" />
     <Compile Include="DrzewoSQL\Directory\Data\DirectoryItemTypeSQL.cs" />
     <Compile Include="DrzewoSQL\Directory\DirectoryStructureSQL.cs" />
@@ -154,6 +157,10 @@
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SQL.cs" />
     <Compile Include="USTAWIENIA_PROGRAMU\_PUBLIC_SqlLite.cs" />
     <Compile Include="_connect_mssql.cs" />
+    <Page Include="DrzewoProcesu\FRM_ZMIEN_NAZ_PLIKU.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DrzewoSQL\UC_SQL_TREE.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

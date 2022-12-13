@@ -70,3 +70,5 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DrzewoSQL\UC_
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\SQL\SQL_SELECT\ColumsTable.g.cs
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DrzewoSQL\UC_SQL_TREE.baml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\SQL\SQL_SELECT\ColumsTable.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DrzewoProcesu\FRM_ZMIEN_NAZ_PLIKU.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\DrzewoProcesu\FRM_ZMIEN_NAZ_PLIKU.baml
