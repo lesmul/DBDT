@@ -58,8 +58,8 @@ namespace DBDT.DrzewoProcesu
                 str_typ_pliku = fi.Extension;
                 str_dir_name = fi.DirectoryName;
 
-                TXT_INFO.Text = "Plik powstał: " + fi.CreationTime.ToString() + "\r\n";
-                TXT_INFO.Text += "Ostatnia zmina: " + fi.LastWriteTime.ToString()+ "\r\n";
+                TXT_INFO.Text = "Plik powstał: " + fi.CreationTime.ToString()  + " rozmiar [" + (fi.Length/1000).ToString() + "KB]" + "\r\n";
+                TXT_INFO.Text += "Ostatnia zmiana: " + fi.LastWriteTime.ToString()+ "\r\n";
                 TXT_INFO.Text += "Ostatni odczyt: " + fi.LastAccessTime.ToString();
             }
 
