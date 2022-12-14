@@ -444,7 +444,7 @@ namespace DBDT
                 VerticalContentAlignment = VerticalAlignment.Center
             };
 
-            Container.Children.Add(new MdiChild { Content = sp, Title = sp.wartosc_obiektu + " " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+            Container.Children.Add(new MdiChild { Content = sp, Title = (sp.wartosc_obiektu == "" ? "Mój komputer" : sp.wartosc_obiektu) + " " + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
 
         }
         private void Lokalizacja_Click(object sender, RoutedEventArgs e)

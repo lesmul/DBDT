@@ -2,6 +2,7 @@
 using DBDT.Konfiguracja;
 using DBDT.USTAWIENIA_PROGRAMU;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -28,6 +29,7 @@ namespace DBDT.DrzewoProcesu
     {
         string nazwa_obiektu;
         public string wartosc_obiektu;
+        ArrayList Arr_szukaj = new ArrayList();
         public UC_PROCES_TREE(string nazwa_ob)
         {
             InitializeComponent();
@@ -83,6 +85,22 @@ namespace DBDT.DrzewoProcesu
                     if (FolderView.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeViewItem)
                         treeViewItem.ExpandSubtree();
                 }
+       
+                var search = Arr_szukaj.Cast<string>().ToList().Where(p => p.Contains(CB_FIND.Text));
+
+                if (search.Count() == 0)
+                {
+                    Arr_szukaj.Add(CB_FIND.Text);
+
+                    CB_FIND.ItemsSource = null;
+                    CB_FIND.ItemsSource = Arr_szukaj;
+
+                    if (Arr_szukaj.Count > 21)
+                    {
+                        Arr_szukaj.RemoveAt(0);
+                    }
+                }
+
             } 
         }
 
@@ -144,6 +162,7 @@ namespace DBDT.DrzewoProcesu
         {
             var tree = this.FolderView;
             if (tree == null) return;
+            if (tree.SelectedItem == null) return;
 
             FRM_ZMIEN_NAZ_PLIKU FRM = new FRM_ZMIEN_NAZ_PLIKU(((DirectoryItemViewModel)tree.SelectedItem).FullPath);
   
@@ -158,6 +177,18 @@ namespace DBDT.DrzewoProcesu
                     B_ODSWIEZ.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 }
                    
+            }
+        }
+
+        private void Size_Changen(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width < 450 || e.NewSize.Height < 350)
+            {
+                MINI_PODGLAD.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                MINI_PODGLAD.Visibility = Visibility.Visible;
             }
         }
     }

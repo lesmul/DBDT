@@ -257,5 +257,16 @@ namespace DBDT.DrzewoSQL
             }
         }
 
+        private void Size_Changen(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width < 450 || e.NewSize.Height < 350)
+            {
+                MINI_PODGLAD.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                MINI_PODGLAD.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

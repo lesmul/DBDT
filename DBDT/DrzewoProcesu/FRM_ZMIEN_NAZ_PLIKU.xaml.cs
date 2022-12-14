@@ -49,6 +49,7 @@ namespace DBDT.DrzewoProcesu
                 B_ZMIEN.IsEnabled = false;
                 TXT_NOWA_NAZWA.Text = "";
                 TXT_ORYGINALNA_NAZWA.Text = "";
+                del_file.IsEnabled = false;
             }
             else
             {
