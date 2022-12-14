@@ -16,7 +16,7 @@
         <Label Content="Oryginalna nazwa pliku:" HorizontalAlignment="Center" Height="29" Margin="0,14,0,0" VerticalAlignment="Top" Width="260"/>
         <Label Content="Nowa nazwa pliku:" HorizontalAlignment="Center" Height="29" Margin="0,79,0,0" VerticalAlignment="Top" Width="260"/>
         <Button x:Name="B_ZMIEN" Content="Zmień nazwę pliku" HorizontalAlignment="Left" Margin="11,206,0,0" VerticalAlignment="Top" Width="159" Height="35" Click="b_zmien"/>
-        <Button x:Name="B_KOPIUJ" Content="Kopiuj z nazwą nazwą pliku" HorizontalAlignment="Left" Margin="175,206,0,0" VerticalAlignment="Top" Width="170" Height="35" Click="b_kopiuj" Grid.ColumnSpan="2"/>
+        <Button x:Name="B_KOPIUJ" Content="Kopiuj z nową nazwą pliku" HorizontalAlignment="Left" Margin="175,206,0,0" VerticalAlignment="Top" Width="170" Height="35" Click="b_kopiuj" Grid.ColumnSpan="2"/>
         <Button x:Name="B_ANULUJ" Content="Anuluj" HorizontalAlignment="Left" Margin="163,206,0,0" VerticalAlignment="Top" Width="111" Height="35" Grid.Column="1" Click="b_anuluj"/>
         <TextBox x:Name="TXT_INFO" Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="58" Margin="0,143,0,0" TextWrapping="Wrap" Text="Informacja o pliku ...." VerticalAlignment="Top" Width="540" IsReadOnly="True" FontStyle="Italic" UndoLimit="0" Foreground="#FF610C0C"/>
         <Button x:Name="del_file" HorizontalAlignment="Center"  FontFamily="Verdana" Height="26" Margin="225,46,0,0" VerticalAlignment="Top" 

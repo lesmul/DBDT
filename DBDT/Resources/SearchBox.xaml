@@ -28,7 +28,7 @@
             <EventTrigger RoutedEvent="Mouse.MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
-                        <DoubleAnimation Storyboard.TargetProperty="(Border.Width)" EasingFunction="{StaticResource ResourceKey=easeInEase}" To="200" Duration="0:0:1.0"/>
+                        <DoubleAnimation Storyboard.TargetProperty="(Border.Width)" EasingFunction="{StaticResource ResourceKey=easeInEase}" To="380" Duration="0:0:1.0"/>
                         <DoubleAnimation Storyboard.TargetProperty="(Border.Height)" EasingFunction="{StaticResource ResourceKey=easeInEase}" To="30" Duration="0:0:1.0"/>
                     </Storyboard>
                 </BeginStoryboard>
