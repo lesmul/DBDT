@@ -108,7 +108,7 @@ namespace DBDT.SQL.SQL_SELECT
 
             errors.Clear();
 
-            WartoscLike = "";
+            WartoscLike = Wat_like(sqlText);
 
             if (bprocesura == false)
             {
@@ -312,5 +312,44 @@ namespace DBDT.SQL.SQL_SELECT
  
         }
 
+        private string Wat_like(string sql)
+        {
+            if (sql.ToLower().IndexOf("where") < 0)
+            {
+                return "";
             }
+            else
+            {
+                if (sql.ToLower().IndexOf("order by", sql.ToLower().IndexOf("where")) < 0)
+                {
+                    string str_c = sql.ToLower().Substring(sql.ToLower().IndexOf("where"));
+
+                    str_c = str_c.Replace("like", " ");
+                    str_c = str_c.Replace("=", " ");
+                    str_c = str_c.Replace("'", " ");
+                    string[] str_a = str_c.Split(' ');
+
+                    if (str_c == "") return "";
+
+                    return str_a[1];
+                }
+                else
+                {
+                    string str_c = sql.ToLower().Substring(sql.ToLower().IndexOf("where"), sql.ToLower().IndexOf("order by") - sql.ToLower().IndexOf("where"));
+
+                    str_c = str_c.Replace("like", " ");
+                    str_c = str_c.Replace("=", " ");
+                    str_c = str_c.Replace("'", " ");
+                    string[] str_a = str_c.Split(' ');
+
+                    if (str_c == "") return "";
+
+                    return str_a[1];
+                }
+
+            }
+            
+        }
+
+    }
 }

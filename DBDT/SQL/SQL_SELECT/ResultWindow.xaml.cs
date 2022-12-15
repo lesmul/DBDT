@@ -23,6 +23,7 @@ namespace DBDT.SQL.SQL_SELECT
     public partial class ResultWindow : Window
     {
         private static string Nazwa_Tabeli = "";
+        private static string str_like = "";
         string copy_data_update = "";
         string copy_data_where ="";
         public ResultWindow(DataTable resultTable, string TableName, string like = "")
@@ -36,6 +37,8 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 Nazwa_Tabeli = TableName;
             }
+
+            str_like = like;
         }
 
         void resultGrid_Update_U_Click(object sender, RoutedEventArgs e)
@@ -554,45 +557,93 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void ColumnsOR_select_Click(object sender, RoutedEventArgs e)
         {
-            string value = "IF [(";
-            for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+            if (str_like == "")
             {
-                DataGridCellInfo cell = resultGrid.SelectedCells[i];
-                if (cell.Item != null)
+                string value = "IF [";
+                for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
                 {
-                    value += "OPTION(" + '\u0022' + cell.Column.Header.ToString() + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") OR ";
+                    DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                    if (cell.Item != null)
+                    {
+                        value += "OPTION(" + '\u0022' + cell.Column.Header.ToString() + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") OR ";
+                    }
                 }
-            }
-            value = value.Substring(0, value.Length - 4);
-            value += "] THEN";
-            value += "\r\n";
-            value += "% - warunek  ";
-            value += "\r\n";
-            value += "ENDIF ";
+                value = value.Substring(0, value.Length - 4);
+                value += "] THEN";
+                value += "\r\n";
+                value += "   % - warunek  ";
+                value += "\r\n";
+                value += "ENDIF ";
 
-            Clipboard.SetDataObject(value.Substring(0, value.Length - 1));
+                Clipboard.SetDataObject(value.Substring(0, value.Length - 1));
+            }
+            else
+            {
+                string value = "IF [";
+                for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+                {
+                    DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                    if (cell.Item != null)
+                    {
+                        value += "OPTION(" + '\u0022' + str_like + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") OR ";
+                    }
+                }
+                value = value.Substring(0, value.Length - 4);
+                value += "] THEN";
+                value += "\r\n";
+                value += "   % - warunek  ";
+                value += "\r\n";
+                value += "ENDIF ";
+
+                Clipboard.SetDataObject(value.Substring(0, value.Length - 1));
+
+            }
 
         }
 
         private void ColumnsAND_select_Click(object sender, RoutedEventArgs e)
         {
-            string value = "IF [(";
-            for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+            if (str_like == "")
             {
-                DataGridCellInfo cell = resultGrid.SelectedCells[i];
-                if (cell.Item != null)
+                string value = "IF [";
+                for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
                 {
-                    value += "OPTION(" + '\u0022' + cell.Column.Header.ToString() + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") AND ";
+                    DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                    if (cell.Item != null)
+                    {
+                        value += "OPTION(" + '\u0022' + cell.Column.Header.ToString() + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") AND ";
+                    }
                 }
-            }
-            value = value.Substring(0, value.Length - 5);
-            value += "] THEN";
-            value += "\r\n";
-            value += "% - warunek  ";
-            value += "\r\n";
-            value += "ENDIF ";
+                value = value.Substring(0, value.Length - 5);
+                value += "] THEN";
+                value += "\r\n";
+                value += "   % - warunek  ";
+                value += "\r\n";
+                value += "ENDIF ";
 
-            Clipboard.SetDataObject(value.Substring(0, value.Length - 1));
+                Clipboard.SetDataObject(value.Substring(0, value.Length - 1));
+
+            }
+            else
+            {
+                string value = "IF [";
+                for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+                {
+                    DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                    if (cell.Item != null)
+                    {
+                        value += "OPTION(" + '\u0022' + str_like + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") AND ";
+                    }
+                }
+                value = value.Substring(0, value.Length - 5);
+                value += "] THEN";
+                value += "\r\n";
+                value += "   % - warunek  ";
+                value += "\r\n";
+                value += "ENDIF ";
+
+                Clipboard.SetDataObject(value.Substring(0, value.Length - 1));
+            }
 
         }
     }
