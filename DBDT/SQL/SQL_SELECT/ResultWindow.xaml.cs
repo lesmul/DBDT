@@ -25,7 +25,7 @@ namespace DBDT.SQL.SQL_SELECT
         private static string Nazwa_Tabeli = "";
         string copy_data_update = "";
         string copy_data_where ="";
-        public ResultWindow(DataTable resultTable, string TableName)
+        public ResultWindow(DataTable resultTable, string TableName, string like = "")
         {
             InitializeComponent();
             resultGrid.ItemsSource = resultTable.DefaultView;
@@ -432,7 +432,7 @@ namespace DBDT.SQL.SQL_SELECT
 
                 }
 
-                Clipboard.SetDataObject(copy_data);
+                Clipboard.SetDataObject(copy_data.Substring(0, copy_data.Length - 2));
             }
             catch (Exception ex)
             {
@@ -476,7 +476,7 @@ namespace DBDT.SQL.SQL_SELECT
 
                 }
 
-                Clipboard.SetDataObject(copy_data);
+                Clipboard.SetDataObject(copy_data.Substring(0, copy_data.Length - 2));
             }
             catch (Exception ex)
             {
@@ -528,12 +528,72 @@ namespace DBDT.SQL.SQL_SELECT
 
                 }
 
-                Clipboard.SetDataObject(copy_data);
+                Clipboard.SetDataObject(copy_data.Substring(0, copy_data.Length - 2));
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void Columns_select_Click(object sender, RoutedEventArgs e)
+        {
+            string value = "";
+
+            for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+            {
+                DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                if (cell.Item != null)
+                {
+                    value += cell.Column.Header.ToString() + "\r\n";
+                }
+            }
+
+            Clipboard.SetDataObject(value.Substring(0, value.Length - 2));
+        }
+
+        private void ColumnsOR_select_Click(object sender, RoutedEventArgs e)
+        {
+            string value = "IF [(";
+            for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+            {
+                DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                if (cell.Item != null)
+                {
+                    value += "OPTION(" + '\u0022' + cell.Column.Header.ToString() + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") OR ";
+                }
+            }
+            value = value.Substring(0, value.Length - 4);
+            value += "] THEN";
+            value += "\r\n";
+            value += "% - warunek  ";
+            value += "\r\n";
+            value += "ENDIF ";
+
+            Clipboard.SetDataObject(value.Substring(0, value.Length - 1));
+
+        }
+
+        private void ColumnsAND_select_Click(object sender, RoutedEventArgs e)
+        {
+            string value = "IF [(";
+            for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
+            {
+                DataGridCellInfo cell = resultGrid.SelectedCells[i];
+                if (cell.Item != null)
+                {
+                    value += "OPTION(" + '\u0022' + cell.Column.Header.ToString() + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") AND ";
+                }
+            }
+            value = value.Substring(0, value.Length - 5);
+            value += "] THEN";
+            value += "\r\n";
+            value += "% - warunek  ";
+            value += "\r\n";
+            value += "ENDIF ";
+
+            Clipboard.SetDataObject(value.Substring(0, value.Length - 1));
+
         }
     }
 

@@ -376,7 +376,7 @@ namespace DBDT.SQL.SQL_SELECT
                 }
 
                 if (result.Rows.Count > 0)
-                    new ResultWindow(result, sqlHandler.Nazwa_Tabeli()).Show();
+                    new ResultWindow(result, sqlHandler.Nazwa_Tabeli(), sqlHandler.Wartosc_Like()).Show();
 
                 else if (errors == null)
                     MessageBox.Show("Ilość wyników <null>.", "Wykonano zapytanie", MessageBoxButton.OK, MessageBoxImage.Information);

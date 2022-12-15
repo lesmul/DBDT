@@ -24,6 +24,7 @@ namespace DBDT.SQL.SQL_SELECT
         public static RoutedUICommand ParseTable;
 
         public static string NazwaTabeli;
+        public static string WartoscLike;
 
         static SqlHandler()
         {
@@ -95,13 +96,20 @@ namespace DBDT.SQL.SQL_SELECT
             return NazwaTabeli.Trim();
         }
 
+        public string Wartosc_Like()
+        {
+            return WartoscLike.Trim();
+        }
+
         public DataTable Execute(string sqlText, out SqlError[] errorsArray, bool bprocesura = false)
         {
             if (!IsConnected)
                 throw new InvalidOperationException("Nie można wykonać zapytania SQL, gdy połączenie jest zamknięte!");
 
             errors.Clear();
-           
+
+            WartoscLike = "";
+
             if (bprocesura == false)
             {
 
@@ -303,5 +311,6 @@ namespace DBDT.SQL.SQL_SELECT
             }
  
         }
-    }
+
+            }
 }

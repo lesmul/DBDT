@@ -27,6 +27,16 @@
                         <MenuItem Header="Kolumny UPDATE" Click="resultGrid_Update_U_Click"/>
                         <MenuItem Header="Kolumny WHERE" Click="resultGrid_Update_W_Click"/>
                     </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Kopiuj nazwy zaznaczonych kolumn" Click="Columns_select_Click" />
+                    <Separator/>
+                    <MenuItem Header="Automatyzacja skryptów">
+                        <MenuItem Header="Kopiuj nazwy zaznaczonych kolumn" Click="Columns_select_Click" />
+                        <Separator/>
+                        <MenuItem Header="Kopiuj nazwy wartości --> OR" Click="ColumnsOR_select_Click" />
+                        <Separator/>
+                        <MenuItem Header="Kopiuj nazwy wartości --> AND" Click="ColumnsAND_select_Click" />
+                    </MenuItem>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
