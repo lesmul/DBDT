@@ -47,6 +47,8 @@ namespace DBDT.SQL.SQL_SELECT
             }
 
             str_like = like;
+
+            LBL_INFO.Content = "Załadowane dane - " + Nazwa_Tabeli;
         }
 
         void resultGrid_Update_U_Click(object sender, RoutedEventArgs e)
@@ -114,6 +116,8 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            LBL_INFO.Content = "Ustawiono warunki UPDATE";
 
         }
 
@@ -194,6 +198,8 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            LBL_INFO.Content = "Ustawiono warunki WHERE";
         }
         void resultGrid_select_Click(object sender, RoutedEventArgs e)
         {
@@ -281,6 +287,8 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            LBL_INFO.Content = "Skopiowano warunki select / where...";
         }
 
         void resultGrid_Click(object sender, RoutedEventArgs e)
@@ -353,6 +361,8 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            LBL_INFO.Content = "Sopiowano warunki where ......";
         }
 
         private void click_clear(object sender, RoutedEventArgs e)
@@ -360,6 +370,8 @@ namespace DBDT.SQL.SQL_SELECT
             Clipboard.SetDataObject("");
             copy_data_update = "";
             copy_data_where = "";
+
+            LBL_INFO.Content = "Schowek wyczyszczono...";
         }
 
         
@@ -449,6 +461,8 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            LBL_INFO.Content = "Skopiowano dane bez polskich znaków...";
         }
 
         void ClickCopyOryg(Object sender, RoutedEventArgs args)
@@ -493,6 +507,8 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            LBL_INFO.Content = "Skopiowano oryginalne dane...";
         }
 
         void ClickCopy(Object sender, RoutedEventArgs args) 
@@ -545,6 +561,8 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            LBL_INFO.Content = "Kopiowano bez spacji dane...";
         }
 
         private void Columns_select_Click(object sender, RoutedEventArgs e)
@@ -561,6 +579,8 @@ namespace DBDT.SQL.SQL_SELECT
             }
 
             Clipboard.SetDataObject(value.Substring(0, value.Length - 2));
+
+            LBL_INFO.Content = "Skopiowano nazwy kolumn...";
         }
 
         private void ColumnsOR_select_Click(object sender, RoutedEventArgs e)
@@ -631,6 +651,8 @@ namespace DBDT.SQL.SQL_SELECT
 
             }
 
+            LBL_INFO.Content = "Skopiowano dane do skryptu OR...";
+
         }
 
         private void ColumnsAND_select_Click(object sender, RoutedEventArgs e)
@@ -700,6 +722,8 @@ namespace DBDT.SQL.SQL_SELECT
 
                 Clipboard.SetDataObject(value.Substring(0, value.Length - 1));
             }
+
+            LBL_INFO.Content = "Skopiowano dane do skryptu AND...";
 
         }
     }

@@ -139,6 +139,51 @@ namespace DBDT
                 {
                     Drzewo_10.IsEnabled = false;
                 }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_11'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_11.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_11.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_12'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_12.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_12.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_13'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_13.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_13.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_14'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_14.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_14.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_15'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_15.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_15.IsEnabled = false;
+                }
             }
         }
 
@@ -396,43 +441,11 @@ namespace DBDT
 
         private void Window_Tree_Click(object sender, RoutedEventArgs e)
         {
-            string nazwa_obiektu = "";
-
-            switch (((System.Windows.FrameworkElement)sender).Tag.ToString())
+            string nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW" + ((FrameworkElement)sender).Tag.ToString();
+                      
+            if (((FrameworkElement)sender).Tag.ToString() == "WT_ALL")
             {
-                case "WT_1":
-                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_1";
-                break;
-                case "WT_2":
-                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_2";
-                    break;
-                case "WT_3":
-                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_3";
-                    break;
-                case "WT_4":
-                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_4";
-                    break;
-                case "WT_5":
-                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_5";
-                    break;
-                case "WT_6":
-                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_6";
-                    break;
-                case "WT_7":
-                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_7";
-                    break;
-                case "WT_8":
-                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_8";
-                    break;
-                case "WT_9":
-                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_9";
-                    break;
-                case "WT_10":
-                    nazwa_obiektu = "TXT_LOKALIZACJA_PLIKOW_10";
-                    break;
-                case "WT_11":
-                    nazwa_obiektu = "";
-                    break;
+                nazwa_obiektu = "";
             }
 
             UC_PROCES_TREE sp = new UC_PROCES_TREE(nazwa_obiektu);

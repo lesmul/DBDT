@@ -1,4 +1,5 @@
-﻿using DBDT.DrzewoProcesu.Directory.ViewModels;
+﻿using DBDT.DrzewoProcesu.Directory.Data;
+using DBDT.DrzewoProcesu.Directory.ViewModels;
 using DBDT.Konfiguracja;
 using DBDT.USTAWIENIA_PROGRAMU;
 using System;
@@ -67,6 +68,8 @@ namespace DBDT.DrzewoProcesu
             {
                 this.DataContext = new DirectoryStructureViewModel(dt.Rows[0]["pole10"].ToString());
             }
+
+            CB_FIND.Text = "";
    
         }
         private void zastosuj_filtr(object sender, RoutedEventArgs e)
@@ -78,7 +81,24 @@ namespace DBDT.DrzewoProcesu
 
                 dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 = '" + nazwa_obiektu + "' order by id desc");
 
-                this.DataContext = new DirectoryStructureViewModel(dt.Rows[0]["pole10"].ToString(), CB_FIND.Text);
+                string folder_find = "";
+                if (dt.Rows.Count > 0 )
+                    folder_find = dt.Rows[0]["pole10"].ToString();
+
+                var tree = this.FolderView;
+                 
+                if (tree.SelectedItem != null)
+                {
+                    if (((DirectoryItemViewModel)tree.SelectedItem).Type == DirectoryItemType.Folder)
+                    {
+                        folder_find = ((DirectoryItemViewModel)tree.SelectedItem).FullPath;
+                    }
+      
+                }
+
+                if (folder_find == "") return;
+
+                this.DataContext = new DirectoryStructureViewModel(folder_find, CB_FIND.Text);
 
                 foreach (var item in FolderView.Items)
                 {
@@ -102,6 +122,10 @@ namespace DBDT.DrzewoProcesu
                 }
 
             } 
+            else
+            {
+                B_ODSWIEZ.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            }
         }
 
         private void TreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)

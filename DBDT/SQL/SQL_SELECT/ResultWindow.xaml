@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Wynik :)" Height="768" Width="1024" SizeToContent="Width" WindowStartupLocation="CenterScreen" MinWidth="610" MinHeight="300">
     <Grid>
-        <StackPanel Margin="10" Grid.ColumnSpan="3">
+        <StackPanel Margin="10,10,10,23">
             <Grid Width="180" HorizontalAlignment="Left" Height="24">
                 <Label FontWeight="Bold" Width="190" HorizontalAlignment="Left" Margin="0,-1,0,-9">Sposób wyświetlania wyników:</Label>
                 <RadioButton Name="copy_memory" Content="Kopiuj do schowka" Margin="185,5,-136,-5"/>
@@ -12,7 +12,7 @@
             </Grid>
 
         </StackPanel>
-        <DataGrid Name="resultGrid" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,34,0,0" IsReadOnly="True" >
+        <DataGrid Name="resultGrid" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,34,0,23" IsReadOnly="True" >
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Kopiuj i usuń polskie znaki" Click="ClickCopy_bez_pl" />
@@ -40,5 +40,7 @@
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
+
+        <Label x:Name="LBL_INFO" Content="Informacja......" Height="23" VerticalAlignment="Bottom" Width="1024" Padding="10,2,10,2" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>

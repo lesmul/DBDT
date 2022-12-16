@@ -67,9 +67,9 @@
                     <Label Content="Historia zapisanych połączeń:" HorizontalAlignment="Left" Margin="7,5,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Konfiguracja lokalizacji katalogów">
+            <TabItem Header="Konfiguracja lokalizacji katalogów" Cursor="Hand">
                 <Grid Background="#FFE5E5E5">
-                    <ScrollBar x:Name="SC_POZIOM" SmallChange="1" Maximum="1" Minimum="0" Value="0" Cursor="Hand" Orientation="Horizontal" Margin="497,10,0,301" HorizontalAlignment="Left" Width="35" ToolTip="Przewiń oab dodać pozostałe wartości do katalogów" ValueChanged="SC_POZIOM_ValueChanged"/>
+                    <ScrollBar x:Name="SC_POZIOM" SmallChange="1" Maximum="2" Minimum="0" Value="0" Cursor="Hand" Orientation="Horizontal" Margin="497,10,0,301" HorizontalAlignment="Left" Width="35" ToolTip="Przewiń oab dodać pozostałe wartości do katalogów" ValueChanged="SC_POZIOM_ValueChanged"/>
                     <Label Name="LBL_LK_1" Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,10,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_1" HorizontalAlignment="Left" Height="28" Margin="7,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
                         <TextBox.Style>
