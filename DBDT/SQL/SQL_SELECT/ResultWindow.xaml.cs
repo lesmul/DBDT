@@ -606,7 +606,7 @@ namespace DBDT.SQL.SQL_SELECT
                             + " = '" + str_like[1].ToString() + "'");
                         if (dt_x.Rows.Count > 0)
                         {
-                            str_like[1] = dt_x.Rows[0][0].ToString();
+                            str_like[1] = dt_x.Rows[0][0].ToString().Trim() ;
                         }
                     }
                 }
@@ -677,7 +677,7 @@ namespace DBDT.SQL.SQL_SELECT
                             + " = '" + str_like[1].ToString() + "'");
                         if (dt_x.Rows.Count > 0)
                         {
-                            str_like[1] = dt_x.Rows[0][0].ToString();
+                            str_like[1] = dt_x.Rows[0][0].ToString().Trim();
                         }
                     }
                 }
