@@ -617,7 +617,7 @@ namespace DBDT.SQL.SQL_SELECT
                     DataGridCellInfo cell = resultGrid.SelectedCells[i];
                     if (cell.Item != null)
                     {
-                        value += "OPTION(" + '\u0022' + str_like[0].ToString() + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") OR ";
+                        value += "OPTION(" + '\u0022' + str_like[1].ToString() + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") OR ";
                     }
                 }
                 value = value.Substring(0, value.Length - 4);
