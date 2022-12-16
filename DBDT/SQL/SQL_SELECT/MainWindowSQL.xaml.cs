@@ -783,7 +783,10 @@ namespace DBDT.SQL.SQL_SELECT
                 switch (zws.Length)
                 {
                     case 1:
-                        txtCode.Text += "\r\n" + "select top 100 * from " + spc.columsselect.TrimEnd(',').Trim();
+                        if (spc.columsselect.TrimEnd(',').Trim() != "")
+                        {
+                            txtCode.Text += "\r\n" + "select top 100 * from " + spc.columsselect.TrimEnd(',').Trim();
+                        }
                         break;
                     case 2:
                         txtCode.Text += "\r\n" + "select top 100 * from " + zws[0].Trim() + " " + "a" +

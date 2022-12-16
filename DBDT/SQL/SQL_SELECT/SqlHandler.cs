@@ -24,7 +24,7 @@ namespace DBDT.SQL.SQL_SELECT
         public static RoutedUICommand ParseTable;
 
         public static string NazwaTabeli;
-        public static string WartoscLike;
+        public static string[] WartoscLike;
 
         static SqlHandler()
         {
@@ -96,9 +96,9 @@ namespace DBDT.SQL.SQL_SELECT
             return NazwaTabeli.Trim();
         }
 
-        public string Wartosc_Like()
+        public string[] Wartosc_Like()
         {
-            return WartoscLike.Trim();
+            return WartoscLike;
         }
 
         public DataTable Execute(string sqlText, out SqlError[] errorsArray, bool bprocesura = false)
@@ -161,6 +161,28 @@ namespace DBDT.SQL.SQL_SELECT
                 DataTable tbl = new DataTable();
                 adapter.Fill(tbl);
                 return tbl;
+        }
+
+        public DataTable Wartosc_nazwy_pola_scrypt(string sql)
+        {
+            if (!IsConnected)
+                throw new InvalidOperationException("Nie można wykonać zapytania SQL, gdy połączenie jest zamknięte!");
+
+            DataTable tbl = new DataTable();
+
+            try
+            {
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                adapter.Fill(tbl);
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.StackTrace, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return tbl;
         }
 
         public double RowCount(string sqlText)
@@ -312,11 +334,11 @@ namespace DBDT.SQL.SQL_SELECT
  
         }
 
-        private string Wat_like(string sql)
+        private string[] Wat_like(string sql)
         {
             if (sql.ToLower().IndexOf("where") < 0)
             {
-                return "";
+                return null;
             }
             else
             {
@@ -329,9 +351,19 @@ namespace DBDT.SQL.SQL_SELECT
                     str_c = str_c.Replace("'", " ");
                     string[] str_a = str_c.Split(' ');
 
-                    if (str_c == "") return "";
+                    if (str_c == "") return null;
 
-                    return str_a[1];
+                    str_a = str_a.Except(new List<string> { string.Empty }).ToArray();
+
+                    if (str_a.Length > 2)
+                    {
+                        string[] zwrot = { str_a[1], str_a[2].TrimStart('%').TrimEnd('%') };
+                        return zwrot;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
@@ -342,9 +374,19 @@ namespace DBDT.SQL.SQL_SELECT
                     str_c = str_c.Replace("'", " ");
                     string[] str_a = str_c.Split(' ');
 
-                    if (str_c == "") return "";
+                    if (str_c == "") return null;
 
-                    return str_a[1];
+                    str_a = str_a.Except(new List<string> { string.Empty }).ToArray();
+
+                    if (str_a.Length > 2)
+                    {
+                        string[] zwrot = { str_a[1], str_a[2].TrimStart('%').TrimEnd('%') };
+                        return zwrot;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
 
             }

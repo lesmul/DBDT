@@ -17,16 +17,17 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 using System.Text;
+using DBDT.USTAWIENIA_PROGRAMU;
 
 namespace DBDT.SQL.SQL_SELECT
 {
     public partial class ResultWindow : Window
     {
         private static string Nazwa_Tabeli = "";
-        private static string str_like = "";
+        private static string[] str_like ;
         string copy_data_update = "";
         string copy_data_where ="";
-        public ResultWindow(DataTable resultTable, string TableName, string like = "")
+        public ResultWindow(DataTable resultTable, string TableName, string[] like = null)
         {
             InitializeComponent();
             resultGrid.ItemsSource = resultTable.DefaultView;
@@ -35,7 +36,14 @@ namespace DBDT.SQL.SQL_SELECT
             
             if (TableName != null )
             {
-                Nazwa_Tabeli = TableName;
+                if (TableName.ToLower().IndexOf(" where") > 0)
+                {
+                    Nazwa_Tabeli = TableName.Substring(0, TableName.ToLower().IndexOf(" where"));
+                }
+                else
+                {
+                    Nazwa_Tabeli = TableName;
+                }
             }
 
             str_like = like;
@@ -526,7 +534,7 @@ namespace DBDT.SQL.SQL_SELECT
 
                         copy_data += str_cls + "\r\n";
                     }
-                    
+                     
                 pomin_null:;
 
                 }
@@ -557,7 +565,7 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void ColumnsOR_select_Click(object sender, RoutedEventArgs e)
         {
-            if (str_like == "")
+            if (str_like == null)
             {
                 string value = "IF [";
                 for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
@@ -579,13 +587,37 @@ namespace DBDT.SQL.SQL_SELECT
             }
             else
             {
+
+                DataTable dt = new DataTable();
+
+                dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, serwer, nazwa_bazy FROM ParametryPalaczenia WHERE nazwa_bazy <> '' order by id desc");
+
+                if (dt.Rows.Count > 0)
+                {
+                    
+                    DataTable dt_x = new DataTable();
+                    var sqlHandler = new SqlHandler();
+
+                    sqlHandler.Connect(@"Server=" + dt.Rows[0][1].ToString() + ";Database=" + dt.Rows[0][2].ToString() + ";Trusted_Connection=True");
+
+                    if (Nazwa_Tabeli.Trim() !="")
+                    {
+                        dt_x = sqlHandler.Wartosc_nazwy_pola_scrypt("select top 1 " + str_like[0].ToString() + " from " + Nazwa_Tabeli + " where " + str_like[0].ToString() 
+                            + " = '" + str_like[1].ToString() + "'");
+                        if (dt_x.Rows.Count > 0)
+                        {
+                            str_like[1] = dt_x.Rows[0][0].ToString();
+                        }
+                    }
+                }
+
                 string value = "IF [";
                 for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
                 {
                     DataGridCellInfo cell = resultGrid.SelectedCells[i];
                     if (cell.Item != null)
                     {
-                        value += "OPTION(" + '\u0022' + str_like + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") OR ";
+                        value += "OPTION(" + '\u0022' + str_like[0].ToString() + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") OR ";
                     }
                 }
                 value = value.Substring(0, value.Length - 4);
@@ -603,7 +635,7 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void ColumnsAND_select_Click(object sender, RoutedEventArgs e)
         {
-            if (str_like == "")
+            if (str_like == null)
             {
                 string value = "IF [";
                 for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
@@ -626,13 +658,37 @@ namespace DBDT.SQL.SQL_SELECT
             }
             else
             {
+
+                DataTable dt = new DataTable();
+
+                dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, serwer, nazwa_bazy FROM ParametryPalaczenia WHERE nazwa_bazy <> '' order by id desc");
+
+                if (dt.Rows.Count > 0)
+                {
+
+                    DataTable dt_x = new DataTable();
+                    var sqlHandler = new SqlHandler();
+
+                    sqlHandler.Connect(@"Server=" + dt.Rows[0][1].ToString() + ";Database=" + dt.Rows[0][2].ToString() + ";Trusted_Connection=True");
+
+                    if (Nazwa_Tabeli.Trim() != "")
+                    {
+                        dt_x = sqlHandler.Wartosc_nazwy_pola_scrypt("select top 1 " + str_like[0].ToString() + " from " + Nazwa_Tabeli + " where " + str_like[0].ToString()
+                            + " = '" + str_like[1].ToString() + "'");
+                        if (dt_x.Rows.Count > 0)
+                        {
+                            str_like[1] = dt_x.Rows[0][0].ToString();
+                        }
+                    }
+                }
+
                 string value = "IF [";
                 for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
                 {
                     DataGridCellInfo cell = resultGrid.SelectedCells[i];
                     if (cell.Item != null)
                     {
-                        value += "OPTION(" + '\u0022' + str_like + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") AND ";
+                        value += "OPTION(" + '\u0022' + str_like[1].ToString() + '\u0022' + "," + '\u0022' + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + '\u0022' + ") AND ";
                     }
                 }
                 value = value.Substring(0, value.Length - 5);
