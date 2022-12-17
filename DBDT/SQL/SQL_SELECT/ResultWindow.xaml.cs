@@ -48,7 +48,7 @@ namespace DBDT.SQL.SQL_SELECT
 
             str_like = like;
 
-            LBL_INFO.Content = "Załadowane dane - " + Nazwa_Tabeli;
+            LBL_INFO.Content = "Załadowane dane - [" + Nazwa_Tabeli + "]";
         }
 
         void resultGrid_Update_U_Click(object sender, RoutedEventArgs e)
@@ -117,7 +117,7 @@ namespace DBDT.SQL.SQL_SELECT
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            LBL_INFO.Content = "Ustawiono warunki UPDATE";
+            LBL_INFO.Content = "Ustawiono warunk UPDATE";
 
         }
 
@@ -199,7 +199,7 @@ namespace DBDT.SQL.SQL_SELECT
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            LBL_INFO.Content = "Ustawiono warunki WHERE";
+            LBL_INFO.Content = "Ustawiono warunk WHERE";
         }
         void resultGrid_select_Click(object sender, RoutedEventArgs e)
         {
@@ -362,7 +362,7 @@ namespace DBDT.SQL.SQL_SELECT
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            LBL_INFO.Content = "Sopiowano warunki where ......";
+            LBL_INFO.Content = "Skopiowano warunki where ......";
         }
 
         private void click_clear(object sender, RoutedEventArgs e)
@@ -562,7 +562,7 @@ namespace DBDT.SQL.SQL_SELECT
                 MessageBox.Show(ex.Message, "Błąd połączenia", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            LBL_INFO.Content = "Kopiowano bez spacji dane...";
+            LBL_INFO.Content = "Skopiowano dane bez spacji...";
         }
 
         private void Columns_select_Click(object sender, RoutedEventArgs e)
@@ -574,13 +574,13 @@ namespace DBDT.SQL.SQL_SELECT
                 DataGridCellInfo cell = resultGrid.SelectedCells[i];
                 if (cell.Item != null)
                 {
-                    value += cell.Column.Header.ToString() + "\r\n";
+                    value += cell.Column.Header.ToString() + ", " + "\r\n";
                 }
             }
 
-            Clipboard.SetDataObject(value.Substring(0, value.Length - 2));
+            Clipboard.SetDataObject(value.Substring(0, value.Length - 4));
 
-            LBL_INFO.Content = "Skopiowano nazwy kolumn...";
+            LBL_INFO.Content = "Skopiowano nazwy zaznaczonych kolumn...";
         }
 
         private void ColumnsOR_select_Click(object sender, RoutedEventArgs e)
