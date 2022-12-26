@@ -54,8 +54,8 @@ namespace DBDT.SQL
 
             FRM.id_rec = ((System.Data.DataRowView)selectedItem).Row.ItemArray[0].ToString();
 
-            FRM.TXT_OPIS.Text= ((System.Data.DataRowView)selectedItem).Row.ItemArray[1].ToString(); ;
-            FRM.TXT_NAZWA_OBJ.Text = ((System.Data.DataRowView)selectedItem).Row.ItemArray[2].ToString();
+            FRM.TXT_OPIS.Text= ((System.Data.DataRowView)selectedItem).Row.ItemArray[2].ToString(); ;
+            FRM.TXT_NAZWA_OBJ.Text = ((System.Data.DataRowView)selectedItem).Row.ItemArray[1].ToString();
 
             XLSX iXLSX = new XLSX(((System.Data.DataRowView)selectedItem).Row.ItemArray[3].ToString(), "/SQL/", "/IKONY/excel.ico", new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Green));
             FRM.items.Add(iXLSX);

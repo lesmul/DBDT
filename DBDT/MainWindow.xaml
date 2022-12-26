@@ -10,7 +10,8 @@
                     <Menu DockPanel.Dock="Top">
                         <MenuItem Header="Konfiguracja">
                             <MenuItem Header="Parametry programu" Click="KonfiguracjaPolaczenia_Click" />
-                            <!--<MenuItem Header="Zapytania SQL" Click="AddScrollWindow_Click" />-->
+                            <Separator/>
+                            <MenuItem Header="Utwórz plik automatyzacji" Click="AddAutomatEXCEL_Click" />
                         </MenuItem>
                         <MenuItem Header="Narzędzia SQL">
                             <MenuItem Header="Lista zapytań SQL" Click="FindSQLWindow_Click" />

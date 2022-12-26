@@ -1147,6 +1147,161 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             mstream.Close();
             return arrImageXLS;
         }
+        public static Boolean DODAJ_REKORD_SQL_FUKCJE(string nazwa_funkcji, string sql, string nazwa_plik_excel,
+        string nazwa_arkusza, string komorka_start, string pole4, string pole5, string pole6, string pole8, string pole9, string pole10, string pole11)
+        {
 
+            if (sql.Trim() == "") return false;
+
+            if (nazwa_funkcji.Trim() == "")
+            {
+                if (MessageBox.Show("Nie podałeś opisu czy mimo to zapisac?", "Uwaga!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                {
+                    return false;
+                }
+
+                nazwa_funkcji = string.Format("Zapisano dnia: {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
+            }
+
+            if (nazwa_funkcji.Trim() == "") return false;
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            command_insert.CommandText = "INSERT INTO funkcje (nazwa_funkcji, opis, pole1, pole2, pole3, pole4, pole5, pole6, pole7, pole8, pole9, pole10, pole11, " +
+                "kto_zmienil, data_utworzenia)" +
+                " VALUES (@nazwa_funkcji, @opis, @pole1, @pole2, @pole3, @pole4, @pole5, @pole6, @pole7, @pole8, @pole9, @pole10, @pole11, @kto_zmienil, @data_utworzenia)";
+
+            command_insert.CommandType = CommandType.Text;
+
+            var guid = Guid.NewGuid().ToString();
+
+            command_insert.Parameters.AddWithValue("@nazwa_funkcji", nazwa_funkcji);
+            command_insert.Parameters.AddWithValue("@opis", sql);
+            command_insert.Parameters.AddWithValue("@pole1", nazwa_plik_excel);
+            command_insert.Parameters.AddWithValue("@pole2", nazwa_arkusza);
+            command_insert.Parameters.AddWithValue("@pole3", komorka_start);
+            command_insert.Parameters.AddWithValue("@pole4", pole4);
+            command_insert.Parameters.AddWithValue("@pole5", pole5);
+            command_insert.Parameters.AddWithValue("@pole6", pole6);
+            command_insert.Parameters.AddWithValue("@pole7", guid);
+            command_insert.Parameters.AddWithValue("@pole8", pole8);
+            command_insert.Parameters.AddWithValue("@pole9", pole9);
+            command_insert.Parameters.AddWithValue("@pole10", pole10);
+            command_insert.Parameters.AddWithValue("@pole11", pole11);
+            command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
+            command_insert.Parameters.AddWithValue("@data_utworzenia", DateTime.Now);
+
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
+        public static Boolean ZMIEN_REKORD_SQL_FUKCJE(string nazwa_funkcji, string sql, string nazwa_plik_excel,
+string nazwa_arkusza, string komorka_start, string pole4, string pole5, string pole6, string pole8, string pole9, string pole10, string pole11, string id)
+        {
+
+            if (sql.Trim() == "") return false;
+
+            if (nazwa_funkcji.Trim() == "")
+            {
+                if (MessageBox.Show("Nie podałeś opisu czy mimo to zapisac?", "Uwaga!", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                {
+                    return false;
+                }
+
+                nazwa_funkcji = string.Format("Zapisano dnia: {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
+            }
+
+            if (nazwa_funkcji.Trim() == "") return false;
+
+            SQLiteCommand command_insert = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_insert = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            command_insert.CommandText = "UPDATE funkcje SET nazwa_funkcji=@nazwa_funkcji, opis=@opis, pole1=@pole1, pole2=@pole2, pole3=@pole3, pole4=@pole4, " +
+                "pole5=@pole5, pole6=@pole6, pole7=@pole7, pole8=@pole8, pole9=@pole9, pole10=@pole10, pole11=@pole11, " +
+                "kto_zmienil=@kto_zmienil, data_utworzenia=@data_utworzenia where id = " + id;
+
+            command_insert.CommandType = CommandType.Text;
+
+            var guid = Guid.NewGuid().ToString();
+
+            command_insert.Parameters.AddWithValue("@nazwa_funkcji", nazwa_funkcji);
+            command_insert.Parameters.AddWithValue("@opis", sql);
+            command_insert.Parameters.AddWithValue("@pole1", nazwa_plik_excel);
+            command_insert.Parameters.AddWithValue("@pole2", nazwa_arkusza);
+            command_insert.Parameters.AddWithValue("@pole3", komorka_start);
+            command_insert.Parameters.AddWithValue("@pole4", pole4);
+            command_insert.Parameters.AddWithValue("@pole5", pole5);
+            command_insert.Parameters.AddWithValue("@pole6", pole6);
+            command_insert.Parameters.AddWithValue("@pole7", guid);
+            command_insert.Parameters.AddWithValue("@pole8", pole8);
+            command_insert.Parameters.AddWithValue("@pole9", pole9);
+            command_insert.Parameters.AddWithValue("@pole10", pole10);
+            command_insert.Parameters.AddWithValue("@pole11", pole11);
+            command_insert.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
+            command_insert.Parameters.AddWithValue("@data_utworzenia", DateTime.Now);
+
+            try
+            {
+                command_insert.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
     }
 } 

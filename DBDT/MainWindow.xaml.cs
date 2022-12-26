@@ -464,5 +464,32 @@ namespace DBDT
         {
 
         }
+
+        private void AddAutomatEXCEL_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i <= this.Container.Children.Count - 1; i++)
+            {
+                MdiChild child = this.Container.Children[i];
+                if (child.Name == "UC_Kolory")
+                {
+                    child.Focus();
+                    return;
+                }
+            }
+
+            UC_Kolory sp = new UC_Kolory();
+
+            Container.Children.Add(new MdiChild
+            {
+                Content = sp,
+                Name = "UC_Kolory",
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Title = "Plik automatyzacji " + ooo++,
+                WindowState = WindowState.Maximized,
+                Width = SHT_W,
+                Height = SHT_H
+            });
+        }
     }
 }
