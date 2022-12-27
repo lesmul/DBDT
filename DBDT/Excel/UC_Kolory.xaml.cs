@@ -108,6 +108,8 @@ namespace DBDT.Excel
             {
                 string str_inf = _PUBLIC_SqlLite.ZAPISZ_DO_PLIKU_XSL(dti.Rows[0]["pole11"].ToString(),
                 dti.Rows[0]["pole11"].ToString(), dtix.Rows[0]["id"].ToString());
+
+                MessageBox.Show(dti.Rows[0]["pole11"].ToString(), "Plik zapisano!");
             }
 
             try
@@ -140,7 +142,7 @@ namespace DBDT.Excel
                                 ExcelApp.Cells[id_r, id_c] = dv[i][j + 3].ToString();
                                 id_r++;
                             }
-                        }
+                        } 
                     }
                 }
                 catch (Exception exx)
