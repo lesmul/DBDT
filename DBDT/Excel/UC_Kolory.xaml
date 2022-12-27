@@ -28,7 +28,7 @@
                         <DataGrid x:Name="DG_MOJE_USTAWIENIA" AutoGenerateColumns="True" Margin="2,2,2,2" Width="496" >
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem x:Name="MI_CRTL_PLUS_V" Header="Wklej" Click="MenuItem_Click_Paste" InputGestureText="Ctrl+V" />
+                                    <MenuItem x:Name="MI_CRTL_PLUS_V" Header="Wklej" Click="MenuItem_Click_Paste"/>
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
                         </DataGrid>
@@ -45,8 +45,8 @@
                     <Label Grid.Column="1" Margin="5,186,0,90" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" >Komórka start:</Label>
                     <TextBox Grid.Column="1" Name="TXT_KOMORKA_START" Margin="127,186,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2" ToolTip="np. A1;C1;D1 - wartość kolumna 1; kolumna 2; kolumna 3" MaxLines="250" CharacterCasing="Upper"/>
                     <Label Grid.Column="1" Margin="5,216,0,61" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" >Plik wynikowy:</Label>
-                    <TextBox Grid.Column="1" Name="TXT_LOK_PLIK_WYNIKOWY" Margin="127,216,25,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2"/>
-                    <Button Name="B_ZAPISZ" Grid.Column="1" Content="Zapisz" Margin="127,0,0,0" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="25" Click="B_ZAPISZ_Click"/>
+                    <TextBox Grid.Column="1" Name="TXT_LOK_PLIK_WYNIKOWY" Margin="127,216,25,0" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2" MaxLines="1" MaxLength="2500" UndoLimit="5" TextAlignment="Right" FlowDirection="RightToLeft"/>
+                    <Button Name="B_ZAPISZ" Grid.Column="1" Content="Zapisz" Margin="127,0,5,0" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="25" Click="B_ZAPISZ_Click"/>
                     <CheckBox Name="CB_UNIKAT" Grid.Column="1" Content="Wartość kolumny Nazwa - unikatowa" HorizontalAlignment="Left" Margin="127,245,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="358"/>
                     <Button x:Name="B_Open" Grid.Column="2" HorizontalAlignment="Right" Height="21" Margin="0,216,5,0" VerticalAlignment="Top" Width="20" Click="b_open_xls_click" ToolTip="Otwórz plik Excel" Background="#FF08290F">
                         <Button.Content>

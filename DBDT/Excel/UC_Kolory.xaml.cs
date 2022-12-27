@@ -167,6 +167,8 @@ namespace DBDT.Excel
                 return;
             }
 
+            if (TXT_SQL.Text.Trim() == "") TXT_SQL.Text = "Brak";
+
             if (id_s == "-1")
             {
                 _PUBLIC_SqlLite.DODAJ_REKORD_SQL_FUKCJE(TXT_NAZ_ZAKLADKI.Text.Trim(), TXT_SQL.Text, CB_NAZ_EXCEL.Text.Trim(), TXT_NAZ_ARKUSZA.Text,
