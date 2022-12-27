@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <DaneX>
+    <ID>0</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy</Objekt>
+    <Nazwa>nazwa</Nazwa>
+    <Wartość>nazwa</Wartość>
+  </DaneX>
+  <DaneX>
+    <ID>1</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Wartość>kolory</Wartość>
+  </DaneX>
+</NewDataSet>

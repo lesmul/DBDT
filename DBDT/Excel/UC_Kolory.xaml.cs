@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.IO;
+using System.Windows.Shapes;
 
 namespace DBDT.Excel
 {
@@ -27,6 +28,7 @@ namespace DBDT.Excel
         string id_s;
         System.Data.DataTable dt_d = new System.Data.DataTable();
         DataView dv = new DataView();
+        DataSet ds = new DataSet();
 
         public UC_Kolory()
         {
@@ -52,6 +54,11 @@ namespace DBDT.Excel
             dt_d.Columns.Add("Tekst", typeof(string));
 
             dt_d.TableName = "DaneX";
+
+            if (ds.Tables.Count == 0)
+            {
+                ds.Tables.Add(dt_d);
+            }
 
             dv.Table = dt_d;
 
@@ -202,6 +209,28 @@ namespace DBDT.Excel
                 DG_MOJE_USTAWIENIA.Columns[0].Visibility = System.Windows.Visibility.Hidden;
                 DG_MOJE_USTAWIENIA.Columns[1].Visibility = System.Windows.Visibility.Hidden;
             }
+
+            string ScieszkaProgramu;
+
+            ScieszkaProgramu = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+
+            if (ScieszkaProgramu.Trim().EndsWith(@"\") == false)
+            {
+                ScieszkaProgramu += @"\";
+            }
+
+            System.IO.FileInfo fi = new System.IO.FileInfo(ScieszkaProgramu + "_auto.xml");
+
+            if (fi.Exists == true)
+            {
+                ds.ReadXml(ScieszkaProgramu + "_auto.xml");
+
+                if (ds.Tables.Count >0)
+                {
+                    dt_d = ds.Tables[0];
+                    dv.Table = ds.Tables[0];
+                }
+            }
         }
 
         private void tc_selection_changed(object sender, SelectionChangedEventArgs e)
@@ -323,6 +352,20 @@ namespace DBDT.Excel
                 dt_d.Rows.Add(dr);
             }
 
+        }
+
+        private void unloaded(object sender, RoutedEventArgs e)
+        {
+            string ScieszkaProgramu;
+
+            ScieszkaProgramu = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+
+            if (ScieszkaProgramu.Trim().EndsWith(@"\") == false)
+            {
+                ScieszkaProgramu += @"\";
+            }
+
+            ds.WriteXml(ScieszkaProgramu + "_auto.xml");
         }
     }
 

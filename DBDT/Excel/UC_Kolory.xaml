@@ -7,7 +7,7 @@
              xmlns:MDI="clr-namespace:WPF.MDI;assembly=WPF.MDI" 
              xmlns:SQL_SELECT="clr-namespace:DBDT.SQL.SQL_SELECT" x:Class="DBDT.Excel.UC_Kolory"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800" Loaded="uc_loaded">
+             d:DesignHeight="600" d:DesignWidth="800" Loaded="uc_loaded" Unloaded="unloaded">
     <Grid>
         <StackPanel Margin="0,0,0,250">
             <SQL_SELECT:MainWindowSQL Height="245"/>
