@@ -85,7 +85,7 @@ namespace DBDT.Excel
 
             dti = _PUBLIC_SqlLite.SelectQuery("SELECT * FROM funkcje WHERE id = " + id_s);
 
-            if (dti.Rows.Count == 0) 
+            if (dti.Rows.Count == 0)
             {
                 MessageBox.Show("Brak wyników w tabeli funkcje!", "Popraw konfiguracje");
                 return;
@@ -98,48 +98,65 @@ namespace DBDT.Excel
             dtix = _PUBLIC_SqlLite.SelectQuery("SELECT id, nazwa_objektu, opis, objekt, kto_zmienil, data_utworzenia, pole1 FROM objekty " +
                 "WHERE pole1 = '" + str_obj[1].Trim() + "' AND opis ='" + str_obj[0].Trim() + "'");
 
-            if (dtix.Rows.Count == 0) 
+            if (dtix.Rows.Count == 0)
             {
                 MessageBox.Show("Brak wyników!", "Popraw konfiguracje");
                 return;
             }
 
-            if (System.IO.File.Exists(dti.Rows[0]["pole11"].ToString())==false)
+            if (System.IO.File.Exists(dti.Rows[0]["pole11"].ToString()) == false)
             {
                 string str_inf = _PUBLIC_SqlLite.ZAPISZ_DO_PLIKU_XSL(dti.Rows[0]["pole11"].ToString(),
                 dti.Rows[0]["pole11"].ToString(), dtix.Rows[0]["id"].ToString());
             }
 
-            //Create Excel Application Instance
-
-            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
-
-            //Create workbook Instance and open the workbook from the below location
-            Workbook ExcelWorkBook = ExcelApp.Workbooks.Open(dti.Rows[0]["pole11"].ToString());
-
             try
             {
-                Worksheet sheet = (Worksheet)ExcelApp.Worksheets[dti.Rows[0]["pole2"].ToString()];
-                sheet.Select(Type.Missing);
-                //ExcelApp.Cells[4, 1] = dti.Rows[0]["pole2"].ToString();
-                //ExcelApp.Range["A1"].Value = dti.Rows[0]["pole2"].ToString();
+                //Create Excel Application Instance
 
-                string[] kolX = dti.Rows[0]["pole3"].ToString().Split(';');
+                Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
 
-                for (int j = 0; j < kolX.Length; j++)
+                //Create workbook Instance and open the workbook from the below location
+                Workbook ExcelWorkBook = ExcelApp.Workbooks.Open(dti.Rows[0]["pole11"].ToString());
+
+                try
                 {
-                    var id_r = ExcelApp.Range[kolX[j]].Row;
-                    var id_c = ExcelApp.Range[kolX[j]].Column;
+                    Worksheet sheet = (Worksheet)ExcelApp.Worksheets[dti.Rows[0]["pole2"].ToString()];
+                    sheet.Select(Type.Missing);
+                    //ExcelApp.Cells[4, 1] = dti.Rows[0]["pole2"].ToString();
+                    //ExcelApp.Range["A1"].Value = dti.Rows[0]["pole2"].ToString();
 
-                    for (int i = 0; i < dv.Count; i++)
+                    string[] kolX = dti.Rows[0]["pole3"].ToString().Split(';');
+
+                    for (int j = 0; j < kolX.Length; j++)
                     {
-                        if (j + 2 < dv.Table.Columns.Count)
+                        var id_r = ExcelApp.Range[kolX[j]].Row;
+                        var id_c = ExcelApp.Range[kolX[j]].Column;
+
+                        for (int i = 0; i < dv.Count; i++)
                         {
-                            ExcelApp.Cells[id_r, id_c] = dv[i][j + 3].ToString();
-                            id_r++;
+                            if (j + 2 < dv.Table.Columns.Count)
+                            {
+                                ExcelApp.Cells[id_r, id_c] = dv[i][j + 3].ToString();
+                                id_r++;
+                            }
                         }
                     }
                 }
+                catch (Exception exx)
+                {
+
+                    MessageBox.Show(exx.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+                //Save the workbook
+                ExcelWorkBook.Save();
+
+                //Close the workbook
+                ExcelWorkBook.Close();
+
+                //Quit the excel process
+                ExcelApp.Quit();
 
             }
             catch (Exception ex)
@@ -148,14 +165,7 @@ namespace DBDT.Excel
                 MessageBox.Show(ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            //Save the workbook
-            ExcelWorkBook.Save();
 
-            //Close the workbook
-            ExcelWorkBook.Close();
-
-            //Quit the excel process
-            ExcelApp.Quit();
         }
 
         private void B_ZAPISZ_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -210,7 +220,7 @@ namespace DBDT.Excel
 
                 DG_MOJE_USTAWIENIA.ItemsSource = dv;
 
-                dt_d.AcceptChanges(); 
+                dt_d.AcceptChanges();
 
                 dt_d.Columns["id_obj"].DefaultValue = id_s;
 
@@ -304,7 +314,7 @@ namespace DBDT.Excel
 
                 DataRow dr = dt_d.NewRow();
 
-                if(strx.Length > 0) dr["Nazwa"] = strx[0].ToString();
+                if (strx.Length > 0) dr["Nazwa"] = strx[0].ToString();
                 if (strx.Length > 1) dr["Wartość"] = strx[1].ToString();
                 if (strx.Length > 2) dr["Tekst"] = strx[2].ToString();
 
