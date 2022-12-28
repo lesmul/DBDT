@@ -829,6 +829,16 @@ namespace DBDT.SQL.SQL_SELECT
             }
           
         }
+
+        private void ClickUpperText(object sender, RoutedEventArgs e)
+        {
+            txtCode.SelectedText = txtCode.SelectedText.ToUpper();
+        }
+
+        private void ClickLowerText(object sender, RoutedEventArgs e)
+        {
+            txtCode.SelectedText = txtCode.SelectedText.ToLower();
+        }
     }
 
 }

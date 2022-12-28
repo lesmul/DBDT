@@ -126,6 +126,8 @@
                         <MenuItem Header="zamień na AND" Name="cxmItemLikeAnd" Click="ClickAnd" />
                         <MenuItem Header="zamień na OR" Name="cxmItemLikeOr" Click="ClickOr" />
                         <Separator/>
+                        <MenuItem Header="Zmień na DUŻE LITERY" Name="cxmItemUpperText" Click="ClickUpperText" />
+                        <MenuItem Header="Zmień na małe litery" Name="cxmItemLowerText" Click="ClickLowerText" />
                         <MenuItem Header="Kolumny w tabeli" Name="cxmItemColumsTable" Click="ClickColumnTable" />
                         <Separator/>
                         <MenuItem Name="praca_procedura"  Header="Ustaw tryb pracy - procedura" Click="click_procedura" />
