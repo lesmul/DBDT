@@ -575,7 +575,7 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void Columns_select_Click(object sender, RoutedEventArgs e)
         {
-            string value = "where ";
+            string value = "";
 
             for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
             {
@@ -753,6 +753,23 @@ namespace DBDT.SQL.SQL_SELECT
                         }
                         if(ruwnum.IsChecked == true)
                         {
+                            var col_dt = ((DataColumn)((Selector)CB_FILTR).SelectedValue).DataType;
+
+                            switch (col_dt.ToString())
+                            {
+                                case "System.String":
+                                    TXT_FILTR.Text = Convert.ToString(TXT_FILTR.Text).ToString();
+                                    break;
+                                case "System.DateTime":
+                                    if (TXT_FILTR.Text.Length < 10) return;
+                                    TXT_FILTR.Text = Convert.ToDateTime(TXT_FILTR.Text).ToString();
+                                    break;
+                                default:
+                                    TXT_FILTR.Text = Convert.ToDouble(TXT_FILTR.Text).ToString();
+                                    break;
+                            }
+                           
+
                             dv.RowFilter = CB_FILTR.Text.Trim() + " = '" + TXT_FILTR.Text.Trim() + "'";
                         }
                     }
@@ -766,6 +783,26 @@ namespace DBDT.SQL.SQL_SELECT
                     ruwnum.IsChecked = true;
                 }
             }
+        }
+        private void CB_FILTR_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            var col_dt = ((DataColumn)((Selector)sender).SelectedValue).DataType;
+
+            switch (col_dt.ToString()) 
+            {
+                case "System.String":
+                    ruwnum.IsEnabled = true;
+                    like.IsEnabled = true;
+                    like.IsChecked = true;
+                    break;
+                default:
+                    ruwnum.IsChecked = true;
+                    ruwnum.IsEnabled= true;
+                    like.IsEnabled= false;
+                    break;
+            }
+
         }
     }
 

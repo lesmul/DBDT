@@ -238,6 +238,12 @@ namespace DBDT.SQL.SQL_SELECT
                     sprCount = sql.Substring(from + 4, spac);
                 }
 
+                if (sprFrom == null)
+                {
+                    NazwaTabeli = "???";
+                    return -1;
+                }
+
                 if(sprFrom.IndexOf("order by") > -1)
                 {
                     sprFrom = sprFrom.Substring(0, sprFrom.IndexOf("order by"));

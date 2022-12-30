@@ -752,7 +752,7 @@ namespace DBDT.SQL.SQL_SELECT
                 txtCode.ScrollToEnd();
                 txtCode.Focus();
               
-                txtCode.Text += "\r\n" + spc.columsselect.TrimEnd(',');
+                txtCode.Text += "\r\n" + "where " + spc.columsselect.TrimEnd(',');
 
             }
 

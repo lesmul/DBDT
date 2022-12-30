@@ -24,10 +24,10 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <ComboBox Grid.Row="0" Name="CB_FILTR" Margin="5,5,5,5" Text="" Height="23" Grid.ColumnSpan="2" IsEditable="True" HorizontalAlignment="Left" Width="250"/>
-                    <RadioButton Grid.Row="0" x:Name="ruwnum" Margin="260,4,703,3" IsChecked="True" >=</RadioButton>
-                    <RadioButton Grid.Row="1" x:Name="like" Margin="260,0,703,0" >Like</RadioButton>
-                    <TextBox Grid.Row="0" x:Name="TXT_FILTR" Height="28" TextWrapping="Wrap" Width="284" UndoLimit="10" MaxLines="1" MaxLength="25" TextChanged="text_changed" RenderTransformOrigin="1,1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="309,2,0,3"/>
+                    <ComboBox Grid.Row="0" Name="CB_FILTR" Margin="5,5,5,5" Text="" Height="23" Grid.ColumnSpan="2" IsEditable="True" HorizontalAlignment="Left" Width="200" SelectionChanged="CB_FILTR_SelectionChanged"/>
+                    <RadioButton Grid.Row="0" x:Name="ruwnum" Margin="240,4,708,3" IsChecked="True" VerticalContentAlignment="Center" Padding="15,-1,0,0" >=</RadioButton>
+                    <RadioButton Grid.Row="1" x:Name="like" Margin="240,0,703,0" >Like %%</RadioButton>
+                    <TextBox Grid.Row="0" x:Name="TXT_FILTR" Height="28" TextWrapping="Wrap" Width="284" UndoLimit="10" MaxLines="1" MaxLength="25" TextChanged="text_changed" RenderTransformOrigin="1,1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="300,2,0,3"/>
                 </Grid>
             </StackPanel>
         </Expander>
