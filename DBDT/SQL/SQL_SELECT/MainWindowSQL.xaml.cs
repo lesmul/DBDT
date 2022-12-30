@@ -701,6 +701,8 @@ namespace DBDT.SQL.SQL_SELECT
                 cxmItemLikeAnd.IsEnabled = false;
                 cxmItemLikeOr.IsEnabled = false;
                 cxmItemColumsTable.IsEnabled = false;
+                cxmItemLowerText.IsEnabled = false;
+                cxmItemUpperText.IsEnabled = false;
 
             }
             else
@@ -712,6 +714,8 @@ namespace DBDT.SQL.SQL_SELECT
                 cxmItemLikeAnd.IsEnabled = true;
                 cxmItemLikeOr.IsEnabled  = true;
                 cxmItemColumsTable.IsEnabled = true;
+                cxmItemLowerText.IsEnabled = true;
+                cxmItemUpperText.IsEnabled = true;
 
             }
 

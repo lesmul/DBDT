@@ -28,7 +28,7 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-        <Image x:Name="MINI_PODGLAD" MaxWidth="256" MaxHeight="256" HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.5" Source="/IKONY/logo.png" Margin="0,0,24,13"/>
+        <Image x:Name="MINI_PODGLAD" MaxWidth="256" MaxHeight="256" HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.5" Source="/IKONY/logo.png" Margin="0,0,24,19"/>
         <Button x:Name="B_ODSWIEZ" HorizontalAlignment="Right" Height="18" Margin="782,0,0,0" VerticalAlignment="Top" Width="18" Click="click_refresh" >
             <Image Source="/IKONY/iokno.png" Width="16" ToolTip="Odśwież dane z serwera" />
         </Button>

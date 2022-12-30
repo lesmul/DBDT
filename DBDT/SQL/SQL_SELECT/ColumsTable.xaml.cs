@@ -20,6 +20,8 @@ namespace DBDT.SQL.SQL_SELECT
     /// </summary>
     public partial class ColumsTable : Window
     {
+
+        List<object> itemsSort = new List<object>();
         public ColumsTable()
         {
             InitializeComponent();
@@ -36,6 +38,21 @@ namespace DBDT.SQL.SQL_SELECT
                 columsselect += itContr.SelectedItems[i].ToString() + " ,";
             }
             this.Close();
+        }
+
+        private void text_changed(object sender, TextChangedEventArgs e)
+        {
+
+            List<string> strings = itemsSort.ConvertAll(obj => obj?.ToString());
+
+            var re = strings.Where(x => x.IndexOf(((System.Windows.Controls.TextBox)sender).Text) > -1);
+
+            itContr.ItemsSource = re;
+        }
+
+        private void loaded(object sender, RoutedEventArgs e)
+        {
+            itemsSort = (List<object>)itContr.ItemsSource;
         }
     }
 }
