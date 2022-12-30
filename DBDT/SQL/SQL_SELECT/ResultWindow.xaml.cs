@@ -25,12 +25,16 @@ namespace DBDT.SQL.SQL_SELECT
     {
         private static string Nazwa_Tabeli = "";
         private static string[] str_like ;
+        private readonly DataView dv = new DataView();
+
         string copy_data_update = "";
         string copy_data_where ="";
         public ResultWindow(DataTable resultTable, string TableName, string[] like = null)
         {
             InitializeComponent();
+            resultTable.TableName = "t_find";
             resultGrid.ItemsSource = resultTable.DefaultView;
+            dv.Table = resultTable;
             Title = string.Format("Dane z {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString()) + " [" + resultTable.Rows.Count + "]";
             this.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
             
@@ -49,6 +53,10 @@ namespace DBDT.SQL.SQL_SELECT
             str_like = like;
 
             LBL_INFO.Content = "Załadowane dane - [" + Nazwa_Tabeli + "]";
+
+            CB_FILTR.ItemsSource = resultTable.Columns;
+            CB_FILTR.DisplayMemberPath = "ColumnName";
+
         }
 
         void resultGrid_Update_U_Click(object sender, RoutedEventArgs e)
@@ -567,7 +575,7 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void Columns_select_Click(object sender, RoutedEventArgs e)
         {
-            string value = "";
+            string value = "where ";
 
             for (int i = 0; i < resultGrid.SelectedCells.Count; i++)
             {
@@ -725,6 +733,39 @@ namespace DBDT.SQL.SQL_SELECT
 
             LBL_INFO.Content = "Skopiowano dane do skryptu AND...";
 
+        }
+
+        private void text_changed(object sender, TextChangedEventArgs e)
+        {
+           if( CB_FILTR.Text != "")
+            {
+                try
+                {
+                    if (TXT_FILTR.Text.Trim() == "")
+                    {
+                        dv.RowFilter = "";
+                    }
+                    else
+                    {
+                        if (like.IsChecked == true)
+                        {
+                            dv.RowFilter = CB_FILTR.Text.Trim() + " like '%" + TXT_FILTR.Text.Trim() + "%'";
+                        }
+                        if(ruwnum.IsChecked == true)
+                        {
+                            dv.RowFilter = CB_FILTR.Text.Trim() + " = '" + TXT_FILTR.Text.Trim() + "'";
+                        }
+                    }
+                    
+                    resultGrid.ItemsSource = dv;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Popraw filtr", MessageBoxButton.OK, MessageBoxImage.Error);
+                    TXT_FILTR.Text = "";
+                    ruwnum.IsChecked = true;
+                }
+            }
         }
     }
 

@@ -3,16 +3,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Wynik :)" Height="768" Width="1024" SizeToContent="Width" WindowStartupLocation="CenterScreen" MinWidth="610" MinHeight="300">
     <Grid>
-        <StackPanel Margin="10,10,10,23">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="10,0,10,0">
             <Grid Width="180" HorizontalAlignment="Left" Height="24">
-                <Label FontWeight="Bold" Width="190" HorizontalAlignment="Left" Margin="0,-1,0,-9">Sposób wyświetlania wyników:</Label>
+                <Label Width="190" HorizontalAlignment="Left" Margin="0,-1,0,-2" FontSize="12" FontWeight="Bold">Sposób wyświetlania wyników:</Label>
                 <RadioButton Name="copy_memory" Content="Kopiuj do schowka" Margin="185,5,-136,-5"/>
                 <RadioButton Name="new_window" Content="Otwórz w nowym oknie SQL" IsChecked="True" Margin="309,5,-299,-2"/>
-                <Button Content="Wyczyść schowek" Margin="484,-6,-495,2" Click="click_clear" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
+                <Button Content="Wyczyść schowek" Margin="484,1,-495,2" Click="click_clear" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
             </Grid>
-
         </StackPanel>
-        <DataGrid Name="resultGrid" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,34,0,23" IsReadOnly="True" >
+        <Expander Grid.Row="1" Name="errorsExpander" Header="Filtry">
+            <StackPanel Grid.Row="1" Margin="5,5,5,5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ComboBox Grid.Row="0" Name="CB_FILTR" Margin="5,5,5,5" Text="" Height="23" Grid.ColumnSpan="2" IsEditable="True" HorizontalAlignment="Left" Width="250"/>
+                    <RadioButton Grid.Row="0" x:Name="ruwnum" Margin="260,4,703,3" IsChecked="True" >=</RadioButton>
+                    <RadioButton Grid.Row="1" x:Name="like" Margin="260,0,703,0" >Like</RadioButton>
+                    <TextBox Grid.Row="0" x:Name="TXT_FILTR" Height="28" TextWrapping="Wrap" Width="284" UndoLimit="10" MaxLines="1" MaxLength="25" TextChanged="text_changed" RenderTransformOrigin="1,1" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="309,2,0,3"/>
+                </Grid>
+            </StackPanel>
+        </Expander>
+        <DataGrid Grid.Row="2" Name="resultGrid" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,1,0,1" IsReadOnly="True" >
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Kopiuj i usuń polskie znaki" Click="ClickCopy_bez_pl" />
@@ -41,6 +60,6 @@
             </DataGrid.ContextMenu>
         </DataGrid>
 
-        <Label x:Name="LBL_INFO" Content="Informacja......" Height="23" VerticalAlignment="Bottom" Width="1024" Padding="10,2,10,2" VerticalContentAlignment="Center"/>
+        <Label  Grid.Row="3"  x:Name="LBL_INFO" Content="Informacja......" Height="23" VerticalAlignment="Bottom" Width="1024" Padding="10,2,10,2" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>
