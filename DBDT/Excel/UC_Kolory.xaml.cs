@@ -62,26 +62,28 @@ namespace DBDT.Excel
 
             dv.Table = dt_d;
 
-            DG_MOJE_USTAWIENIA.ItemsSource = dv;
+            //DG_MOJE_USTAWIENIA.ItemsSource = dv;
 
-            System.Data.DataTable dtcb = new System.Data.DataTable();
-            dtcb = _PUBLIC_SqlLite.SelectQuery("SELECT id, (opis || ' \\ ' || pole1) as opisx FROM objekty order by pole1");
+            //System.Data.DataTable dtcb = new System.Data.DataTable();
+            //dtcb = _PUBLIC_SqlLite.SelectQuery("SELECT id, (opis || ' \\ ' || pole1) as opisx FROM objekty order by pole1");
 
-            CB_NAZ_EXCEL.ItemsSource = dtcb.DefaultView;
-            CB_NAZ_EXCEL.DisplayMemberPath = "opisx";
+            //CB_NAZ_EXCEL.ItemsSource = dtcb.DefaultView;
+            //CB_NAZ_EXCEL.DisplayMemberPath = "opisx";
 
-            TI_M.Tag = -1;
+            //TI_M.Tag = -1;
 
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                TabItem item = new TabItem();
-                item.ContentTemplate = TryFindResource("TC_Zakl") as DataTemplate;
-                item.Header = dt.Rows[i]["Opis"].ToString();
-                item.Content = TI_M.Content;
-                item.ToolTip = dt.Rows[i]["Opis"].ToString();
-                item.Tag = dt.Rows[i]["id"].ToString();
-                TC_Zakl.Items.Add(item);
-            }
+            //for (int i = 0; i < dt.Rows.Count; i++)
+            //{
+            //    TabItem item = new TabItem();
+            //    item.ContentTemplate = TryFindResource("TC_Zakl") as DataTemplate;
+            //    item.Header = dt.Rows[i]["Opis"].ToString();
+            //    item.Content = TI_M.Content;
+            //    item.ToolTip = dt.Rows[i]["Opis"].ToString();
+            //    item.Tag = dt.Rows[i]["id"].ToString();
+            //    TC_Zakl.Items.Add(item);
+            //}
+
+            load_tab();
 
         }
 
@@ -200,6 +202,7 @@ namespace DBDT.Excel
                 TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), "", "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim(), id_s);
             }
 
+            load_tab();
         }
 
         private void uc_loaded(object sender, RoutedEventArgs e)
@@ -233,12 +236,45 @@ namespace DBDT.Excel
             }
         }
 
+        private void tc_selection_clear()
+        {
+            dv.RowFilter = "";
+            B_ZAPISZ.Content = "Zapisz";
+            TXT_NAZ_ZAKLADKI.Text = "";
+            TXT_SQL.Text = "";
+            CB_NAZ_EXCEL.Text = "";
+            TXT_NAZ_ARKUSZA.Text = "";
+            TXT_KOMORKA_START.Text = "";
+            CB_UNIKAT.IsChecked = false;
+            TXT_LOK_PLIK_WYNIKOWY.Text = "";
+            B_Wyslij_Excel.Visibility = System.Windows.Visibility.Hidden;
+            B_Usun.Visibility = System.Windows.Visibility.Hidden;
+            MI_CRTL_PLUS_V.IsEnabled = false;
+            dt_d.Columns["Objekt"].DefaultValue = "";
+            DG_MOJE_USTAWIENIA.CanUserAddRows = false;
+        }
         private void tc_selection_changed(object sender, SelectionChangedEventArgs e)
         {
+           
+            if (TC_Zakl.SelectedItem == null)
+            {
+                id_s = "-1";
+       
+                tc_selection_clear();
+
+                return;
+            }
+
             if (e.Source is TabControl)
             {
-
-                id_s = ((System.Windows.FrameworkElement)((System.Windows.Controls.Primitives.Selector)sender).SelectedItem).Tag.ToString();
+               if (((FrameworkElement)((System.Windows.Controls.Primitives.Selector)sender).SelectedItem).Tag == null)
+                {
+                    id_s = "-1";
+                }
+                else
+                {
+                    id_s = ((FrameworkElement)((System.Windows.Controls.Primitives.Selector)sender).SelectedItem).Tag.ToString();
+                }
 
                 if (id_s == "-1")
                 {
@@ -257,19 +293,8 @@ namespace DBDT.Excel
 
                 if (id_s == "-1")
                 {
-                    dv.RowFilter = "";
-                    B_ZAPISZ.Content = "Zapisz";
-                    TXT_NAZ_ZAKLADKI.Text = "";
-                    TXT_SQL.Text = "";
-                    CB_NAZ_EXCEL.Text = "";
-                    TXT_NAZ_ARKUSZA.Text = "";
-                    TXT_KOMORKA_START.Text = "";
-                    CB_UNIKAT.IsChecked = false;
-                    TXT_LOK_PLIK_WYNIKOWY.Text = "";
-                    B_Wyslij_Excel.Visibility = System.Windows.Visibility.Hidden;
-                    MI_CRTL_PLUS_V.IsEnabled = false;
-                    dt_d.Columns["Objekt"].DefaultValue = "";
-                    DG_MOJE_USTAWIENIA.CanUserAddRows = false;
+                    tc_selection_clear();
+
                     return;
                 }
 
@@ -303,6 +328,7 @@ namespace DBDT.Excel
                 TXT_LOK_PLIK_WYNIKOWY.Text = dti.Rows[0]["pole11"].ToString();
 
                 B_Wyslij_Excel.Visibility = System.Windows.Visibility.Visible;
+                B_Usun.Visibility = System.Windows.Visibility.Visible;
                 MI_CRTL_PLUS_V.IsEnabled = true;
 
             }
@@ -366,6 +392,84 @@ namespace DBDT.Excel
             }
 
             ds.WriteXml(ScieszkaProgramu + "_auto.xml");
+        }
+
+        private void load_tab()
+        {
+            System.Data.DataTable dt = new System.Data.DataTable();
+
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, nazwa_funkcji as Opis, pole5 as Nazwa, pole6 FROM funkcje ORDER BY nazwa_funkcji");
+
+            //DataColumn wCol1 = dt_d.Columns.Add("ID", typeof(Int32));
+            //wCol1.AllowDBNull = false;
+            //wCol1.Unique = true;
+            //wCol1.AutoIncrement = true;
+            //DataColumn wCol2 = dt_d.Columns.Add("id_obj", typeof(string));
+            //wCol2.DefaultValue = "-1";
+
+            //DataColumn wCol3 = dt_d.Columns.Add("Objekt", typeof(string));
+            //wCol3.ReadOnly = true;
+            //wCol3.DefaultValue = "";
+
+            //dt_d.Columns.Add("Nazwa", typeof(string));
+            //dt_d.Columns.Add("Wartość", typeof(string));
+            //dt_d.Columns.Add("Tekst", typeof(string));
+
+            //dt_d.TableName = "DaneX";
+
+            //if (ds.Tables.Count == 0)
+            //{
+            //    ds.Tables.Add(dt_d);
+            //}
+
+            //dv.Table = dt_d;
+
+            DG_MOJE_USTAWIENIA.ItemsSource = dv;
+
+            System.Data.DataTable dtcb = new System.Data.DataTable();
+            dtcb = _PUBLIC_SqlLite.SelectQuery("SELECT id, (opis || ' \\ ' || pole1) as opisx FROM objekty order by pole1");
+
+            CB_NAZ_EXCEL.ItemsSource = dtcb.DefaultView;
+            CB_NAZ_EXCEL.DisplayMemberPath = "opisx";
+
+            TI_M.Tag = -1;
+
+            if (TC_Zakl.Items.Count > 1)
+            {
+                while (TC_Zakl.Items.Count > 1)
+                {
+                    TC_Zakl.Items.RemoveAt(1);
+
+                }
+            }
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                TabItem item = new TabItem();
+                item.ContentTemplate = TryFindResource("TC_Zakl") as DataTemplate;
+                item.Header = dt.Rows[i]["Opis"].ToString();
+                item.Content = TI_M.Content;
+                item.ToolTip = dt.Rows[i]["Opis"].ToString();
+                item.Tag = dt.Rows[i]["id"].ToString();
+                TC_Zakl.Items.Add(item);
+            }
+        }
+
+        private void B_USUN_ZAKL_Click(object sender, RoutedEventArgs e)
+        {
+
+            var resolut = MessageBox.Show("Czy usunąć zakładkę?", "Uwaga!!!", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            if (resolut == MessageBoxResult.No) return;
+
+            if (_PUBLIC_SqlLite.ZAPISZ_ZMIANY_SQL("DELETE FROM funkcje WHERE id = " + id_s) == false)
+            {
+                MessageBox.Show("Wystapił problem z usunięciem zakładki", "Błąd", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else 
+            {
+                load_tab();
+            };
         }
     }
 
