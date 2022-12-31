@@ -224,7 +224,7 @@ namespace DBDT.Excel
 
             System.IO.FileInfo fi = new System.IO.FileInfo(ScieszkaProgramu + "_auto.xml");
 
-            if (fi.Exists == true)
+            if (fi.Exists == true && dt_d.Rows.Count == 0)
             {
                 ds.ReadXml(ScieszkaProgramu + "_auto.xml");
 
@@ -239,7 +239,7 @@ namespace DBDT.Excel
         private void tc_selection_clear()
         {
             dv.RowFilter = "";
-            B_ZAPISZ.Content = "Zapisz";
+            B_ZAPISZ.Content = "Dodaj zakładkę";
             TXT_NAZ_ZAKLADKI.Text = "";
             TXT_SQL.Text = "";
             CB_NAZ_EXCEL.Text = "";
@@ -470,6 +470,11 @@ namespace DBDT.Excel
             {
                 load_tab();
             };
+        }
+
+        private void b_sql_x_click(object sender, RoutedEventArgs e)
+        {
+            MW_SQL.txtCode.Text = TXT_SQL.Text;
         }
     }
 

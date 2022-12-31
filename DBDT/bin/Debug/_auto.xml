@@ -4,13 +4,32 @@
     <ID>0</ID>
     <id_obj>1</id_obj>
     <Objekt>Indeksy</Objekt>
-    <Nazwa>nazwa</Nazwa>
-    <Wartość>nazwa</Wartość>
+    <Nazwa>23423</Nazwa>
+    <Wartość>234234</Wartość>
+    <Tekst>234233</Tekst>
   </DaneX>
   <DaneX>
     <ID>1</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy</Objekt>
+    <Nazwa>adeqweqwe</Nazwa>
+    <Wartość>qwqweqwe</Wartość>
+    <Tekst>qweqw</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>2</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
-    <Wartość>kolory</Wartość>
+    <Nazwa>3245423423</Nazwa>
+    <Wartość>sdfsdfdsf</Wartość>
+    <Tekst>sdfsdfdsf</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>3</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>sdfsdfds</Nazwa>
+    <Wartość>sdfsdfsdf</Wartość>
+    <Tekst>sdffsd</Tekst>
   </DaneX>
 </NewDataSet>

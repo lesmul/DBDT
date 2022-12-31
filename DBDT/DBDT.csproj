@@ -361,7 +361,9 @@
   <ItemGroup>
     <Resource Include="DrzewoProcesu\Images\excel.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="IKONY\sql.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="IKONY\Search.png" />
   </ItemGroup>
