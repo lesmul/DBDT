@@ -29,6 +29,7 @@ namespace DBDT.Excel
         System.Data.DataTable dt_d = new System.Data.DataTable();
         DataView dv = new DataView();
         DataSet ds = new DataSet();
+        string old_tab_name;
 
         public UC_Kolory()
         {
@@ -202,7 +203,8 @@ namespace DBDT.Excel
                 TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), "", "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim(), id_s);
             }
 
-            load_tab();
+            if(old_tab_name != TXT_NAZ_ZAKLADKI.Text) load_tab();
+
         }
 
         private void uc_loaded(object sender, RoutedEventArgs e)
@@ -255,11 +257,12 @@ namespace DBDT.Excel
         }
         private void tc_selection_changed(object sender, SelectionChangedEventArgs e)
         {
-           
+    
             if (TC_Zakl.SelectedItem == null)
             {
                 id_s = "-1";
-       
+                old_tab_name = "";
+
                 tc_selection_clear();
 
                 return;
@@ -270,10 +273,12 @@ namespace DBDT.Excel
                if (((FrameworkElement)((System.Windows.Controls.Primitives.Selector)sender).SelectedItem).Tag == null)
                 {
                     id_s = "-1";
+                    old_tab_name = "";
                 }
                 else
                 {
                     id_s = ((FrameworkElement)((System.Windows.Controls.Primitives.Selector)sender).SelectedItem).Tag.ToString();
+                    old_tab_name = ((HeaderedContentControl)((System.Windows.Controls.Primitives.Selector)e.OriginalSource).SelectedItem).Header.ToString();
                 }
 
                 if (id_s == "-1")
@@ -309,6 +314,7 @@ namespace DBDT.Excel
                 if (dti.Rows.Count == 0) return;
 
                 TXT_NAZ_ZAKLADKI.Text = dti.Rows[0]["nazwa_funkcji"].ToString();
+                old_tab_name = TXT_NAZ_ZAKLADKI.Text;
                 TXT_SQL.Text = dti.Rows[0]["opis"].ToString();
                 CB_NAZ_EXCEL.Text = dti.Rows[0]["pole1"].ToString();
                 TXT_NAZ_ARKUSZA.Text = dti.Rows[0]["pole2"].ToString();
