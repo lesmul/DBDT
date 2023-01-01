@@ -194,13 +194,13 @@ namespace DBDT.Excel
             if (id_s == "-1")
             {
                 _PUBLIC_SqlLite.DODAJ_REKORD_SQL_FUKCJE(TXT_NAZ_ZAKLADKI.Text.Trim(), TXT_SQL.Text, CB_NAZ_EXCEL.Text.Trim(), TXT_NAZ_ARKUSZA.Text,
-                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), "", "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim());
+                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), TXT_NR_PROJEKTU.Text.Trim(), "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim());
                 TXT_NAZ_ZAKLADKI.Text = "";
             }
             else
             {
                 _PUBLIC_SqlLite.ZMIEN_REKORD_SQL_FUKCJE(TXT_NAZ_ZAKLADKI.Text.Trim(), TXT_SQL.Text, CB_NAZ_EXCEL.Text.Trim(), TXT_NAZ_ARKUSZA.Text,
-                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), "", "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim(), id_s);
+                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), TXT_NR_PROJEKTU.Text.Trim(), "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim(), id_s);
             }
 
             if(old_tab_name != TXT_NAZ_ZAKLADKI.Text) load_tab();
@@ -249,6 +249,7 @@ namespace DBDT.Excel
             TXT_KOMORKA_START.Text = "";
             CB_UNIKAT.IsChecked = false;
             TXT_LOK_PLIK_WYNIKOWY.Text = "";
+            TXT_NR_PROJEKTU.Text = "";
             B_Wyslij_Excel.Visibility = System.Windows.Visibility.Hidden;
             B_Usun.Visibility = System.Windows.Visibility.Hidden;
             MI_CRTL_PLUS_V.IsEnabled = false;
@@ -319,6 +320,8 @@ namespace DBDT.Excel
                 CB_NAZ_EXCEL.Text = dti.Rows[0]["pole1"].ToString();
                 TXT_NAZ_ARKUSZA.Text = dti.Rows[0]["pole2"].ToString();
                 TXT_KOMORKA_START.Text = dti.Rows[0]["pole3"].ToString();
+
+                TXT_NR_PROJEKTU.Text = dti.Rows[0]["pole5"].ToString();
 
                 dt_d.Columns["Objekt"].DefaultValue = dti.Rows[0]["nazwa_funkcji"].ToString();
 

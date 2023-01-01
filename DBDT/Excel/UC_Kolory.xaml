@@ -7,7 +7,7 @@
              xmlns:MDI="clr-namespace:WPF.MDI;assembly=WPF.MDI" 
              xmlns:SQL_SELECT="clr-namespace:DBDT.SQL.SQL_SELECT" x:Class="DBDT.Excel.UC_Kolory"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800" Loaded="uc_loaded" Unloaded="unloaded">
+             d:DesignHeight="600" d:DesignWidth="900" Loaded="uc_loaded" Unloaded="unloaded">
     <Grid>
         <StackPanel Margin="0,0,0,250">
             <SQL_SELECT:MainWindowSQL x:Name="MW_SQL" Height="245"/>
@@ -34,8 +34,8 @@
                         </DataGrid>
                     </StackPanel>
                     <Button x:Name="B_Wyslij_Excel" Grid.Column="0" Grid.Row="1" Content="Wyślij zmiany do EXCEL" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="146" Click="click_wyslij_zmiany_excel"/>
-                    <Label Grid.Column="1" Margin="0,0,0,270" HorizontalAlignment="Left" Width="90" >Opis zakładki:</Label>
-                    <TextBox Grid.Column="1" Name="TXT_NAZ_ZAKLADKI" Margin="95,0,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" Grid.ColumnSpan="2" ToolTip="Opis zakłądki"/>
+                    <Label Grid.Column="1" Margin="0,-2,0,272" HorizontalAlignment="Left" Width="85" >Opis zakładki:</Label>
+                    <TextBox Grid.Column="1" Name="TXT_NAZ_ZAKLADKI" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" ToolTip="Opis zakłądki" HorizontalAlignment="Left" Width="88" Margin="80,2,0,0" Grid.ColumnSpan="2"/>
                     <Label Grid.Column="1" Margin="5,23,0,250" HorizontalAlignment="Left" >SQL - Zapytanie:</Label>
                     <TextBox Grid.Column="1" Name="TXT_SQL" Margin="5,48,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="73" Grid.ColumnSpan="2"/>
                     <Button x:Name="B_SQL_T" Grid.Column="2" HorizontalAlignment="Right" Height="21" Margin="0,100,5,0" VerticalAlignment="Top" Width="20" ToolTip="Przenieś do okna SQL" Background="#FF3C260B" Click="b_sql_x_click">
@@ -59,6 +59,8 @@
                             <Image  Source="/IKONY/excel.ico" Stretch="Fill" />
                         </Button.Content>
                     </Button>
+                    <Label Grid.Column="2" Margin="23,-2,0,272" HorizontalAlignment="Left" Width="72" Content="Nr projeku:" />
+                    <TextBox Grid.Column="2" Name="TXT_NR_PROJEKTU" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" ToolTip="Aktulny numer projektu" Margin="95,2,5,0"/>
                 </Grid>
             </TabItem>
         </TabControl >
