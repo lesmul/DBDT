@@ -157,7 +157,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 " `polereal` REAL DEFAULT 0, " +
                 " `objekt` varbinary, " +
                 " `kto_zmienil` varchar(255) NOT NULL, " +
-                " `data_utworzenia` DATETIME DEFAULT current_timestamp; ";
+                " `data_utworzenia` DATETIME DEFAULT current_timestamp); ";
 
             string str_5 = "CREATE TABLE IF NOT EXISTS `procedury` (`id` integer NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 " `nazwa_procedury` varchar(255) NOT NULL, " +

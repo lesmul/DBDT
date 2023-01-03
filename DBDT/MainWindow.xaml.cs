@@ -38,9 +38,12 @@ namespace DBDT
         public MainWindow()
         {
             InitializeComponent();
+
             _original_title = Title;
             Container.Children.CollectionChanged += (o, e) => Menu_RefreshWindows();
             Container.MdiChildTitleChanged += Container_MdiChildTitleChanged;
+
+            LadujIni.Laduj_SQLLite();
 
             DataTable dt = new DataTable();
 

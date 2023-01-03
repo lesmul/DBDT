@@ -10,7 +10,7 @@
 
         <TabControl HorizontalAlignment="Center" Height="356" VerticalAlignment="Top" Width="627" Margin="0,14,0,0">
             <TabItem Header="Połączenia do bazy danych">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="#FFF6F5F5">
                     <Button Content="Zakończ i zapisz" Height="43" Margin="0,186,0,0" Width="601" Click="zakoncz_click" BorderThickness="1,1,1,1" VerticalAlignment="Top" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                     <Label Content="Nazwa serwera" HorizontalAlignment="Left" Margin="7,62,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="TXT_NAZWA_SERWERA" HorizontalAlignment="Left" Height="28" Margin="7,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="388" ToolTip="Podaj adre IP lub nazwę serwera" MaxLines="1" MaxLength="250" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
@@ -68,8 +68,8 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Konfiguracja lokalizacji katalogów" Cursor="Hand">
-                <Grid Background="#FFE5E5E5">
-                    <ScrollBar x:Name="SC_POZIOM" SmallChange="1" Maximum="2" Minimum="0" Value="0" Cursor="Hand" Orientation="Horizontal" Margin="497,10,0,301" HorizontalAlignment="Left" Width="35" ToolTip="Przewiń oab dodać pozostałe wartości do katalogów" ValueChanged="SC_POZIOM_ValueChanged"/>
+                <Grid Background="#FFFAFAFA">
+                    <ScrollBar x:Name="SC_POZIOM" SmallChange="1" Maximum="2" Minimum="0" Value="0" Cursor="Hand" Orientation="Horizontal" Margin="497,10,0,301" HorizontalAlignment="Left" Width="35" ToolTip="Przewiń aby dodać pozostałe wartości do katalogów" ValueChanged="SC_POZIOM_ValueChanged" BorderThickness="1,1,1,1" Background="#FF0C0C0C" BorderBrush="#FF121212" Panel.ZIndex="1"/>
                     <Label Name="LBL_LK_1" Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,10,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_1" HorizontalAlignment="Left" Height="28" Margin="7,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
                         <TextBox.Style>

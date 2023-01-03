@@ -11,7 +11,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
     internal class LadujIni
     {
 
-        public void LADUJ_USTAWIENIA_INI()
+        public static void LADUJ_USTAWIENIA_INI()
         {
             string ScieszkaProgramu = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
 
@@ -33,7 +33,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             }
         }
 
-        public void Laduj_SQLLite()
+        public static void Laduj_SQLLite()
         {
             if (_PUBLIC_SqlLite.Existsdb("") == false)
             {
@@ -41,10 +41,10 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             }
 
             DataTable td = new DataTable();
-            td = _PUBLIC_SqlLite.SelectQuery("SELECT * FROM `ParametryPalaczenia`");
+            td = _PUBLIC_SqlLite.SelectQuery("SELECT COUNT(*) FROM `funkcje`");
             if (td == null)
             {
-                return;
+                MessageBox.Show("Sprawdź strukturę bazy danych!!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
