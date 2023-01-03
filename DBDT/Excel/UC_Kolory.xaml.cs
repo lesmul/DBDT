@@ -375,7 +375,7 @@ namespace DBDT.Excel
 
             bool fbooltext = true;
 
-           if (((System.Windows.FrameworkElement)sender).Name == "MI_CRTL_PLUS_V_CSV")
+           if (((FrameworkElement)sender).Name == "MI_CRTL_PLUS_V_CSV")
             {
                 fbooltext = false;
             }
@@ -576,6 +576,11 @@ namespace DBDT.Excel
             char separator = isCSV ? ',' : '\t';
             int startIndex = 0;
             int endIndex = 0;
+
+            if (value.IndexOf("\t") < 0 && isCSV == false)
+            {
+                value = value.Replace(";", "\t");
+            }
 
             for (int i = 0; i < value.Length; i++)
             {
