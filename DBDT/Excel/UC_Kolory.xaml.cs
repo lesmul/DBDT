@@ -373,30 +373,36 @@ namespace DBDT.Excel
         private void MenuItem_Click_Paste(object sender, RoutedEventArgs e)
         {
 
-            bool fbooltext = true;
-
-           if (((FrameworkElement)sender).Name == "MI_CRTL_PLUS_V_CSV")
-            {
-                fbooltext = false;
-            }
-
             List<string[]> rowData = ClipboardHelper.ParseClipboardData();
 
             for (int i = 0; i < rowData.Count; i++)
             {
-                string linia = rowData[i][0];
-                char separator = fbooltext ? '\t' : ';';
-                string[] strx = linia.Split(separator);
+                if(boolCSV == true)
+                {
+                    string linia = rowData[i][0];
+                    char separator = ';';
+                    string[] strx = linia.Split(separator);
 
-                MessageBox.Show(linia, "????", MessageBoxButton.OK, MessageBoxImage.Information);
+                    DataRow dr = dt_d.NewRow();
 
-                DataRow dr = dt_d.NewRow();
+                    if (strx.Length > 0) dr["Nazwa"] = strx[0].ToString();
+                    if (strx.Length > 1) dr["Wartość"] = strx[1].ToString();
+                    if (strx.Length > 2) dr["Tekst"] = strx[2].ToString();
 
-                if (strx.Length > 0) dr["Nazwa"] = strx[0].ToString();
-                if (strx.Length > 1) dr["Wartość"] = strx[1].ToString();
-                if (strx.Length > 2) dr["Tekst"] = strx[2].ToString();
+                    dt_d.Rows.Add(dr);
+                }
+                else
+                {
 
-                dt_d.Rows.Add(dr);
+                    DataRow dr = dt_d.NewRow();
+
+                    if (rowData.Count > 0) dr["Nazwa"] = rowData[i][0].ToString();
+                    if (rowData.Count > 1) dr["Wartość"] = rowData[i][1].ToString();
+                    if (rowData.Count > 2) dr["Tekst"] = rowData[i][2].ToString(); ;
+
+                    dt_d.Rows.Add(dr);
+                }
+
             }
 
         }
@@ -502,6 +508,8 @@ namespace DBDT.Excel
     public static class ClipboardHelper
     {
         public delegate string[] ParseFormat(string value);
+
+        public static bool boolCSV;
        
         public static List<string[]> ParseClipboardData()
         {
@@ -516,11 +524,13 @@ namespace DBDT.Excel
             if ((clipboardRawData = dataObj.GetData(DataFormats.CommaSeparatedValue)) != null)
             {
                     parseFormat = ParseCsvFormat;
-                
+                    boolCSV = true;
+
             }
             else if ((clipboardRawData = dataObj.GetData(DataFormats.Text)) != null)
             {
                 parseFormat = ParseTextFormat;
+                boolCSV = false;
             }
 
             if (parseFormat != null)

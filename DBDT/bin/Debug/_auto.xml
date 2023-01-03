@@ -16,4 +16,92 @@
     <Wartość>test 2</Wartość>
     <Tekst>test 3</Tekst>
   </DaneX>
+  <DaneX>
+    <ID>95</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 3</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>96</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 4</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>97</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 5</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>98</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 6</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>99</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 7</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>100</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 8</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>101</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 9</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>102</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 10</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>103</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>FR_Kody_okuć_DW/BAS      </Nazwa>
+    <Wartość />
+    <Tekst>FR_Kody_okuć_DW/BAS      </Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>104</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>FR_Kody_okuć_DW/PRE      </Nazwa>
+    <Wartość />
+    <Tekst>FR_Kody_okuć_DW/PRE      </Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>105</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>FR_Kody_okuć_DW/WER      </Nazwa>
+    <Wartość />
+    <Tekst>FR_Kody_okuć_DW/WER      </Tekst>
+  </DaneX>
 </NewDataSet>
