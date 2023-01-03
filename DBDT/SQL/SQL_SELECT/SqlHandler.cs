@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Linq;
 using System.Xml;
+using System.Data.SqlTypes;
 
 namespace DBDT.SQL.SQL_SELECT
 {
@@ -200,6 +201,12 @@ namespace DBDT.SQL.SQL_SELECT
             }
    
             string sql = sqlText.ToLower().Trim();
+            // - \r\n
+
+            if (sql.StartsWith("--"))
+            {
+                sql = sql.Substring(sql.IndexOf("\r\n") + 2, sql.Length -  (sql.IndexOf("\r\n") + 2));
+            }
         
             sql = sql.Replace("\nset", " ");
             sql = sql.Replace("\n", " ");
