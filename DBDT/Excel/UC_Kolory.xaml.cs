@@ -380,13 +380,15 @@ namespace DBDT.Excel
                 fbooltext = false;
             }
 
-            List<string[]> rowData = ClipboardHelper.ParseClipboardData(fbooltext);
+            List<string[]> rowData = ClipboardHelper.ParseClipboardData();
 
             for (int i = 0; i < rowData.Count; i++)
             {
                 string linia = rowData[i][0];
                 char separator = fbooltext ? '\t' : ';';
                 string[] strx = linia.Split(separator);
+
+                MessageBox.Show(linia, "????", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 DataRow dr = dt_d.NewRow();
 
@@ -501,7 +503,7 @@ namespace DBDT.Excel
     {
         public delegate string[] ParseFormat(string value);
        
-        public static List<string[]> ParseClipboardData(bool bool_text)
+        public static List<string[]> ParseClipboardData()
         {
             List<string[]> clipboardData = null;
             object clipboardRawData = null;
@@ -513,14 +515,7 @@ namespace DBDT.Excel
 
             if ((clipboardRawData = dataObj.GetData(DataFormats.CommaSeparatedValue)) != null)
             {
-                if (bool_text == true)
-                {
-                    parseFormat = ParseTextFormat;
-                }
-                else
-                {
                     parseFormat = ParseCsvFormat;
-                }
                 
             }
             else if ((clipboardRawData = dataObj.GetData(DataFormats.Text)) != null)
@@ -577,11 +572,6 @@ namespace DBDT.Excel
             char separator = isCSV ? ',' : '\t';
             int startIndex = 0;
             int endIndex = 0;
-
-            if (value.IndexOf("\t") < 0 && isCSV == false)
-            {
-                value = value.Replace(";", "\t");
-            }
 
             for (int i = 0; i < value.Length; i++)
             {
