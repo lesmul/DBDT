@@ -206,6 +206,10 @@ namespace DBDT.SQL.SQL_SELECT
             if (sql.StartsWith("--"))
             {
                 sql = sql.Substring(sql.IndexOf("\r\n") + 2, sql.Length -  (sql.IndexOf("\r\n") + 2));
+                if (sql.StartsWith("\r\n"))
+                {
+                    sql = sql.Substring(sql.IndexOf("\r\n") + 2, sql.Length - (sql.IndexOf("\r\n") + 2));
+                }
             }
         
             sql = sql.Replace("\nset", " ");
@@ -380,8 +384,23 @@ namespace DBDT.SQL.SQL_SELECT
                 }
                 else
                 {
-                    string str_c = sql.ToLower().Substring(sql.ToLower().IndexOf("where"), sql.ToLower().IndexOf("order by") - sql.ToLower().IndexOf("where"));
 
+                    if (sql.StartsWith("--"))
+                    {
+                        sql = sql.Substring(sql.IndexOf("\r\n") + 2, sql.Length - (sql.IndexOf("\r\n") + 2));
+                        if (sql.StartsWith("\r\n"))
+                        {
+                            sql = sql.Substring(sql.IndexOf("\r\n") + 2, sql.Length - (sql.IndexOf("\r\n") + 2));
+                        }
+                    }
+
+                    string str_c = "";
+
+                    if (sql.ToLower().IndexOf("where") > -1 && sql.ToLower().IndexOf("order by") - sql.ToLower().IndexOf("where") > 0)
+                    {
+                        str_c = sql.ToLower().Substring(sql.ToLower().IndexOf("where"), sql.ToLower().IndexOf("order by") - sql.ToLower().IndexOf("where"));
+                    }
+     
                     str_c = str_c.Replace("like", " ");
                     str_c = str_c.Replace("=", " ");
                     str_c = str_c.Replace("'", " ");
