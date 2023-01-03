@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Windows.Data;
 using System.IO;
 using System.Windows.Shapes;
+using static DBDT.Excel.ClipboardHelper;
 
 namespace DBDT.Excel
 {
@@ -371,7 +372,15 @@ namespace DBDT.Excel
 
         private void MenuItem_Click_Paste(object sender, RoutedEventArgs e)
         {
-            List<string[]> rowData = ClipboardHelper.ParseClipboardData();
+
+            bool fbooltext = true;
+
+           if (((System.Windows.FrameworkElement)sender).Name == "MI_CRTL_PLUS_V_CSV")
+            {
+                fbooltext = false;
+            }
+
+            List<string[]> rowData = ClipboardHelper.ParseClipboardData(fbooltext);
 
             for (int i = 0; i < rowData.Count; i++)
             {
@@ -490,8 +499,8 @@ namespace DBDT.Excel
     public static class ClipboardHelper
     {
         public delegate string[] ParseFormat(string value);
-
-        public static List<string[]> ParseClipboardData()
+       
+        public static List<string[]> ParseClipboardData(bool bool_text)
         {
             List<string[]> clipboardData = null;
             object clipboardRawData = null;
@@ -500,9 +509,18 @@ namespace DBDT.Excel
             // get the data and set the parsing method based on the format
             // currently works with CSV and Text DataFormats            
             IDataObject dataObj = System.Windows.Clipboard.GetDataObject();
+
             if ((clipboardRawData = dataObj.GetData(DataFormats.CommaSeparatedValue)) != null)
             {
-                parseFormat = ParseCsvFormat;
+                if (bool_text == true)
+                {
+                    parseFormat = ParseTextFormat;
+                }
+                else
+                {
+                    parseFormat = ParseCsvFormat;
+                }
+                
             }
             else if ((clipboardRawData = dataObj.GetData(DataFormats.Text)) != null)
             {

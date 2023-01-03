@@ -28,6 +28,7 @@
                         <DataGrid x:Name="DG_MOJE_USTAWIENIA" AutoGenerateColumns="True" Margin="2,2,2,2" Width="596" >
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
+                                    <MenuItem x:Name="MI_CRTL_PLUS_V_CSV" Header="Wklej jako CSV" Click="MenuItem_Click_Paste"/>
                                     <MenuItem x:Name="MI_CRTL_PLUS_V" Header="Wklej" Click="MenuItem_Click_Paste"/>
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
@@ -59,7 +60,7 @@
                             <Image  Source="/IKONY/excel.ico" Stretch="Fill" />
                         </Button.Content>
                     </Button>
-                    <Label Grid.Column="2" Margin="23,-2,0,272" HorizontalAlignment="Left" Width="72" Content="Nr projeku:" />
+                    <Label Grid.Column="2" Margin="23,-2,0,272" HorizontalAlignment="Left" Width="72" Content="Nr projektu:" />
                     <TextBox Grid.Column="2" Name="TXT_NR_PROJEKTU" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" ToolTip="Aktulny numer projektu" Margin="95,2,5,0"/>
                 </Grid>
             </TabItem>
