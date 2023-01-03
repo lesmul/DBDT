@@ -385,7 +385,8 @@ namespace DBDT.Excel
             for (int i = 0; i < rowData.Count; i++)
             {
                 string linia = rowData[i][0];
-                string[] strx = linia.Split(';');
+                char separator = fbooltext ? '\t' : ';';
+                string[] strx = linia.Split(separator);
 
                 DataRow dr = dt_d.NewRow();
 

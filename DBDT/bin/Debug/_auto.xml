@@ -1,31 +1,71 @@
 <?xml version="1.0" standalone="yes"?>
 <NewDataSet>
   <DaneX>
-    <ID>0</ID>
+    <ID>60</ID>
     <id_obj>1</id_obj>
-    <Objekt>Indeksy</Objekt>
-    <Nazwa>23423</Nazwa>
-    <Wartość>234234</Wartość>
-    <Tekst>234233</Tekst>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 3</Tekst>
   </DaneX>
   <DaneX>
-    <ID>2</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>3245423423</Nazwa>
-    <Wartość>sdfsdfdsf</Wartość>
-    <Tekst>sdfsdfdsf</Tekst>
+    <ID>61</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 4</Tekst>
   </DaneX>
   <DaneX>
-    <ID>3</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>sdfsdfds</Nazwa>
-    <Wartość>sdfsdfsdf</Wartość>
-    <Tekst>sdffsd</Tekst>
+    <ID>62</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 5</Tekst>
   </DaneX>
   <DaneX>
-    <ID>4</ID>
+    <ID>63</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 6</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>64</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 7</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>65</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 8</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>66</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 9</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>67</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 10</Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>94</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
     <Nazwa>test 1</Nazwa>
@@ -33,7 +73,7 @@
     <Tekst>test 3</Tekst>
   </DaneX>
   <DaneX>
-    <ID>5</ID>
+    <ID>95</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
     <Nazwa>test 1</Nazwa>
@@ -41,7 +81,7 @@
     <Tekst>test 4</Tekst>
   </DaneX>
   <DaneX>
-    <ID>6</ID>
+    <ID>96</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
     <Nazwa>test 1</Nazwa>
@@ -49,7 +89,7 @@
     <Tekst>test 5</Tekst>
   </DaneX>
   <DaneX>
-    <ID>7</ID>
+    <ID>97</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
     <Nazwa>test 1</Nazwa>
@@ -57,7 +97,7 @@
     <Tekst>test 6</Tekst>
   </DaneX>
   <DaneX>
-    <ID>8</ID>
+    <ID>98</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
     <Nazwa>test 1</Nazwa>
@@ -65,7 +105,7 @@
     <Tekst>test 7</Tekst>
   </DaneX>
   <DaneX>
-    <ID>9</ID>
+    <ID>99</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
     <Nazwa>test 1</Nazwa>
@@ -73,7 +113,7 @@
     <Tekst>test 8</Tekst>
   </DaneX>
   <DaneX>
-    <ID>10</ID>
+    <ID>100</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
     <Nazwa>test 1</Nazwa>
@@ -81,187 +121,11 @@
     <Tekst>test 9</Tekst>
   </DaneX>
   <DaneX>
-    <ID>11</ID>
+    <ID>101</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
     <Nazwa>test 1</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 10</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>12</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 3</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>13</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 4</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>14</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 5</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>15</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 6</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>16</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 7</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>17</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 8</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>18</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 9</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>19</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 10</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>20</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 3</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>21</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 4</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>22</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 5</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>23</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 6</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>24</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 7</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>25</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 8</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>26</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 9</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>27</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 10</Tekst>
-  </DaneX>
-  <DaneX>
-    <ID>44</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-  </DaneX>
-  <DaneX>
-    <ID>45</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-  </DaneX>
-  <DaneX>
-    <ID>46</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-  </DaneX>
-  <DaneX>
-    <ID>47</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-  </DaneX>
-  <DaneX>
-    <ID>48</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-  </DaneX>
-  <DaneX>
-    <ID>49</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-  </DaneX>
-  <DaneX>
-    <ID>50</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
-  </DaneX>
-  <DaneX>
-    <ID>51</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
   </DaneX>
 </NewDataSet>

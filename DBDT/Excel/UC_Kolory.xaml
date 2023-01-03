@@ -28,8 +28,8 @@
                         <DataGrid x:Name="DG_MOJE_USTAWIENIA" AutoGenerateColumns="True" Margin="2,2,2,2" Width="596" >
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem x:Name="MI_CRTL_PLUS_V_CSV" Header="Wklej jako CSV" Click="MenuItem_Click_Paste"/>
-                                    <MenuItem x:Name="MI_CRTL_PLUS_V" Header="Wklej" Click="MenuItem_Click_Paste"/>
+                                    <MenuItem x:Name="MI_CRTL_PLUS_V_CSV" Header="Wklej znak rozdzielający |;|" Click="MenuItem_Click_Paste"/>
+                                    <MenuItem x:Name="MI_CRTL_PLUS_V" Header="Wklej znak rozdzielający |TAB|" Click="MenuItem_Click_Paste"/>
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
                         </DataGrid>
