@@ -29,12 +29,14 @@ namespace DBDT.SQL.SQL_SELECT
 
         string copy_data_update = "";
         string copy_data_where ="";
+        double dbl_row_count;
         public ResultWindow(DataTable resultTable, string TableName, string[] like = null)
         {
             InitializeComponent();
             resultTable.TableName = "t_find";
             resultGrid.ItemsSource = resultTable.DefaultView;
             dv.Table = resultTable;
+            dbl_row_count = resultTable.Rows.Count;
             Title = string.Format("Dane z {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString()) + " [" + resultTable.Rows.Count + "]";
             this.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
             
@@ -775,6 +777,8 @@ namespace DBDT.SQL.SQL_SELECT
                     }
                     
                     resultGrid.ItemsSource = dv;
+
+                    Title = string.Format("Dane z {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString()) + " [" + dv.Count + " z " + dbl_row_count + "]";
                 }
                 catch (Exception ex)
                 {
@@ -804,6 +808,17 @@ namespace DBDT.SQL.SQL_SELECT
             }
 
         }
+
+        private void selectde_cells(object sender, SelectedCellsChangedEventArgs e)
+        {
+            LBL_INFO_2.Content = "Ilość zaznaczonych komórek: " + resultGrid.SelectedCells.Count;
+        }
+
+        private void mouse_down(object sender, MouseButtonEventArgs e)
+        {
+            LBL_INFO_2.Content = "Ilość zaznaczonych komórek: " + resultGrid.SelectedCells.Count;
+        }
+
     }
 
 }

@@ -31,7 +31,7 @@
                 </Grid>
             </StackPanel>
         </Expander>
-        <DataGrid Grid.Row="2" Name="resultGrid" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,1,0,1" IsReadOnly="True" >
+        <DataGrid Grid.Row="2" Name="resultGrid" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,1,0,1" IsReadOnly="True" SelectedCellsChanged="selectde_cells" MouseLeftButtonDown="mouse_down" >
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Kopiuj i usuń polskie znaki" Click="ClickCopy_bez_pl" />
@@ -59,7 +59,7 @@
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
-
-        <Label  Grid.Row="3"  x:Name="LBL_INFO" Content="Informacja......" Height="23" VerticalAlignment="Bottom" Width="1024" Padding="10,2,10,2" VerticalContentAlignment="Center"/>
+        <Label  Grid.Row="3"  x:Name="LBL_INFO" Content="Informacja......" Height="23" VerticalAlignment="Center" Padding="10,2,10,2" VerticalContentAlignment="Center" Margin="0,0,219,0"/>
+        <Label  Grid.Row="3"  x:Name="LBL_INFO_2" Content="Ilość zaznaczonych: 0" Height="23" VerticalAlignment="Center" Padding="10,2,10,2" VerticalContentAlignment="Center" Margin="645,0,0,0" HorizontalAlignment="Right"/>
     </Grid>
 </Window>
