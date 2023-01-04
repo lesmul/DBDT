@@ -811,12 +811,12 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void selectde_cells(object sender, SelectedCellsChangedEventArgs e)
         {
-            LBL_INFO_2.Content = "Ilość zaznaczonych komórek: " + resultGrid.SelectedCells.Count;
+            LBL_INFO_2.Content = "Ilość zaznaczonych komórek: " + resultGrid.SelectedCells.Count.ToString();
         }
 
         private void mouse_down(object sender, MouseButtonEventArgs e)
         {
-            LBL_INFO_2.Content = "Ilość zaznaczonych komórek: " + resultGrid.SelectedCells.Count;
+            LBL_INFO_2.Content = "Ilość zaznaczonych komórek: " + resultGrid.SelectedCells.Count.ToString();
         }
 
     }
