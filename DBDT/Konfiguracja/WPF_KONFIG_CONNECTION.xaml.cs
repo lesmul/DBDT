@@ -201,6 +201,11 @@ namespace DBDT.Konfiguracja
                 sb_poziom = 5;
             }
 
+            if (SC_POZIOM.Value == 2)
+            {
+                sb_poziom = 10;
+            }
+
             switch (((System.Windows.FrameworkElement)sender).Tag.ToString())
             {
                 case "T1":
