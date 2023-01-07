@@ -4,7 +4,7 @@
     <ID>60</ID>
     <id_obj>1</id_obj>
     <Objekt>Indeksy 2</Objekt>
-    <Nazwa>test 1</Nazwa>
+    <Nazwa>WR_test 1</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 3</Tekst>
   </DaneX>
@@ -81,26 +81,32 @@
     <Tekst>test 10</Tekst>
   </DaneX>
   <DaneX>
-    <ID>103</ID>
+    <ID>106</ID>
     <id_obj>1</id_obj>
     <Objekt>Indeksy 2</Objekt>
-    <Nazwa>FR_Kody_okuć_DW/BAS      </Nazwa>
+    <Nazwa>Zaznaczone klonuj</Nazwa>
+  </DaneX>
+  <DaneX>
+    <ID>107</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>IT_Kody_okuć_DW/BAS      </Nazwa>
     <Wartość />
     <Tekst>FR_Kody_okuć_DW/BAS      </Tekst>
   </DaneX>
   <DaneX>
-    <ID>104</ID>
+    <ID>108</ID>
     <id_obj>1</id_obj>
     <Objekt>Indeksy 2</Objekt>
-    <Nazwa>FR_Kody_okuć_DW/PRE      </Nazwa>
+    <Nazwa>IT_Kody_okuć_DW/PRE      </Nazwa>
     <Wartość />
     <Tekst>FR_Kody_okuć_DW/PRE      </Tekst>
   </DaneX>
   <DaneX>
-    <ID>105</ID>
+    <ID>109</ID>
     <id_obj>1</id_obj>
     <Objekt>Indeksy 2</Objekt>
-    <Nazwa>FR_Kody_okuć_DW/WER      </Nazwa>
+    <Nazwa>IT_Kody_okuć_DW/WER      </Nazwa>
     <Wartość />
     <Tekst>FR_Kody_okuć_DW/WER      </Tekst>
   </DaneX>

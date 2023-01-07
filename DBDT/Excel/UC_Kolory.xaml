@@ -29,6 +29,24 @@
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem x:Name="MI_CRTL_PLUS_V" Header="Wklej z EXCEL" Click="MenuItem_Click_Paste"/>
+                                    <Separator/>
+                                    <MenuItem x:Name="MI_WR" Header="Zaznaczone klonuj i dodaj WR" Tag="WR" Click="MenuItem_Klonuj" />
+                                    <MenuItem x:Name="MI_ALU" Header="Zaznaczone klonuj i dodaj ALU" Tag="ALU" Click="MenuItem_Klonuj"/>
+                                    <MenuItem x:Name="MI_PVC" Header="Zaznaczone klonuj i dodaj PVC" Tag="PVC" Click="MenuItem_Klonuj"/>
+                                    <Separator/>
+                                    <MenuItem x:Name="MI_WR_" Header="Zaznaczone klonuj WR zamień do znaku _" Tag="WR_" Click="MenuItem_Klonuj"/>
+                                    <MenuItem x:Name="MI_ALU_" Header="Zaznaczone klonuj ALU zamień do znaku _" Tag="ALU_" Click="MenuItem_Klonuj"/>
+                                    <MenuItem x:Name="MI_PVC_" Header="Zaznaczone klonuj PVC zamień do znaku _" Tag="PVC_" Click="MenuItem_Klonuj"/>
+                                    <Separator/>
+                                    <MenuItem x:Name="MI_DOWOLNY" Tag="XX_DOWOLNY" Click="MenuItem_Klonuj">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Zaznaczone zamień" />
+                                                <TextBox Width="35" Name="tbCustomDataRange" Margin="2,0" UndoLimit="10" ToolTip="Podaj wartość np: PL - dodaj PL_ - zamień" MaxLines="1" MaxLength="5" />
+                                                <Label Content=" - wpisz frezę do zmiany" />
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
                         </DataGrid>

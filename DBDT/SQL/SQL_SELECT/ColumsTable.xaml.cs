@@ -35,7 +35,7 @@ namespace DBDT.SQL.SQL_SELECT
 
             for (int i = 0; i < itContr.SelectedItems.Count; i++)
             {
-                columsselect += itContr.SelectedItems[i].ToString() + " ,";
+                columsselect += itContr.SelectedItems[i].ToString() + ", ";
             }
             this.Close();
         }

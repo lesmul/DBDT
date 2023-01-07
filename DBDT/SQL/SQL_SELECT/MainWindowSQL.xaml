@@ -128,7 +128,7 @@
                         <Separator/>
                         <MenuItem Header="Zmień na DUŻE LITERY" Name="cxmItemUpperText" Click="ClickUpperText" />
                         <MenuItem Header="Zmień na małe litery" Name="cxmItemLowerText" Click="ClickLowerText" />
-                        <MenuItem Header="Kolumny w tabeli" Name="cxmItemColumsTable" Click="ClickColumnTable" />
+                        <MenuItem Header="Kopiuj kolumny w tabeli" Name="cxmItemColumsTable" Click="ClickColumnTable" />
                         <Separator/>
                         <MenuItem Name="praca_procedura"  Header="Ustaw tryb pracy - procedura" Click="click_procedura" />
                     </MenuItem>

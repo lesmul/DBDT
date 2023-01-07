@@ -728,6 +728,15 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void ClickColumnTable(object sender, RoutedEventArgs e)
         {
+
+            if (dt_str_danych.Rows.Count == 0)
+            {
+                dt_str_danych = sqlHandler.StrukturaTabel();
+                auto_u = true;
+                BitmapImage Image1 = new BitmapImage(new Uri("/SQL/SQL_SELECT/Images/auto_on.png", UriKind.Relative));
+                auto_on.Source = Image1;
+            }
+
             string sql = txtCode.SelectedText;
 
             var distinctRows = (from r in dt_str_danych.AsEnumerable()
@@ -751,8 +760,11 @@ namespace DBDT.SQL.SQL_SELECT
                 txtCode.CaretIndex = txtCode.Text.Length;
                 txtCode.ScrollToEnd();
                 txtCode.Focus();
-              
-                txtCode.Text += "\r\n" + "where " + spc.columsselect.TrimEnd(',');
+
+                if (spc.columsselect.Trim() != "")
+                {
+                    txtCode.Text += "\r\n" + "where " + spc.columsselect.Trim().TrimEnd(',');
+                }
 
             }
 
@@ -760,6 +772,14 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void ClickSelecAllTable(object sender, RoutedEventArgs e)
         {
+            if (dt_str_danych.Rows.Count == 0)
+            {
+                dt_str_danych = sqlHandler.StrukturaTabel();
+                auto_u = true;
+                BitmapImage Image1 = new BitmapImage(new Uri("/SQL/SQL_SELECT/Images/auto_on.png", UriKind.Relative));
+                auto_on.Source = Image1;
+            }
+
             var distinctRows = (from r in dt_str_danych.AsEnumerable()
                                         .Where(myRow => myRow.Field<string>("TableName") != "")
                                 select r["TableName"]).Distinct().ToList();

@@ -16,6 +16,9 @@ using System.Windows.Data;
 using System.IO;
 using System.Windows.Shapes;
 using static DBDT.Excel.ClipboardHelper;
+using System.Collections;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Windows.Documents;
 
 namespace DBDT.Excel
 {
@@ -153,7 +156,7 @@ namespace DBDT.Excel
                                 ExcelApp.Cells[id_r, id_c] = dv[i][j + 3].ToString();
                                 id_r++;
                             }
-                        } 
+                        }
                     }
                 }
                 catch (Exception exx)
@@ -204,7 +207,7 @@ namespace DBDT.Excel
                 TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), TXT_NR_PROJEKTU.Text.Trim(), "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim(), id_s);
             }
 
-            if(old_tab_name != TXT_NAZ_ZAKLADKI.Text) load_tab();
+            if (old_tab_name != TXT_NAZ_ZAKLADKI.Text) load_tab();
 
         }
 
@@ -231,7 +234,7 @@ namespace DBDT.Excel
             {
                 ds.ReadXml(ScieszkaProgramu + "_auto.xml");
 
-                if (ds.Tables.Count >0)
+                if (ds.Tables.Count > 0)
                 {
                     dt_d = ds.Tables[0];
                     dv.Table = ds.Tables[0];
@@ -259,7 +262,7 @@ namespace DBDT.Excel
         }
         private void tc_selection_changed(object sender, SelectionChangedEventArgs e)
         {
-    
+
             if (TC_Zakl.SelectedItem == null)
             {
                 id_s = "-1";
@@ -272,7 +275,7 @@ namespace DBDT.Excel
 
             if (e.Source is TabControl)
             {
-               if (((FrameworkElement)((System.Windows.Controls.Primitives.Selector)sender).SelectedItem).Tag == null)
+                if (((FrameworkElement)((System.Windows.Controls.Primitives.Selector)sender).SelectedItem).Tag == null)
                 {
                     id_s = "-1";
                     old_tab_name = "";
@@ -377,7 +380,7 @@ namespace DBDT.Excel
 
             for (int i = 0; i < rowData.Count; i++)
             {
-                if(boolCSV == true)
+                if (boolCSV == true)
                 {
                     string linia = rowData[i][0];
                     char separator = ';';
@@ -493,7 +496,7 @@ namespace DBDT.Excel
             {
                 MessageBox.Show("Wystapił problem z usunięciem zakładki", "Błąd", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            else 
+            else
             {
                 load_tab();
             };
@@ -503,6 +506,121 @@ namespace DBDT.Excel
         {
             MW_SQL.txtCode.Text = TXT_SQL.Text;
         }
+
+        private void MenuItem_Klonuj(object sender, RoutedEventArgs e)
+        {
+            if (DG_MOJE_USTAWIENIA.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            switch (((FrameworkElement)sender).Tag)
+            {
+                case "WR":
+                    zamien_wybrane("WR", false, false);
+                    break;
+                case "ALU":
+                    zamien_wybrane("ALU", false, false);
+                    break;
+                case "PVC":
+                    zamien_wybrane("PVC", false, false);
+                    break;
+                case "WR_":
+                    zamien_wybrane("WR", false, true);
+                    break;
+                case "ALU_":
+                    zamien_wybrane("ALU", false, true);
+                    break;
+                case "PVC_":
+                    zamien_wybrane("PVC", false, true);
+                    break;
+                case "XX_DOWOLNY":
+                    bool bool_zmien = false;
+                    if (tbCustomDataRange.Text.IndexOf("_") > -1) bool_zmien = true;
+                    zamien_wybrane(tbCustomDataRange.Text, bool_zmien, false);
+                    break;
+            }
+
+        }
+
+        private void zamien_wybrane(string str_x, bool zamien,bool zastap)
+        {
+
+            if (str_x.Trim() == "") return;
+
+            IList items = DG_MOJE_USTAWIENIA.SelectedItems;
+
+            foreach (object item in items)
+            {
+
+                DataRowView MyRow = (DataRowView)item;
+
+                if (zamien == false)
+                {
+                    DataRow row = dt_d.NewRow();
+                    row["id_obj"] = MyRow["id_obj"].ToString();
+                    row["Objekt"] = MyRow["Objekt"].ToString();
+                    row["Nazwa"] = MyRow["Nazwa"].ToString();
+                    row["Wartość"] = MyRow["Wartość"].ToString();
+                    row["Tekst"] = MyRow["Tekst"].ToString();
+                    dt_d.Rows.Add(row);
+                }
+
+                string value = MyRow["Nazwa"].ToString();
+                int ch_s = value.ToString().IndexOf("_");
+
+                if (zamien == true)
+                {
+                    if (ch_s > -1)
+                    {
+                        MyRow["Nazwa"] = str_x + value.Substring(ch_s + 1, value.Length - ch_s - 1);
+                    }
+                    else
+                    {
+                        if (value.StartsWith("_"))
+                        {
+                            MyRow["Nazwa"] = str_x + value;
+                        }
+                        else
+                        {
+                            MyRow["Nazwa"] = str_x + "_" + value;
+                        }
+                    }
+                }
+                else
+                {
+                    if (zastap == true)
+                    {
+                        if (ch_s > -1)
+                        {
+                            MyRow["Nazwa"] = str_x + "_" + value.Substring(ch_s + 1, value.Length - ch_s - 1);
+                        }
+                        else
+                        {
+                            if (value.StartsWith("_"))
+                            {
+                                MyRow["Nazwa"] = str_x + value;
+                            }
+                            else
+                            {
+                                MyRow["Nazwa"] = str_x + "_" + value;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (value.StartsWith("_"))
+                        {
+                            MyRow["Nazwa"] = str_x + value;
+                        }
+                        else
+                        {
+                            MyRow["Nazwa"] = str_x + "_" + value;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static class ClipboardHelper
@@ -510,7 +628,7 @@ namespace DBDT.Excel
         public delegate string[] ParseFormat(string value);
 
         public static bool boolCSV;
-       
+
         public static List<string[]> ParseClipboardData()
         {
             List<string[]> clipboardData = null;
@@ -523,8 +641,8 @@ namespace DBDT.Excel
 
             if ((clipboardRawData = dataObj.GetData(DataFormats.CommaSeparatedValue)) != null)
             {
-                    parseFormat = ParseCsvFormat;
-                    boolCSV = true;
+                parseFormat = ParseCsvFormat;
+                boolCSV = true;
 
             }
             else if ((clipboardRawData = dataObj.GetData(DataFormats.Text)) != null)

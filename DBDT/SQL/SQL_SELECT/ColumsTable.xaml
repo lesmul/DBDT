@@ -20,7 +20,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Content="Zakończ" HorizontalAlignment="Center" Height="30" Margin="0,384,0,0" VerticalAlignment="Top" Width="285" Click="Click_Close"/>
+        <Button Content="Zmień dane w oknie SQL" HorizontalAlignment="Center" Height="30" Margin="0,384,0,0" VerticalAlignment="Top" Width="285" Click="Click_Close"/>
         <TextBox x:Name="TXT_FILTR" HorizontalAlignment="Center" Height="19" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" TextChanged="text_changed" UndoLimit="10" MaxLines="1" MaxLength="50">
             <TextBox.Style>
                 <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">

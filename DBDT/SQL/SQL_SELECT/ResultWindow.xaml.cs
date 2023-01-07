@@ -778,7 +778,7 @@ namespace DBDT.SQL.SQL_SELECT
                     
                     resultGrid.ItemsSource = dv;
 
-                    Title = string.Format("Dane z {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString()) + " [" + dv.Count + " z " + dbl_row_count + "]";
+                    Title = string.Format("Dane z {0} z {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString()) + " [" + dv.Count + " z " + dbl_row_count + "]";
                 }
                 catch (Exception ex)
                 {
