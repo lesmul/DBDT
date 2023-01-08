@@ -90,7 +90,7 @@
     <ID>107</ID>
     <id_obj>1</id_obj>
     <Objekt>Indeksy 2</Objekt>
-    <Nazwa>IT_Kody_okuć_DW/BAS      </Nazwa>
+    <Nazwa>DW/BAS      </Nazwa>
     <Wartość />
     <Tekst>FR_Kody_okuć_DW/BAS      </Tekst>
   </DaneX>
@@ -98,7 +98,7 @@
     <ID>108</ID>
     <id_obj>1</id_obj>
     <Objekt>Indeksy 2</Objekt>
-    <Nazwa>IT_Kody_okuć_DW/PRE      </Nazwa>
+    <Nazwa>Kody_okuć_DW/PRE      </Nazwa>
     <Wartość />
     <Tekst>FR_Kody_okuć_DW/PRE      </Tekst>
   </DaneX>
@@ -109,5 +109,21 @@
     <Nazwa>IT_Kody_okuć_DW/WER      </Nazwa>
     <Wartość />
     <Tekst>FR_Kody_okuć_DW/WER      </Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>110</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>IT_Kody_okuć_DW/BAS      </Nazwa>
+    <Wartość />
+    <Tekst>FR_Kody_okuć_DW/BAS      </Tekst>
+  </DaneX>
+  <DaneX>
+    <ID>111</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>WR_okuć_DW/BAS      </Nazwa>
+    <Wartość />
+    <Tekst>FR_Kody_okuć_DW/BAS      </Tekst>
   </DaneX>
 </NewDataSet>

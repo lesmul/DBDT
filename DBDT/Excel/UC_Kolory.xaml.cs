@@ -539,6 +539,9 @@ namespace DBDT.Excel
                     if (tbCustomDataRange.Text.IndexOf("_") > -1) bool_zmien = true;
                     zamien_wybrane(tbCustomDataRange.Text, bool_zmien, false);
                     break;
+                case "DEL_":
+                    zamien_wybrane("_", true, true);
+                    break;
             }
 
         }
@@ -573,17 +576,17 @@ namespace DBDT.Excel
                 {
                     if (ch_s > -1)
                     {
-                        MyRow["Nazwa"] = str_x + value.Substring(ch_s + 1, value.Length - ch_s - 1);
+                        MyRow["Nazwa"] = (str_x.StartsWith("_") ? "" : str_x) + value.Substring(ch_s + 1, value.Length - ch_s - 1);
                     }
                     else
                     {
                         if (value.StartsWith("_"))
                         {
-                            MyRow["Nazwa"] = str_x + value;
+                            MyRow["Nazwa"] = (str_x.StartsWith("_") ? "" : str_x) + value;
                         }
                         else
                         {
-                            MyRow["Nazwa"] = str_x + "_" + value;
+                            MyRow["Nazwa"] = (str_x.StartsWith("_") ? "" : str_x + "_") + value;
                         }
                     }
                 }
@@ -593,7 +596,7 @@ namespace DBDT.Excel
                     {
                         if (ch_s > -1)
                         {
-                            MyRow["Nazwa"] = str_x + "_" + value.Substring(ch_s + 1, value.Length - ch_s - 1);
+                            MyRow["Nazwa"] = (str_x.StartsWith("_") ? "": str_x + "_") + value.Substring(ch_s + 1, value.Length - ch_s - 1);
                         }
                         else
                         {
