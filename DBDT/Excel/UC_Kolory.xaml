@@ -25,7 +25,7 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <StackPanel Background="#FF9FC051" Orientation="Horizontal" Margin="0,0,0,0" Grid.Column="0" Grid.Row="0">
-                        <DataGrid x:Name="DG_MOJE_USTAWIENIA" AutoGenerateColumns="True" Margin="2,2,2,2" Width="596" SelectedCellsChanged="sel_cells_changed" CellEditEnding="celEditEding" KeyUp="keyUp" >
+                        <DataGrid x:Name="DG_MOJE_USTAWIENIA" AutoGenerateColumns="True" Margin="2,2,2,2" Width="596" SelectedCellsChanged="sel_cells_changed" KeyUp="keyUp" >
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem x:Name="MI_CRTL_PLUS_V" Header="Wklej z EXCEL" Click="MenuItem_Click_Paste"/>

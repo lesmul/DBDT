@@ -644,6 +644,7 @@ namespace DBDT.Excel
                             MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
                         }
                     }
+
                 }
             }
         }
@@ -662,23 +663,14 @@ namespace DBDT.Excel
             }
         }
 
-        private void celEditEding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            IList items = DG_MOJE_USTAWIENIA.SelectedItems;
-
-            foreach (object item in items)
-            {
-                DataRowView MyRow = (DataRowView)item;
-                MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
-            }
-        }
-
         private void keyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
+           
             if (e.Key == System.Windows.Input.Key.Delete) return;
             DataRowView MyRow = (DataRowView)DG_MOJE_USTAWIENIA.Items[((System.Windows.Controls.Primitives.Selector)e.Source).SelectedIndex];
             MyRow["Ilość_Znaków"] = ((System.Windows.Controls.TextBox)e.OriginalSource).Text.Length;
             MyRow.EndEdit();
+       
         }
 
     }
