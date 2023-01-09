@@ -73,15 +73,6 @@
     <Ilość_Znaków>6</Ilość_Znaków>
   </DaneX>
   <DaneX>
-    <ID>101</ID>
-    <id_obj>2</id_obj>
-    <Objekt>Kolory</Objekt>
-    <Nazwa>test 1670</Nazwa>
-    <Wartość>test 2</Wartość>
-    <Tekst>test 9</Tekst>
-    <Ilość_Znaków>8</Ilość_Znaków>
-  </DaneX>
-  <DaneX>
     <ID>102</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>

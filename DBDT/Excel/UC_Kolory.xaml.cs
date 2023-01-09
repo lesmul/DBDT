@@ -671,6 +671,7 @@ namespace DBDT.Excel
 
         private void keyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            if (e.Key == System.Windows.Input.Key.Delete) return;
             DataRowView MyRow = (DataRowView)DG_MOJE_USTAWIENIA.Items[((System.Windows.Controls.Primitives.Selector)e.Source).SelectedIndex];
             MyRow["Ilość_Znaków"] = ((System.Windows.Controls.TextBox)e.OriginalSource).Text.Length;
             MyRow.EndEdit();
