@@ -19,6 +19,7 @@ using static DBDT.Excel.ClipboardHelper;
 using System.Collections;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace DBDT.Excel
 {
@@ -653,8 +654,11 @@ namespace DBDT.Excel
 
             foreach (object item in items)
             {
-                DataRowView MyRow = (DataRowView)item;
-                MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
+                if (item.ToString() != "{NewItemPlaceholder}")
+                {
+                    DataRowView MyRow = (DataRowView)item;
+                    MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
+                }
             }
         }
 
