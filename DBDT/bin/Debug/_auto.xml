@@ -7,6 +7,7 @@
     <Nazwa>WR_test 1</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 3</Tekst>
+    <Ilość_Znaków>9</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>94</ID>
@@ -15,30 +16,34 @@
     <Nazwa>test 1</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 3</Tekst>
+    <Ilość_Znaków>6</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>95</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
+    <Nazwa>test 1   dd</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 3</Tekst>
+    <Ilość_Znaków>11</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>96</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
+    <Nazwa>test 16</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 4</Tekst>
+    <Ilość_Znaków>7</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>97</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
+    <Nazwa>test 1eew</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 5</Tekst>
+    <Ilość_Znaków>8</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>98</ID>
@@ -47,6 +52,7 @@
     <Nazwa>test 1</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 6</Tekst>
+    <Ilość_Znaków>6</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>99</ID>
@@ -55,6 +61,7 @@
     <Nazwa>test 1</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 7</Tekst>
+    <Ilość_Znaków>6</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>100</ID>
@@ -63,28 +70,32 @@
     <Nazwa>test 1</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 8</Tekst>
+    <Ilość_Znaków>6</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>101</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
+    <Nazwa>test 1670</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 9</Tekst>
+    <Ilość_Znaków>8</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>102</ID>
     <id_obj>2</id_obj>
     <Objekt>Kolory</Objekt>
-    <Nazwa>test 1</Nazwa>
+    <Nazwa>test 102500001</Nazwa>
     <Wartość>test 2</Wartość>
     <Tekst>test 10</Tekst>
+    <Ilość_Znaków>14</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>106</ID>
     <id_obj>1</id_obj>
     <Objekt>Indeksy 2</Objekt>
-    <Nazwa>Zaznaczone klonuj</Nazwa>
+    <Nazwa>Zaznaczone klonuj 5</Nazwa>
+    <Ilość_Znaków>19</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>107</ID>
@@ -93,6 +104,7 @@
     <Nazwa>DW/BAS      </Nazwa>
     <Wartość />
     <Tekst>FR_Kody_okuć_DW/BAS      </Tekst>
+    <Ilość_Znaków>12</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>108</ID>
@@ -101,29 +113,33 @@
     <Nazwa>Kody_okuć_DW/PRE      </Nazwa>
     <Wartość />
     <Tekst>FR_Kody_okuć_DW/PRE      </Tekst>
+    <Ilość_Znaków>22</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>109</ID>
     <id_obj>1</id_obj>
     <Objekt>Indeksy 2</Objekt>
-    <Nazwa>IT_Kody_okuć_DW/WER      </Nazwa>
+    <Nazwa>IT_Kody_okuć_DW/WER     </Nazwa>
     <Wartość />
     <Tekst>FR_Kody_okuć_DW/WER      </Tekst>
+    <Ilość_Znaków>24</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>110</ID>
     <id_obj>1</id_obj>
     <Objekt>Indeksy 2</Objekt>
-    <Nazwa>IT_Kody_okuć_DW/BAS      </Nazwa>
+    <Nazwa>IT_Kody_okuć_DW/BAS   </Nazwa>
     <Wartość />
     <Tekst>FR_Kody_okuć_DW/BAS      </Tekst>
+    <Ilość_Znaków>22</Ilość_Znaków>
   </DaneX>
   <DaneX>
     <ID>111</ID>
     <id_obj>1</id_obj>
     <Objekt>Indeksy 2</Objekt>
-    <Nazwa>WR_okuć_DW/BAS      </Nazwa>
+    <Nazwa>WR_okuć_DW/BAS</Nazwa>
     <Wartość />
     <Tekst>FR_Kody_okuć_DW/BAS      </Tekst>
+    <Ilość_Znaków>14</Ilość_Znaków>
   </DaneX>
 </NewDataSet>

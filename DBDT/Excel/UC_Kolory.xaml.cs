@@ -58,6 +58,10 @@ namespace DBDT.Excel
             dt_d.Columns.Add("Wartość", typeof(string));
             dt_d.Columns.Add("Tekst", typeof(string));
 
+            DataColumn wCol4 = dt_d.Columns.Add("Ilość_Znaków", typeof(Int32));
+           // wCol4.ReadOnly = true;
+            wCol4.DefaultValue = 0;
+
             dt_d.TableName = "DaneX";
 
             if (ds.Tables.Count == 0)
@@ -388,7 +392,12 @@ namespace DBDT.Excel
 
                     DataRow dr = dt_d.NewRow();
 
-                    if (strx.Length > 0) dr["Nazwa"] = strx[0].ToString();
+                    if (strx.Length > 0) 
+                    {
+                        dr["Nazwa"] = strx[0].ToString().Trim();
+                        dr["Ilość_Znaków"] = strx[0].ToString().Length;
+                    }
+                    
                     if (strx.Length > 1) dr["Wartość"] = strx[1].ToString();
                     if (strx.Length > 2) dr["Tekst"] = strx[2].ToString();
 
@@ -399,7 +408,11 @@ namespace DBDT.Excel
 
                     DataRow dr = dt_d.NewRow();
 
-                    if (rowData.Count > 0) dr["Nazwa"] = rowData[i][0].ToString();
+                    if (rowData.Count > 0)
+                    {
+                        dr["Nazwa"] = rowData[i][0].ToString().Trim();
+                        dr["Ilość_Znaków"] = rowData[i][0].ToString().Length;
+                    }
                     if (rowData.Count > 1) dr["Wartość"] = rowData[i][1].ToString();
                     if (rowData.Count > 2) dr["Tekst"] = rowData[i][2].ToString(); ;
 
@@ -563,7 +576,8 @@ namespace DBDT.Excel
                     DataRow row = dt_d.NewRow();
                     row["id_obj"] = MyRow["id_obj"].ToString();
                     row["Objekt"] = MyRow["Objekt"].ToString();
-                    row["Nazwa"] = MyRow["Nazwa"].ToString();
+                    row["Nazwa"] = MyRow["Nazwa"].ToString().Trim();
+                    row["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
                     row["Wartość"] = MyRow["Wartość"].ToString();
                     row["Tekst"] = MyRow["Tekst"].ToString();
                     dt_d.Rows.Add(row);
@@ -577,16 +591,19 @@ namespace DBDT.Excel
                     if (ch_s > -1)
                     {
                         MyRow["Nazwa"] = (str_x.StartsWith("_") ? "" : str_x) + value.Substring(ch_s + 1, value.Length - ch_s - 1);
+                        MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
                     }
                     else
                     {
                         if (value.StartsWith("_"))
                         {
                             MyRow["Nazwa"] = (str_x.StartsWith("_") ? "" : str_x) + value;
+                            MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
                         }
                         else
                         {
                             MyRow["Nazwa"] = (str_x.StartsWith("_") ? "" : str_x + "_") + value;
+                            MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
                         }
                     }
                 }
@@ -597,16 +614,19 @@ namespace DBDT.Excel
                         if (ch_s > -1)
                         {
                             MyRow["Nazwa"] = (str_x.StartsWith("_") ? "": str_x + "_") + value.Substring(ch_s + 1, value.Length - ch_s - 1);
+                            MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
                         }
                         else
                         {
                             if (value.StartsWith("_"))
                             {
                                 MyRow["Nazwa"] = str_x + value;
+                                MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
                             }
                             else
                             {
                                 MyRow["Nazwa"] = str_x + "_" + value;
+                                MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
                             }
                         }
                     }
@@ -615,15 +635,47 @@ namespace DBDT.Excel
                         if (value.StartsWith("_"))
                         {
                             MyRow["Nazwa"] = str_x + value;
+                            MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
                         }
                         else
                         {
                             MyRow["Nazwa"] = str_x + "_" + value;
+                            MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
                         }
                     }
                 }
             }
         }
+
+        private void sel_cells_changed(object sender, SelectedCellsChangedEventArgs e)
+        {
+            IList items = DG_MOJE_USTAWIENIA.SelectedItems;
+
+            foreach (object item in items)
+            {
+                DataRowView MyRow = (DataRowView)item;
+                MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
+            }
+        }
+
+        private void celEditEding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            IList items = DG_MOJE_USTAWIENIA.SelectedItems;
+
+            foreach (object item in items)
+            {
+                DataRowView MyRow = (DataRowView)item;
+                MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
+            }
+        }
+
+        private void keyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            DataRowView MyRow = (DataRowView)DG_MOJE_USTAWIENIA.Items[((System.Windows.Controls.Primitives.Selector)e.Source).SelectedIndex];
+            MyRow["Ilość_Znaków"] = ((System.Windows.Controls.TextBox)e.OriginalSource).Text.Length;
+            MyRow.EndEdit();
+        }
+
     }
 
     public static class ClipboardHelper
