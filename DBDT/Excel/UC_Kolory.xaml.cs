@@ -60,7 +60,6 @@ namespace DBDT.Excel
             dt_d.Columns.Add("Tekst", typeof(string));
 
             DataColumn wCol4 = dt_d.Columns.Add("Ilość_Znaków", typeof(Int32));
-           // wCol4.ReadOnly = true;
             wCol4.DefaultValue = 0;
 
             dt_d.TableName = "DaneX";
@@ -71,27 +70,6 @@ namespace DBDT.Excel
             }
 
             dv.Table = dt_d;
-
-            //DG_MOJE_USTAWIENIA.ItemsSource = dv;
-
-            //System.Data.DataTable dtcb = new System.Data.DataTable();
-            //dtcb = _PUBLIC_SqlLite.SelectQuery("SELECT id, (opis || ' \\ ' || pole1) as opisx FROM objekty order by pole1");
-
-            //CB_NAZ_EXCEL.ItemsSource = dtcb.DefaultView;
-            //CB_NAZ_EXCEL.DisplayMemberPath = "opisx";
-
-            //TI_M.Tag = -1;
-
-            //for (int i = 0; i < dt.Rows.Count; i++)
-            //{
-            //    TabItem item = new TabItem();
-            //    item.ContentTemplate = TryFindResource("TC_Zakl") as DataTemplate;
-            //    item.Header = dt.Rows[i]["Opis"].ToString();
-            //    item.Content = TI_M.Content;
-            //    item.ToolTip = dt.Rows[i]["Opis"].ToString();
-            //    item.Tag = dt.Rows[i]["id"].ToString();
-            //    TC_Zakl.Items.Add(item);
-            //}
 
             load_tab();
 
@@ -186,7 +164,6 @@ namespace DBDT.Excel
                 MessageBox.Show(ex.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-
         }
 
         private void B_ZAPISZ_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -203,13 +180,13 @@ namespace DBDT.Excel
             if (id_s == "-1")
             {
                 _PUBLIC_SqlLite.DODAJ_REKORD_SQL_FUKCJE(TXT_NAZ_ZAKLADKI.Text.Trim(), TXT_SQL.Text, CB_NAZ_EXCEL.Text.Trim(), TXT_NAZ_ARKUSZA.Text,
-                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), TXT_NR_PROJEKTU.Text.Trim(), "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim());
+                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), CB_NR_PROJEKTU.Text.Trim(), "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim());
                 TXT_NAZ_ZAKLADKI.Text = "";
             }
             else
             {
                 _PUBLIC_SqlLite.ZMIEN_REKORD_SQL_FUKCJE(TXT_NAZ_ZAKLADKI.Text.Trim(), TXT_SQL.Text, CB_NAZ_EXCEL.Text.Trim(), TXT_NAZ_ARKUSZA.Text,
-                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), TXT_NR_PROJEKTU.Text.Trim(), "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim(), id_s);
+                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), CB_NR_PROJEKTU.Text.Trim(), "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim(), id_s);
             }
 
             if (old_tab_name != TXT_NAZ_ZAKLADKI.Text) load_tab();
@@ -232,12 +209,35 @@ namespace DBDT.Excel
             {
                 ScieszkaProgramu += @"\";
             }
+            ScieszkaProgramu += @"\xml\";
 
-            System.IO.FileInfo fi = new System.IO.FileInfo(ScieszkaProgramu + "_auto.xml");
+            DirectoryInfo info = new DirectoryInfo(ScieszkaProgramu);
+            if (info.Exists == false)
+            {
+                info.Create();
+            }
+            else
+            {
+                var children = DirectoryStructure.GetDirectoryContents(ScieszkaProgramu, "*.xml");
+
+                for (int i = 0; i < children.Count; i++)
+                {
+                    if (children[i].Name != "_auto.xml")
+                    {
+                        int int_type = children[i].Name.LastIndexOf(children[i].TypeFile.ToString());
+                        CB_NR_PROJEKTU.Items.Add(children[i].Name.Substring(0, int_type).Replace("_", "/"));
+                    }
+                }
+            }
+
+            string nazwa_plik_xml = "_auto.xml";
+            if (CB_NR_PROJEKTU.Text.Trim() != "") nazwa_plik_xml = CB_NR_PROJEKTU.Text.Trim().Replace("/", "_") + ".xml";
+
+            System.IO.FileInfo fi = new System.IO.FileInfo(ScieszkaProgramu + nazwa_plik_xml);
 
             if (fi.Exists == true && dt_d.Rows.Count == 0)
             {
-                ds.ReadXml(ScieszkaProgramu + "_auto.xml");
+                ds.ReadXml(ScieszkaProgramu + nazwa_plik_xml);
 
                 if (ds.Tables.Count > 0)
                 {
@@ -258,7 +258,7 @@ namespace DBDT.Excel
             TXT_KOMORKA_START.Text = "";
             CB_UNIKAT.IsChecked = false;
             TXT_LOK_PLIK_WYNIKOWY.Text = "";
-            TXT_NR_PROJEKTU.Text = "";
+            CB_NR_PROJEKTU.Text = "";
             B_Wyslij_Excel.Visibility = System.Windows.Visibility.Hidden;
             B_Usun.Visibility = System.Windows.Visibility.Hidden;
             MI_CRTL_PLUS_V.IsEnabled = false;
@@ -299,12 +299,32 @@ namespace DBDT.Excel
                 {
                     dv.RowFilter = "id_obj = '" + id_s + "'";
                 }
+                //Zapisz stare ustawienia
+                string ScieszkaProgramu;
+
+                ScieszkaProgramu = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+
+                if (ScieszkaProgramu.Trim().EndsWith(@"\") == false)
+                {
+                    ScieszkaProgramu += @"\";
+                }
+
+                ScieszkaProgramu += @"\xml\";
+
+                string nazwa_plik_xml = "_auto.xml";
+
+                if (dt_d.Rows.Count > 0)
+                {
+                    if (CB_NR_PROJEKTU.Text.Trim() != "") nazwa_plik_xml = CB_NR_PROJEKTU.Text.Trim().Replace("/", "_") + ".xml";
+                    ds.WriteXml(ScieszkaProgramu + nazwa_plik_xml);
+                }
+                //Zapisz stare ustawienia
 
                 DG_MOJE_USTAWIENIA.ItemsSource = dv;
 
-                dt_d.AcceptChanges();
-
                 dt_d.Columns["id_obj"].DefaultValue = id_s;
+
+                dt_d.AcceptChanges();
 
                 if (id_s == "-1")
                 {
@@ -330,9 +350,7 @@ namespace DBDT.Excel
                 TXT_NAZ_ARKUSZA.Text = dti.Rows[0]["pole2"].ToString();
                 TXT_KOMORKA_START.Text = dti.Rows[0]["pole3"].ToString();
 
-                TXT_NR_PROJEKTU.Text = dti.Rows[0]["pole5"].ToString();
-
-                dt_d.Columns["Objekt"].DefaultValue = dti.Rows[0]["nazwa_funkcji"].ToString();
+                CB_NR_PROJEKTU.Text = dti.Rows[0]["pole5"].ToString();
 
                 if (dti.Rows[0]["pole4"].ToString() == "True")
                 {
@@ -349,6 +367,26 @@ namespace DBDT.Excel
                 B_Usun.Visibility = System.Windows.Visibility.Visible;
                 MI_CRTL_PLUS_V.IsEnabled = true;
 
+                nazwa_plik_xml = "_auto.xml";
+                if (CB_NR_PROJEKTU.Text.Trim() != "") nazwa_plik_xml = CB_NR_PROJEKTU.Text.Trim().Replace("/", "_") + ".xml";
+
+                System.IO.FileInfo fi = new System.IO.FileInfo(ScieszkaProgramu + nazwa_plik_xml);
+
+                dt_d.Rows.Clear();
+
+                if (fi.Exists == true)
+                {
+                    ds.ReadXml(ScieszkaProgramu + nazwa_plik_xml);
+
+                    if (ds.Tables.Count > 0)
+                    {
+                        dt_d = ds.Tables[0];
+                        dv.Table = ds.Tables[0];
+                    }
+                }
+
+                dt_d.Columns["Objekt"].DefaultValue = dti.Rows[0]["nazwa_funkcji"].ToString();
+                dt_d.AcceptChanges();
             }
 
         }
@@ -393,12 +431,12 @@ namespace DBDT.Excel
 
                     DataRow dr = dt_d.NewRow();
 
-                    if (strx.Length > 0) 
+                    if (strx.Length > 0)
                     {
                         dr["Nazwa"] = strx[0].ToString().Trim();
-                        dr["Ilość_Znaków"] = strx[0].ToString().Length;
+                        dr["Ilość_Znaków"] = strx[0].ToString().Trim().Length;
                     }
-                    
+
                     if (strx.Length > 1) dr["Wartość"] = strx[1].ToString();
                     if (strx.Length > 2) dr["Tekst"] = strx[2].ToString();
 
@@ -412,10 +450,10 @@ namespace DBDT.Excel
                     if (rowData.Count > 0)
                     {
                         dr["Nazwa"] = rowData[i][0].ToString().Trim();
-                        dr["Ilość_Znaków"] = rowData[i][0].ToString().Length;
+                        dr["Ilość_Znaków"] = rowData[i][0].ToString().Trim().Length;
                     }
-                    if (rowData.Count > 1) dr["Wartość"] = rowData[i][1].ToString();
-                    if (rowData.Count > 2) dr["Tekst"] = rowData[i][2].ToString(); ;
+                    if (rowData[i].Length > 1) dr["Wartość"] = rowData[i][1].ToString();
+                    if (rowData[i].Length > 2) dr["Tekst"] = rowData[i][2].ToString(); ;
 
                     dt_d.Rows.Add(dr);
                 }
@@ -435,7 +473,12 @@ namespace DBDT.Excel
                 ScieszkaProgramu += @"\";
             }
 
-            ds.WriteXml(ScieszkaProgramu + "_auto.xml");
+            ScieszkaProgramu += @"\xml\";
+
+            string nazwa_plik_xml = "_auto.xml";
+            if (CB_NR_PROJEKTU.Text.Trim() != "") nazwa_plik_xml = CB_NR_PROJEKTU.Text.Trim().Replace("/", "_") + ".xml";
+            ds.WriteXml(ScieszkaProgramu + nazwa_plik_xml);
+
         }
 
         private void load_tab()
@@ -443,30 +486,6 @@ namespace DBDT.Excel
             System.Data.DataTable dt = new System.Data.DataTable();
 
             dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, nazwa_funkcji as Opis, pole5 as Nazwa, pole6 FROM funkcje ORDER BY nazwa_funkcji");
-
-            //DataColumn wCol1 = dt_d.Columns.Add("ID", typeof(Int32));
-            //wCol1.AllowDBNull = false;
-            //wCol1.Unique = true;
-            //wCol1.AutoIncrement = true;
-            //DataColumn wCol2 = dt_d.Columns.Add("id_obj", typeof(string));
-            //wCol2.DefaultValue = "-1";
-
-            //DataColumn wCol3 = dt_d.Columns.Add("Objekt", typeof(string));
-            //wCol3.ReadOnly = true;
-            //wCol3.DefaultValue = "";
-
-            //dt_d.Columns.Add("Nazwa", typeof(string));
-            //dt_d.Columns.Add("Wartość", typeof(string));
-            //dt_d.Columns.Add("Tekst", typeof(string));
-
-            //dt_d.TableName = "DaneX";
-
-            //if (ds.Tables.Count == 0)
-            //{
-            //    ds.Tables.Add(dt_d);
-            //}
-
-            //dv.Table = dt_d;
 
             DG_MOJE_USTAWIENIA.ItemsSource = dv;
 
@@ -493,7 +512,7 @@ namespace DBDT.Excel
                 item.ContentTemplate = TryFindResource("TC_Zakl") as DataTemplate;
                 item.Header = dt.Rows[i]["Opis"].ToString();
                 item.Content = TI_M.Content;
-                item.ToolTip = dt.Rows[i]["Opis"].ToString();
+                //item.ToolTip = dt.Rows[i]["Opis"].ToString();
                 item.Tag = dt.Rows[i]["id"].ToString();
                 TC_Zakl.Items.Add(item);
             }
@@ -560,7 +579,7 @@ namespace DBDT.Excel
 
         }
 
-        private void zamien_wybrane(string str_x, bool zamien,bool zastap)
+        private void zamien_wybrane(string str_x, bool zamien, bool zastap)
         {
 
             if (str_x.Trim() == "") return;
@@ -614,7 +633,7 @@ namespace DBDT.Excel
                     {
                         if (ch_s > -1)
                         {
-                            MyRow["Nazwa"] = (str_x.StartsWith("_") ? "": str_x + "_") + value.Substring(ch_s + 1, value.Length - ch_s - 1);
+                            MyRow["Nazwa"] = (str_x.StartsWith("_") ? "" : str_x + "_") + value.Substring(ch_s + 1, value.Length - ch_s - 1);
                             MyRow["Ilość_Znaków"] = MyRow["Nazwa"].ToString().Length;
                         }
                         else
@@ -665,14 +684,61 @@ namespace DBDT.Excel
 
         private void keyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-           
+
             if (e.Key == System.Windows.Input.Key.Delete) return;
+            if (e.Key == System.Windows.Input.Key.Enter) return;
+            if (e.Key == System.Windows.Input.Key.PageDown) return;
+
+            if (e.Key == System.Windows.Input.Key.Down)
+            {
+                DataRow dr = dt_d.NewRow();
+                dr["Nazwa"] = "";
+                dr["Ilość_Znaków"] = 0;
+                dr["Wartość"] = "";
+                dr["Tekst"] = "";
+                dt_d.Rows.Add(dr);
+
+                dt_d.AcceptChanges();
+
+                return;
+            }
+
             DataRowView MyRow = (DataRowView)DG_MOJE_USTAWIENIA.Items[((System.Windows.Controls.Primitives.Selector)e.Source).SelectedIndex];
             MyRow["Ilość_Znaków"] = ((System.Windows.Controls.TextBox)e.OriginalSource).Text.Length;
             MyRow.EndEdit();
-       
+
         }
 
+        private void CB_NR_PROJEKTU_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string nazwa_plik_xml = "_auto.xml";
+            if (CB_NR_PROJEKTU.Text.Trim() != "") nazwa_plik_xml = CB_NR_PROJEKTU.Text.Trim().Replace("/", "_") + ".xml";
+
+            string ScieszkaProgramu;
+
+            ScieszkaProgramu = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+
+            if (ScieszkaProgramu.Trim().EndsWith(@"\") == false)
+            {
+                ScieszkaProgramu += @"\";
+            }
+            ScieszkaProgramu += @"\xml\";
+
+            System.IO.FileInfo fi = new System.IO.FileInfo(ScieszkaProgramu + nazwa_plik_xml);
+
+            if (fi.Exists == true)
+            {
+                dt_d.Rows.Clear();
+
+                ds.ReadXml(ScieszkaProgramu + nazwa_plik_xml);
+
+                if (ds.Tables.Count > 0)
+                {
+                    dt_d = ds.Tables[0];
+                    dv.Table = ds.Tables[0];
+                }
+            }
+        }
     }
 
     public static class ClipboardHelper

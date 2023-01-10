@@ -1,0 +1,155 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <DaneX>
+    <ID>60</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>WR_test 1</Nazwa>
+    <Wartość>test 2</Wartość>
+    <Tekst>test 3</Tekst>
+    <Ilość_Znaków>9</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>106</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>Zaznaczone klonuj 5</Nazwa>
+    <Ilość_Znaków>19</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>107</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>DW/BAS    </Nazwa>
+    <Wartość />
+    <Tekst>FR_Kody_okuć_DW/BAS      </Tekst>
+    <Ilość_Znaków>10</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>108</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>Kody_okuć_DW/PRE      </Nazwa>
+    <Wartość />
+    <Tekst>FR_Kody_okuć_DW/PRE      </Tekst>
+    <Ilość_Znaków>22</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>109</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>IT_Kody_okuć_DW/WER     </Nazwa>
+    <Wartość />
+    <Tekst>FR_Kody_okuć_DW/WER      </Tekst>
+    <Ilość_Znaków>24</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>110</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>IT_Kody_okuć_DW/BAS   </Nazwa>
+    <Wartość />
+    <Tekst>FR_Kody_okuć_DW/BAS      </Tekst>
+    <Ilość_Znaków>22</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>111</ID>
+    <id_obj>1</id_obj>
+    <Objekt>Indeksy 2</Objekt>
+    <Nazwa>WR_okuć_DW/BAS</Nazwa>
+    <Wartość />
+    <Tekst>FR_Kody_okuć_DW/BAS      </Tekst>
+    <Ilość_Znaków>14</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>209</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>zxcxcv</Nazwa>
+    <Wartość>cxxc</Wartość>
+    <Ilość_Znaków>6</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>218</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>erterter</Nazwa>
+    <Wartość>ertert</Wartość>
+    <Ilość_Znaków>8</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>381</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>xcvxc</Nazwa>
+    <Wartość>cxvcx</Wartość>
+    <Ilość_Znaków>5</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>418</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>xcvxc</Nazwa>
+    <Wartość>xcvxcv</Wartość>
+    <Ilość_Znaków>5</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>495</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>dfdfg</Nazwa>
+    <Wartość>dfgdf</Wartość>
+    <Ilość_Znaków>5</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>536</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>gfhgfhfg</Nazwa>
+    <Wartość>fghfgh</Wartość>
+    <Ilość_Znaków>8</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>579</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>dsfdsd</Nazwa>
+    <Wartość>dsfdsf</Wartość>
+    <Ilość_Znaków>6</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>686</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>vcbcvbcv</Nazwa>
+    <Wartość>cvbcv</Wartość>
+    <Ilość_Znaków>8</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>687</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>cvbcvb</Nazwa>
+    <Wartość>cvbcv</Wartość>
+    <Tekst />
+    <Ilość_Znaków>6</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>688</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>vbnvbn</Nazwa>
+    <Wartość />
+    <Tekst />
+    <Ilość_Znaków>6</Ilość_Znaków>
+  </DaneX>
+  <DaneX>
+    <ID>689</ID>
+    <id_obj>2</id_obj>
+    <Objekt>Kolory</Objekt>
+    <Nazwa>vbvbn</Nazwa>
+    <Wartość />
+    <Tekst />
+    <Ilość_Znaków>5</Ilość_Znaków>
+  </DaneX>
+</NewDataSet>

@@ -80,7 +80,7 @@
                         </Button.Content>
                     </Button>
                     <Label Grid.Column="2" Margin="22,-2,0,0" HorizontalAlignment="Left" Width="73" Content="Nr projektu:" VerticalAlignment="Top" HorizontalContentAlignment="Right" />
-                    <TextBox Grid.Column="2" Name="TXT_NR_PROJEKTU" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" ToolTip="Aktulny numer projektu" Margin="95,2,5,0"/>
+                    <ComboBox Grid.Column="2" Name="CB_NR_PROJEKTU" Margin="95,2,5,0" Text="" VerticalAlignment="Top" Height="23" Grid.ColumnSpan="2" IsEditable="True" SelectionChanged="CB_NR_PROJEKTU_SelectionChanged"/>
                 </Grid>
             </TabItem>
         </TabControl >
