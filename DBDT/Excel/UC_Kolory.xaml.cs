@@ -141,11 +141,18 @@ namespace DBDT.Excel
                             }
                         }
                     }
+
+                    kolX = dti.Rows[0]["pole6"].ToString().Split(';');
+
+                    sheet = (Worksheet)ExcelApp.Worksheets[dti.Rows[0]["pole8"].ToString()];
+                    sheet.Select(Type.Missing);
+                    ExcelApp.Cells[ExcelApp.Range[kolX[0]].Row, ExcelApp.Range[kolX[0]].Column] = CB_NR_PROJEKTU.Text.Trim();
+
                 }
                 catch (Exception exx)
                 {
 
-                    MessageBox.Show(exx.Message, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(exx.Message, "Sprawdź nazwę skoroszytu, lub nazwy komórek", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 //Save the workbook
@@ -180,13 +187,13 @@ namespace DBDT.Excel
             if (id_s == "-1")
             {
                 _PUBLIC_SqlLite.DODAJ_REKORD_SQL_FUKCJE(TXT_NAZ_ZAKLADKI.Text.Trim(), TXT_SQL.Text, CB_NAZ_EXCEL.Text.Trim(), TXT_NAZ_ARKUSZA.Text,
-                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), CB_NR_PROJEKTU.Text.Trim(), "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim());
+                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), CB_NR_PROJEKTU.Text.Trim(), TXT_POLE_NR_PROJEKT.Text.Trim(), TXT_ARKUSZ_POLE_NR_PROJEKT.Text.Trim(), "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim());
                 TXT_NAZ_ZAKLADKI.Text = "";
             }
             else
             {
                 _PUBLIC_SqlLite.ZMIEN_REKORD_SQL_FUKCJE(TXT_NAZ_ZAKLADKI.Text.Trim(), TXT_SQL.Text, CB_NAZ_EXCEL.Text.Trim(), TXT_NAZ_ARKUSZA.Text,
-                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), CB_NR_PROJEKTU.Text.Trim(), "", "", "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim(), id_s);
+                TXT_KOMORKA_START.Text, CB_UNIKAT.IsChecked.ToString(), CB_NR_PROJEKTU.Text.Trim(), TXT_POLE_NR_PROJEKT.Text.Trim(), TXT_ARKUSZ_POLE_NR_PROJEKT.Text.Trim(), "", "", TXT_LOK_PLIK_WYNIKOWY.Text.Trim(), id_s);
             }
 
             if (old_tab_name != TXT_NAZ_ZAKLADKI.Text) load_tab();
@@ -256,8 +263,10 @@ namespace DBDT.Excel
             CB_NAZ_EXCEL.Text = "";
             TXT_NAZ_ARKUSZA.Text = "";
             TXT_KOMORKA_START.Text = "";
+            TXT_POLE_NR_PROJEKT.Text = "";
             CB_UNIKAT.IsChecked = false;
             TXT_LOK_PLIK_WYNIKOWY.Text = "";
+            TXT_ARKUSZ_POLE_NR_PROJEKT.Text = "";
             CB_NR_PROJEKTU.Text = "";
             B_Wyslij_Excel.Visibility = System.Windows.Visibility.Hidden;
             B_Usun.Visibility = System.Windows.Visibility.Hidden;
@@ -351,6 +360,8 @@ namespace DBDT.Excel
                 TXT_KOMORKA_START.Text = dti.Rows[0]["pole3"].ToString();
 
                 CB_NR_PROJEKTU.Text = dti.Rows[0]["pole5"].ToString();
+                TXT_POLE_NR_PROJEKT.Text = dti.Rows[0]["pole6"].ToString();
+                TXT_ARKUSZ_POLE_NR_PROJEKT.Text = dti.Rows[0]["pole8"].ToString();
 
                 if (dti.Rows[0]["pole4"].ToString() == "True")
                 {

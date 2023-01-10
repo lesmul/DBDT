@@ -68,30 +68,4 @@
     <Nazwa>&amp;&amp; dt_d.Rows.Count == 0</Nazwa>
     <Ilość_Znaków>23</Ilość_Znaków>
   </DaneX>
-  <DaneX>
-    <ID>596</ID>
-    <id_obj>1</id_obj>
-    <Objekt>Indeksy 2</Objekt>
-    <Nazwa>gfhfgh</Nazwa>
-    <Wartość>gfhhfg</Wartość>
-    <Ilość_Znaków>6</Ilość_Znaków>
-  </DaneX>
-  <DaneX>
-    <ID>597</ID>
-    <id_obj>1</id_obj>
-    <Objekt>Indeksy 2</Objekt>
-    <Nazwa>gfhgfhgf</Nazwa>
-    <Wartość>fghgfhgh</Wartość>
-    <Tekst />
-    <Ilość_Znaków>8</Ilość_Znaków>
-  </DaneX>
-  <DaneX>
-    <ID>646</ID>
-    <id_obj>1</id_obj>
-    <Objekt>Indeksy 2</Objekt>
-    <Nazwa>fgfdhf</Nazwa>
-    <Wartość />
-    <Tekst />
-    <Ilość_Znaków>6</Ilość_Znaków>
-  </DaneX>
 </NewDataSet>

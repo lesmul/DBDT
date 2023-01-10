@@ -104,7 +104,14 @@ namespace DBDT.SQL
             {
                 LV_XLSX.Items.Clear();
             }
-
+            if(id_rec != "-1")
+            {
+                LV_XLSX.ItemsSource = null;
+                items.Clear();
+                LV_XLSX.Items.Clear();
+                B_Zastap_plik_excel.Visibility= Visibility.Visible;
+            }
+  
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
@@ -236,10 +243,17 @@ namespace DBDT.SQL
                 MI_ZMIEN_NAZWE.Visibility = Visibility.Hidden;
                 this.Topmost = false;
             }
-            else
+            else 
             {
                 MI_ZAPISZ_P.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void B_Zastap_plik_excel_Click(object sender, RoutedEventArgs e)
+        {
+            _PUBLIC_SqlLite.ZMIEN_REKORD_OBJEKT_FULL(TXT_NAZWA_OBJ.Text.Trim(), TXT_OPIS.Text.Trim(), items[0].CalaScieszka, items[0].TextExcel, id_rec);
+            B_Zastap_plik_excel.Visibility = Visibility.Hidden;
+            this.DialogResult = true;
         }
     }
 }

@@ -712,6 +712,74 @@ namespace DBDT.USTAWIENIA_PROGRAMU
 
             return true;
         }
+        public static Boolean ZMIEN_REKORD_OBJEKT_FULL(string nazwa_objektu, string opis, string scieszka_do_pliku, string nazwa_pliku, string id_rec)
+        {
+
+            if (nazwa_objektu.Trim() == "") return false;
+
+            if (nazwa_objektu.Trim() == "") nazwa_objektu = string.Format("Zapisano dnia: {0} at {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToLongTimeString());
+
+            SQLiteCommand command_update = new SQLiteCommand();
+
+            try
+            {
+
+                SQLiteConnection connection = new SQLiteConnection
+                {
+                    ConnectionString = "Data Source=" + sqlite_file
+                };
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command_update = connection.CreateCommand();
+
+            }
+            catch (SQLiteException ex)
+            {
+                //Add your exception code here.
+                MessageBox.Show(ex.Message, "Błąd");
+            }
+
+            var guid = Guid.NewGuid().ToString();
+
+            command_update.CommandType = CommandType.Text;
+
+            command_update.Parameters.AddWithValue("@nazwa_objektu", nazwa_objektu);
+            command_update.Parameters.AddWithValue("@opis", opis);
+            command_update.Parameters.AddWithValue("@pole1", nazwa_pliku);
+            command_update.Parameters.AddWithValue("@pole7", guid);
+            command_update.Parameters.AddWithValue("@kto_zmienil", Environment.UserName.ToString());
+            command_update.Parameters.AddWithValue("@data_utworzenia", DateTime.Now);
+            command_update.Parameters.AddWithValue("@id", id_rec);
+
+            if (scieszka_do_pliku != "")
+            {
+                command_update.CommandText = "UPDATE `objekty` SET `nazwa_objektu` = @nazwa_objektu,`opis` = @opis, `objekt` = @objekt, `pole1` = @pole1, `pole7` = @pole7, " +
+                    "`kto_zmienil` = @kto_zmienil, `data_utworzenia` = @data_utworzenia where `id` = @id";
+
+                command_update.Parameters.AddWithValue("@objekt", ARR_BYTE_FILE_XSL(scieszka_do_pliku));
+            }
+            else
+            {
+                command_update.CommandText = "UPDATE `objekty` SET `nazwa_objektu` = @nazwa_objektu,`opis` = @opis, `pole1` = @pole1, `pole7` = @pole7, " +
+                    "`kto_zmienil` = @kto_zmienil, `data_utworzenia` = @data_utworzenia where `id` = @id";
+            }
+
+            try
+            {
+                command_update.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Błąd");
+                return false;
+            }
+
+            return true;
+        }
         public static Boolean DODAJ_REKORD_OBJEKT_Z_MASTER(string nazwa_objektu, string opis, string pole1, 
             string pole7, string kto_zmienil, object objekt)
         {

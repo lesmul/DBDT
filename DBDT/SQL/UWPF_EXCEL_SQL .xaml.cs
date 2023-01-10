@@ -64,7 +64,9 @@ namespace DBDT.SQL
 
             if (FRM.ShowDialog() == true)
             {
-              //  _PUBLIC_SqlLite.DODAJ_REKORD_OBJEKT(FRM.TXT_NAZWA_OBJ.Text.Trim(), FRM.TXT_OPIS.Text.Trim(), FRM.items[0].CalaScieszka, FRM.items[0].TextExcel);
+                dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_objektu, opis, pole1 from objekty order by id desc");
+                LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();
+                //  _PUBLIC_SqlLite.DODAJ_REKORD_OBJEKT(FRM.TXT_NAZWA_OBJ.Text.Trim(), FRM.TXT_OPIS.Text.Trim(), FRM.items[0].CalaScieszka, FRM.items[0].TextExcel);
             }
 
         }
@@ -125,7 +127,6 @@ namespace DBDT.SQL
 
             if (FRM.ShowDialog() == true)
             {
-                
                 _PUBLIC_SqlLite.ZMIEN_REKORD_OBJEKT(FRM.TXT_NAZWA_OBJ.Text.Trim(), FRM.TXT_OPIS.Text.Trim(), ((System.Data.DataRowView)selectedItem).Row.ItemArray[0].ToString());
                 dt = _PUBLIC_SqlLite.SelectQuery("select id, nazwa_objektu, opis, pole1 from objekty order by id desc");
                 LB_HIST_ZAPYTAN_SQL.ItemsSource = dt.AsDataView();

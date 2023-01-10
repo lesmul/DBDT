@@ -7,7 +7,7 @@
              xmlns:MDI="clr-namespace:WPF.MDI;assembly=WPF.MDI" 
              xmlns:SQL_SELECT="clr-namespace:DBDT.SQL.SQL_SELECT" x:Class="DBDT.Excel.UC_Kolory"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="900" Loaded="uc_loaded" Unloaded="unloaded">
+             d:DesignHeight="650" d:DesignWidth="900" Loaded="uc_loaded" Unloaded="unloaded">
     <Grid>
         <StackPanel Margin="0,0,0,250">
             <SQL_SELECT:MainWindowSQL x:Name="MW_SQL" Height="245"/>
@@ -18,6 +18,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="600" />
@@ -55,26 +56,30 @@
                     </StackPanel>
                     <Button x:Name="B_Wyslij_Excel" Grid.Column="0" Grid.Row="1" Content="Wyślij zmiany do EXCEL" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="146" Click="click_wyslij_zmiany_excel"/>
                     <Label Grid.Column="1" Margin="0,-2,0,0" HorizontalAlignment="Left" Width="85" VerticalAlignment="Top" >Opis zakładki:</Label>
-                    <TextBox Grid.Column="1" Name="TXT_NAZ_ZAKLADKI" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" ToolTip="Opis zakłądki" HorizontalAlignment="Left" Width="88" Margin="80,2,0,0" Grid.ColumnSpan="2"/>
-                    <Label Grid.Column="1" Margin="5,23,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >SQL - Zapytanie:</Label>
-                    <TextBox Grid.Column="1" Name="TXT_SQL" Margin="5,48,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="73" Grid.ColumnSpan="2"/>
-                    <Button x:Name="B_SQL_T" Grid.Column="2" HorizontalAlignment="Right" Height="21" Margin="0,100,5,0" VerticalAlignment="Top" Width="20" ToolTip="Przenieś do okna SQL" Background="#FF3C260B" Click="b_sql_x_click">
+                    <TextBox Grid.Column="1" Name="TXT_NAZ_ZAKLADKI" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" ToolTip="Opis zakłądki" HorizontalAlignment="Left" Width="85" Margin="96,2,0,0" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="1" Margin="0,31,103,0" HorizontalAlignment="Right" Width="107" VerticalAlignment="Top" Grid.ColumnSpan="2" >Komórka projekt:</Label>
+                    <TextBox Grid.Column="2" Name="TXT_POLE_NR_PROJEKT" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" ToolTip="Gdzie wpisać numer projektu w EXCEL nr komórki" HorizontalAlignment="Right" Width="98" Margin="0,31,5,0"/>
+                    <Label Grid.Column="1" Margin="0,31,103,0" HorizontalAlignment="Left" Width="107" VerticalAlignment="Top" Grid.ColumnSpan="2" >Nazwa ark. Excel:</Label>
+                    <TextBox Grid.Column="1" Name="TXT_ARKUSZ_POLE_NR_PROJEKT" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="23" ToolTip="Gdzie wpisać numer projektu w EXCEL nazwa arkusza" HorizontalAlignment="Left" Width="84" Margin="97,31,0,0" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="1" Margin="5,53,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >SQL - Zapytanie:</Label>
+                    <TextBox Grid.Column="1" Name="TXT_SQL" Margin="5,78,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="73" Grid.ColumnSpan="2"/>
+                    <Button x:Name="B_SQL_T" Grid.Column="2" HorizontalAlignment="Right" Height="21" Margin="0,130,5,0" VerticalAlignment="Top" Width="20" ToolTip="Przenieś do okna SQL" Background="#FF3C260B" Click="b_sql_x_click">
                         <Button.Content>
                             <Image  Source="/IKONY/sql.png" Stretch="Fill" />
                         </Button.Content>
                     </Button>
-                    <Label Grid.Column="1" Margin="5,126,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Nazwa pliku EXCEL:</Label>
-                    <ComboBox Grid.Column="1" Name="CB_NAZ_EXCEL" Margin="127,126,5,0" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2" IsEditable="True"/>
-                    <Label Grid.Column="1" Margin="5,156,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Nazwa arkusza:</Label>
-                    <TextBox Grid.Column="1" Name="TXT_NAZ_ARKUSZA" Margin="127,156,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2"/>
-                    <Label Grid.Column="1" Margin="5,186,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Komórka start:</Label>
-                    <TextBox Grid.Column="1" Name="TXT_KOMORKA_START" Margin="127,186,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2" ToolTip="np. A1;C1;D1 - wartość kolumna 1; kolumna 2; kolumna 3" MaxLines="250" CharacterCasing="Upper"/>
-                    <Label Grid.Column="1" Margin="5,216,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Plik wynikowy:</Label>
-                    <TextBox Grid.Column="1" Name="TXT_LOK_PLIK_WYNIKOWY" Margin="127,216,25,0" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2" MaxLines="1" MaxLength="2500" UndoLimit="5" TextAlignment="Right" FlowDirection="RightToLeft"/>
-                    <Button Name="B_ZAPISZ" Grid.Column="2" Content="Zapisz" Margin="32,273,5,0" VerticalAlignment="Top" Height="25" Click="B_ZAPISZ_Click"/>
+                    <Label Grid.Column="1" Margin="5,156,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Nazwa pliku EXCEL:</Label>
+                    <ComboBox Grid.Column="1" Name="CB_NAZ_EXCEL" Margin="127,156,5,0" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2" IsEditable="True"/>
+                    <Label Grid.Column="1" Margin="5,186,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Nazwa arkusza:</Label>
+                    <TextBox Grid.Column="1" Name="TXT_NAZ_ARKUSZA" Margin="127,186,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2"/>
+                    <Label Grid.Column="1" Margin="5,216,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Komórka start:</Label>
+                    <TextBox Grid.Column="1" Name="TXT_KOMORKA_START" Margin="127,216,5,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2" ToolTip="np. A1;C1;D1 - wartość kolumna 1; kolumna 2; kolumna 3" MaxLines="250" CharacterCasing="Upper"/>
+                    <Label Grid.Column="1" Margin="5,246,0,0" Padding="5,1,5,1" HorizontalAlignment="Left" Width="117" VerticalAlignment="Top" >Plik wynikowy:</Label>
+                    <TextBox Grid.Column="1" Name="TXT_LOK_PLIK_WYNIKOWY" Margin="127,246,25,0" Text="" VerticalAlignment="Top" Height="21" Grid.ColumnSpan="2" MaxLines="1" MaxLength="2500" UndoLimit="5" TextAlignment="Right" FlowDirection="RightToLeft"/>
+                    <Button Name="B_ZAPISZ" Grid.Column="2" Content="Zapisz" Margin="32,296,5,0" VerticalAlignment="Top" Height="25" Click="B_ZAPISZ_Click"/>
                     <Button Name="B_Usun" Grid.Column="1" Content="Usuń zakładkę" Margin="10,0,0,0" VerticalAlignment="Bottom" Height="25" Click="B_USUN_ZAKL_Click" HorizontalAlignment="Left" Width="112" />
-                    <CheckBox Name="CB_UNIKAT" Grid.Column="1" Content="Wartość kolumny Nazwa - unikatowa" HorizontalAlignment="Left" Margin="127,245,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="223"/>
-                    <Button x:Name="B_Open" Grid.Column="2" HorizontalAlignment="Right" Height="21" Margin="0,216,5,0" VerticalAlignment="Top" Width="20" Click="b_open_xls_click" ToolTip="Otwórz plik Excel" Background="#FF08290F">
+                    <CheckBox Name="CB_UNIKAT" Grid.Column="1" Content="Wartość kolumny Nazwa - unikatowa" HorizontalAlignment="Left" Margin="127,275,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="223"/>
+                    <Button x:Name="B_Open" Grid.Column="2" HorizontalAlignment="Right" Height="21" Margin="0,246,5,0" VerticalAlignment="Top" Width="20" Click="b_open_xls_click" ToolTip="Otwórz plik Excel" Background="#FF08290F">
                         <Button.Content>
                             <Image  Source="/IKONY/excel.ico" Stretch="Fill" />
                         </Button.Content>
