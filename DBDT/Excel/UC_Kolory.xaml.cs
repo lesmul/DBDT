@@ -118,6 +118,18 @@ namespace DBDT.Excel
                 //Create workbook Instance and open the workbook from the below location
                 Workbook ExcelWorkBook = ExcelApp.Workbooks.Open(dti.Rows[0]["pole11"].ToString());
 
+                if (dti.Rows[0]["pole2"].ToString() == "")
+                {
+                    MessageBox.Show("Brak danych w polu nazwa arkusza", "Popraw dane", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                if (dti.Rows[0]["pole3"].ToString() == "")
+                {
+                    MessageBox.Show("Brak powiązanych komórek np A1;B1", "Popraw dane", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
                 try
                 {
                     Worksheet sheet = (Worksheet)ExcelApp.Worksheets[dti.Rows[0]["pole2"].ToString()];
@@ -142,11 +154,15 @@ namespace DBDT.Excel
                         }
                     }
 
-                    kolX = dti.Rows[0]["pole6"].ToString().Split(';');
 
-                    sheet = (Worksheet)ExcelApp.Worksheets[dti.Rows[0]["pole8"].ToString()];
-                    sheet.Select(Type.Missing);
-                    ExcelApp.Cells[ExcelApp.Range[kolX[0]].Row, ExcelApp.Range[kolX[0]].Column] = CB_NR_PROJEKTU.Text.Trim();
+                    if (dti.Rows[0]["pole8"].ToString().Trim() != "" && dti.Rows[0]["pole6"].ToString().Trim() != "")
+                    {
+                        kolX = dti.Rows[0]["pole6"].ToString().Split(';');
+
+                        sheet = (Worksheet)ExcelApp.Worksheets[dti.Rows[0]["pole8"].ToString()];
+                        sheet.Select(Type.Missing);
+                        ExcelApp.Cells[ExcelApp.Range[kolX[0]].Row, ExcelApp.Range[kolX[0]].Column] = CB_NR_PROJEKTU.Text.Trim();
+                    }
 
                 }
                 catch (Exception exx)
