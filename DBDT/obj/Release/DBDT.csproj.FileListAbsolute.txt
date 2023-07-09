@@ -104,3 +104,11 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\EPPlus.xml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\Microsoft.IO.RecyclableMemoryStream.xml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\Excel\WPF_ZAPIS_EXCEL_SQL.g.cs
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Release\Excel\WPF_ZAPIS_EXCEL_SQL.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\System.Buffers.dll
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\System.Memory.dll
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\System.Numerics.Vectors.dll
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\System.Buffers.xml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\System.Memory.xml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\System.Numerics.Vectors.xml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Release\System.Runtime.CompilerServices.Unsafe.xml

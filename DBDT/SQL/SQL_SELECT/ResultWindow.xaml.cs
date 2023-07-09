@@ -795,6 +795,7 @@ namespace DBDT.SQL.SQL_SELECT
 
         private void ColumnsOR_select_Click(object sender, RoutedEventArgs e)
         {
+
             try
             {
                 int licz_copy = 0;
