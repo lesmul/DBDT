@@ -824,19 +824,19 @@ namespace DBDT.SQL.SQL_SELECT
 
                         licz_copy++;
 
-                        if (licz_copy % 2 == 0)
-                        {
+                        //if (licz_copy % 2 == 0)
+                        //{
 
-                            if (boolWstawEnter == false)
-                            {
-                                boolWstawEnter = true;
-                            }
-                            else
-                            {
-                                boolWstawEnter = false;
+                        //    if (boolWstawEnter == false)
+                        //    {
+                        //        boolWstawEnter = true;
+                        //    }
+                        //    else
+                        //    {
+                        //        boolWstawEnter = false;
                                 valuex += "\r\n";
-                            }
-                        }
+                        //    }
+                        //}
 
                     }
 
@@ -1073,19 +1073,19 @@ namespace DBDT.SQL.SQL_SELECT
                                 + ((FrameworkElement)sender).Tag.ToString() + " AND ";
                             licz_copy++;
 
-                            if (licz_copy % 2 == 0)
-                            {
+                            //if (licz_copy % 2 == 0)
+                            //{
 
-                                if (boolWstawEnter == false)
-                                {
-                                    boolWstawEnter = true;
-                                }
-                                else
-                                {
-                                    boolWstawEnter = false;
+                            //    if (boolWstawEnter == false)
+                            //    {
+                            //        boolWstawEnter = true;
+                            //    }
+                            //    else
+                            //    {
+                            //        boolWstawEnter = false;
                                     valuex += "\r\n";
-                                }
-                            }
+                            //    }
+                            //}
                         }
 
                     }

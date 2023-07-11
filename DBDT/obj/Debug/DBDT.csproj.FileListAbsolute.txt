@@ -107,8 +107,8 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.Properties
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.GenerateResource.cache
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.CoreCompileInputs.cache
-C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fody.CopyLocal.cache
-C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fody.RuntimeCopyLocal.cache
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.CopyComplete
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.exe
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.pdb
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\PropertyChanged.dll
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\PropertyChanged.xml
