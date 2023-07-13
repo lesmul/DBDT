@@ -30,6 +30,7 @@ using WPF.MDI;
 using System.IO;
 using OfficeOpenXml;
 using Microsoft.Win32;
+using DBDT.Excel_EpPlus;
 
 namespace DBDT
 {
@@ -193,6 +194,53 @@ namespace DBDT
                 {
                     Drzewo_15.IsEnabled = false;
                 }
+
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_16'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_16.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_16.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_17'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_17.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_17.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_18'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_18.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_18.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_19'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_19.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_19.IsEnabled = false;
+                }
+                dv.RowFilter = "pole9='TXT_LOKALIZACJA_PLIKOW_20'";
+                if (dv.Count > 0)
+                {
+                    if (dv[0]["pole8"].ToString() != "") Drzewo_20.Header = dv[0]["pole8"].ToString();
+                }
+                else
+                {
+                    Drzewo_20.IsEnabled = false;
+                }
+
             }
         }
 
@@ -557,6 +605,80 @@ namespace DBDT
                 Height = SHT_H
             });
         }
+
+        private void EXCEL_SELECT_DATA_Click(object sender, RoutedEventArgs e)
+        {
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Pliki Excel (*.xlsx)|*.xlsx|Pliki Excel 97-2003 (*.xls)|*.xls";
+            openFileDialog.Title = "Wybierz plik Excel";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filePath = openFileDialog.FileName;
+
+                DataTable dataTable = new DataTable();
+
+                ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;// LicenseContext.NonCommercial;
+
+                using (ExcelPackage package = new ExcelPackage(new FileInfo(filePath)))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0]; // Załóżmy, że arkusz znajduje się na indeksie 0
+
+                    int rowCount = worksheet.Dimension.Rows;
+                    int colCount = worksheet.Dimension.Columns;
+
+                    // Dodawanie kolumn do DataTable
+                    for (int col = 1; col <= colCount; col++)
+                    {
+                        if (worksheet.Cells[1, col].Value == null)
+                        {
+                            string columnName = "XKol" + col.ToString();
+
+                            if (dataTable.Columns.Contains(columnName))
+                            {
+                                dataTable.Columns.Add(columnName + col.ToString());
+                            }
+                            else
+                            {
+                                dataTable.Columns.Add(columnName);
+                            }
+                        }
+                        else
+                        {
+                            string columnName = worksheet.Cells[1, col].Value.ToString().Trim();
+
+                            if (dataTable.Columns.Contains(columnName))
+                            {
+                                dataTable.Columns.Add(columnName + col.ToString());
+                            }
+                            else
+                            {
+                                dataTable.Columns.Add(columnName);
+                            }
+                        }
+
+                    }
+
+                    // Dodawanie danych do DataTable
+                    for (int row = 2; row <= rowCount; row++)
+                    {
+                        DataRow dataRow = dataTable.NewRow();
+                        for (int col = 1; col <= colCount; col++)
+                        {
+                            dataRow[col - 1] = worksheet.Cells[row, col].Value;
+                        }
+                        dataTable.Rows.Add(dataRow);
+                    }
+                }
+
+                WPF_Excel FRM = new WPF_Excel(dataTable);
+                FRM.dt_exec = dataTable;
+                FRM.ShowDialog();
+
+            }
+        }
+
         private void EXCEL_COPY_DATA_Click(object sender, RoutedEventArgs e)
         {
 

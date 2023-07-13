@@ -1,0 +1,37 @@
+﻿<Window x:Class="DBDT.Excel_EpPlus.WPF_Excel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DBDT.Excel_EpPlus"
+        mc:Ignorable="d"
+        Title="Sprawdź dane z tabeli" Height="480" Width="1200" WindowStartupLocation="CenterScreen" StateChanged="state_changed" MinWidth="795" MinHeight="470">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="1" Name="exectGrid" AutoGenerateColumns="True" ColumnWidth="Auto" CanUserDeleteRows="True" CanUserResizeColumns="False" Margin="0,1,0,1" CanUserAddRows="False" SelectionUnit="CellOrRowHeader">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Usuń zaznaczone wiersze" Click="ClickDelSelectRow" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <Expander Grid.Row="2" Name="precura_sql" Header="SQL - Zapytanie do bazy popdaj dane">
+            <StackPanel Grid.Row="2" Margin="5,5,5,5">
+                <TextBox Grid.Row="0" x:Name="TXT_INFO_SELECT" Height="95" TextWrapping="Wrap" UndoLimit="25" MaxLength="5500"/>
+                <Grid>
+                    <Label HorizontalAlignment="Center">[wartosc_z_wskazanej_kolumny] - zapis w SQL wymagany</Label>
+                    <Button Content="Zapisz do bazy"  HorizontalContentAlignment="Center" Width="125" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="1058,0,2,0" Click="Button_Click_Save"/>
+                </Grid>
+            </StackPanel>
+        </Expander>
+        <StackPanel Grid.Row="2" Margin="1,1,6,1">
+            <Grid>
+                <Button Content="Sprawdź"  HorizontalContentAlignment="Center" Width="125" Height="25" HorizontalAlignment="Left" Click="Button_Click" VerticalAlignment="Center" Margin="1058,0,2,0"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

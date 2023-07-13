@@ -304,7 +304,7 @@ namespace DBDT.Excel
         private void konfiguracj_click()
         {
 
-            if (TXT_PROJEKT.Text == "")
+            if (TXT_PROJEKT.Text == "" || CB_NAZ_ZAK.SelectedItem == null)
             {
                 MessageBox.Show("Wybierz projekt", "Błąd konfiguracji!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;

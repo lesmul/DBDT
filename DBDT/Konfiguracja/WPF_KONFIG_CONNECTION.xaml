@@ -69,7 +69,7 @@
             </TabItem>
             <TabItem Header="Konfiguracja lokalizacji katalogów" Cursor="Hand">
                 <Grid Background="#FFFAFAFA">
-                    <ScrollBar x:Name="SC_POZIOM" SmallChange="1" Maximum="2" Minimum="0" Value="0" Cursor="Hand" Orientation="Horizontal" Margin="497,10,0,301" HorizontalAlignment="Left" Width="35" ToolTip="Przewiń aby dodać pozostałe wartości do katalogów" ValueChanged="SC_POZIOM_ValueChanged" BorderThickness="1,1,1,1" Background="#FF0C0C0C" BorderBrush="#FF121212" Panel.ZIndex="1"/>
+                    <ScrollBar x:Name="SC_POZIOM" SmallChange="1" Maximum="3" Minimum="0" Value="0" Cursor="Hand" Orientation="Horizontal" Margin="497,10,0,301" HorizontalAlignment="Left" Width="35" ToolTip="Przewiń aby dodać pozostałe wartości do katalogów" ValueChanged="SC_POZIOM_ValueChanged" BorderThickness="1,1,1,1" Background="#FF0C0C0C" BorderBrush="#FF121212" Panel.ZIndex="1"/>
                     <Label Name="LBL_LK_1" Content="Lokalizacja - katalog głowny:" HorizontalAlignment="Left" Margin="7,10,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="TXT_LOKALIZACJA_PLIKOW_1" HorizontalAlignment="Left" Height="28" Margin="7,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" ToolTip="Wklej ścieszkę w pole" MaxLines="1" MaxLength="500" UndoLimit="1" TabIndex="80" SpellCheck.IsEnabled="True">
                         <TextBox.Style>

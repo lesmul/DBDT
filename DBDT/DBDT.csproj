@@ -217,7 +217,7 @@
     <Compile Include="Excel\WPF_NOWY_PROJEKT.xaml.cs">
       <DependentUpon>WPF_NOWY_PROJEKT.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Excel\WPF_ZAPIS_EXCEL_SQL.xaml.cs">
+    <Compile Include="Excel_EpPlus\WPF_ZAPIS_EXCEL_SQL.xaml.cs">
       <DependentUpon>WPF_ZAPIS_EXCEL_SQL.xaml</DependentUpon>
     </Compile>
     <Compile Include="Excel\WPF_ZAPIS_SQL.xaml.cs">
@@ -227,6 +227,9 @@
       <DependentUpon>WPF_KONFIG_SQL.xaml</DependentUpon>
     </Compile>
     <Compile Include="Excel\zamien_wybrane.cs" />
+    <Compile Include="Excel_EpPlus\WPF_Excel.xaml.cs">
+      <DependentUpon>WPF_Excel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Indeksy\IndeksTable.xaml.cs">
       <DependentUpon>IndeksTable.xaml</DependentUpon>
     </Compile>
@@ -297,7 +300,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Excel\WPF_ZAPIS_EXCEL_SQL.xaml">
+    <Page Include="Excel_EpPlus\WPF_ZAPIS_EXCEL_SQL.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -306,6 +309,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Excel\WPF_KONFIG_SQL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Excel_EpPlus\WPF_Excel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

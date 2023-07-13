@@ -26,7 +26,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
             if (fiA.Exists == true)
             {
                 System.IO.StreamReader srA = new System.IO.StreamReader(fiA.FullName, System.Text.Encoding.Default);
-                string STR_UZYTKOWNIK = srA.ReadLine();
+                //string STR_UZYTKOWNIK = srA.ReadLine();
 
                 srA.Close();
                 srA.Dispose();

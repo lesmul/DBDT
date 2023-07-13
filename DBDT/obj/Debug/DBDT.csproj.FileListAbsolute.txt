@@ -54,7 +54,6 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\UC_EXEC_D
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\UC_Konfig.g.cs
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\WPF_EDYCJA_KOLUMN.g.cs
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\WPF_NOWY_PROJEKT.g.cs
-C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\WPF_ZAPIS_EXCEL_SQL.g.cs
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\WPF_ZAPIS_SQL.g.cs
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\WPF_KONFIG_SQL.g.cs
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Indeksy\IndeksTable.g.cs
@@ -84,7 +83,6 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\UC_EXEC_D
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\UC_Konfig.baml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\WPF_EDYCJA_KOLUMN.baml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\WPF_NOWY_PROJEKT.baml
-C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\WPF_ZAPIS_EXCEL_SQL.baml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\WPF_ZAPIS_SQL.baml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel\WPF_KONFIG_SQL.baml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Indeksy\IndeksTable.baml
@@ -110,5 +108,9 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Cor
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.CopyComplete
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.exe
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.pdb
-C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\PropertyChanged.dll
-C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\PropertyChanged.xml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel_EpPlus\WPF_Excel.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel_EpPlus\WPF_Excel.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel_EpPlus\WPF_ZAPIS_EXCEL_SQL.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel_EpPlus\WPF_ZAPIS_EXCEL_SQL.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fody.CopyLocal.cache
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fody.RuntimeCopyLocal.cache

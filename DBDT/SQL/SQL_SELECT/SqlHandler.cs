@@ -210,6 +210,27 @@ namespace DBDT.SQL.SQL_SELECT
             return errors.ToArray();
         }
 
+        public bool CzyJestWpis(string sqlText)
+        {
+            if (!IsConnected)
+                throw new InvalidOperationException("Nie można wykonać zapytania SQL, gdy połączenie jest zamknięte!");
+
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sqlText;
+
+            DataTable tbl = new DataTable();
+            adapter.Fill(tbl);
+            if(tbl.Rows .Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
         public DataTable StrukturaTabel()
         {
             if (!IsConnected)

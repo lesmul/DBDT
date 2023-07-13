@@ -41,12 +41,21 @@
                                 <MenuItem Tag="_13" Name="Drzewo_13" Header="Drzewo #13" Click="Window_Tree_Click" />
                                 <MenuItem Tag="_14" Name="Drzewo_14" Header="Drzewo #14" Click="Window_Tree_Click" />
                                 <MenuItem Tag="_15" Name="Drzewo_15" Header="Drzewo #15" Click="Window_Tree_Click" />
+                                
+                                <MenuItem Tag="_16" Name="Drzewo_16" Header="Drzewo #16" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_17" Name="Drzewo_17" Header="Drzewo #17" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_18" Name="Drzewo_18" Header="Drzewo #18" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_19" Name="Drzewo_19" Header="Drzewo #19" Click="Window_Tree_Click" />
+                                <MenuItem Tag="_20" Name="Drzewo_20" Header="Drzewo #20" Click="Window_Tree_Click" />
+
                                 <MenuItem Tag="WT_ALL" Name="Drzewo_ALL" Header="Mój komputer" Click="Window_Tree_Click" />
                             </MenuItem>
                             <Separator/>
                             <MenuItem Header="Generuj dane automatyzacji zapisu" Click="ExecAutomatEXCEL_Click" />
                             <Separator/>
                             <MenuItem Header="Kopiuj dane z EXCEL do tabeli w bazie danych" Click="EXCEL_COPY_DATA_Click" />
+                            <Separator/>
+                            <MenuItem Header="Sprawdź dane z EXCEL z tabelą w bazie danych" Click="EXCEL_SELECT_DATA_Click" />
                         </MenuItem>
                         <MenuItem Header="DXF">
                             <MenuItem Header="Podgląd DXF" Click="AddDXFWindow_Click" />

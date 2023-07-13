@@ -74,6 +74,15 @@ namespace DBDT.Konfiguracja
                 LBL_LK_4.Content = "Lokalizacja - katalog głowny [#14]:";
                 LBL_LK_5.Content = "Lokalizacja - katalog głowny [#15]:";
             }
+            else if (SC_POZIOM.Value == 3)
+            {
+                sb_poziom = 15;
+                LBL_LK_1.Content = "Lokalizacja - katalog głowny [#16]:";
+                LBL_LK_2.Content = "Lokalizacja - katalog głowny [#17]:";
+                LBL_LK_3.Content = "Lokalizacja - katalog głowny [#18]:";
+                LBL_LK_4.Content = "Lokalizacja - katalog głowny [#19]:";
+                LBL_LK_5.Content = "Lokalizacja - katalog głowny [#20]:";
+            }
 
             TXT_LOKALIZACJA_PLIKOW_1.Text = "";
             TXT_LOKALIZACJA_PLIKOW_2.Text = "";
@@ -216,6 +225,11 @@ namespace DBDT.Konfiguracja
             if (SC_POZIOM.Value == 2)
             {
                 sb_poziom = 10;
+            }
+
+            if (SC_POZIOM.Value == 3)
+            {
+                sb_poziom = 15;
             }
 
             switch (((System.Windows.FrameworkElement)sender).Tag.ToString())

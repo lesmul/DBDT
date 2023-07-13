@@ -800,7 +800,7 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 int licz_copy = 0;
 
-                bool boolWstawEnter = false;
+                //bool boolWstawEnter = false;
 
                 string valuex = "IF [";
 
