@@ -66,6 +66,12 @@ namespace DBDT.Excel
                 str_Tag = "OK";
             }
 
+
+            if (dts == null)
+            {
+                return "";
+            }
+
             if (dts.Rows.Count == 0) 
             {
                 MessageBox.Show("Brak danych w tabeli " + strOp[0].ToString() + " dla indeksu: " + str_indesk + " musi być równy " + strOp[1].ToString(), "Błąd konfiguracji!!!", MessageBoxButton.OK, MessageBoxImage.Warning);

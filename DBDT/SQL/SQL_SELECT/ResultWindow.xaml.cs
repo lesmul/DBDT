@@ -2056,7 +2056,7 @@ namespace DBDT.SQL.SQL_SELECT
                 var col = itemx.Column as DataGridColumn;
                 var row = itemx.Item as DataRowView;
 
-                if (row != null)
+                if (row != null && ((FrameworkElement)e.OriginalSource).Tag != null)
                 {
 
                     str_d += add_boom.AddBoom(resultGrid, spc, ((FrameworkElement)e.OriginalSource).Tag.ToString(), row.Row[col.Header.ToString()].ToString().Trim());
@@ -2124,5 +2124,45 @@ namespace DBDT.SQL.SQL_SELECT
             LBL_INFO.Content = "Nie zaznaczone kolumny usunięto...";
 
         }
-    }
+
+		private void resultGridKeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.F8)
+			{
+				click_seterror(sender, e);
+			}
+			else if (e.Key == Key.F2 || e.Key == Key.K)
+			{
+				ClickCopy(sender, e);
+			}
+			else if (e.Key == Key.F5)
+            {
+				FrameworkElement element = sender as FrameworkElement;
+				if (element != null)
+				{
+					element.Tag = "";
+					Columns_select_Click(element, e);
+				}
+			}
+			else if (e.Key == Key.F9 || e.Key == Key.S)
+            {
+				FrameworkElement element = sender as FrameworkElement;
+				if (element != null)
+				{
+					element.Tag = "SETOPTION";
+					ColumnsAND_select_Click(element, e);
+				}
+			}
+			else if (e.Key == Key.F6 || e.Key == Key.B)
+            {
+				FrameworkElement element = sender as FrameworkElement;
+				if (element != null)
+				{
+					element.Tag = "";
+					Dodaj_do_boom_Click(element, e);
+				}
+			}
+
+		}
+	}
 }

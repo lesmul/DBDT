@@ -38,7 +38,7 @@
                 </Grid>
             </StackPanel>
         </Expander>
-        <DataGrid Grid.Row="2" Name="resultGrid" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,1,0,1" IsReadOnly="True" SelectedCellsChanged="selectde_cells" MouseLeftButtonDown="mouse_down" ContextMenuOpening="cont_menu_opening" MaxColumnWidth="900" MinRowHeight="10" CanUserAddRows="False" CanUserDeleteRows="False" MouseDoubleClick="mouse_double_click" >
+        <DataGrid Grid.Row="2" Name="resultGrid" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,1,0,1" IsReadOnly="True" SelectedCellsChanged="selectde_cells" MouseLeftButtonDown="mouse_down" ContextMenuOpening="cont_menu_opening" MaxColumnWidth="900" MinRowHeight="10" CanUserAddRows="False" CanUserDeleteRows="False" MouseDoubleClick="mouse_double_click" KeyDown="resultGridKeyDown" >
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="MinHeight" Value="10"/>
@@ -54,7 +54,11 @@
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Kopiuj i usuń polskie znaki" Click="ClickCopy_bez_pl" />
-                    <MenuItem Header="Kopiuj i usuń białe znaki" Click="ClickCopy" />
+                    <MenuItem Header="Kopiuj i usuń białe znaki" Click="ClickCopy">
+                        <MenuItem.InputGestureText>
+                            F2 lub K
+                        </MenuItem.InputGestureText>
+                    </MenuItem>
                     <MenuItem Header="Kopiuj oryginał" Click="ClickCopyOryg" />
                     <Separator/>
                     <MenuItem Header="Ustaw szybki filtr" Tag="" Click="resultGrid_szybki_filtr_Click" />
@@ -84,7 +88,11 @@
                     </MenuItem>
                     <Separator/>
                     <MenuItem Header="Kolumny">
-                        <MenuItem Header="Kopiuj nazwy zaznaczonych kolumn" Tag="" Click="Columns_select_Click" />
+                        <MenuItem Header="Kopiuj nazwy zaznaczonych kolumn" Tag="" Click="Columns_select_Click">
+                            <MenuItem.InputGestureText>
+                                F5
+                            </MenuItem.InputGestureText>
+                        </MenuItem>
                         <MenuItem Header="Usuń kolumny zaznaczone" Tag="DEL" Click="Columns_Del_select_Click" />
                         <MenuItem Header="Usuń kolumny oprócz zaznaczonych" Tag="" Click="Columns_Del_select_Click" />
                     </MenuItem>
@@ -123,13 +131,25 @@
                             </MenuItem.Header>
                         </MenuItem>
                         <Separator/>
-                        <MenuItem Header="Kopiuj pole jako polecenie SETERROREX" Click="click_seterror" Foreground="#FF980C0C" />
-                        <MenuItem Header="Kopiuj pole jako polecenie SETOPTION" Tag="SETOPTION" Click="ColumnsAND_select_Click" Foreground="#FF1D0E4E" />
+                        <MenuItem x:Name="menuItem" Header="Kopiuj pole jako polecenie SETERROREX" Click="click_seterror" Foreground="#FF980C0C">
+                            <MenuItem.InputGestureText>
+                                F8
+                            </MenuItem.InputGestureText>
+                        </MenuItem>
+                        <MenuItem Header="Kopiuj pole jako polecenie SETOPTION" Tag="SETOPTION" Click="ColumnsAND_select_Click" Foreground="#FF1D0E4E">
+                            <MenuItem.InputGestureText>
+                                F9 lub S
+                            </MenuItem.InputGestureText>
+                        </MenuItem>
                         <MenuItem Header="Kopiuj pole jako polecenie IF ENDIF" Tag="IF" Click="ColumnsAND_select_Click" Foreground="#FF085C19" />
                         <MenuItem Header="Kopiuj pole jako polecenie tylko IF" Tag="IFTYLKO" Click="ColumnsAND_select_Click" Foreground="#FF085C19" />
                     </MenuItem>
                     <MenuItem Header="Dodaj indesk do boom">
-                        <MenuItem Header="Zaznaczone" Tag="OK" Click="Dodaj_do_boom_Click" />
+                        <MenuItem Header="Zaznaczone" Tag="OK" Click="Dodaj_do_boom_Click">
+                            <MenuItem.InputGestureText>
+                                F6 lub B
+                            </MenuItem.InputGestureText>
+                        </MenuItem>
                         <MenuItem Header="Zaznaczone oraz wytnij do znaku - " Tag="LIKE" Click="Dodaj_do_boom_Click" />
                         <MenuItem Header="Zaznaczone opisem" Tag="NOK" Click="Dodaj_do_boom_Click" />
                     </MenuItem>

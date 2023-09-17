@@ -56,6 +56,8 @@
                             <MenuItem Header="Kopiuj dane z EXCEL do tabeli w bazie danych" Click="EXCEL_COPY_DATA_Click" />
                             <Separator/>
                             <MenuItem Header="Sprawdź dane z EXCEL z tabelą w bazie danych" Click="EXCEL_SELECT_DATA_Click" />
+                            <Separator/>
+                            <MenuItem Header="Narzędzie do generowania dopłat" Click="EXCEL_DOPLATY_DATA_Click" />
                         </MenuItem>
                         <MenuItem Header="DXF">
                             <MenuItem Header="Podgląd DXF" Click="AddDXFWindow_Click" />

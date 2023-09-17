@@ -433,7 +433,7 @@ namespace DBDT.SQL.SQL_SELECT
                     strSQL = txtCode.SelectedText;
                 }
 
-                DataSet resultDS = sqlHandler.ExecuteDS(strSQL, out errors);
+                DataSet resultDS = sqlHandler.ExecuteDS(strSQL, out errors, Convert.ToInt32(IntTimeOut.Text));
                 errorsGrid.ItemsSource = errors;
                 errorsExpander.IsExpanded = (errors.Length != 0);
                 int i_tx = 0;
@@ -1032,6 +1032,98 @@ namespace DBDT.SQL.SQL_SELECT
             TXT_OLD.Text = TXT_NEW.Text;
             TXT_NEW.Text = Clipboard.GetText();
         }
+        int indeks_old = 0;
+		private void find_next_text_click(object sender, RoutedEventArgs e)
+		{
+
+			if (TXT_FIND.Text.Length < 2)
+			{
+				txtCode.Select(0, 0);
+				return;
+
+			}
+			//if (currentIndex == 0 && searchLength == 0) return;
+
+			string searchText = TXT_FIND.Text.TrimEnd();
+			string textToSearchIn = txtCode.Text;
+			int currentIndex = intfindindex;
+			int searchLength = searchText.Length;
+
+			while (currentIndex < textToSearchIn.Length)
+			{
+				currentIndex = textToSearchIn.IndexOf(searchText, currentIndex, StringComparison.InvariantCultureIgnoreCase);
+
+				if (currentIndex == -1)
+				{
+					break;
+				}
+
+				txtCode.Select(currentIndex, searchLength);
+				currentIndex += searchLength;
+
+				intfindindex = currentIndex;
+
+				if (searchLength > -1) break;
+			}
+
+            if(indeks_old == intfindindex)
+            {
+			     intfindindex = 0;
+			}
+            else
+            {
+                indeks_old = intfindindex;
+			}
+		}
+		
+		private int intfindindex = 0;
+		private void TextChanged(object sender, TextChangedEventArgs e)
+		{
+			intfindindex = 0;
+
+			if (TXT_FIND.Text.Length < 2)
+            {
+                txtCode.Select(0, 0);
+                return;
+
+			}
+			//if (currentIndex == 0 && searchLength == 0) return;
+
+			string searchText = TXT_FIND.Text.TrimEnd();
+			string textToSearchIn = txtCode.Text;
+			int currentIndex = intfindindex;
+			int searchLength = searchText.Length;
+
+			while (currentIndex < textToSearchIn.Length)
+			{
+				currentIndex = textToSearchIn.IndexOf(searchText, currentIndex, StringComparison.InvariantCultureIgnoreCase);
+
+				if (currentIndex == -1)
+				{
+					break;
+				}
+
+				txtCode.Select(currentIndex, searchLength);
+				currentIndex += searchLength;
+
+                intfindindex = currentIndex;
+
+				if (searchLength>-1) break;
+			}
+		}
+        private void IntTimeOut_PreviewTextInput(object sender, TextCompositionEventArgs e)
+	    {
+		    // Sprawdź, czy wprowadzony tekst składa się tylko z cyfr.
+		    if (!IsNumeric(e.Text))
+		    {
+			    e.Handled = true; // Odrzuć wprowadzone znaki, jeśli nie są cyframi.
+		    }
+	    }
+
+	    private bool IsNumeric(string text)
+	    {
+		    return int.TryParse(text, out _); // Sprawdź, czy tekst można przekonwertować na liczbę całkowitą.
+	    }
     }
 
 }

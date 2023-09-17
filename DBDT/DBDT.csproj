@@ -217,6 +217,9 @@
     <Compile Include="Excel\WPF_NOWY_PROJEKT.xaml.cs">
       <DependentUpon>WPF_NOWY_PROJEKT.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Excel_EpPlus\WPF_Doplaty_Narz.xaml.cs">
+      <DependentUpon>WPF_Doplaty_Narz.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Excel_EpPlus\WPF_ZAPIS_EXCEL_SQL.xaml.cs">
       <DependentUpon>WPF_ZAPIS_EXCEL_SQL.xaml</DependentUpon>
     </Compile>
@@ -299,6 +302,10 @@
     <Page Include="Excel\WPF_NOWY_PROJEKT.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Excel_EpPlus\WPF_Doplaty_Narz.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Excel_EpPlus\WPF_ZAPIS_EXCEL_SQL.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -566,6 +573,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="SQL\SQL_SELECT\Images\paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SQL\SQL_SELECT\Images\find.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -111,5 +111,7 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel_EpPlus\WP
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel_EpPlus\WPF_Excel.baml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel_EpPlus\WPF_ZAPIS_EXCEL_SQL.g.cs
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel_EpPlus\WPF_ZAPIS_EXCEL_SQL.baml
-C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fody.CopyLocal.cache
-C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fody.RuntimeCopyLocal.cache
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel_EpPlus\WPF_Doplaty_Narz.g.cs
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\Excel_EpPlus\WPF_Doplaty_Narz.baml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\PropertyChanged.dll
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\PropertyChanged.xml

@@ -31,6 +31,10 @@ using System.IO;
 using OfficeOpenXml;
 using Microsoft.Win32;
 using DBDT.Excel_EpPlus;
+using Microsoft.Office.Interop.Excel;
+using DataTable = System.Data.DataTable;
+using MenuItem = System.Windows.Controls.MenuItem;
+using Window = System.Windows.Window;
 
 namespace DBDT
 {
@@ -605,8 +609,14 @@ namespace DBDT
                 Height = SHT_H
             });
         }
+		
+	    private void EXCEL_DOPLATY_DATA_Click(object sender, RoutedEventArgs e)
+        {
+			WPF_Doplaty_Narz FRM = new WPF_Doplaty_Narz();
+			FRM.Show();
 
-        private void EXCEL_SELECT_DATA_Click(object sender, RoutedEventArgs e)
+		}
+		private void EXCEL_SELECT_DATA_Click(object sender, RoutedEventArgs e)
         {
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -690,7 +700,7 @@ namespace DBDT
             {
                 string filePath = openFileDialog.FileName;
 
-                DataTable dataTable = new DataTable();
+				DataTable dataTable = new DataTable();
 
                 ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;// LicenseContext.NonCommercial;
 

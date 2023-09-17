@@ -62,6 +62,8 @@ namespace DBDT.SQL.SQL_SELECT
         private List<SqlError> errors;
         private ArrayList infoCount;
 
+        private int intCzasTimeOut = 360;
+
         public string ConnectionString
         {
             get { return conn.ConnectionString; }
@@ -131,7 +133,8 @@ namespace DBDT.SQL.SQL_SELECT
 
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sqlText;
-                DataTable tbl = new DataTable();
+                cmd.CommandTimeout = intCzasTimeOut;
+				DataTable tbl = new DataTable();
                 adapter.Fill(tbl);
                 errorsArray = errors.ToArray();
                 return tbl;
@@ -166,7 +169,8 @@ namespace DBDT.SQL.SQL_SELECT
                 }
 
                 cmd.CommandText = dtexec.Rows[0]["NazwaProcedury"].ToString();
-                cmd.ExecuteScalar();
+				cmd.CommandTimeout = intCzasTimeOut;
+				cmd.ExecuteScalar();
                 errorsArray = errors.ToArray();
 
                 cmd.Parameters.Clear();
@@ -176,16 +180,19 @@ namespace DBDT.SQL.SQL_SELECT
 
         }
 
-        public DataSet ExecuteDS(string sqlText, out SqlError[] errorsArray)
+        public DataSet ExecuteDS(string sqlText, out SqlError[] errorsArray, int TimeUout)
         {
             if (!IsConnected)
                 throw new InvalidOperationException("Nie można wykonać zapytania SQL, gdy połączenie jest zamknięte!");
 
             errors.Clear();
 
-            cmd.CommandType = CommandType.Text;
+            intCzasTimeOut = TimeUout;
+
+			cmd.CommandType = CommandType.Text;
             cmd.CommandText = sqlText;
-            DataSet tbl = new DataSet();
+			cmd.CommandTimeout = intCzasTimeOut;
+			DataSet tbl = new DataSet();
             adapter.Fill(tbl);
             errorsArray = errors.ToArray();
             return tbl;

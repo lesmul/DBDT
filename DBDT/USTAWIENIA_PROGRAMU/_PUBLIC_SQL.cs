@@ -72,7 +72,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 return "" ;
             }
 
-            return "Server=" + dt.Rows[0][1].ToString() + ";Database=" + dt.Rows[0][2].ToString() + ";Trusted_Connection=True;Connection Timeout=180";
+            return "Server=" + dt.Rows[0][1].ToString() + ";Database=" + dt.Rows[0][2].ToString() + ";Trusted_Connection=True;Connection Timeout=120";
         }
 
         /// <summary>

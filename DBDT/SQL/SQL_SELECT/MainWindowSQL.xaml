@@ -158,6 +158,37 @@
             <Button Name="B_PASTE_MOVE" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Wklej ze schowka do pola na: pole na: przenieś na z:" Click="paste_and_move_click" >
                 <Image Source="Images/paste.png"/>
             </Button>
+            <Separator></Separator>
+            <TextBox x:Name="TXT_FIND" Width="95" Height="27" TextChanged="TextChanged" ToolTip="Wpisz frazę">
+                <TextBox.Style>
+                    <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="Wyszukaj frazę" Foreground="LightBlue" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Button Name="B_FIND_NEXT" Style="{StaticResource ResourceKey=buttonStyle}" ToolTip="Wyszukaj następne wystąpinienie" Click="find_next_text_click" >
+                <Image Source="Images/find.png"/>
+            </Button>
+            <Separator></Separator>
+            <Label>TimeOut:</Label>
+            <TextBox Name="IntTimeOut" PreviewTextInput="IntTimeOut_PreviewTextInput" ToolTip="Ograniczenia czasu wywołania w sekundach (po upłewie tego czasu będzie błąd!)">360</TextBox>
         </ToolBar>
         <TextBox Name="txtCode"
                  AcceptsReturn="True"
