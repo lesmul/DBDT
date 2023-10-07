@@ -58,8 +58,12 @@
                             <MenuItem Header="Sprawdź dane z EXCEL z tabelą w bazie danych" Click="EXCEL_SELECT_DATA_Click" />
                             <Separator/>
                             <MenuItem Header="Narzędzie do generowania dopłat" Click="EXCEL_DOPLATY_DATA_Click" />
+                            <Separator/>
+                            <MenuItem Header="Narzędzie do generowania restrykcji wymiarowych" Click="EXCEL_RESTR_WYMIAROWE_DATA_Click" />
                         </MenuItem>
-                        <MenuItem Header="DXF">
+                        <MenuItem Header="XSLT / DXF">
+                            <MenuItem Header="Podgląd transformacji pliku XML za pomocą XSLT" Click="XMLXSLTWindow_Click" />
+                            <Separator/>
                             <MenuItem Header="Podgląd DXF" Click="AddDXFWindow_Click" />
                         </MenuItem>
                         <MenuItem Header="Narzędzia Python">

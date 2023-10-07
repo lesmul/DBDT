@@ -335,7 +335,7 @@ namespace DBDT.USTAWIENIA_PROGRAMU
         /// <returns></returns>
         public static Boolean DODAJ_REKORD_PAR_POLACZENIA(string str_serwer, string str_nazwa_bazy,
             string pole8 = "",string pole10 ="", string nazwa_pola = "", bool boolZastap = false, string pole2 = "", string pole3 = "", 
-            string pole4 = "", string pole5 = "", string pole6 = "")
+            string pole4 = "", string pole5 = "", string pole6 = "", string pole11 = "")
         {
 
             if ((str_serwer.Trim() == "" || str_nazwa_bazy.Trim() == "") && boolZastap == false) return false;
@@ -375,12 +375,13 @@ namespace DBDT.USTAWIENIA_PROGRAMU
                 command_insert.ExecuteNonQuery();
             }
 
-            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole9`, `pole8`, `pole7`, `pole6`, `pole5`, `kto_zmienil`, " +
+            command_insert.CommandText = "INSERT INTO `ParametryPalaczenia` (`serwer`,`nazwa_bazy`, `pole10`, `pole11`, `pole9`, `pole8`, `pole7`, `pole6`, `pole5`, `kto_zmienil`, " +
                 "`data_utworzenia`, `pole2`, `pole3`, `pole4`)" +
-                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole9, @pole8, @pole7, @pole6, @pole5, @kto_zmienil, @data_utworzenia, @pole2, @pole3, @pole4)";
+                " VALUES(@serwer, @nazwa_bazy, @pole10, @pole11, @pole9, @pole8, @pole7, @pole6, @pole5, @kto_zmienil, @data_utworzenia, @pole2, @pole3, @pole4)";
 
             command_insert.Parameters.AddWithValue("@serwer", str_serwer);
             command_insert.Parameters.AddWithValue("@nazwa_bazy", str_nazwa_bazy);
+            command_insert.Parameters.AddWithValue("@pole11", pole11);
             command_insert.Parameters.AddWithValue("@pole10", pole10);
             command_insert.Parameters.AddWithValue("@pole8", pole8);
             command_insert.Parameters.AddWithValue("@pole7", guid);

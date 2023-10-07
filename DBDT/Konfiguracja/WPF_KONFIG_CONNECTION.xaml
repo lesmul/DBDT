@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DBDT.Konfiguracja"
         mc:Ignorable="d"
-        Title="Konfiguracja programu połączenia/katalogi/synchronizacja" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png" WindowStyle="ToolWindow" Width="637" Height="395" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5,5,5,5" Margin="-1,0,0,0">
+        Title="Konfiguracja programu połączenia/katalogi/synchronizacja" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/Konfiguracja/iokno.png" WindowStyle="ToolWindow" Width="637" Height="425" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5,5,5,5" Margin="-1,0,0,0">
     <Grid Margin="-5,-5,-5,4">
 
-        <TabControl HorizontalAlignment="Center" Height="356" VerticalAlignment="Top" Width="627" Margin="0,14,0,0">
+        <TabControl HorizontalAlignment="Center" Height="386" VerticalAlignment="Top" Width="627" Margin="0,14,0,0">
             <TabItem Header="Połączenia do bazy danych">
                 <Grid Background="#FFF6F5F5">
                     <Button Content="Zakończ i zapisz" Height="43" Margin="0,186,0,0" Width="601" Click="zakoncz_click" BorderThickness="1,1,1,1" VerticalAlignment="Top" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
@@ -453,7 +453,62 @@
                             </Style>
                         </TextBox.Style>
                     </TextBox>
-                    <Button x:Name="B_ZAPISZ_KONF_INDEKS" Content="Zapisz konfiguracje" Height="28" Margin="391,260,5,0" Click="B_ZAPISZ_KONF_INDEKS_Click"/>
+                    <Button x:Name="B_ZAPISZ_KONF_INDEKS" Content="Zapisz konfiguracje" Margin="487,30,0,31" Click="B_ZAPISZ_KONF_INDEKS_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="SQL - Automatyzacja">
+                <Grid Height="348">
+                    <Label Content="SQL Wyszkaj pusty numer błędu:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_SQL_PUSTY_NUMER" HorizontalAlignment="Center" Height="117" Margin="0,37,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Width="601" ToolTip="Zapytanie SQL pusty numer błądu" UndoLimit="5" TabIndex="80" SpellCheck.IsEnabled="True" AcceptsReturn="True" AcceptsTab="True" MaxLength="1500">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Zapytanie SQL pusty numer błądu" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Label Content="SQL Wyszkaj i zapisz XML serii:" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TXT_SQL_XML_SERII" HorizontalAlignment="Center" Height="117" Margin="0,172,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Width="601" ToolTip="Zapytanie SQL XML serii Uwaga: = @SeriaProdukcyjna w składni SQL będzie zamieniany na numer który będzie podawany" UndoLimit="5" TabIndex="80" SpellCheck.IsEnabled="True" AcceptsReturn="True" AcceptsTab="True" MaxLength="5500">
+                        <TextBox.Style>
+                            <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="{x:Type TextBox}">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="Zapytanie SQL XML serii Uwaga: = @SeriaProdukcyjna w składni SQL będzie zamieniany na numer który będzie podawany" Foreground="LightGray" />
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button x:Name="B_ZAPISZ_KONF_SQL" Content="Zapisz konfiguracje SQL" Height="28" Margin="474,296,13,24" Click="B_ZAPISZ_KONF_INDEKS_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Synchronizacja programu">

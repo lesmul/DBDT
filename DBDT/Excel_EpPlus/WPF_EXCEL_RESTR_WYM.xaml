@@ -1,0 +1,40 @@
+﻿<Window x:Class="DBDT.Excel.WPF_EXCEL_RESTR_WYM"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:l="clr-namespace:DBDT.Excel_EpPlus"
+        mc:Ignorable="d"
+        Title="Konfigurator zapisu danych SQL" Height="650" Width="1126" WindowStartupLocation="CenterScreen" StateChanged="state_changed" MinWidth="795" MinHeight="470">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MinHeight="9"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto" MinHeight="521.08"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="1" Content="Wybierz plik EXCEL" Click="OpenEXCELFile_Click" HorizontalAlignment="Left" Margin="10,10,0,10" Width="118"/>
+        <TextBlock Grid.Row="1" Text="Lokalizacja pliku EXCEL:" VerticalAlignment="Center" Margin="133,0,22,0" Height="18"/>
+        <TextBox Grid.Row="1" Name="xmlFilePathTextBox" Margin="133,0,14,0" VerticalAlignment="Center" IsReadOnly="True" Height="18"/>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16,0,0,0" Width="259" Height="25">
+            <TextBlock Text="Wybierz kolor ma spełnić warunki IF" Width="200" />
+            <l:LivePreviewComboBox x:Name="CB_KOLORY" Width="54" ItemsSource="{Binding uniqueColors}" SelectedIndex="0" Height="25" RenderTransformOrigin="0.499,-0.109">
+                <l:LivePreviewComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle Width="20" Height="20" Fill="{Binding}" />
+                    </DataTemplate>
+                </l:LivePreviewComboBox.ItemTemplate>
+            </l:LivePreviewComboBox>
+        </StackPanel>
+        <Label Grid.Row="2" Margin="275,0,750,47" Grid.RowSpan="2">Nazwa arkusza:</Label>
+        <ComboBox x:Name="CB_NazwaArkusza" HorizontalAlignment="Left" Margin="368,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="350"/>
+        <Button x:Name="B_TW_FUNKCJE"  Grid.Row="3" Content="Generuj warunki" HorizontalAlignment="Left" Height="46" Margin="998,0,0,0" VerticalAlignment="Center" Width="128" Click="B_TW_FUNKCJE_Click"/>
+        <TextBox x:Name="TXT_WYNIK_IF_ENDIF"  Grid.Row="3" Margin="10,5,133,5" TextWrapping="Wrap" Text="TextBox"/>
+
+        <DataGrid Grid.Row="4" Name="dataGrid1" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,0,0,0" ></DataGrid>
+
+    </Grid>
+</Window>

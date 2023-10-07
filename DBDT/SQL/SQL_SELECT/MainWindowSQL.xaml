@@ -189,6 +189,7 @@
             <Separator></Separator>
             <Label>TimeOut:</Label>
             <TextBox Name="IntTimeOut" PreviewTextInput="IntTimeOut_PreviewTextInput" ToolTip="Ograniczenia czasu wywołania w sekundach (po upłewie tego czasu będzie błąd!)">360</TextBox>
+			<CheckBox x:Name="ChkTopmost">Wyniki [zawsze na wierzchu]</CheckBox>
         </ToolBar>
         <TextBox Name="txtCode"
                  AcceptsReturn="True"
@@ -230,6 +231,8 @@
                     <Separator/>
                     <MenuItem Header="Zmień zaznaczone linie na komentarz" Tag="comments" Click="click_coments" />
                     <MenuItem Header="Usuń komentarz z zaznaczonych linii" Tag="uncomments" Click="click_coments" />
+					<Separator/>
+					<MenuItem Header="Wyszukaj wolny numer błędu" Tag="err_empty" Click="click_find_error" />
                 </ContextMenu>
             </TextBox.ContextMenu>
         </TextBox>

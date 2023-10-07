@@ -18,6 +18,7 @@ using System.Windows.Documents;
 using System.Collections;
 using System.Windows.Controls.Primitives;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace DBDT.SQL.SQL_SELECT
 {
@@ -226,6 +227,102 @@ namespace DBDT.SQL.SQL_SELECT
                 sr.Close();
             }
         }
+        private void click_find_error(object sender, RoutedEventArgs e)
+        {
+
+            UpdateUIStatus();
+
+            try
+            {
+                b_wykonaj.IsEnabled = false;
+                b_wykonaj_ds.IsEnabled = false;
+                SqlError[] errors;
+
+                System.Data.DataTable dt = new System.Data.DataTable();
+
+                dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole10 FROM ParametryPalaczenia WHERE pole9 LIKE 'POLE_KONFIGURACJI_INDEKSOW' order by id desc");
+
+                string strSQL = "";
+
+                if (dt.Rows.Count > 0)
+                {
+                    if(dt.Rows[0]["pole10"].ToString().Trim() != "")
+                    {
+                        strSQL = dt.Rows[0]["pole10"].ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Brak danych w konfiguraorze SQL", "Błąd", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                }
+
+                DataTable result = sqlHandler.Execute(strSQL, out errors, procedura);
+
+                if(result.Rows.Count == 0)
+                {
+                    MessageBox.Show("Brak danych", "Błąd", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                string strcolname = result.Columns[0].ColumnName;
+
+                DataTable dtpuste = new DataTable();
+                DataColumn dc = new DataColumn
+                {
+                    ColumnName = strcolname,
+                    DataType = typeof(int)
+                };
+                dtpuste.Columns.Add(dc);
+                DataColumn dco = new DataColumn
+                {
+                    ColumnName = "Informacja DBDT",
+                    DataType = typeof(string),
+                    DefaultValue ="Pusty numer błędu"
+                };
+                dtpuste.Columns.Add(dco);
+
+                int lpmax = result.AsEnumerable().Max(row => row.Field<int>(0)) + 10;
+                int lpmin = result.AsEnumerable().Min(row => row.Field<int>(0));
+
+                int i;
+
+                DataView dv = new DataView(result);
+
+                for (i = lpmin; i < lpmax; i++)
+                {
+                    dv.RowFilter = strcolname + "=" + i;
+                    if (dv.Count == 0)
+                    {
+                        DataRow newRow = dtpuste.NewRow();
+                        newRow[strcolname] = i;
+                        dtpuste.Rows.Add(newRow);
+                    }
+                }
+
+                errorsGrid.ItemsSource = errors;
+                errorsExpander.IsExpanded = (errors.Length != 0);
+
+                UpdateUIStatus(true, "Zapytanie zwróciło wyników: " + dtpuste.Rows.Count.ToString()); ;
+
+                if (dtpuste.Rows.Count > 0)
+                {
+                    ResultWindow resultWindow = new ResultWindow(dtpuste, sqlHandler.Nazwa_Tabeli(), sqlHandler.Wartosc_Like());
+                    resultWindow.Topmost = (bool)ChkTopmost.IsChecked; // Ustawienie okna wynikowego na zawsze na wierzchu
+                    resultWindow.Show();
+                }
+                else if (errors == null)
+                {
+                    MessageBox.Show("Ilość wyników <null>.", "Wykonano zapytanie", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.StackTrace, "Błąd zapytania SQL", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
 
         private void Save_ExecutedSQL(object sender, ExecutedRoutedEventArgs e)
         {
@@ -400,10 +497,16 @@ namespace DBDT.SQL.SQL_SELECT
                 }
 
                 if (result.Rows.Count > 0)
-                    new ResultWindow(result, sqlHandler.Nazwa_Tabeli(), sqlHandler.Wartosc_Like()).Show();
-
+                {
+                    ResultWindow resultWindow = new ResultWindow(result, sqlHandler.Nazwa_Tabeli(), sqlHandler.Wartosc_Like());
+                    resultWindow.Topmost = (bool)ChkTopmost.IsChecked; // Ustawienie okna wynikowego na zawsze na wierzchu
+                    resultWindow.Show();
+                }
                 else if (errors == null)
+                {
                     MessageBox.Show("Ilość wyników <null>.", "Wykonano zapytanie", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
             }
             catch (Exception ex)
             {

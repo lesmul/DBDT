@@ -31,7 +31,7 @@ namespace DBDT.Konfiguracja
 
             DataTable dt = new DataTable();
 
-            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole2, pole3, pole4, pole5, pole6 FROM ParametryPalaczenia WHERE pole9 LIKE 'POLE_KONFIGURACJI_INDEKSOW' order by id desc");
+            dt = _PUBLIC_SqlLite.SelectQuery("SELECT id, pole2, pole3, pole4, pole5, pole6, pole10, pole11  FROM ParametryPalaczenia WHERE pole9 LIKE 'POLE_KONFIGURACJI_INDEKSOW' order by id desc");
 
             if (dt.Rows.Count > 0)
             {
@@ -40,6 +40,10 @@ namespace DBDT.Konfiguracja
                 TXT_INDESK_INNY.Text = dt.Rows[0]["pole4"].ToString();
                 TXT_INDESK_DRUK.Text = dt.Rows[0]["pole5"].ToString();
                 TXT_INDESK_UZYTKOWNIKA.Text = dt.Rows[0]["pole6"].ToString();
+
+                TXT_SQL_PUSTY_NUMER.Text = dt.Rows[0]["pole10"].ToString();
+                TXT_SQL_XML_SERII.Text = dt.Rows[0]["pole11"].ToString();
+
             }
         }
 
@@ -433,9 +437,10 @@ namespace DBDT.Konfiguracja
 
             if (dr == MessageBoxResult.Yes)
             {
-                _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", "", "", "POLE_KONFIGURACJI_INDEKSOW", true, TXT_INDESK_DOPLAT.Text.Trim(), TXT_INDESK_DUMMY.Text.Trim(),
-                    TXT_INDESK_INNY.Text.Trim(),TXT_INDESK_DRUK.Text.Trim(),TXT_INDESK_INNY.Text.Trim());
+                _PUBLIC_SqlLite.DODAJ_REKORD_PAR_POLACZENIA("", "", "", TXT_SQL_PUSTY_NUMER.Text.Trim(), "POLE_KONFIGURACJI_INDEKSOW", true, TXT_INDESK_DOPLAT.Text.Trim(), TXT_INDESK_DUMMY.Text.Trim(),
+                    TXT_INDESK_INNY.Text.Trim(),TXT_INDESK_DRUK.Text.Trim(),TXT_INDESK_INNY.Text.Trim(),TXT_SQL_XML_SERII.Text.Trim());
             }
         }
+        
     }
 }

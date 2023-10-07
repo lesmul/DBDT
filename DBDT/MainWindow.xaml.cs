@@ -359,6 +359,26 @@ namespace DBDT
         }
 
         /// <summary>
+        /// Handles the Click event of the 'Fixed window' menu item.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        private void XMLXSLTWindow_Click(object sender, RoutedEventArgs e)
+        {
+            //Container.Children.Add(new MdiChild { Content = new Label { Content = "Fixed width window" }, Title = "Window " + ooo++, Resizable = false });
+            UC_XMLXSLT sp = new UC_XMLXSLT();
+
+            ScrollViewer sv = new ScrollViewer
+            {
+                Content = sp,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center
+            };
+            //Container.Children.Add(new MdiChild { Content = sv, Title = "Zapytanie SQL " + ooo++, WindowState=WindowState.Maximized, Width= SHT_W, Height= SHT_H });
+            Container.Children.Add(new MdiChild { Content = sp, Title = "XSLT - XML" + ooo++, WindowState = WindowState.Maximized, Width = SHT_W, Height = SHT_H });
+        }
+
+        /// <summary>
         /// Handles the Click event of the 'Scroll window' menu item.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -760,6 +780,12 @@ namespace DBDT
                 FRM.ShowDialog();
 
             }
+        }
+
+        private void EXCEL_RESTR_WYMIAROWE_DATA_Click(object sender, RoutedEventArgs e)
+        {
+            WPF_EXCEL_RESTR_WYM FRM = new WPF_EXCEL_RESTR_WYM();
+            FRM.ShowDialog();
         }
 
         private void Config_Indeks_Click(object sender, RoutedEventArgs e)

@@ -133,7 +133,7 @@
                         <Separator/>
                         <MenuItem x:Name="menuItem" Header="Kopiuj pole jako polecenie SETERROREX" Click="click_seterror" Foreground="#FF980C0C">
                             <MenuItem.InputGestureText>
-                                F8
+                                F8 lub E
                             </MenuItem.InputGestureText>
                         </MenuItem>
                         <MenuItem Header="Kopiuj pole jako polecenie SETOPTION" Tag="SETOPTION" Click="ColumnsAND_select_Click" Foreground="#FF1D0E4E">
@@ -141,8 +141,37 @@
                                 F9 lub S
                             </MenuItem.InputGestureText>
                         </MenuItem>
-                        <MenuItem Header="Kopiuj pole jako polecenie IF ENDIF" Tag="IF" Click="ColumnsAND_select_Click" Foreground="#FF085C19" />
+                        <MenuItem Header="Kopiuj pole jako polecenie IF ENDIF" Tag="IF" Click="ColumnsAND_select_Click" Foreground="#FF085C19">
+                            <MenuItem.InputGestureText>
+                                I
+                            </MenuItem.InputGestureText>
+                        </MenuItem>
                         <MenuItem Header="Kopiuj pole jako polecenie tylko IF" Tag="IFTYLKO" Click="ColumnsAND_select_Click" Foreground="#FF085C19" />
+                        <Separator/>
+                        <MenuItem Header="Kopiuj pole jako polecenie IF ENDIF OR" Tag="IFOR" Click="ColumnsAND_select_Click" Foreground="#FF085C19" />
+                        <MenuItem Header="Kopiuj pole jako polecenie IF ENDIF AND" Tag="IFAND" Click="ColumnsAND_select_Click" Foreground="#FF085C19" />
+                        <Separator/>
+                        <MenuItem Header="Kopiuj pole jako wysterowanie opcji silnikowych PVC" Tag="SILNIK_PVC" Click="ColumnsAND_select_Click" Foreground="#FF1D26BB" />
+                        <MenuItem Header="Kopiuj pole jako wysterowanie opcji silnikowych ALU" Tag="SILNIK_ALU" Click="ColumnsAND_select_Click" Foreground="#FF1D26BB"  />
+                        <MenuItem x:Name="SILNIK_XXX" Tag="SILNIK_XXX" Click="ColumnsAND_select_Click" FontWeight="Normal">
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Kopiuj pole jako wysterowanie opcji silnikowych na:" Foreground="#FF1D26BB" FontWeight="Bold"/>
+                                    <TextBox Width="65" Name="tbCustomDataSilnik" Margin="1,0" UndoLimit="10" ToolTip="Zmień przedrostek" MaxLines="1" MaxLength="25" Foreground="#FF1D26BB" FontWeight="Bold">WRR</TextBox>
+                                    <Label Content=" do znaku _" HorizontalAlignment="Left" Foreground="#FF1D26BB" FontWeight="Bold"/>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem x:Name="KOPIUJ_Z_NOWYM_PRZEDROSTKIEM" Tag="NOWA_OPCJA_XXX" Click="ColumnsAND_select_Click" FontWeight="Normal">
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Kopiuj opcję z nowym przedrostkiem:" FontWeight="Bold" Foreground="#FF3A0C0C"/>
+                                    <TextBox Width="65" Name="tbCustomDataNowyPrzedrostek" Margin="1,0" UndoLimit="10" ToolTip="Skopiuj z nowym przedrostkiem wyświetlone opcje" MaxLines="1" MaxLength="25" Foreground="#FF3A0C0C" FontWeight="Bold">WRR</TextBox>
+                                    <Label Content=" do znaku _" HorizontalAlignment="Left" Foreground="#FF3A0C0C" FontWeight="Bold"/>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
                     </MenuItem>
                     <MenuItem Header="Dodaj indesk do boom">
                         <MenuItem Header="Zaznaczone" Tag="OK" Click="Dodaj_do_boom_Click">

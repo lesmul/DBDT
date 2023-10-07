@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace DBDT.SQL.SQL_SELECT
 {
@@ -967,7 +968,10 @@ namespace DBDT.SQL.SQL_SELECT
                     return;
 
                 }
-                else if (((FrameworkElement)sender).Tag.ToString() == "IF" || ((FrameworkElement)sender).Tag.ToString() == "IFTYLKO")
+                else if (((FrameworkElement)sender).Tag.ToString() == "IF" || ((FrameworkElement)sender).Tag.ToString() == "IFTYLKO" || 
+                    ((FrameworkElement)sender).Tag.ToString() == "IFOR" || ((FrameworkElement)sender).Tag.ToString() == "IFAND" 
+                    || ((FrameworkElement)sender).Tag.ToString() == "SILNIK_PVC" || ((FrameworkElement)sender).Tag.ToString() == "SILNIK_ALU" ||
+                    ((FrameworkElement)sender).Tag.ToString() == "SILNIK_XXX" || ((FrameworkElement)sender).Tag.ToString() == "NOWA_OPCJA_XXX")
                 {
 
                     string valuex = "";
@@ -1037,11 +1041,61 @@ namespace DBDT.SQL.SQL_SELECT
                         return;
                     }
 
+                    string strIf = "";
+
                     for (int i = 0; i < arrayList_SET.Count; i += 2)
                     {
                         if (((FrameworkElement)sender).Tag.ToString() == "IFTYLKO")
                         {
                             valuex += "IF[OPTION(" + '\u0022' + arrayList_SET[i].ToString().TrimEnd() + '\u0022' + "," + '\u0022' + arrayList_GET[i].ToString().TrimEnd() + '\u0022' + ")]THEN" + "\r\n";
+                        }
+                        else if (((FrameworkElement)sender).Tag.ToString() == "IFAND")
+                        {
+                            strIf = "IF[";
+                            valuex += "OPTION(" + '\u0022' + arrayList_SET[i].ToString().TrimEnd() + '\u0022' + "," + '\u0022' + arrayList_GET[i].ToString().TrimEnd() + '\u0022' + ") AND" + "\r\n";
+                        }
+                        else if (((FrameworkElement)sender).Tag.ToString() == "IFOR")
+                        {
+                            strIf = "IF[";
+                            valuex += "OPTION(" + '\u0022' + arrayList_SET[i].ToString().TrimEnd() + '\u0022' + "," + '\u0022' + arrayList_GET[i].ToString().TrimEnd() + '\u0022' + ") OR" + "\r\n";
+                        }
+                        else if (((FrameworkElement)sender).Tag.ToString() == "SILNIK_ALU")
+                        {
+                            var gdzie_podloga = arrayList_SET[i].ToString().TrimEnd().IndexOf('_');
+
+                            valuex += "IF[OPTION(" + '\u0022' + arrayList_SET[i].ToString().TrimEnd() + '\u0022' + "," + '\u0022' + arrayList_GET[i].ToString().TrimEnd() + '\u0022' + ")]THEN"
+                           + "\r\n"
+                           + "    SETOPTION(" + '\u0022' + "ALU_" + arrayList_SET[i].ToString().TrimEnd().Substring(gdzie_podloga + 1) + '\u0022' + "," + '\u0022' + arrayList_GET[i].ToString().TrimEnd() + '\u0022' + ");"
+                           + "\r\n"
+                           + "ENDIF" + "\r\n";
+                        }
+                        else if (((FrameworkElement)sender).Tag.ToString() == "SILNIK_XXX")
+                        {
+                            var gdzie_podloga = arrayList_SET[i].ToString().TrimEnd().IndexOf('_');
+
+                            valuex += "IF[OPTION(" + '\u0022' + arrayList_SET[i].ToString().TrimEnd() + '\u0022' + "," + '\u0022' + arrayList_GET[i].ToString().TrimEnd() + '\u0022' + ")]THEN"
+                           + "\r\n"
+                           + "    SETOPTION(" + '\u0022' + tbCustomDataSilnik.Text.Trim() + "_" + arrayList_SET[i].ToString().TrimEnd().Substring(gdzie_podloga + 1) + '\u0022' + "," + '\u0022' + arrayList_GET[i].ToString().TrimEnd() + '\u0022' + ");"
+                           + "\r\n"
+                           + "ENDIF" + "\r\n";
+                        }
+                        else if (((FrameworkElement)sender).Tag.ToString() == "NOWA_OPCJA_XXX") 
+                        {
+                            var gdzie_podloga = arrayList_SET[i].ToString().TrimEnd().IndexOf('_');
+
+                            valuex += ""
+                           +  tbCustomDataNowyPrzedrostek.Text.Trim() + "_" + arrayList_SET[i].ToString().TrimEnd().Substring(gdzie_podloga + 1)  + "\t" +  arrayList_GET[i].ToString().TrimEnd()
+                           + "\r\n";
+                        }
+                        else if (((FrameworkElement)sender).Tag.ToString() == "SILNIK_PVC")
+                        {
+                            var gdzie_podloga = arrayList_SET[i].ToString().TrimEnd().IndexOf('_');
+
+                            valuex += "IF[OPTION(" + '\u0022' + arrayList_SET[i].ToString().TrimEnd() + '\u0022' + "," + '\u0022' + arrayList_GET[i].ToString().TrimEnd() + '\u0022' + ")]THEN"
+                            + "\r\n"
+                            + "    SETOPTION(" + '\u0022' + "PVC_" + arrayList_SET[i].ToString().TrimEnd().Substring(gdzie_podloga + 1) + '\u0022' + "," + '\u0022' + arrayList_GET[i].ToString().TrimEnd() + '\u0022' + ");"
+                            + "\r\n"
+                            + "ENDIF" + "\r\n";
                         }
                         else
                         {
@@ -1051,7 +1105,14 @@ namespace DBDT.SQL.SQL_SELECT
                         }
                     }
 
-                    Clipboard.SetDataObject(valuex.TrimEnd(Environment.NewLine.ToCharArray()));
+                    string copyData = valuex.TrimEnd(Environment.NewLine.ToCharArray()).TrimEnd();
+
+                    if(strIf != "")
+                    {
+                        copyData = strIf + copyData.Substring(0, copyData.Length - 3).TrimEnd() + "]THEN" + "\r\n" + "    " + "\r\n" + "ENDIF";
+                    }
+
+                    Clipboard.SetDataObject(copyData);
 
                     LBL_INFO.Content = "Skopiowano: " + licz_copy.ToString() + " -> dane do skryptu IF...";
 
@@ -1340,13 +1401,13 @@ namespace DBDT.SQL.SQL_SELECT
             {
                 if (resultGrid.SelectedCells.Count == 1)
                 {
-                    Clipboard.SetDataObject("SETERROREX([" + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + "],\u0022NE\u0022);%");
+                    Clipboard.SetDataObject("SETERROREX([" + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + "],\u0022[NE]\u0022);%");
                     LBL_INFO_2.Content = "Ustawiono wartość SETERROREX";
                 }
                 else if (resultGrid.SelectedCells.Count == 2)
                 {
                     DataGridCellInfo cell2 = resultGrid.SelectedCells[1];
-                    Clipboard.SetDataObject("SETERROREX([" + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + "],\u0022NE\u0022);%" +
+                    Clipboard.SetDataObject("SETERROREX([" + ((TextBlock)cell.Column.GetCellContent(cell.Item)).Text.Trim() + "],\u0022[NE]\u0022);%" +
                         ((TextBlock)cell2.Column.GetCellContent(cell2.Item)).Text.Trim());
                     LBL_INFO_2.Content = "Ustawiono wartość SETERROR";
                 }
@@ -2127,42 +2188,50 @@ namespace DBDT.SQL.SQL_SELECT
 
 		private void resultGridKeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.Key == Key.F8)
-			{
-				click_seterror(sender, e);
-			}
-			else if (e.Key == Key.F2 || e.Key == Key.K)
-			{
-				ClickCopy(sender, e);
-			}
-			else if (e.Key == Key.F5)
+            if (e.Key == Key.F8 || e.Key == Key.E)
             {
-				FrameworkElement element = sender as FrameworkElement;
-				if (element != null)
-				{
-					element.Tag = "";
-					Columns_select_Click(element, e);
-				}
-			}
-			else if (e.Key == Key.F9 || e.Key == Key.S)
+                click_seterror(sender, e);
+            }
+            else if (e.Key == Key.F2 || e.Key == Key.K)
             {
-				FrameworkElement element = sender as FrameworkElement;
-				if (element != null)
-				{
-					element.Tag = "SETOPTION";
-					ColumnsAND_select_Click(element, e);
-				}
-			}
-			else if (e.Key == Key.F6 || e.Key == Key.B)
+                ClickCopy(sender, e);
+            }
+            else if (e.Key == Key.F5)
             {
-				FrameworkElement element = sender as FrameworkElement;
-				if (element != null)
-				{
-					element.Tag = "";
-					Dodaj_do_boom_Click(element, e);
-				}
-			}
-
-		}
+                FrameworkElement element = sender as FrameworkElement;
+                if (element != null)
+                {
+                    element.Tag = "";
+                    Columns_select_Click(element, e);
+                }
+            }
+            else if (e.Key == Key.F9 || e.Key == Key.S)
+            {
+                FrameworkElement element = sender as FrameworkElement;
+                if (element != null)
+                {
+                    element.Tag = "SETOPTION";
+                    ColumnsAND_select_Click(element, e);
+                }
+            }
+            else if (e.Key == Key.F6 || e.Key == Key.B)
+            {
+                FrameworkElement element = sender as FrameworkElement;
+                if (element != null)
+                {
+                    element.Tag = "";
+                    Dodaj_do_boom_Click(element, e);
+                }
+            }
+            else if  (e.Key == Key.I)
+            {
+                FrameworkElement element = sender as FrameworkElement;
+                if (element != null)
+                {
+                    element.Tag = "IF";
+                    ColumnsAND_select_Click(element, e);
+                }
+            }
+        }
 	}
 }
