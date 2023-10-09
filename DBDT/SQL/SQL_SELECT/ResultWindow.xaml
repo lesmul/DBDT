@@ -17,7 +17,6 @@
                 <Button Content="Wyczyść schowek" Margin="360,1,0,2" Click="click_clear" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="100"/>
                 <ComboBox x:Name="FullTabele" SelectionChanged="FullTabele_SelectionChanged" Margin="465,0,329,0" Visibility="Collapsed" FontSize="14" FontStretch="Medium" FontWeight="DemiBold" Foreground="#FF2B1212" />
             </Grid>
-
         </StackPanel>
         <Expander Grid.Row="1" Name="filtersExpander" Header="Filtry">
             <StackPanel Grid.Row="1" Margin="5,5,5,5">

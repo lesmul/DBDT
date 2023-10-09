@@ -459,9 +459,7 @@
     <Compile Include="Excel\WPF_NOWY_PROJEKT.xaml.cs">
       <DependentUpon>WPF_NOWY_PROJEKT.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Excel_EpPlus\CellHelper.cs" />
-    <Compile Include="Excel_EpPlus\ExcelCellData.cs" />
-    <Compile Include="Excel_EpPlus\ExcelDataProcessor.cs" />
+    <Compile Include="Excel_EpPlus\ConditionData.cs" />
     <Compile Include="Excel_EpPlus\ExcelHelper.cs" />
     <Compile Include="Excel_EpPlus\LivePreviewComboBox.cs" />
     <Compile Include="Excel_EpPlus\WPF_Doplaty_Narz.xaml.cs">

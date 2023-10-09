@@ -202,5 +202,5 @@ C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\ExcelNumberForm
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\RBush.xml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\SixLabors.Fonts.xml
 C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\System.IO.Packaging.xml
-C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\PropertyChanged.dll
-C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\bin\Debug\PropertyChanged.xml
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fody.CopyLocal.cache
+C:\Users\Leszek Mularski\Documents\KODY\DBDT\DBDT\DBDT\obj\Debug\DBDT.csproj.Fody.RuntimeCopyLocal.cache

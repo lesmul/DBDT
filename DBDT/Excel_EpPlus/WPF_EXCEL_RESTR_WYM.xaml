@@ -5,23 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:DBDT.Excel_EpPlus"
         mc:Ignorable="d"
-        Title="Konfigurator zapisu danych SQL" Height="650" Width="1126" WindowStartupLocation="CenterScreen" StateChanged="state_changed" MinWidth="795" MinHeight="470">
+        Title="Generuj warunki restrykcji wymiarowych" Height="650" Width="1162" WindowStartupLocation="CenterScreen" StateChanged="state_changed" MinWidth="795" MinHeight="470" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" MinHeight="9"/>
-            <RowDefinition/>
-            <RowDefinition Height="Auto" MinHeight="521.08"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="22"/>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="Auto" Name="ExpanderRow"/>
+            <!-- Wysokość zmieniana po rozwinięciu Expander -->
+            <RowDefinition Height="95*"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="1" Content="Wybierz plik EXCEL" Click="OpenEXCELFile_Click" HorizontalAlignment="Left" Margin="10,10,0,10" Width="118"/>
-        <TextBlock Grid.Row="1" Text="Lokalizacja pliku EXCEL:" VerticalAlignment="Center" Margin="133,0,22,0" Height="18"/>
-        <TextBox Grid.Row="1" Name="xmlFilePathTextBox" Margin="133,0,14,0" VerticalAlignment="Center" IsReadOnly="True" Height="18"/>
+        <Button Grid.Row="1" Content="Wybierz plik EXCEL" Click="OpenEXCELFile_Click" HorizontalAlignment="Left" Margin="2,1,0,1" Width="118"/>
+        <TextBlock Grid.Row="1" Text="Lokalizacja pliku EXCEL:" VerticalAlignment="Center" Margin="133,0,5,0" Height="18"/>
+        <TextBox Grid.Row="1" Name="xmlFilePathTextBox" Margin="133,0,5,0" IsReadOnly="True" Height="18"/>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="16,0,0,0" Width="259" Height="25">
-            <TextBlock Text="Wybierz kolor ma spełnić warunki IF" Width="200" />
-            <l:LivePreviewComboBox x:Name="CB_KOLORY" Width="54" ItemsSource="{Binding uniqueColors}" SelectedIndex="0" Height="25" RenderTransformOrigin="0.499,-0.109">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,0,0,0" Width="336" Height="23">
+            <TextBlock Text=" Wybierz kolory który ma spełnić warunki IF:" Width="233" Padding="0,3,0,0" />
+            <l:LivePreviewComboBox x:Name="CB_KOLORY" Width="51" ItemsSource="{Binding uniqueColors}" SelectedIndex="0" RenderTransformOrigin="0,0">
+                <l:LivePreviewComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle Width="20" Height="20" Fill="{Binding}" />
+                    </DataTemplate>
+                </l:LivePreviewComboBox.ItemTemplate>
+            </l:LivePreviewComboBox>
+            <Label Width="2"></Label>
+            <l:LivePreviewComboBox x:Name="CB_KOLORY_SLAVE" Width="50" ItemsSource="{Binding uniqueColors}" SelectedIndex="0" RenderTransformOrigin="0,0">
                 <l:LivePreviewComboBox.ItemTemplate>
                     <DataTemplate>
                         <Rectangle Width="20" Height="20" Fill="{Binding}" />
@@ -29,12 +38,67 @@
                 </l:LivePreviewComboBox.ItemTemplate>
             </l:LivePreviewComboBox>
         </StackPanel>
-        <Label Grid.Row="2" Margin="275,0,750,47" Grid.RowSpan="2">Nazwa arkusza:</Label>
-        <ComboBox x:Name="CB_NazwaArkusza" HorizontalAlignment="Left" Margin="368,0,0,0" Grid.Row="2" VerticalAlignment="Center" Width="350"/>
-        <Button x:Name="B_TW_FUNKCJE"  Grid.Row="3" Content="Generuj warunki" HorizontalAlignment="Left" Height="46" Margin="998,0,0,0" VerticalAlignment="Center" Width="128" Click="B_TW_FUNKCJE_Click"/>
-        <TextBox x:Name="TXT_WYNIK_IF_ENDIF"  Grid.Row="3" Margin="10,5,133,5" TextWrapping="Wrap" Text="TextBox"/>
-
-        <DataGrid Grid.Row="4" Name="dataGrid1" AutoGenerateColumns="True" SelectionUnit="Cell" Margin="0,0,0,0" ></DataGrid>
+        <Label Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="336,0,0,0">Nazwa arkusza:</Label>
+        <ComboBox x:Name="CB_NazwaArkusza" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="120" SelectionChanged="CB_NazwaArkusza_SelectionChanged" Height="22" Margin="431,2,0,0"/>
+        <Label Grid.Row="1" Content="Ogranicz ilość wierszy:" HorizontalAlignment="Left" Margin="550,21,0,23" Grid.RowSpan="3" ></Label>
+        <TextBox Grid.Row="2" Name="integerTextBoxwiersz" PreviewTextInput="IntegerTextBox_PreviewTextInput" HorizontalAlignment="Left" MinWidth="40" Margin="683,1,0,1"/>
+        <Label Grid.Row="1" Content="Ogranicz ilość kolumn:" HorizontalAlignment="Left" Margin="728,21,0,23" Grid.RowSpan="3" ></Label>
+        <TextBox Grid.Row="2" Name="integerTextBoxkolumna" HorizontalAlignment="Left" PreviewTextInput="IntegerTextBox_PreviewTextInput" MinWidth="40" Margin="853,1,0,1"/>
+        <Label Grid.Row="2" Content="Znaki rozdzielające:" HorizontalAlignment="Left" Margin="894,3,0,23" Padding="5,5,5,5" Grid.RowSpan="2" />
+        <ComboBox x:Name="CB_Znak_RozdzielL1" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="38" Height="22" Margin="1009,0,0,0">
+            <ComboBoxItem Content="&gt;"/>
+            <ComboBoxItem Content="&gt;="/>
+            <ComboBoxItem Content="&lt;"/>
+            <ComboBoxItem Content="&lt;="/>
+        </ComboBox>
+        <ComboBox x:Name="CB_Znak_RozdzielL2" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="38" Height="22" Margin="1051,0,0,0">
+            <ComboBoxItem Content="&gt;"/>
+            <ComboBoxItem Content="&gt;="/>
+            <ComboBoxItem Content="&lt;"/>
+            <ComboBoxItem Content="&lt;="/>
+        </ComboBox>
+        <ComboBox x:Name="CB_Czcionka" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Width="35" Height="22" Margin="1093,0,0,0" SelectionChanged="CB_Czcionka_SelectionChanged">
+            <ComboBoxItem Content="6"/>
+            <ComboBoxItem Content="7"/>
+            <ComboBoxItem Content="8"/>
+            <ComboBoxItem Content="9"/>
+            <ComboBoxItem Content="10"/>
+            <ComboBoxItem Content="12"/>
+            <ComboBoxItem Content="14"/>
+        </ComboBox>
+        <Label Grid.Row="2" Content=":px" HorizontalAlignment="Left" Margin="1127,3,0,23" Padding="5,5,5,5" Grid.RowSpan="2" Width="25" />
+        <!--<Button x:Name="B_TW_FUNKCJE"  Grid.Row="3" Content="Generuj warunki" HorizontalAlignment="Left" Height="20" Margin="998,0,0,0" VerticalAlignment="Center" Width="128" Click="B_TW_FUNKCJE_Click"/>-->
+        <Expander Grid.Row="3" IsExpanded="False">
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="TXT_WYNIK_IF_ENDIF" Height="360" TextWrapping="Wrap" UndoLimit="10" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,485,0" />
+                    <DataGrid x:Name="DG_LISTA_L1_L2" Margin="644,0,0,0" HorizontalAlignment="Right" Width="480" AutoGenerateColumns="True" SelectionUnit="Cell" MaxHeight="360" IsReadOnly="True"/>
+                </Grid>
+            </StackPanel>
+        </Expander>
+        <ScrollViewer  Grid.Row="4" ScrollChanged="DataGridScrollChanged">
+            <DataGrid Grid.Row="4" Name="dataGrid1" AutoGenerateColumns="True" SelectionUnit="Cell" CanUserResizeRows="False" IsReadOnly="True" MaxColumnWidth="25" FontSize="7"  >
+                <DataGrid.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsVirtualizing="False" VirtualizationMode="Standard"/>
+                    </ItemsPanelTemplate>
+                </DataGrid.ItemsPanel>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Generuj warunki IF" Click="GenerateIFConditions_Click"/>
+                        <Separator/>
+                        <MenuItem Header="Odśwież dane dane z EXCEL" Click="Odswiez_z_excel_Click" />
+                        <Separator/>
+                        <MenuItem Header="Odśwież tabelę" Click="Odswiez_Click" />
+                        <Separator/>
+                        <MenuItem Header="Pokaż kod koloru" Click="KodKoloru_Click" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </ScrollViewer>
 
     </Grid>
 </Window>
